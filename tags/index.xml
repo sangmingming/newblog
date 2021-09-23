@@ -2,9 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 码农明明桑</title>
-    <link>htts://isming.me/tags/</link>
+    
+    
+    
+    <link>/tags/</link>
     <description>Recent content in Tags on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="htts://isming.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
   </channel>
 </rss>

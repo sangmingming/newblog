@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>htts://isming.me/post/</loc>
+    <loc>/post/</loc>
     <lastmod>2014-06-22T12:57:52+08:00</lastmod>
   </url><url>
-    <loc>htts://isming.me/post/2014-06-22-my-soft-in-ubuntu/</loc>
+    <loc>/post/2014-06-22-my-soft-in-ubuntu/</loc>
     <lastmod>2014-06-22T12:57:52+08:00</lastmod>
   </url><url>
-    <loc>htts://isming.me/</loc>
+    <loc>/</loc>
     <lastmod>2014-06-22T12:57:52+08:00</lastmod>
   </url><url>
-    <loc>htts://isming.me/categories/</loc>
+    <loc>/categories/</loc>
   </url><url>
-    <loc>htts://isming.me/tags/</loc>
+    <loc>/tags/</loc>
   </url>
 </urlset>
