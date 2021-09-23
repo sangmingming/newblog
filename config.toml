@@ -4,7 +4,6 @@ title = '码农明明桑'
 theme = "hello-friend"
 
 [params]
- contentTypeName = "posts"
  defaultTheme = "light" #light or dark
 
 
