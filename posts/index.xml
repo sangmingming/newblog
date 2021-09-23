@@ -5,21 +5,21 @@
     
     
     
-    <link>/post/</link>
+    <link>/posts/</link>
     <description>Recent content in Posts on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 22 Jun 2014 12:57:52 +0800</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>一个程序员的Ubuntu安装的那些软件</title>
-      <link>/post/2014-06-22-my-soft-in-ubuntu/</link>
+      <link>/posts/2014-06-22-my-soft-in-ubuntu/</link>
       <pubDate>Sun, 22 Jun 2014 12:57:52 +0800</pubDate>
       
-      <guid>/post/2014-06-22-my-soft-in-ubuntu/</guid>
+      <guid>/posts/2014-06-22-my-soft-in-ubuntu/</guid>
       <description>
         
           
