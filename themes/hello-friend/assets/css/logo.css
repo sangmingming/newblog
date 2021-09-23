@@ -23,8 +23,8 @@
 
   &__cursor {
     display: inline-block;
-    width: 10px;
-    height: 1rem;
+    width: 2px;
+    height: 1.125rem;
     background: #fe5186;
     margin-left: 5px;
     border-radius: 1px;
