@@ -3,7 +3,30 @@ languageCode = 'zh-CN'
 title = '码农明明桑'
 theme = "hello-friend"
 
+[permalinks]
+  posts = "/:filename/" # Don't miss the last slash: "/"
+  tags = "/tags/:slug/" # Don't miss the last slash: "/"
+
 [params]
  defaultTheme = "light" #light or dark
+
+[menu]
+ [[menu.main]]
+  name="技术"
+  url="/posts/tech/"
+  weight="1"
+ [[menu.main]]
+  name="摄影"
+  url="/posts/photography/"
+  weight="2"
+ [[menu.main]]
+  name="归档"
+  url="/archive/"
+  weight="3"
+ [[menu.main]]
+  name="关于"
+  url="/about/"
+  weight="4"
+
 
 
