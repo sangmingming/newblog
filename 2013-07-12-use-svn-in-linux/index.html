@@ -3,7 +3,7 @@
   <head>
     
       <title>
-        Categories ::
+        Linux下SVN的使用 ::
         码农明明桑
       </title>
     
@@ -11,14 +11,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta
   name="description"
-  content=""
+  content="今天在新浪sae上搭建了个人博客，新浪sae采用svn的方式进行代码管理，之前在windows下面做svn操作都是采用TortoiseSVN，今天正好开机到了linux下面，那么好吧，就用svn传我的wordpress到sae中去。
+"
 />
 <meta
   name="keywords"
   content=""
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="/categories/" />
+<link rel="canonical" href="/2013-07-12-use-svn-in-linux/" />
 
 
 
@@ -46,20 +47,21 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Categories"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Linux下SVN的使用"/>
+<meta name="twitter:description" content="今天在新浪sae上搭建了个人博客，新浪sae采用svn的方式进行代码管理，之前在windows下面做svn操作都是采用TortoiseSVN，今天正好开机到了linux下面，那么好吧，就用svn传我的wordpress到sae中去。"/>
 
 
 
-<meta property="og:title" content="Categories" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/categories/" />
+<meta property="og:title" content="Linux下SVN的使用" />
+<meta property="og:description" content="今天在新浪sae上搭建了个人博客，新浪sae采用svn的方式进行代码管理，之前在windows下面做svn操作都是采用TortoiseSVN，今天正好开机到了linux下面，那么好吧，就用svn传我的wordpress到sae中去。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2013-07-12-use-svn-in-linux/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2013-07-12T21:30:52+08:00" />
+<meta property="article:modified_time" content="2013-07-12T21:30:52+08:00" />
 
 
 
 
-<link rel="alternate" type="application/rss+xml" href="/categories/index.xml" title="码农明明桑" />
 
 
 
@@ -157,12 +159,78 @@
 
       <div class="content">
         
-  <div class="terms">
-    <h1>Categories</h1>
-    <ul class="terms__list">
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Linux下SVN的使用</h1>
+    <div class="post-meta">
       
+        <span class="post-date">
+          2013-07-12
+        </span>
+
+        
+          
+        
       
-    </ul>
+
+      
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>今天在新浪sae上搭建了个人博客，新浪sae采用svn的方式进行代码管理，之前在windows下面做svn操作都是采用TortoiseSVN，今天正好开机到了linux下面，那么好吧，就用svn传我的wordpress到sae中去。</p>
+<p>首先，安装svn。</p>
+<blockquote>
+<p>sudo apt-get install subversion</p>
+</blockquote>
+<p>ubuntu下面安装svn，就是这么简单。</p>
+<p>可以通过man svn查看使用手册。</p>
+<p>下面介绍一些常用命令：
+1.检出文件（checkout）。
+使用命令：</p>
+<blockquote>
+<p>svn co http://{svn repository url} /destination</p>
+</blockquote>
+<p>然后系统会用当前的用户名登录，提示输入密码，如果第一次密码输入错误，会提示你输入用户名；输入正确后，就可以检出文件了。</p>
+<p>2、Ubuntu SVN提交文件（commit）。
+进入需要更新的目录，输入命令：</p>
+<blockquote>
+<p>svn commit -m path-to-commit</p>
+</blockquote>
+<p>，其中path-to-commit可以为空，成功后会提示更新后的版本号。</p>
+<p>3、更新文件（update）。</p>
+<blockquote>
+<p>svn update</p>
+</blockquote>
+<p>，在要更新的目录运行这个命令就可以了。</p>
+<p>4、查看日志（log）。</p>
+<blockquote>
+<p>svn log path</p>
+</blockquote>
+<p>5.删除文件</p>
+<blockquote>
+<p>svn delete svn://xxx.com/test.php -m “delete test file”</p>
+</blockquote>
+<p>或者直接svn delete test.php 然后再svn ci -m ‘delete test file‘，推荐使用这种简写：svn (del, remove, rm)</p>
+<p>更多使用方法，自己查看手册吧。</p>
+    </div>
+    
+
+    
+      
+        
+
+      
+    
   </div>
 
       </div>

@@ -1,40 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 码农明明桑</title>
+    <title>文章 on 码农明明桑</title>
     
     
     
     <link>/posts/</link>
-    <description>Recent content in Posts on 码农明明桑</description>
+    <description>Recent content in 文章 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 22 Jun 2014 12:57:52 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 12 Jul 2017 21:30:52 +0800</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>一个程序员的Ubuntu安装的那些软件</title>
-      <link>/posts/2014-06-22-my-soft-in-ubuntu/</link>
-      <pubDate>Sun, 22 Jun 2014 12:57:52 +0800</pubDate>
-      
-      <guid>/posts/2014-06-22-my-soft-in-ubuntu/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          &lt;p&gt;鄙人程序猿一枚，Android开发，常年使用Ubuntu（主要是买不起Mac，O(∩_∩)O哈哈~）。分享一下自己使用的那些软件，如果你有什么好的软件。欢迎与我交流。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;输入法&lt;/em&gt;：开始的时候是用的fcitx，后来搜狗出了linux版本，选择之。&lt;a href=&#34;http://pinyin.sogou.com/linux/&#34;&gt;下载链接&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;办公软件&lt;/em&gt;：WPS Linux，真心很好用，比libreOffice好用不止一点.&lt;a href=&#34;http://community.wps.cn/download/&#34;&gt;下载链接&lt;/a&gt; 注意：下载alpah版本.&lt;/p&gt;
-          
-        
-        </description>
-    </item>
     
   </channel>
 </rss>
