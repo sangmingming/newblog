@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Path和Property Animation配合让线条动起来 ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="之前做过一个图上标签但是动画样式不太好看，经过查找资料发现了一种全新的思路来实现动画，流畅的让标签的线显示和隐藏，示例如下，就在这里说一说。本文会涉及到Path，Property Animation, PathEffect, PathMeasure。我们开始一一道来。
+"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/2016-06-07-path-property-animation/" />
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+<link rel="stylesheet" href="/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Path和Property Animation配合让线条动起来"/>
+<meta name="twitter:description" content="之前做过一个图上标签但是动画样式不太好看，经过查找资料发现了一种全新的思路来实现动画，流畅的让标签的线显示和隐藏，示例如下，就在这里说一说。本文会涉及到Path，Property Animation, PathEffect, PathMeasure。我们开始一一道来。"/>
+
+
+
+<meta property="og:title" content="Path和Property Animation配合让线条动起来" />
+<meta property="og:description" content="之前做过一个图上标签但是动画样式不太好看，经过查找资料发现了一种全新的思路来实现动画，流畅的让标签的线显示和隐藏，示例如下，就在这里说一说。本文会涉及到Path，Property Animation, PathEffect, PathMeasure。我们开始一一道来。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2016-06-07-path-property-animation/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-06-07T14:03:39+08:00" />
+<meta property="article:modified_time" content="2016-06-07T14:03:39+08:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">摄影</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">摄影</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Path和Property Animation配合让线条动起来</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2016-06-07
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/android/">#android</a>&nbsp;
+        
+          <a href="/tags/animation/">#animation</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>之前做过一个图上标签但是动画样式不太好看，经过查找资料发现了一种全新的思路来实现动画，流畅的让标签的线显示和隐藏，示例如下，就在这里说一说。本文会涉及到Path，Property Animation, PathEffect, PathMeasure。我们开始一一道来。</p>
+<p><img src="/images/tag_animation.gif" alt="示例"></p>
+<h3 id="使用path绘制曲线">使用Path绘制曲线</h3>
+<p>当我们需要画曲线的时候，可能会直接使用drawLine来画，不太复杂的话还比较好实现，如果需要画曲线，或者拐弯的线的时候使用drawLine就比较复杂了。这时候，我们可以借助<code>Path</code>来drawPath。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Paint paint <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Paint<span style="color:#f92672">();</span>
+paint<span style="color:#f92672">.</span><span style="color:#a6e22e">setColor</span><span style="color:#f92672">(</span>Color<span style="color:#f92672">.</span><span style="color:#a6e22e">BLACK</span><span style="color:#f92672">);</span>
+paint<span style="color:#f92672">.</span><span style="color:#a6e22e">setStyle</span><span style="color:#f92672">(</span>Paint<span style="color:#f92672">.</span><span style="color:#a6e22e">Style</span><span style="color:#f92672">.</span><span style="color:#a6e22e">STROKE</span><span style="color:#f92672">);</span> <span style="color:#75715e">//一定要设置为画线条
+</span><span style="color:#75715e"></span>Path path <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Path<span style="color:#f92672">();</span>
+path<span style="color:#f92672">.</span><span style="color:#a6e22e">moveTo</span><span style="color:#f92672">(</span>100<span style="color:#f92672">,</span> 100<span style="color:#f92672">);</span>   <span style="color:#75715e">//定位path的起点
+</span><span style="color:#75715e"></span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">lineTo</span><span style="color:#f92672">(</span>100<span style="color:#f92672">,</span> 200<span style="color:#f92672">);</span>
+path<span style="color:#f92672">.</span><span style="color:#a6e22e">lineTo</span><span style="color:#f92672">(</span>200<span style="color:#f92672">,</span> 150<span style="color:#f92672">);</span>
+path<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+canvas<span style="color:#f92672">.</span><span style="color:#a6e22e">drawPath</span><span style="color:#f92672">(</span>path<span style="color:#f92672">,</span> paint<span style="color:#f92672">);</span>
+</code></pre></div><p>通过以上的方法代码我们就可以画出三角形了。</p>
+<h3 id="测量path的长度">测量Path的长度</h3>
+<p>实现动画的前提是首先得到Path的长度，然后根据长度计算出每个时间节点应该显示的长度。因为系统给我们提供了测量长度的方法，就不需要我们去进行复杂的计算了。直接使用<code>PathMeasure</code>就可以了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PathMeasure measure <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PathMeasure<span style="color:#f92672">(</span>path<span style="color:#f92672">,</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">);</span>
+<span style="color:#66d9ef">float</span> length <span style="color:#f92672">=</span> measure<span style="color:#f92672">.</span><span style="color:#a6e22e">getLength</span><span style="color:#f92672">();</span>
+</code></pre></div><h3 id="只绘制path的一部分">只绘制Path的一部分</h3>
+<p>为了让Path能够逐步显示出来，或者逐步隐藏。我们需要做到能够显示path的一部分，并且改变显示的长度。我们知道可以通过<code>DashPathEffect</code>来显示虚线效果。同时我们可以借助DashPathEffect让我们的实线和虚线的部分的长度分别为我们的Path的长度，然后来改变偏移量，实现只显示path的一部分。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DashPathEffect<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">float</span><span style="color:#f92672">[]{</span>pathLength<span style="color:#f92672">,</span> pathLength<span style="color:#f92672">},</span> pathLength<span style="color:#f92672">/</span>2<span style="color:#f92672">);</span>
+paint<span style="color:#f92672">.</span><span style="color:#a6e22e">setPathEffect</span><span style="color:#f92672">(</span>effect<span style="color:#f92672">);</span>
+canvas<span style="color:#f92672">.</span><span style="color:#a6e22e">drawPath</span><span style="color:#f92672">(</span>path<span style="color:#f92672">,</span> paint<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="让path动起来">让Path动起来</h3>
+<p>通过上面说的，我们改变PathEffect的偏移量就可以改变path显示的长度，因此我们可以给我们的View或者对象定义个属性，通过Property Animation来改变这个属性的值，即可实现动画。</p>
+<p>PathEffect 属性值变化</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">float</span> percentage <span style="color:#f92672">=</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">;</span>
+PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DashPathEffect<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">float</span><span style="color:#f92672">[]{</span>pathLength<span style="color:#f92672">,</span> pathLength<span style="color:#f92672">},</span> pathLength <span style="color:#f92672">-</span> pathLength<span style="color:#f92672">*</span>percentage<span style="color:#f92672">);</span>
+</code></pre></div><p>动画定义:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Animator animatorLine <span style="color:#f92672">=</span> ObjectAnimator<span style="color:#f92672">.</span><span style="color:#a6e22e">ofFloat</span><span style="color:#f92672">(</span>view<span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">“</span>percentage<span style="color:#960050;background-color:#1e0010">”</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">);</span>
+</code></pre></div><h3 id="其他">其他</h3>
+<p>就这样就实现了。思路甚至代码都是参考一篇国外的博客。思路很重要，一年前做这个动画的时候百思不得姐，花了好多时间，后面实现的效果还是比较僵硬。这次发现了其他人的思路之后，很容易就解决了。</p>
+<p><em>思路很重要，以及要了解更加全面的知识</em>，不然很多东西都不知道，自己的思路还是会被限制。</p>
+<p>最后就是多google，百毒上除了广告，别的东西都挺难找到的。</p>
+<p>没有Demo了，可以参考我参考的那个github的库吧。同时作者已经实现svg的动画显示了，原理相同，只是把svg加载为path，使用同样的动画。代码:<a href="https://github.com/matthewrkula/AnimatedPathView">https://github.com/matthewrkula/AnimatedPathView</a></p>
+    </div>
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span
+          >© 2021 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

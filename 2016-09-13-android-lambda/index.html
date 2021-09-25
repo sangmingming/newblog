@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        聊聊Android N开始支持的Lambda ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Android N 正式版已经发布了。对于开发者来说一个重大的更新是对于Java支持到了Java8，其中一点就是支持Lambda。我们就来聊聊什么是lambda，怎么在Android中使用。
+什么是lambda Lambda 可以理解为匿名函数,帮助我们写出更加简洁的代码。
+"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/2016-09-13-android-lambda/" />
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+<link rel="stylesheet" href="/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="聊聊Android N开始支持的Lambda"/>
+<meta name="twitter:description" content="Android N 正式版已经发布了。对于开发者来说一个重大的更新是对于Java支持到了Java8，其中一点就是支持Lambda。我们就来聊聊什么是lambda，怎么在Android中使用。
+什么是lambda
+Lambda 可以理解为匿名函数,帮助我们写出更加简洁的代码。"/>
+
+
+
+<meta property="og:title" content="聊聊Android N开始支持的Lambda" />
+<meta property="og:description" content="Android N 正式版已经发布了。对于开发者来说一个重大的更新是对于Java支持到了Java8，其中一点就是支持Lambda。我们就来聊聊什么是lambda，怎么在Android中使用。
+什么是lambda
+Lambda 可以理解为匿名函数,帮助我们写出更加简洁的代码。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2016-09-13-android-lambda/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-09-13T20:39:03+08:00" />
+<meta property="article:modified_time" content="2016-09-13T20:39:03+08:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">摄影</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">摄影</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">聊聊Android N开始支持的Lambda</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2016-09-13
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/android/">#Android</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>Android N 正式版已经发布了。对于开发者来说一个重大的更新是对于Java支持到了Java8，其中一点就是支持Lambda。我们就来聊聊什么是lambda，怎么在Android中使用。</p>
+<h3 id="什么是lambda">什么是lambda</h3>
+<p>Lambda 可以理解为匿名函数,帮助我们写出更加简洁的代码。</p>
+<p>给view设置一个clicklistener，原本你需要写出这样的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">v<span style="color:#f92672">.</span><span style="color:#a6e22e">setOnClickListener</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> View<span style="color:#f92672">.</span><span style="color:#a6e22e">OnClickListener</span><span style="color:#f92672">(</span>View v<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+ <span style="color:#a6e22e">@Override</span>
+ <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">(</span>View v<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+ Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">makeText</span><span style="color:#f92672">(</span>getActivity<span style="color:#f92672">(),</span> <span style="color:#e6db74">&#34;clicked&#34;</span><span style="color:#f92672">,</span> Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">LENGTH_LONG</span><span style="color:#f92672">).</span><span style="color:#a6e22e">show</span><span style="color:#f92672">()</span>
+ <span style="color:#f92672">}</span>
+<span style="color:#f92672">});</span>
+</code></pre></div><p>使用lambda之后:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">.</span><span style="color:#a6e22e">setOnClickListener</span><span style="color:#f92672">(</span>v <span style="color:#f92672">-&gt;</span> Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">makeText</span><span style="color:#f92672">(</span>getActivity<span style="color:#f92672">(),</span> <span style="color:#e6db74">&#34;clicked&#34;</span><span style="color:#f92672">,</span> Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">LENGTH_LONG</span><span style="color:#f92672">).</span><span style="color:#a6e22e">show</span><span style="color:#f92672">());</span>
+</code></pre></div><p>是不是代码量爆减。这里再看下怎么写lambda。</p>
+<p>在JavaScript，python等语言中函数是一等公民，但是Java中类才是。使用lambda时候，lambda其实应该是一个对象，依附于函数式接口（只包含一个抽象方法声明的接口，例如刚刚我们举例的<code>OnClickListener</code>就是,在Java 8 需要使用<code>@FunctionalInterface</code>这样保证在编译的时候一个接口只有一个抽象注解）。</p>
+<p>写法的基本规则是这样:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">(</span>arguments<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>body<span style="color:#f92672">}</span>
+</code></pre></div><p>arguments 是参数列表，0~n个， 参数为一个时候，可以不要括号     <br>
+body 为具体代码部分，如果代码只有一句的话可以不要大括号 <br>
+返回值会自动推导出类型</p>
+<p>一些写法实例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>  <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b<span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+
+<span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello World&#34;</span><span style="color:#f92672">);</span>
+
+<span style="color:#f92672">(</span>String s<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>s<span style="color:#f92672">);</span>
+
+<span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> 42
+
+<span style="color:#f92672">()</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span> <span style="color:#66d9ef">return</span> 3<span style="color:#f92672">.</span><span style="color:#a6e22e">1415</span> <span style="color:#f92672">};</span>
+<span style="color:#f92672">(</span>a<span style="color:#f92672">,</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span><span style="color:#66d9ef">return</span> a<span style="color:#f92672">+</span>b<span style="color:#f92672">;}</span>
+</code></pre></div><p>另外一点需要注意的是，在我们的lambda表达式中<code>this</code>关键指的是外部对象，而不是我们以为的lambda这个对象。在语法糖的实现过程中，lambda表达式最后会被变为类的私有方法，因此可以放心的使用this。</p>
+<h3 id="使用retrolambda">使用retrolambda</h3>
+<p>目前有个比较成熟的解决方案，使用<code>retrolambd</code>,接入的配置如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">apply plugin: <span style="color:#e6db74">&#39;com.android.application&#39;</span> 
+apply plugin:<span style="color:#e6db74">&#39;me.tatarka.retrolambda&#39;</span>
+
+buildscript <span style="color:#f92672">{</span>
+    repositories <span style="color:#f92672">{</span>
+        mavenCentral<span style="color:#f92672">()</span>
+    <span style="color:#f92672">}</span>
+
+ dependencies <span style="color:#f92672">{</span>
+     classpath <span style="color:#e6db74">&#39;me.tatarka:gradle-retrolambda:3.2.5&#39;</span>
+ <span style="color:#f92672">}</span> 
+<span style="color:#f92672">}</span>
+  <span style="color:#75715e">// Required because retrolambda is on maven central
+</span><span style="color:#75715e"></span>repositories <span style="color:#f92672">{</span>
+    mavenCentral<span style="color:#f92672">()</span> 
+<span style="color:#f92672">}</span>
+ android <span style="color:#f92672">{</span>   
+     compileOptions <span style="color:#f92672">{</span>
+        sourceCompatibility JavaVersion<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_1_8</span>
+        targetCompatibility JavaVersion<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_1_8</span>   
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">//指定将源码编译的级别，以下会将代码编译到1.7的自己码格式
+</span><span style="color:#75715e"></span>retrolambda <span style="color:#f92672">{</span>
+	javaVersion JavaVersion<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_1_7</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>当前，retrolambda对于android gradle插件是有依赖的，需要使用1.5+的插件才可以。</p>
+<p>retrolambda的原理是在编译的过程中，给class文件增加包裹，转成java 1.7支持的格式。</p>
+<h3 id="使用jack">使用jack</h3>
+<p>在Android N，支持使用Java 8， google给我们提供了新的编译工具<code>jack</code>,因此可以直接支持lambda，为了支持低版本的Android也可以用lambda，我们需要将<code>targetSdkVersion</code>和<code>compileSdkVersion</code>设置为23或者更小。启用jack，修改<code>build.gradle</code>如下。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">android <span style="color:#f92672">{</span>
+  <span style="color:#f92672">...</span>
+  defaultConfig <span style="color:#f92672">{</span>
+    <span style="color:#f92672">...</span>
+    jackOptions <span style="color:#f92672">{</span>
+      enabled <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">}</span>
+  <span style="color:#f92672">}</span>
+  compileOptions <span style="color:#f92672">{</span>
+    sourceCompatibility JavaVersion<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_1_8</span>
+    targetCompatibility JavaVersion<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_1_8</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>jack工具链会的编译步骤如下：</p>
+<pre tabindex="0"><code>Jack (.java --&gt; .jack --&gt; .dex)
+</code></pre><p>和之前相比，将中间转换为class文件的步骤省略了，不需要多个工具链。
+在低版本兼容lambda，也同样是使用的语法糖来实现。</p>
+<h3 id="后记">后记</h3>
+<p>如上两种工具都可以让我们在进行Android开发的时候来使用lambda，retrolambda出来的时间更早，经过很多次的迭代，目前也有一些app在使用，相比较来说更加成熟。jack则是google开发，减少了对javac的依赖，更多谷歌的自主性，相信后面谷歌大力推广的，但是出于刚刚开发出来因此还不够成熟，对于lint，proguard，instant run还有很多地方支持不好的地方，我们相信以后jack会是趋势。</p>
+<p>出于尝鲜，还是可以来使用的，但是在大的项目里面还是不建议使用的，毕竟万一出了问题还是很难排查的。</p>
+<p>另外，如果想要在android开发更爽快的使用lambda，也可以去试试<code>kotlin</code>这个语言。</p>
+<p>参考资料:</p>
+<ol>
+<li><a href="http://viralpatel.net/blogs/Lambda-expressions-java-tutorial/">http://viralpatel.net/blogs/Lambda-expressions-java-tutorial/</a></li>
+<li><a href="https://developer.android.com/guide/platform/j8-jack.html">https://developer.android.com/guide/platform/j8-jack.html</a></li>
+<li><a href="https://github.com/evant/gradle-retrolambda">https://github.com/evant/gradle-retrolambda</a></li>
+</ol>
+    </div>
+    
+
+    
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span
+          >© 2021 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

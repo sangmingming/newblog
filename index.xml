@@ -35,6 +35,95 @@
     </item>
     
     <item>
+      <title>简单聊聊Android Architecture Componets</title>
+      <link>/2017-05-18-android-architecture-components-guide/</link>
+      <pubDate>Thu, 18 May 2017 20:01:38 +0800</pubDate>
+      
+      <guid>/2017-05-18-android-architecture-components-guide/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;Google IO大会进行中，本次大会Android最大的新闻当属Android O以及Kotlin被官方认可。我发现了原来还有发布官方的架构库，以及推荐使用指南，分享给大家。&lt;/p&gt;
+&lt;h2 id=&#34;架构原则&#34;&gt;架构原则&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;关注分离&lt;/li&gt;
+&lt;li&gt;模型驱动UI,优先持久化模型&lt;/li&gt;
+&lt;/ul&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>聊聊Android N开始支持的Lambda</title>
+      <link>/2016-09-13-android-lambda/</link>
+      <pubDate>Tue, 13 Sep 2016 20:39:03 +0800</pubDate>
+      
+      <guid>/2016-09-13-android-lambda/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;Android N 正式版已经发布了。对于开发者来说一个重大的更新是对于Java支持到了Java8，其中一点就是支持Lambda。我们就来聊聊什么是lambda，怎么在Android中使用。&lt;/p&gt;
+&lt;h3 id=&#34;什么是lambda&#34;&gt;什么是lambda&lt;/h3&gt;
+&lt;p&gt;Lambda 可以理解为匿名函数,帮助我们写出更加简洁的代码。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>小红书Android客户端演进之路</title>
+      <link>/2016-08-08-red-android-evolution/</link>
+      <pubDate>Mon, 08 Aug 2016 19:13:00 +0800</pubDate>
+      
+      <guid>/2016-08-08-red-android-evolution/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;小红书Android客户端第一个版本于2014年8月8日发布，转眼到了2016年8月8日，小红书Android版本发版两周年。趁机回顾一下小红书的Android版本，两年中我们踩过很多坑，收获很多经验，分享出来与大家共勉。
+小红书从最初1.0到现在目前4.7版本，历经两年，安装包从原先的5M发展到现在的17M，产品模块也从原先的只有社区模块发展到了具有社区和电商两个大模块。App包含社区、电商、支付、推送、直播、统计等各种功能和模块，那么开始吧。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Path和Property Animation配合让线条动起来</title>
+      <link>/2016-06-07-path-property-animation/</link>
+      <pubDate>Tue, 07 Jun 2016 14:03:39 +0800</pubDate>
+      
+      <guid>/2016-06-07-path-property-animation/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;之前做过一个图上标签但是动画样式不太好看，经过查找资料发现了一种全新的思路来实现动画，流畅的让标签的线显示和隐藏，示例如下，就在这里说一说。本文会涉及到Path，Property Animation, PathEffect, PathMeasure。我们开始一一道来。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
       <title>一个程序员的Ubuntu安装的那些软件</title>
       <link>/2014-06-22-my-soft-in-ubuntu/</link>
       <pubDate>Sun, 22 Jun 2014 12:57:52 +0800</pubDate>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>animation on 码农明明桑</title>
+    
+    
+    
+    <link>/tags/animation/</link>
+    <description>Recent content in animation on 码农明明桑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 07 Jun 2016 14:03:39 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/animation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Path和Property Animation配合让线条动起来</title>
+      <link>/2016-06-07-path-property-animation/</link>
+      <pubDate>Tue, 07 Jun 2016 14:03:39 +0800</pubDate>
+      
+      <guid>/2016-06-07-path-property-animation/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;之前做过一个图上标签但是动画样式不太好看，经过查找资料发现了一种全新的思路来实现动画，流畅的让标签的线显示和隐藏，示例如下，就在这里说一说。本文会涉及到Path，Property Animation, PathEffect, PathMeasure。我们开始一一道来。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>
