@@ -171,6 +171,321 @@
   <div class="posts">
     
     <div class="post on-list">
+      <h1 class="post-title"><a href="/2015-05-10-sticker-view/">图片贴纸旋转缩放功能的实现</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2015-05-10
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/android/">#android</a>&nbsp;
+          
+        </span>
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>我们的项目包含图片编辑功能，特别是包含图片添加水印贴纸的功能，从最初的简单版可以添加一个图片并且移动位置，到现在添加的图片可以进行移动，以及缩放，旋转，已经是和其他的图片处理可以达到一样的很好的效果了。一直想要整理一下，分享一下实现的改进过程，一直没空，也由于我过于懒，没有动笔。今天正好有时间，分享一下。</p>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2015-05-10-sticker-view/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/2015-05-01-android-multi-dex/">打破Android应用65K方法数魔咒</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2015-05-01
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/android/">#android</a>&nbsp;
+          
+        </span>
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>近日，我们的应用，在编译的时候不幸的遇到这个错误</p>
+<blockquote>
+<p>Conversion to Dalvik format failed: Unable to execute dex: method ID not in [0, 0xffff]: 65536</p>
+</blockquote>
+<p>这才让我意识到原来我们的程序中，方法数已经超过了65536。在之前，已经知道了android系统的java虚拟机dalvik在执行java程序时，使用原生类型short来索引dex文件中的方法，因此方法数就呗限制在65536了。之前我一直以为，这个数量已经很大了，不会达到上限，结果今天就达到了。</p>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2015-05-01-android-multi-dex/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/2015-03-18-android-build-speed-up/">加速Android Studio/Gradle构建</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2015-03-18
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/android/">#android</a>&nbsp;
+          
+            <a href="/tags/gradle/">#gradle</a>&nbsp;
+          
+        </span>
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>已经使用Android Studio进行开发超过一年，随着项目的增大，依赖库的增多，构建速度越来越慢，现在最慢要6分钟才能build一个release的安装包，在网上查找资料，发现可以通过一些配置可以加快速度，这里跟大家分享一下。</p>
+<h3 id="开启gradle单独的守护进程">开启gradle单独的守护进程</h3>
+<p>在下面的目录下面创建<code>gradle.properties</code>文件：</p>
+<ul>
+<li><code>/home/&lt;username&gt;/.gradle/</code> (Linux)</li>
+<li><code>/Users/&lt;username&gt;/.gradle/</code> (Mac)</li>
+<li><code>C:\Users\&lt;username&gt;\.gradle</code> (Windows)</li>
+</ul>
+<p>并在文件中增加：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">daemon</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+</code></pre></div>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2015-03-18-android-build-speed-up/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/2014-06-22-my-soft-in-ubuntu/">一个程序员的Ubuntu安装的那些软件</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2014-06-22
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>鄙人程序猿一枚，Android开发，常年使用Ubuntu（主要是买不起Mac，O(∩_∩)O哈哈~）。分享一下自己使用的那些软件，如果你有什么好的软件。欢迎与我交流。</p>
+<p><em>输入法</em>：开始的时候是用的fcitx，后来搜狗出了linux版本，选择之。<a href="http://pinyin.sogou.com/linux/">下载链接</a></p>
+<p><em>办公软件</em>：WPS Linux，真心很好用，比libreOffice好用不止一点.<a href="http://community.wps.cn/download/">下载链接</a> 注意：下载alpah版本.</p>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2014-06-22-my-soft-in-ubuntu/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/2014-03-15-ubuntu-sublime-text-error/">解决Ubuntu下Sublime text 3中文输入的问题</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2014-03-15
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/linux/">#linux</a>&nbsp;
+          
+            <a href="/tags/ubuntu/">#ubuntu</a>&nbsp;
+          
+        </span>
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>好久之前便听朋友说起Sublime Text这款软件很好用，终于这几天有空折腾，把软件给装起来了。用起来确实很不错，写代码很爽。<br>
+但是用了一段时间之后，我需要输入中文了，无论怎么切换输入法，都无法切换到中文。</p>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2014-03-15-ubuntu-sublime-text-error/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/2013-09-11-android-smartimageview/">Android图像开源视图：SmartImageView</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2013-09-11
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>项目需要，开发中需要加载图片，自己要写图片从网上下载的方法，还要写缓存，等等。</p>
+<p>在网上找到一个开源项目，smartImageVIew，支持从URL和通讯录中获取图像，可以替代Android标准的ImageView。</p>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2013-09-11-android-smartimageview/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/2013-07-28-java-hashmaphe-hashtable/">Java中HashMap和HashTable的区别</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2013-07-28
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/java/">#java</a>&nbsp;
+          
+        </span>
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>面试中遇到，但是不会，回来google到，分享下吧，据说是老掉牙的问题
+HashMap 是Hashtable 的轻量级实现（非线程安全的实现），他们都完成了Map 接口，主要区别在于HashMap 允许空（null）键值（key）,由于非线程安全，效率上可能高于Hashtable。</p>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2013-07-28-java-hashmaphe-hashtable/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/2013-07-23-java-collection-collections/">Java中Collection和Collections的区别</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2013-07-23
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/java/">#java</a>&nbsp;
+          
+        </span>
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>前几天去一个公司参加面试遇到这个问题，Java中Collection和Collections的区别，当时不会，回来从网上找到，现在记录一下。</p>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2013-07-23-java-collection-collections/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
       <h1 class="post-title"><a href="/2013-07-12-use-svn-in-linux/">Linux下SVN的使用</a></h1>
       <div class="post-meta">
         

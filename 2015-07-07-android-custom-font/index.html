@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Android应用使用自定义字体的一些探究 ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="最近团队里面在做程序界面统一的工作，因此希望统一字体，接到一个研究怎么自定义字体的任务。因为我们的开发模式，所以需要研究在界面内的字体自定义，以及webview的显示中的字体自定义。
+"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/2015-07-07-android-custom-font/" />
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+<link rel="stylesheet" href="/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Android应用使用自定义字体的一些探究"/>
+<meta name="twitter:description" content="最近团队里面在做程序界面统一的工作，因此希望统一字体，接到一个研究怎么自定义字体的任务。因为我们的开发模式，所以需要研究在界面内的字体自定义，以及webview的显示中的字体自定义。"/>
+
+
+
+<meta property="og:title" content="Android应用使用自定义字体的一些探究" />
+<meta property="og:description" content="最近团队里面在做程序界面统一的工作，因此希望统一字体，接到一个研究怎么自定义字体的任务。因为我们的开发模式，所以需要研究在界面内的字体自定义，以及webview的显示中的字体自定义。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2015-07-07-android-custom-font/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2015-07-07T19:04:22+08:00" />
+<meta property="article:modified_time" content="2015-07-07T19:04:22+08:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">摄影</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">摄影</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Android应用使用自定义字体的一些探究</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2015-07-07
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/android/">#android</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>最近团队里面在做程序界面统一的工作，因此希望统一字体，接到一个研究怎么自定义字体的任务。因为我们的开发模式，所以需要研究在界面内的字体自定义，以及webview的显示中的字体自定义。</p>
+<h3 id="android系统内置字体">android系统内置字体</h3>
+<p>android 系统本身内置了一些字体，可以在程序中使用，并且支持在xml配置textView的时候进行修改字体的样式。支持字段为<code>android:textStyle</code> ,<code>android:typeface</code>, <code>android:fontFamily</code>，系统内置了<code>normal|bold|italic</code>三种style, 内置了<code>normal</code>，<code>sans</code>,<code>serif</code>,<code>monospace</code>，几种字体（实测这几种字体仅英文有效），typace和fontFamily功能一样。</p>
+<h3 id="使用自定义的字体">使用自定义的字体</h3>
+<p>以上的方式可以改变字体的样式，还不是真正的自定义。</p>
+<p>android系统支持TypeFace，即ttf的字体文件。</p>
+<p>我们可以在程序中放入ttf字体文件，在程序中使用Typeface设置字
+体。</p>
+<p>第一步，在assets目录下新建fonts目录，把ttf字体文件放到这。
+第二步，程序中调用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">AssetManager mgr<span style="color:#f92672">=</span>getAssets<span style="color:#f92672">();</span><span style="color:#75715e">//得到AssetManager
+</span><span style="color:#75715e"></span>Typeface tf<span style="color:#f92672">=</span>Typeface<span style="color:#f92672">.</span><span style="color:#a6e22e">createFromAsset</span><span style="color:#f92672">(</span>mgr<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;fonts/ttf.ttf&#34;</span><span style="color:#f92672">);</span><span style="color:#75715e">//根据路径得到Typeface
+</span><span style="color:#75715e"></span>tv<span style="color:#f92672">.</span><span style="color:#a6e22e">setTypeface</span><span style="color:#f92672">(</span>tf<span style="color:#f92672">);</span><span style="color:#75715e">//设置字体
+</span></code></pre></div><p>注意ttf文件命名不能使用中文,否则可能无法加载。</p>
+<p>对于需要使用比较多的地方，可以写一个TextView的子类来统一处理。</p>
+<h3 id="在webview中使用自定义地体">在webview中使用自定义地体</h3>
+<p>对于本地的网页，在asset目录放字体文件，并在css中添加以下内容，自定义一个字体face，并且在需要的地方使用这个字体face即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">@<span style="color:#66d9ef">font-face</span> {
+	<span style="color:#f92672">font-family</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;MyFont&#34;</span><span style="color:#f92672">;</span>
+	<span style="color:#f92672">src</span><span style="color:#f92672">:</span> <span style="color:#f92672">url</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;file:///android_asset/fonts/ttf.ttf&#39;</span><span style="color:#f92672">);</span>
+}
+
+<span style="color:#f92672">h3</span> { <span style="color:#66d9ef">font-family</span>:<span style="color:#e6db74">&#34;MyFont&#34;</span>}
+</code></pre></div><p>对于在线的网页，则需要把字体文件放到服务器，使用同样的方式定义字体face,应用到每个地方。</p>
+<p>为了减少网页或者说服务器端的工作，可以使用本地注入的方式注入font-face的css，并对整个网页进行样式替换。</p>
+<p>给webview自定义webViewClient,重写<code>onPageFinish</code>,在其中添加如下内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">view<span style="color:#f92672">.</span><span style="color:#a6e22e">loadUrl</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;javascript:!function(){&#34;</span> <span style="color:#f92672">+</span>
+        <span style="color:#e6db74">&#34;s=document.createElement(&#39;style&#39;);s.innerHTML=&#34;</span>
+        <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34;@font-face{font-family:myhyqh;src:url(&#39;**injection**/hyqh.ttf&#39;);}*{font-family:myhyqh !important;}\&#34;;&#34;</span>
+        <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;document.getElementsByTagName(&#39;head&#39;)[0].appendChild(s);&#34;</span> <span style="color:#f92672">+</span>
+        <span style="color:#e6db74">&#34;document.getElementsByTagName(&#39;body&#39;)[0].style.fontFamily = \&#34;myhyqh\&#34;;}()&#34;</span><span style="color:#f92672">);</span>
+</code></pre></div><p>由于网页上是没有权限访问本地的asset文件夹的，因此我们需要拦截请求来加载本地的文件，我这里替换了<code>file:///android_assets/</code>为 <code>**injection**/</code>了，我们还需要重写
+<code>shouldInterceptRequest</code>
+在请求为我们这个字体文件的时候，加载本地文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Override</span>
+<span style="color:#66d9ef">public</span> WebResourceResponse <span style="color:#a6e22e">shouldInterceptRequest</span><span style="color:#f92672">(</span>WebView view<span style="color:#f92672">,</span> String url<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    WebResourceResponse response <span style="color:#f92672">=</span>  <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">shouldInterceptRequest</span><span style="color:#f92672">(</span>view<span style="color:#f92672">,</span> url<span style="color:#f92672">);</span>
+    CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;load intercept request:&#34;</span> <span style="color:#f92672">+</span> url<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>url <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">contains</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+
+        <span style="color:#75715e">//String assertPath = url.replace(&#34;**injection**/&#34;, &#34;&#34;);
+</span><span style="color:#75715e"></span>        String assertPath <span style="color:#f92672">=</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">substring</span><span style="color:#f92672">(</span>url<span style="color:#f92672">.</span><span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(),</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">());</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+
+            response <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WebResourceResponse<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;application/x-font-ttf&#34;</span><span style="color:#f92672">,</span>
+                    <span style="color:#e6db74">&#34;UTF8&#34;</span><span style="color:#f92672">,</span> getAssets<span style="color:#f92672">().</span><span style="color:#a6e22e">open</span><span style="color:#f92672">(</span>assertPath<span style="color:#f92672">)</span>
+                    <span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">return</span> response<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="问题">问题</h3>
+<p>使用字体统一界面，但是也遇到了一些问题，如下：</p>
+<ol>
+<li>运行速度变慢（毫秒级，用户觉查不到），由于需要读取自定义的字体文件，以及需要渲染，比使用系统字体要慢。</li>
+<li>emoji在5.0以下的系统会有问题。</li>
+<li>在网页，如果采用服务器文件的方法，会消耗用户的流量</li>
+<li>在网页，采用本地注入方式，因为是在onpagefinish后才开始加载字体，因此页面会重新渲染，影响效果。这样还会造成网页可能会出现样式错误。</li>
+</ol>
+<p>因为我们的程序中大量使用到emoji，以及考虑到性能的问题，决定还是使用系统自带的字体了。</p>
+<p>如果你在这方面有更好的方案，欢迎交流！</p>
+    </div>
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span
+          >© 2021 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

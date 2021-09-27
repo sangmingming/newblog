@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        图片贴纸旋转缩放功能的实现 ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="我们的项目包含图片编辑功能，特别是包含图片添加水印贴纸的功能，从最初的简单版可以添加一个图片并且移动位置，到现在添加的图片可以进行移动，以及缩放，旋转，已经是和其他的图片处理可以达到一样的很好的效果了。一直想要整理一下，分享一下实现的改进过程，一直没空，也由于我过于懒，没有动笔。今天正好有时间，分享一下。
+"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/2015-05-10-sticker-view/" />
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+<link rel="stylesheet" href="/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="图片贴纸旋转缩放功能的实现"/>
+<meta name="twitter:description" content="我们的项目包含图片编辑功能，特别是包含图片添加水印贴纸的功能，从最初的简单版可以添加一个图片并且移动位置，到现在添加的图片可以进行移动，以及缩放，旋转，已经是和其他的图片处理可以达到一样的很好的效果了。一直想要整理一下，分享一下实现的改进过程，一直没空，也由于我过于懒，没有动笔。今天正好有时间，分享一下。"/>
+
+
+
+<meta property="og:title" content="图片贴纸旋转缩放功能的实现" />
+<meta property="og:description" content="我们的项目包含图片编辑功能，特别是包含图片添加水印贴纸的功能，从最初的简单版可以添加一个图片并且移动位置，到现在添加的图片可以进行移动，以及缩放，旋转，已经是和其他的图片处理可以达到一样的很好的效果了。一直想要整理一下，分享一下实现的改进过程，一直没空，也由于我过于懒，没有动笔。今天正好有时间，分享一下。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2015-05-10-sticker-view/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2015-05-10T22:55:04+08:00" />
+<meta property="article:modified_time" content="2015-05-10T22:55:04+08:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">摄影</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">摄影</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">图片贴纸旋转缩放功能的实现</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2015-05-10
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/android/">#android</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>我们的项目包含图片编辑功能，特别是包含图片添加水印贴纸的功能，从最初的简单版可以添加一个图片并且移动位置，到现在添加的图片可以进行移动，以及缩放，旋转，已经是和其他的图片处理可以达到一样的很好的效果了。一直想要整理一下，分享一下实现的改进过程，一直没空，也由于我过于懒，没有动笔。今天正好有时间，分享一下。</p>
+<h3 id="原始阶段直接添加imageview并且设置其在父view中的位置">原始阶段：直接添加ImageView，并且设置其在父view中的位置</h3>
+<p>父视图为RelativeLayout,贴纸view就是一个ImageView,通过设置topMargin和leftMargin来设置在父视图中显示的位置，不支持缩放和旋转。功能快速实现，代码比较冗余。再有了新的需求不方便扩展。</p>
+<h3 id="新阶段自定义view通过matrix变换实现各种功能">新阶段：自定义View，通过matrix变换实现各种功能</h3>
+<p>主要是定义一个View，在使用的时候放到需要用到的地方，大小设置和目标图片相同大小。通过matrix对平移，旋转，缩放的操作进行映射，最终改变贴纸图片的绘制结果，因此实现目标功能。下面具体分析各个功能。</p>
+<p>首先创建的视图在设置完贴纸图片之后，要创建一个浮点型数组，用于保存默认未进行任何变换的时候贴纸图片的关键点，以及一个原始矩形用于保存一个默认绘制区域的矩形，用代码表示就是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">float</span> imgWidth <span style="color:#f92672">=</span> mBitmap<span style="color:#f92672">.</span><span style="color:#a6e22e">getWidth</span><span style="color:#f92672">();</span>
+<span style="color:#66d9ef">float</span> imgHeight <span style="color:#f92672">=</span> mBitmap<span style="color:#f92672">.</span><span style="color:#a6e22e">getHeight</span><span style="color:#f92672">();</span>
+<span style="color:#66d9ef">float</span><span style="color:#f92672">[]</span> originPoints <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">float</span><span style="color:#f92672">[]{</span>0<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span>0<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">/</span>2<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">/</span>2<span style="color:#f92672">};</span> <span style="color:#75715e">//分别为矩形的四个点，与中心点
+</span><span style="color:#75715e"></span>RectF mOriginRect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RectF<span style="color:#f92672">(</span>0<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">);</span>
+</code></pre></div><p>变换后的点通过Matrix.mapPoints(newPoints, originPoints)进行映射，变换后的矩形通过Matrix.mapRect(newRect, originRect)进行映射，可以通过这些新的点画一些附加元素。至于贴纸图，可以通过获取后的rect进行定位画，也可以直接使用canvas.drawBitmap(bitmap, matrix, paint)方法绘制。</p>
+<p>至于如何进行变换操作，如何进行变换，则是在onTouch中处理各种触摸事件，或者在dispatchTouchEvent。</p>
+<h4 id="平移">平移</h4>
+<p>通过判断ACTION_DOWN，ACTION_UP，判断触摸是否在我们的贴纸图片上面，然后计算手指滑动的距离，可以获取到x轴和y轴的平移距离，调用mMatrix.postTranslate(x,y)，然后重新映射绘图即可。</p>
+<h4 id="旋转">旋转</h4>
+<p>以贴纸图片的一个边缘点为旋转触摸点，以贴纸图片的中心（非贴纸view的中心），计算旋转的角度，调用mMatrix.postRotate(rotation, px, py)， px，py为贴纸图片的中心点（为上面映射后的点，而不是原始点）。</p>
+<h4 id="缩放">缩放</h4>
+<p>同样通过触摸位置计算两次滑动过程中的缩放比例，来通过Matrix.postScale(scale, scale, px, py)进行缩放。</p>
+<h3 id="其他">其他</h3>
+<p>开始的时候没有想到使用Matrix，进行了很多的尝试，没有很好的结果。最后使用了Matrix之后，则简单很多，只是在计算缩放和旋转的时候，因为数学没有学好，花了很久才把数学问题搞定。</p>
+<p>这里分享我自己的一个完整的贴纸View，开箱即用，<a href="https://github.com/sangmingming/StickerView">https://github.com/sangmingming/StickerView</a> 。如果在这方面，你又更好的实现方式，也欢迎留言，与我进行交流。</p>
+    </div>
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span
+          >© 2021 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

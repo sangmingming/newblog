@@ -3,7 +3,7 @@
   <head>
     
       <title>
-        Tags ::
+        gradle ::
         码农明明桑
       </title>
     
@@ -18,7 +18,7 @@
   content=""
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="/tags/" />
+<link rel="canonical" href="/tags/gradle/" />
 
 
 
@@ -46,20 +46,20 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
+<meta name="twitter:title" content="gradle"/>
 <meta name="twitter:description" content=""/>
 
 
 
-<meta property="og:title" content="Tags" />
+<meta property="og:title" content="gradle" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/tags/" />
+<meta property="og:url" content="/tags/gradle/" />
 
 
 
 
-<link rel="alternate" type="application/rss+xml" href="/tags/index.xml" title="码农明明桑" />
+<link rel="alternate" type="application/rss+xml" href="/tags/gradle/index.xml" title="码农明明桑" />
 
 
 
@@ -157,82 +157,69 @@
 
       <div class="content">
         
-  <div class="terms">
-    <h1>Tags</h1>
-    <ul class="terms__list">
-      
-      
+  <div class="posts">
+    
+      <div class="post on-list">
+        <h1 class="post-title"><a href="/2015-03-18-android-build-speed-up/">加速Android Studio/Gradle构建</a></h1>
+        <div class="post-meta">
+          
+            <span class="post-date">
+              2015-03-18
+            </span>
+
+            
+          
+          
+
+
+          
+        </div>
+
         
+          <span class="post-tags">
+            
+              <a href="/tags/android/">#android</a>&nbsp;
+            
+              <a href="/tags/gradle/">#gradle</a>&nbsp;
+            
+          </span>
         
+
         
-          <li class="terms__term">
-            <a href="/tags/android/"
-              >#android <span class="terms__term-count">12</span></a
+
+        <div class="post-content">
+          
+            
+              <p>已经使用Android Studio进行开发超过一年，随着项目的增大，依赖库的增多，构建速度越来越慢，现在最慢要6分钟才能build一个release的安装包，在网上查找资料，发现可以通过一些配置可以加快速度，这里跟大家分享一下。</p>
+<h3 id="开启gradle单独的守护进程">开启gradle单独的守护进程</h3>
+<p>在下面的目录下面创建<code>gradle.properties</code>文件：</p>
+<ul>
+<li><code>/home/&lt;username&gt;/.gradle/</code> (Linux)</li>
+<li><code>/Users/&lt;username&gt;/.gradle/</code> (Mac)</li>
+<li><code>C:\Users\&lt;username&gt;\.gradle</code> (Windows)</li>
+</ul>
+<p>并在文件中增加：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">daemon</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+</code></pre></div>
+            
+          
+        </div>
+        
+          <div>
+            <a class="read-more button" href="/2015-03-18-android-build-speed-up/"
+              >Read more →</a
             >
-          </li>
+          </div>
         
-      
-        
-        
-        
-          <li class="terms__term">
-            <a href="/tags/animation/"
-              >#animation <span class="terms__term-count">1</span></a
-            >
-          </li>
-        
-      
-        
-        
-        
-          <li class="terms__term">
-            <a href="/tags/gradle/"
-              >#gradle <span class="terms__term-count">1</span></a
-            >
-          </li>
-        
-      
-        
-        
-        
-          <li class="terms__term">
-            <a href="/tags/java/"
-              >#java <span class="terms__term-count">2</span></a
-            >
-          </li>
-        
-      
-        
-        
-        
-          <li class="terms__term">
-            <a href="/tags/linux/"
-              >#linux <span class="terms__term-count">1</span></a
-            >
-          </li>
-        
-      
-        
-        
-        
-          <li class="terms__term">
-            <a href="/tags/ubuntu/"
-              >#ubuntu <span class="terms__term-count">1</span></a
-            >
-          </li>
-        
-      
-        
-        
-        
-          <li class="terms__term">
-            <a href="/tags/%E6%9E%B6%E6%9E%84/"
-              >#架构 <span class="terms__term-count">1</span></a
-            >
-          </li>
-        
-      
-    </ul>
+      </div>
+    
+    <div class="pagination">
+  <div class="pagination__buttons">
+    
+    
+  </div>
+</div>
+
   </div>
 
       </div>

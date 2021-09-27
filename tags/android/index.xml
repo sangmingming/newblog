@@ -103,5 +103,179 @@
         </description>
     </item>
     
+    <item>
+      <title>Android系统更改状态栏字体颜色</title>
+      <link>/2016-01-09-chang-android-statusbar-text-color/</link>
+      <pubDate>Sat, 09 Jan 2016 00:41:39 +0800</pubDate>
+      
+      <guid>/2016-01-09-chang-android-statusbar-text-color/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;随着时代的发展，Android的状态栏都不是乌黑一片了，在Android4.4之后我们可以修改状态栏的颜色或者让我们自己的View延伸到状态栏下面。我们可以进行更多的定制化了，然而有的时候我们使用的是淡色的颜色比如白色，由于状态栏上面的文字为白色，这样的话状态栏上面的文字就无法看清了。因此本文提供一些解决方案，可以是MIUI6+,Flyme4+，Android6.0+支持切换状态栏的文字颜色为暗色。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Android WebView 上传文件支持全解析</title>
+      <link>/2015-12-21-android-webview-upload-file/</link>
+      <pubDate>Mon, 21 Dec 2015 20:02:30 +0800</pubDate>
+      
+      <guid>/2015-12-21-android-webview-upload-file/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;默认情况下情况下，使用Android的WebView是不能够支持上传文件的。而这个，也是在我们的前端工程师告知之后才了解的。因为Android的每个版本WebView的实现有差异，因此需要对不同版本去适配。花了一点时间，参考别人的代码，这个问题已经解决，这里把我踩过的坑分享出来。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Android WebView使用的技巧与一些坑</title>
+      <link>/2015-10-18-webview-use/</link>
+      <pubDate>Sun, 18 Oct 2015 17:10:09 +0800</pubDate>
+      
+      <guid>/2015-10-18-webview-use/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;随着手机性能的提高，以及iOS和Android两个平台的普及，更多的App都会选择两个平台的App都进行开发，在有些时候，为了更加快速的开发，我们会采用hybird方式开发，这个时候我们需要使用webview并且自己进行一些配置。Android的webview在低版本和高版本采用了不同的webkit版本内核，4.4后直接使用了chrome，因此问题很多，这里分享一些我使用过程的一些技巧和遇到的坑。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>改变support中AlertDialog的样式</title>
+      <link>/2015-08-31-modify-alert-style/</link>
+      <pubDate>Mon, 31 Aug 2015 19:57:15 +0800</pubDate>
+      
+      <guid>/2015-08-31-modify-alert-style/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;android最近的support库提供了AlertDialog，可以让我们在低于5.0的系统使用到跟5.0系统一样的Material Design风格的对话框，但是使用了一段时间想到一些办法去改变对话框按钮字体的颜色，都不生效。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Android应用使用自定义字体的一些探究</title>
+      <link>/2015-07-07-android-custom-font/</link>
+      <pubDate>Tue, 07 Jul 2015 19:04:22 +0800</pubDate>
+      
+      <guid>/2015-07-07-android-custom-font/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;最近团队里面在做程序界面统一的工作，因此希望统一字体，接到一个研究怎么自定义字体的任务。因为我们的开发模式，所以需要研究在界面内的字体自定义，以及webview的显示中的字体自定义。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>图片贴纸旋转缩放功能的实现</title>
+      <link>/2015-05-10-sticker-view/</link>
+      <pubDate>Sun, 10 May 2015 22:55:04 +0800</pubDate>
+      
+      <guid>/2015-05-10-sticker-view/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;我们的项目包含图片编辑功能，特别是包含图片添加水印贴纸的功能，从最初的简单版可以添加一个图片并且移动位置，到现在添加的图片可以进行移动，以及缩放，旋转，已经是和其他的图片处理可以达到一样的很好的效果了。一直想要整理一下，分享一下实现的改进过程，一直没空，也由于我过于懒，没有动笔。今天正好有时间，分享一下。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>打破Android应用65K方法数魔咒</title>
+      <link>/2015-05-01-android-multi-dex/</link>
+      <pubDate>Fri, 01 May 2015 00:33:08 +0800</pubDate>
+      
+      <guid>/2015-05-01-android-multi-dex/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;近日，我们的应用，在编译的时候不幸的遇到这个错误&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Conversion to Dalvik format failed: Unable to execute dex: method ID not in [0, 0xffff]: 65536&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这才让我意识到原来我们的程序中，方法数已经超过了65536。在之前，已经知道了android系统的java虚拟机dalvik在执行java程序时，使用原生类型short来索引dex文件中的方法，因此方法数就呗限制在65536了。之前我一直以为，这个数量已经很大了，不会达到上限，结果今天就达到了。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>加速Android Studio/Gradle构建</title>
+      <link>/2015-03-18-android-build-speed-up/</link>
+      <pubDate>Wed, 18 Mar 2015 22:56:10 +0800</pubDate>
+      
+      <guid>/2015-03-18-android-build-speed-up/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;已经使用Android Studio进行开发超过一年，随着项目的增大，依赖库的增多，构建速度越来越慢，现在最慢要6分钟才能build一个release的安装包，在网上查找资料，发现可以通过一些配置可以加快速度，这里跟大家分享一下。&lt;/p&gt;
+&lt;h3 id=&#34;开启gradle单独的守护进程&#34;&gt;开启gradle单独的守护进程&lt;/h3&gt;
+&lt;p&gt;在下面的目录下面创建&lt;code&gt;gradle.properties&lt;/code&gt;文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/home/&amp;lt;username&amp;gt;/.gradle/&lt;/code&gt; (Linux)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/Users/&amp;lt;username&amp;gt;/.gradle/&lt;/code&gt; (Mac)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C:\Users\&amp;lt;username&amp;gt;\.gradle&lt;/code&gt; (Windows)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;并在文件中增加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;org&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;gradle&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;daemon&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+          
+        
+        </description>
+    </item>
+    
   </channel>
 </rss>

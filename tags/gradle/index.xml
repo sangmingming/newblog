@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gradle on 码农明明桑</title>
+    
+    
+    
+    <link>/tags/gradle/</link>
+    <description>Recent content in gradle on 码农明明桑</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 18 Mar 2015 22:56:10 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/gradle/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>加速Android Studio/Gradle构建</title>
+      <link>/2015-03-18-android-build-speed-up/</link>
+      <pubDate>Wed, 18 Mar 2015 22:56:10 +0800</pubDate>
+      
+      <guid>/2015-03-18-android-build-speed-up/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;已经使用Android Studio进行开发超过一年，随着项目的增大，依赖库的增多，构建速度越来越慢，现在最慢要6分钟才能build一个release的安装包，在网上查找资料，发现可以通过一些配置可以加快速度，这里跟大家分享一下。&lt;/p&gt;
+&lt;h3 id=&#34;开启gradle单独的守护进程&#34;&gt;开启gradle单独的守护进程&lt;/h3&gt;
+&lt;p&gt;在下面的目录下面创建&lt;code&gt;gradle.properties&lt;/code&gt;文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/home/&amp;lt;username&amp;gt;/.gradle/&lt;/code&gt; (Linux)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/Users/&amp;lt;username&amp;gt;/.gradle/&lt;/code&gt; (Mac)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;C:\Users\&amp;lt;username&amp;gt;\.gradle&lt;/code&gt; (Windows)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;并在文件中增加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;org&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;gradle&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;daemon&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>
