@@ -9,10 +9,30 @@
     <description>Recent content in java on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 28 Jul 2013 21:30:01 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2015 00:19:19 +0800</lastBuildDate>
     
 	<atom:link href="/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>java注解</title>
+      <link>/2015-03-06-java-annotation/</link>
+      <pubDate>Fri, 06 Mar 2015 00:19:19 +0800</pubDate>
+      
+      <guid>/2015-03-06-java-annotation/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;从java 5.0开始，为我们提供注解功能，通过注解可以限制代码的重载，过时，以及实现一些其他功能，这里，就来分析一下java的注解。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>Java中HashMap和HashTable的区别</title>

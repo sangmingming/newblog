@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        android反编译-smali语法 ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="前言 前面我们有说过android反编译的工具，如何进行反编译。反编译后可以得到jar或者得到smali文件。Android采用的是java语言进行开发，但是Android系统有自己的虚拟机Dalvik,代码编译最终不是采用的java的class，而是使用的smali。我们反编译得到的代码，jar的话可能很多地方无法正确的解释出来，如果我们反编译的是smali则可以正确的理解程序的意思。因此，我们有必要熟悉smali语法。
+"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/2015-01-14-android-decompile-smali/" />
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+<link rel="stylesheet" href="/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="android反编译-smali语法"/>
+<meta name="twitter:description" content="前言
+前面我们有说过android反编译的工具，如何进行反编译。反编译后可以得到jar或者得到smali文件。Android采用的是java语言进行开发，但是Android系统有自己的虚拟机Dalvik,代码编译最终不是采用的java的class，而是使用的smali。我们反编译得到的代码，jar的话可能很多地方无法正确的解释出来，如果我们反编译的是smali则可以正确的理解程序的意思。因此，我们有必要熟悉smali语法。"/>
+
+
+
+<meta property="og:title" content="android反编译-smali语法" />
+<meta property="og:description" content="前言
+前面我们有说过android反编译的工具，如何进行反编译。反编译后可以得到jar或者得到smali文件。Android采用的是java语言进行开发，但是Android系统有自己的虚拟机Dalvik,代码编译最终不是采用的java的class，而是使用的smali。我们反编译得到的代码，jar的话可能很多地方无法正确的解释出来，如果我们反编译的是smali则可以正确的理解程序的意思。因此，我们有必要熟悉smali语法。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2015-01-14-android-decompile-smali/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2015-01-14T23:52:44+08:00" />
+<meta property="article:modified_time" content="2015-01-14T23:52:44+08:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">摄影</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">摄影</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">android反编译-smali语法</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2015-01-14
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/android/">#android</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <h3 id="前言">前言</h3>
+<p>前面我们有说过android反编译的工具，如何进行反编译。反编译后可以得到jar或者得到smali文件。Android采用的是java语言进行开发，但是Android系统有自己的虚拟机Dalvik,代码编译最终不是采用的java的class，而是使用的smali。我们反编译得到的代码，jar的话可能很多地方无法正确的解释出来，如果我们反编译的是smali则可以正确的理解程序的意思。因此，我们有必要熟悉smali语法。</p>
+<h3 id="类型的表示">类型的表示</h3>
+<p>java里面包含两种类型，原始类型和引用类型(包括对象)，同时映射到smali也是有这两大类型。</p>
+<h5 id="原始类型">原始类型</h5>
+<blockquote>
+<p>V void (只能用于返回值类型)
+Z boolean
+B byte
+S short	
+C char
+I int
+J long
+F float
+D Double</p>
+</blockquote>
+<h5 id="对象类型">对象类型</h5>
+<blockquote>
+<p>Lpackage/name/ObjectName; 相当于java中的package.name.ObjectName</p>
+</blockquote>
+<p><em>L</em> 表示这是一个对象类型
+<em>package/name</em> 该对象所在的包
+<em>ObjectName</em> 对象名称		
+<em>;</em> 标识对象名称的结束</p>
+<h5 id="数组的表示">数组的表示</h5>
+<p><em>[I</em> 表示一个int型的一维数组，相当于int[]；	
+增加一个维度增加一个 <em>[</em>,如*[[I*表示*int[][]*</p>
+<p>数组每一个维度最多 <em>255</em>个;</p>
+<p>对象数组表示也是类似，如String数组的表示是 <em>[Ljava/lang/String</em></p>
+<h3 id="寄存器与变量">寄存器与变量</h3>
+<p>java中变量都是存放在内存中的，android为了提高性能，变量都是存放在寄存器中的，寄存器为32位，可以支持任何类型，其中long和double是64为的，需要使用两个寄存器保存。</p>
+<p>寄存器采用v和p来命名
+v表示本地寄存器，p表示参数寄存器，关系如下</p>
+<p>如果一个方法有两个本地变量，有三个参数</p>
+<blockquote>
+<p>v0     第一个本地寄存器
+v1		第二个本地寄存器
+v2	p0	 (this)
+v3	p1	第一个参数
+v4 	p2	第二个参数
+v5	p3	第三个参数</p>
+</blockquote>
+<p>当然，如果是静态方法的话就只有5个寄存器了，不需要存this了。</p>
+<p>.registers 使用这个指令指定方法中寄存器的总数
+.locals 使用这个指定表明方法中非参寄存器的总数，放在方法的第一行。</p>
+<h3 id="方法和字段的表示">方法和字段的表示</h3>
+<h5 id="方法签名">方法签名</h5>
+<p>methodName(III)Lpackage/name/ObjectName;</p>
+<p>如果做过ndk开发的对于这样的签名应该很熟悉的，就是这样来标识一个方法的。
+上面methodName标识方法名，III表示三个整形参数，Lpackage/name/ObjectName;表示返回值的类型。</p>
+<h5 id="方法的表示">方法的表示</h5>
+<p>Lpackage/name/ObjectName;——&gt;methodName(III)Z 
+即 package.name.ObjectName中的 function boolean methondName(int a, int b, int c) 类似这样子</p>
+<h5 id="字段的表示">字段的表示</h5>
+<p>Lpackage/name/ObjectName;——&gt;FieldName:Ljava/lang/String;</p>
+<p>即表示： 包名，字段名和各字段类型</p>
+<h4 id="方法的定义">方法的定义</h4>
+<p>比如我下面的一个方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">+</span>b<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>使用编译后是这样</p>
+<pre tabindex="0"><code class="language-smali" data-lang="smali">
+.method private static sum(II)I
+    .locals 4   #表示需要申请4个本地寄存器
+    .parameter
+    .parameter #这里表示有两个参数
+
+    .prologue
+    .line 27 
+    move v0, p0
+
+    .local v0, a:I
+    move v1, p1
+
+    .local v1, b:I
+    move v2, v0
+
+    move v3, v1
+
+    add-int/2addr v2, v3
+
+    move v0, v2
+
+    .end local v0           #a:I
+    return v0
+.end method
+
+</code></pre><p>从上面可以看到函数声明使用*.method*开始 *.end method*结束，java中的关键词private,static 等都可以使用，同时使用签名来表示唯一的方法，这里是*sum(II)I*。</p>
+<h4 id="声明成员">声明成员</h4>
+<p>.field private name:Lpackage/name/ObjectName;
+比如：private TextView mTextView;表示就是
+.field private mTextView:Landroid/widget/TextView;
+private int mCount;
+.field private mCount:I</p>
+<h3 id="指令执行">指令执行</h3>
+<p>smali字节码是类似于汇编的，如果你有汇编基础，理解起来是非常容易的。</p>
+<p>比如：
+move v0, v3 #把v3寄存器的值移动到寄存器v0上.</p>
+<p>const v0， 0x1 #把值0x1赋值到寄存器v0上。</p>
+<p>invoke-static {v4, v5}, Lme/isming/myapplication/MainActivity;-&gt;sum(II)I   #执行方法sum(),v4,v5的值分别作为sum的参数。</p>
+<h3 id="其他">其他</h3>
+<p>通过前面我们可以看到，smali就是类似汇编，其中很多命令，我们可以去查它的手册来一一对应。学习时，我们可以自己写一个比较简单的java文件，然后转成smali文件来对照学习。</p>
+<p>下面，我贴一个我写的一个比较简单的java文件以及其对应的smali，其中包含if判断和for循环。</p>
+<p>java文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> me.isming.myapplication<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> android.support.v7.app.ActionBarActivity<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> android.os.Bundle<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> android.view.Menu<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> android.view.MenuItem<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> android.widget.TextView<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MainActivity</span> <span style="color:#66d9ef">extends</span> ActionBarActivity <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> TextView mTextView<span style="color:#f92672">;</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onCreate</span><span style="color:#f92672">(</span>Bundle savedInstanceState<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onCreate</span><span style="color:#f92672">(</span>savedInstanceState<span style="color:#f92672">);</span>
+        setContentView<span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">layout</span><span style="color:#f92672">.</span><span style="color:#a6e22e">activity_main</span><span style="color:#f92672">);</span>
+
+        mTextView <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>TextView<span style="color:#f92672">)</span> findViewById<span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">.</span><span style="color:#a6e22e">text</span><span style="color:#f92672">);</span>
+
+        mTextView<span style="color:#f92672">.</span><span style="color:#a6e22e">setText</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a+b=&#34;</span> <span style="color:#f92672">+</span> sum<span style="color:#f92672">(</span>1<span style="color:#f92672">,</span>2<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;a&gt;b?&#34;</span> <span style="color:#f92672">+</span> max<span style="color:#f92672">(</span>1<span style="color:#f92672">,</span>2<span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;5 accumulate:&#34;</span> <span style="color:#f92672">+</span> accumulate<span style="color:#f92672">(</span>5<span style="color:#f92672">));</span>
+
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> a<span style="color:#f92672">+</span>b<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">max</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>a <span style="color:#f92672">&gt;</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">accumulate</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>a <span style="color:#f92672">&lt;=</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">return</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> a<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            sum <span style="color:#f92672">+=</span> a<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">return</span> sum<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p>对应的smali:</p>
+<pre tabindex="0"><code class="language-smali" data-lang="smali">.class public Lme/isming/myapplication/MainActivity;
+.super Landroid/support/v7/app/ActionBarActivity;
+.source &quot;MainActivity.java&quot;
+
+
+# instance fields
+.field private mTextView:Landroid/widget/TextView;
+
+
+# direct methods
+.method public constructor &lt;init&gt;()V
+    .locals 2
+
+    .prologue
+    .line 10
+    move-object v0, p0
+
+    .local v0, this:Lme/isming/myapplication/MainActivity;
+    move-object v1, v0
+
+    invoke-direct {v1}, Landroid/support/v7/app/ActionBarActivity;-&gt;&lt;init&gt;()V
+
+    return-void
+.end method
+
+.method private accumulate(I)I
+    .locals 6
+    .parameter
+
+    .prologue
+    .line 39
+    move-object v0, p0
+
+    .local v0, this:Lme/isming/myapplication/MainActivity;
+    move v1, p1
+
+    .local v1, a:I
+    move v4, v1
+
+    if-gtz v4, :cond_0
+
+    .line 40
+    const/4 v4, 0x0
+
+    move v0, v4
+
+    .line 46
+    .end local v0           #this:Lme/isming/myapplication/MainActivity;
+    :goto_0
+    return v0
+
+    .line 42
+    .restart local v0       #this:Lme/isming/myapplication/MainActivity;
+    :cond_0
+    const/4 v4, 0x0
+
+    move v2, v4
+
+    .line 43
+    .local v2, sum:I
+    const/4 v4, 0x0
+
+    move v3, v4
+
+    .local v3, i:I
+    :goto_1
+    move v4, v3
+
+    move v5, v1
+
+    if-gt v4, v5, :cond_1
+
+    .line 44
+    move v4, v2
+
+    move v5, v1
+
+    add-int/2addr v4, v5
+
+    move v2, v4
+
+    .line 43
+    add-int/lit8 v3, v3, 0x1
+
+    goto :goto_1
+
+    .line 46
+    :cond_1
+    move v4, v2
+
+    move v0, v4
+
+    goto :goto_0
+.end method
+
+.method private max(II)Z
+    .locals 5
+    .parameter
+    .parameter
+
+    .prologue
+    .line 31
+    move-object v0, p0
+
+    .local v0, this:Lme/isming/myapplication/MainActivity;
+    move v1, p1
+
+    .local v1, a:I
+    move v2, p2
+
+    .local v2, b:I
+    move v3, v1
+
+    move v4, v2
+
+    if-le v3, v4, :cond_0
+
+    .line 32
+    const/4 v3, 0x1
+
+    move v0, v3
+
+    .line 34
+    .end local v0           #this:Lme/isming/myapplication/MainActivity;
+    :goto_0
+    return v0
+
+    .restart local v0       #this:Lme/isming/myapplication/MainActivity;
+    :cond_0
+    const/4 v3, 0x0
+
+    move v0, v3
+
+    goto :goto_0
+.end method
+
+.method private static sum(II)I
+    .locals 4
+    .parameter
+    .parameter
+
+    .prologue
+    .line 27
+    move v0, p0
+
+    .local v0, a:I
+    move v1, p1
+
+    .local v1, b:I
+    move v2, v0
+
+    move v3, v1
+
+    add-int/2addr v2, v3
+
+    move v0, v2
+
+    .end local v0           #a:I
+    return v0
+.end method
+
+
+# virtual methods
+.method protected onCreate(Landroid/os/Bundle;)V
+    .locals 8
+    .parameter
+
+    .prologue
+    .line 16
+    move-object v0, p0
+
+    .local v0, this:Lme/isming/myapplication/MainActivity;
+    move-object v1, p1
+
+    .local v1, savedInstanceState:Landroid/os/Bundle;
+    move-object v2, v0
+
+    move-object v3, v1
+
+    invoke-super {v2, v3}, Landroid/support/v7/app/ActionBarActivity;-&gt;onCreate(Landroid/os/Bundle;)V
+
+    .line 17
+    move-object v2, v0
+
+    const v3, 0x7f030017
+
+    invoke-virtual {v2, v3}, Lme/isming/myapplication/MainActivity;-&gt;setContentView(I)V
+
+    .line 19
+    move-object v2, v0
+
+    move-object v3, v0
+
+    const v4, 0x7f08003f
+
+    invoke-virtual {v3, v4}, Lme/isming/myapplication/MainActivity;-&gt;findViewById(I)Landroid/view/View;
+
+    move-result-object v3
+
+    check-cast v3, Landroid/widget/TextView;
+
+    iput-object v3, v2, Lme/isming/myapplication/MainActivity;-&gt;mTextView:Landroid/widget/TextView;
+
+    .line 21
+    move-object v2, v0
+
+    iget-object v2, v2, Lme/isming/myapplication/MainActivity;-&gt;mTextView:Landroid/widget/TextView;
+
+    new-instance v3, Ljava/lang/StringBuilder;
+
+    move-object v7, v3
+
+    move-object v3, v7
+
+    move-object v4, v7
+
+    invoke-direct {v4}, Ljava/lang/StringBuilder;-&gt;&lt;init&gt;()V
+
+    const-string v4, &quot;a+b=&quot;
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    const/4 v4, 0x1
+
+    const/4 v5, 0x2
+
+    invoke-static {v4, v5}, Lme/isming/myapplication/MainActivity;-&gt;sum(II)I
+
+    move-result v4
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;-&gt;append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    const-string v4, &quot;a&gt;b?&quot;
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    move-object v4, v0
+
+    const/4 v5, 0x1
+
+    const/4 v6, 0x2
+
+    invoke-direct {v4, v5, v6}, Lme/isming/myapplication/MainActivity;-&gt;max(II)Z
+
+    move-result v4
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;-&gt;append(Z)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    const-string v4, &quot;5 accumulate:&quot;
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    move-object v4, v0
+
+    const/4 v5, 0x5
+
+    invoke-direct {v4, v5}, Lme/isming/myapplication/MainActivity;-&gt;accumulate(I)I
+
+    move-result v4
+
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;-&gt;append(I)Ljava/lang/StringBuilder;
+
+    move-result-object v3
+
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;-&gt;toString()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {v2, v3}, Landroid/widget/TextView;-&gt;setText(Ljava/lang/CharSequence;)V
+
+    .line 23
+    return-void
+.end method
+
+</code></pre><h3 id="参考资料">参考资料</h3>
+<p>最后附上一些参考资料：</p>
+<p><a href="http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html">http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html</a></p>
+<p><a href="https://code.google.com/p/smali/w/list">https://code.google.com/p/smali/w/list</a></p>
+<p><a href="http://www.miui.com/thread-409543-1-1.html">http://www.miui.com/thread-409543-1-1.html</a></p>
+    </div>
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span
+          >© 2021 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

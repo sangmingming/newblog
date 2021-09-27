@@ -9,10 +9,32 @@
     <description>Recent content in gradle on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 18 Mar 2015 22:56:10 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2015 23:19:07 +0800</lastBuildDate>
     
 	<atom:link href="/tags/gradle/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>一个上传apk到fir的gradle插件</title>
+      <link>/2015-08-01-gradle-fir-plugin/</link>
+      <pubDate>Sat, 01 Aug 2015 23:19:07 +0800</pubDate>
+      
+      <guid>/2015-08-01-gradle-fir-plugin/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;声明，这不是广告，没有任何利益瓜葛。&lt;/p&gt;
+&lt;p&gt;App内测需要把安装把安装包放在一个地方进行托管，方便内测人员下载。国内有蒲公英，fir，等等这些网站可以用。&lt;/p&gt;
+&lt;p&gt;最近fir上了新版本了，上了新的api，新界面，本以为它们会提供gradle的上传工具，结果没有，而且它们新版本还不好用，原本的下载统计浏览统计都没有了，结果上传很慢，甚至上传不了，我便写了一个gradle的上传工具。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>加速Android Studio/Gradle构建</title>
