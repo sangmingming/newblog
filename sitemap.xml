@@ -2,17 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/posts/photography/</loc>
+    <lastmod>2021-09-30T01:18:46+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2021-09-30T01:18:46+08:00</lastmod>
+  </url><url>
+    <loc>/2018-04-japan/</loc>
+    <lastmod>2021-09-30T01:18:46+08:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2021-09-30T01:18:46+08:00</lastmod>
+  </url><url>
     <loc>/2019-11-india-travel/</loc>
     <lastmod>2019-11-29T10:33:48+08:00</lastmod>
   </url><url>
-    <loc>/posts/photography/</loc>
-    <lastmod>2019-11-29T10:33:48+08:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2019-11-29T10:33:48+08:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2019-11-29T10:33:48+08:00</lastmod>
+    <loc>/2018-05-us/</loc>
+    <lastmod>2018-04-29T01:18:57+08:00</lastmod>
   </url><url>
     <loc>/posts/tech/</loc>
     <lastmod>2017-07-12T21:30:52+08:00</lastmod>
