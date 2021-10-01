@@ -65,5 +65,16 @@ tag: ["摄影", "旅行"]
 加尔各答河上的船夫
 
 ![](/images/photo/india/DSC01491.jpg)
+
 ![](/images/photo/india/DSC01472.jpg)
 当地的公交车
+
+![](/images/photo/india/DSC01531.jpg)
+
+当地的有轨电车，看起来很破，轨道没有任何保护和隔离
+
+![](/images/photo/india/DSC01538.jpg)
+
+![](/images/photo/india/DSC01537.jpg)
+
+公路高架下生活的小孩，他们养的用来表演的马匹
