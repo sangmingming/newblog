@@ -5,3 +5,11 @@ Hugo directory and insert:
 {{ template "_internal/disqus.html" . }}
 
 or whatever comment engine you want -> https://gohugo.io/content-management/comments/#readout -->
+
+<div id="waline"></div>
+  <script>
+    Waline({
+      el: '#waline',
+      serverURL: 'https://my-waline-comments-53wsfjmo5-sangmingming.vercel.app/',
+    });
+  </script>
