@@ -9,6 +9,7 @@ theme = "hello-friend"
 
 [params]
  defaultTheme = "light" #light or dark
+ contentTypeName="posts"
 
 [menu]
  [[menu.main]]
