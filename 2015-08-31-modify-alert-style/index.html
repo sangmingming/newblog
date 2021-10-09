@@ -228,16 +228,51 @@ builder<span style="color:#f92672">.</span><span style="color:#a6e22e">show</spa
 <p>从上面改变对话框的样式，可以想到用同样的思路来实现应用的换肤，应用主题之类的功能。</p>
     </div>
     
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/2015-10-18-webview-use/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Android WebView使用的技巧与一些坑</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="/2015-08-01-gradle-fir-plugin/">
+                  <span class="button__text">一个上传apk到fir的gradle插件</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
 
     
       
         
-
+<script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
 <div id="waline"></div>
   <script>
     Waline({
       el: '#waline',
       serverURL: 'https://my-waline-comments-53wsfjmo5-sangmingming.vercel.app/',
+      uploadImage: false,
+      dark: "body.dark-theme",
+      login: "disable",
+      number: 3,
+      mathTagSupport: false,
+      visitor: true
     });
   </script>
 
@@ -265,7 +300,6 @@ builder<span style="color:#f92672">.</span><span style="color:#a6e22e">show</spa
   </div>
 </footer><script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
-<script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <script>
     

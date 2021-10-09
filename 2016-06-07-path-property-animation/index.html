@@ -236,16 +236,51 @@ PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9e
 <p>没有Demo了，可以参考我参考的那个github的库吧。同时作者已经实现svg的动画显示了，原理相同，只是把svg加载为path，使用同样的动画。代码:<a href="https://github.com/matthewrkula/AnimatedPathView">https://github.com/matthewrkula/AnimatedPathView</a></p>
     </div>
     
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/2016-08-08-red-android-evolution/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">小红书Android客户端演进之路</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="/2016-01-09-chang-android-statusbar-text-color/">
+                  <span class="button__text">Android系统更改状态栏字体颜色</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
 
     
       
         
-
+<script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
 <div id="waline"></div>
   <script>
     Waline({
       el: '#waline',
       serverURL: 'https://my-waline-comments-53wsfjmo5-sangmingming.vercel.app/',
+      uploadImage: false,
+      dark: "body.dark-theme",
+      login: "disable",
+      number: 3,
+      mathTagSupport: false,
+      visitor: true
     });
   </script>
 
@@ -273,7 +308,6 @@ PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9e
   </div>
 </footer><script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
-<script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <script>
     
