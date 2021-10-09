@@ -6,6 +6,7 @@
   --color: #222;
   --color-secondary: #999;
   --border-color: #dcdcdc;
+  --theme-color: #FD281A;
 
   /* variables for js, must be the same as these in @custom-media queries */
   --phoneWidth: (max-width: 684px);
