@@ -9,7 +9,7 @@
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
 <meta
   name="description"
   content="Android中经常会有一些操作比如网络请求，文件读写，数据库操作，比较耗时，我们需要将其放在非UI线程去处理，此时，我们需要处理任务前后UI的变化和交互。我们需要通过类似js中异步请求处理，这里总结我所了解到的，方便自己记忆，也方便别人的浏览。
@@ -260,6 +260,16 @@ View.post(Runnable)方法。在post(Runnable action)方法里，View获得当前
 
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
 
 
       

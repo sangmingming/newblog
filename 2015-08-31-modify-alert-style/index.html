@@ -9,7 +9,7 @@
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
 <meta
   name="description"
   content="android最近的support库提供了AlertDialog，可以让我们在低于5.0的系统使用到跟5.0系统一样的Material Design风格的对话框，但是使用了一段时间想到一些办法去改变对话框按钮字体的颜色，都不生效。
@@ -259,6 +259,16 @@ builder<span style="color:#f92672">.</span><span style="color:#a6e22e">show</spa
 
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
 
 
       

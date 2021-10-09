@@ -9,7 +9,7 @@
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
 <meta
   name="description"
   content="已经使用Android Studio进行开发超过一年，随着项目的增大，依赖库的增多，构建速度越来越慢，现在最慢要6分钟才能build一个release的安装包，在网上查找资料，发现可以通过一些配置可以加快速度，这里跟大家分享一下。
@@ -306,6 +306,16 @@ org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span>
 
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
 
 
       

@@ -9,7 +9,7 @@
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
 <meta
   name="description"
   content=" 程序员一枚，主要从事Android软件开发，熟悉PHP，了解Python，喜爱摆弄各种新鲜技术。 热爱互联网以及移动互联网，常年混迹于网络。 努力学习摄影中  那些年开发的APP  蔷薇小说-精品小说阅读：http://www.qwsy.com/app_android.aspx 游戏典-游戏应用市场：http://www.ucdin.com/download/downpage/web.html 世界杯闹钟：http://app.xiaomi.com/detail/63648 妹子图-高清妹子图：http://app.mi.com/detail/60408  关于博客 记录我的技术成长，技术历程，遇到的技术问题。
@@ -239,6 +239,16 @@
 
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
 
 
       

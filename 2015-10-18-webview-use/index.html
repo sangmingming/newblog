@@ -9,7 +9,7 @@
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
 <meta
   name="description"
   content="随着手机性能的提高，以及iOS和Android两个平台的普及，更多的App都会选择两个平台的App都进行开发，在有些时候，为了更加快速的开发，我们会采用hybird方式开发，这个时候我们需要使用webview并且自己进行一些配置。Android的webview在低版本和高版本采用了不同的webkit版本内核，4.4后直接使用了chrome，因此问题很多，这里分享一些我使用过程的一些技巧和遇到的坑。
@@ -278,6 +278,16 @@ webView<span style="color:#f92672">.</span><span style="color:#a6e22e">addJavasc
 
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
 
 
       

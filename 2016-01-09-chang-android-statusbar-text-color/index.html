@@ -9,7 +9,7 @@
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
 <meta
   name="description"
   content="随着时代的发展，Android的状态栏都不是乌黑一片了，在Android4.4之后我们可以修改状态栏的颜色或者让我们自己的View延伸到状态栏下面。我们可以进行更多的定制化了，然而有的时候我们使用的是淡色的颜色比如白色，由于状态栏上面的文字为白色，这样的话状态栏上面的文字就无法看清了。因此本文提供一些解决方案，可以是MIUI6&#43;,Flyme4&#43;，Android6.0&#43;支持切换状态栏的文字颜色为暗色。
@@ -284,6 +284,16 @@
 
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
 
 
       
