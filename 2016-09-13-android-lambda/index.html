@@ -22,7 +22,7 @@
 />
 <meta name="robots" content="noodp" />
 <meta name="color-scheme" content="light dark" />
-<meta name="theme-color" content="#C8102E" />
+<meta name="theme-color" content="#fd281a" />
 <link rel="canonical" href="/2016-09-13-android-lambda/" />
 
 
@@ -327,7 +327,14 @@ buildscript <span style="color:#f92672">{</span>
     
       
         
+<p></p>
 <script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+<style>
+    :root {
+        --waline-theme-color: #fd281a;
+        --waline-active-color: #e24d42;
+    }
+</style>
 <div id="waline"></div>
   <script>
     Waline({
@@ -338,7 +345,8 @@ buildscript <span style="color:#f92672">{</span>
       login: "disable",
       number: 3,
       mathTagSupport: false,
-      visitor: true
+      visitor: true,
+      avatar: 'wavatar',
     });
   </script>
 

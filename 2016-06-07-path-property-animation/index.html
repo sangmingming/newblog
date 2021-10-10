@@ -21,7 +21,7 @@
 />
 <meta name="robots" content="noodp" />
 <meta name="color-scheme" content="light dark" />
-<meta name="theme-color" content="#C8102E" />
+<meta name="theme-color" content="#fd281a" />
 <link rel="canonical" href="/2016-06-07-path-property-animation/" />
 
 
@@ -269,7 +269,14 @@ PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9e
     
       
         
+<p></p>
 <script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+<style>
+    :root {
+        --waline-theme-color: #fd281a;
+        --waline-active-color: #e24d42;
+    }
+</style>
 <div id="waline"></div>
   <script>
     Waline({
@@ -280,7 +287,8 @@ PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9e
       login: "disable",
       number: 3,
       mathTagSupport: false,
-      visitor: true
+      visitor: true,
+      avatar: 'wavatar',
     });
   </script>
 

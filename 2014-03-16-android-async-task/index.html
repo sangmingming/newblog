@@ -21,7 +21,7 @@
 />
 <meta name="robots" content="noodp" />
 <meta name="color-scheme" content="light dark" />
-<meta name="theme-color" content="#C8102E" />
+<meta name="theme-color" content="#fd281a" />
 <link rel="canonical" href="/2014-03-16-android-async-task/" />
 
 
@@ -262,7 +262,14 @@ View.post(Runnable)方法。在post(Runnable action)方法里，View获得当前
     
       
         
+<p></p>
 <script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+<style>
+    :root {
+        --waline-theme-color: #fd281a;
+        --waline-active-color: #e24d42;
+    }
+</style>
 <div id="waline"></div>
   <script>
     Waline({
@@ -273,7 +280,8 @@ View.post(Runnable)方法。在post(Runnable action)方法里，View获得当前
       login: "disable",
       number: 3,
       mathTagSupport: false,
-      visitor: true
+      visitor: true,
+      avatar: 'wavatar',
     });
   </script>
 
