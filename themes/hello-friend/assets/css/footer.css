@@ -4,16 +4,46 @@
   color: var(--color-secondary);
 
   &__inner {
-    display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    width: 760px;
     max-width: 100%;
 
     @media (--tablet) {
       flex-direction: column;
     }
+  }
+
+  &__title {
+    margin: 0!important;
+    display: flex;
+    text-align: center;
+    position: relative;
+  }
+
+  &__title-h {
+    text-align: center;
+    margin: 0 auto;
+    font-size: .8rem;
+    letter-spacing: .1em;
+    z-index: 1;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    i {
+      font-size: 2.1rem!important;
+      margin: 0 5px!important;
+      color: #363636;
+      transition: fill 120ms ease-in-out;
+
+      :hover {
+        color: var(--theme-color);
+      }
+    }
+
   }
 
   a {
