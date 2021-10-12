@@ -26,6 +26,22 @@
   }
 }
 
+html:not([data-scroll="0"]) .header  {
+  
+    position: fixed;
+    top: 0;
+    background: var(--light-header);
+    box-shadow: 0 0 0.5em rgb(0 0 0 / 10%);
+    padding: 5px;
+  
+    @media (--phone) {
+      box-shadow: 0 0 0.5em rgb(0 0 0 / 50%);
+      padding: 0 20px;
+      border-radius: 0 0 8px 8px;
+    }
+  
+}
+
 .theme-toggle {
   display: flex;
   align-items: center;

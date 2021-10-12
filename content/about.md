@@ -25,9 +25,6 @@ layout: 'posts'
 
 记录我的技术成长，技术历程，遇到的技术问题。
 
-{{< friend des="" url="https://blog.shuiba.co" src="https://static.eallion.com/link/hanhan.jpg" name="水八口记" >}}
-{{< friend des="" url="https://blog.shuiba.co" src="https://static.eallion.com/link/hanhan.jpg" name="水八口记" >}}
-
 ### 联系我
 
 + 邮箱： [sangmingming@vip.qq.com](mailto:sangmingming@vip.qq.com)   [linming1007@gmail.com](mailto:linming1007@gmail.com)

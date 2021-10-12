@@ -269,3 +269,18 @@ blockquote.twitter-tweet {
   line-height: inherit;
   border-radius: 8px;
 }
+
+*::selection {
+  background: var(--theme-color);
+  color: var(--background);
+}
+
+*::-moz-selection {
+  background: var(--theme-color);
+  color: var(--background);
+}
+
+*::-webkit-selection {
+  background: var(--theme-color);
+  color: var(--background);
+}
