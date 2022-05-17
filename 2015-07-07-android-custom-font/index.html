@@ -219,50 +219,50 @@
 体。</p>
 <p>第一步，在assets目录下新建fonts目录，把ttf字体文件放到这。
 第二步，程序中调用：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">AssetManager mgr<span style="color:#f92672">=</span>getAssets<span style="color:#f92672">();</span><span style="color:#75715e">//得到AssetManager
-</span><span style="color:#75715e"></span>Typeface tf<span style="color:#f92672">=</span>Typeface<span style="color:#f92672">.</span><span style="color:#a6e22e">createFromAsset</span><span style="color:#f92672">(</span>mgr<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;fonts/ttf.ttf&#34;</span><span style="color:#f92672">);</span><span style="color:#75715e">//根据路径得到Typeface
-</span><span style="color:#75715e"></span>tv<span style="color:#f92672">.</span><span style="color:#a6e22e">setTypeface</span><span style="color:#f92672">(</span>tf<span style="color:#f92672">);</span><span style="color:#75715e">//设置字体
-</span></code></pre></div><p>注意ttf文件命名不能使用中文,否则可能无法加载。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>AssetManager mgr<span style="color:#f92672">=</span>getAssets<span style="color:#f92672">();</span><span style="color:#75715e">//得到AssetManager
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Typeface tf<span style="color:#f92672">=</span>Typeface<span style="color:#f92672">.</span><span style="color:#a6e22e">createFromAsset</span><span style="color:#f92672">(</span>mgr<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;fonts/ttf.ttf&#34;</span><span style="color:#f92672">);</span><span style="color:#75715e">//根据路径得到Typeface
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>tv<span style="color:#f92672">.</span><span style="color:#a6e22e">setTypeface</span><span style="color:#f92672">(</span>tf<span style="color:#f92672">);</span><span style="color:#75715e">//设置字体
+</span></span></span></code></pre></div><p>注意ttf文件命名不能使用中文,否则可能无法加载。</p>
 <p>对于需要使用比较多的地方，可以写一个TextView的子类来统一处理。</p>
 <h3 id="在webview中使用自定义地体">在webview中使用自定义地体</h3>
 <p>对于本地的网页，在asset目录放字体文件，并在css中添加以下内容，自定义一个字体face，并且在需要的地方使用这个字体face即可。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">@<span style="color:#66d9ef">font-face</span> {
-	<span style="color:#f92672">font-family</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;MyFont&#34;</span><span style="color:#f92672">;</span>
-	<span style="color:#f92672">src</span><span style="color:#f92672">:</span> <span style="color:#f92672">url</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;file:///android_asset/fonts/ttf.ttf&#39;</span><span style="color:#f92672">);</span>
-}
-
-<span style="color:#f92672">h3</span> { <span style="color:#66d9ef">font-family</span>:<span style="color:#e6db74">&#34;MyFont&#34;</span>}
-</code></pre></div><p>对于在线的网页，则需要把字体文件放到服务器，使用同样的方式定义字体face,应用到每个地方。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span>@<span style="color:#66d9ef">font-face</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">font-family</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;MyFont&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">src</span><span style="color:#f92672">:</span> <span style="color:#f92672">url</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;file:///android_asset/fonts/ttf.ttf&#39;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">h3</span> { <span style="color:#66d9ef">font-family</span>:<span style="color:#e6db74">&#34;MyFont&#34;</span>}
+</span></span></code></pre></div><p>对于在线的网页，则需要把字体文件放到服务器，使用同样的方式定义字体face,应用到每个地方。</p>
 <p>为了减少网页或者说服务器端的工作，可以使用本地注入的方式注入font-face的css，并对整个网页进行样式替换。</p>
 <p>给webview自定义webViewClient,重写<code>onPageFinish</code>,在其中添加如下内容：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">view<span style="color:#f92672">.</span><span style="color:#a6e22e">loadUrl</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;javascript:!function(){&#34;</span> <span style="color:#f92672">+</span>
-        <span style="color:#e6db74">&#34;s=document.createElement(&#39;style&#39;);s.innerHTML=&#34;</span>
-        <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34;@font-face{font-family:myhyqh;src:url(&#39;**injection**/hyqh.ttf&#39;);}*{font-family:myhyqh !important;}\&#34;;&#34;</span>
-        <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;document.getElementsByTagName(&#39;head&#39;)[0].appendChild(s);&#34;</span> <span style="color:#f92672">+</span>
-        <span style="color:#e6db74">&#34;document.getElementsByTagName(&#39;body&#39;)[0].style.fontFamily = \&#34;myhyqh\&#34;;}()&#34;</span><span style="color:#f92672">);</span>
-</code></pre></div><p>由于网页上是没有权限访问本地的asset文件夹的，因此我们需要拦截请求来加载本地的文件，我这里替换了<code>file:///android_assets/</code>为 <code>**injection**/</code>了，我们还需要重写
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>view<span style="color:#f92672">.</span><span style="color:#a6e22e">loadUrl</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;javascript:!function(){&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;s=document.createElement(&#39;style&#39;);s.innerHTML=&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34;@font-face{font-family:myhyqh;src:url(&#39;**injection**/hyqh.ttf&#39;);}*{font-family:myhyqh !important;}\&#34;;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;document.getElementsByTagName(&#39;head&#39;)[0].appendChild(s);&#34;</span> <span style="color:#f92672">+</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;document.getElementsByTagName(&#39;body&#39;)[0].style.fontFamily = \&#34;myhyqh\&#34;;}()&#34;</span><span style="color:#f92672">);</span>
+</span></span></code></pre></div><p>由于网页上是没有权限访问本地的asset文件夹的，因此我们需要拦截请求来加载本地的文件，我这里替换了<code>file:///android_assets/</code>为 <code>**injection**/</code>了，我们还需要重写
 <code>shouldInterceptRequest</code>
 在请求为我们这个字体文件的时候，加载本地文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Override</span>
-<span style="color:#66d9ef">public</span> WebResourceResponse <span style="color:#a6e22e">shouldInterceptRequest</span><span style="color:#f92672">(</span>WebView view<span style="color:#f92672">,</span> String url<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    WebResourceResponse response <span style="color:#f92672">=</span>  <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">shouldInterceptRequest</span><span style="color:#f92672">(</span>view<span style="color:#f92672">,</span> url<span style="color:#f92672">);</span>
-    CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;load intercept request:&#34;</span> <span style="color:#f92672">+</span> url<span style="color:#f92672">);</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>url <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">contains</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-
-        <span style="color:#75715e">//String assertPath = url.replace(&#34;**injection**/&#34;, &#34;&#34;);
-</span><span style="color:#75715e"></span>        String assertPath <span style="color:#f92672">=</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">substring</span><span style="color:#f92672">(</span>url<span style="color:#f92672">.</span><span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(),</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">());</span>
-        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
-
-            response <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WebResourceResponse<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;application/x-font-ttf&#34;</span><span style="color:#f92672">,</span>
-                    <span style="color:#e6db74">&#34;UTF8&#34;</span><span style="color:#f92672">,</span> getAssets<span style="color:#f92672">().</span><span style="color:#a6e22e">open</span><span style="color:#f92672">(</span>assertPath<span style="color:#f92672">)</span>
-                    <span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
-        <span style="color:#f92672">}</span>
-    <span style="color:#f92672">}</span>
-    <span style="color:#66d9ef">return</span> response<span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><h3 id="问题">问题</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> WebResourceResponse <span style="color:#a6e22e">shouldInterceptRequest</span><span style="color:#f92672">(</span>WebView view<span style="color:#f92672">,</span> String url<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    WebResourceResponse response <span style="color:#f92672">=</span>  <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">shouldInterceptRequest</span><span style="color:#f92672">(</span>view<span style="color:#f92672">,</span> url<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;load intercept request:&#34;</span> <span style="color:#f92672">+</span> url<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>url <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">contains</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//String assertPath = url.replace(&#34;**injection**/&#34;, &#34;&#34;);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        String assertPath <span style="color:#f92672">=</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">substring</span><span style="color:#f92672">(</span>url<span style="color:#f92672">.</span><span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;**injection**/&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">(),</span> url<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WebResourceResponse<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;application/x-font-ttf&#34;</span><span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;UTF8&#34;</span><span style="color:#f92672">,</span> getAssets<span style="color:#f92672">().</span><span style="color:#a6e22e">open</span><span style="color:#f92672">(</span>assertPath<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> response<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="问题">问题</h3>
 <p>使用字体统一界面，但是也遇到了一些问题，如下：</p>
 <ol>
 <li>运行速度变慢（毫秒级，用户觉查不到），由于需要读取自定义的字体文件，以及需要渲染，比使用系统字体要慢。</li>
@@ -352,7 +352,7 @@
     
       <div class="copyright">
         <span
-          >© 2021 码农明明桑 Powered by
+          >© 2022 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

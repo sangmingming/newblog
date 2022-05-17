@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        2022年在MacOs上编译AOSP ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
+<meta
+  name="description"
+  content="之前苦于电脑磁盘空间比较小，而android系统的源码越来越大，一直没有机会自己编译Android系统。这次换了电脑，磁盘足够大，可以尝试一下了。 而android源码的网站红色的字写着Platform development on MacOS isn&amp;rsquo;t supported as of June 22, 2021.，我就知道不会那么容易了。
+"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#fd281a" />
+<link rel="canonical" href="/2022-05-17-build-android-system/" />
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+<link rel="stylesheet" href="/style.css" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" href="/ming.ico" />
+<link rel="manifest" href="/manifest.json" />
+
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link rel="preload" href="//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.css">
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2022年在MacOs上编译AOSP"/>
+<meta name="twitter:description" content="之前苦于电脑磁盘空间比较小，而android系统的源码越来越大，一直没有机会自己编译Android系统。这次换了电脑，磁盘足够大，可以尝试一下了。
+而android源码的网站红色的字写着Platform development on MacOS isn&rsquo;t supported as of June 22, 2021.，我就知道不会那么容易了。"/>
+
+
+
+<meta property="og:title" content="2022年在MacOs上编译AOSP" />
+<meta property="og:description" content="之前苦于电脑磁盘空间比较小，而android系统的源码越来越大，一直没有机会自己编译Android系统。这次换了电脑，磁盘足够大，可以尝试一下了。
+而android源码的网站红色的字写着Platform development on MacOS isn&rsquo;t supported as of June 22, 2021.，我就知道不会那么容易了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2022-05-17-build-android-system/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-17T22:30:52+08:00" />
+<meta property="article:modified_time" content="2022-05-17T22:30:52+08:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">摄影</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/links/">友链</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">摄影</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/links/">友链</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">2022年在MacOs上编译AOSP</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2022-05-17
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>之前苦于电脑磁盘空间比较小，而android系统的源码越来越大，一直没有机会自己编译Android系统。这次换了电脑，磁盘足够大，可以尝试一下了。
+而android源码的网站红色的字写着<em>Platform development on MacOS isn&rsquo;t supported as of June 22, 2021.</em>，我就知道不会那么容易了。</p>
+<p>我的电脑环境：</p>
+<blockquote>
+<p>2021款  M1芯片 Macbook Pro 16GB运行内存
+MacOS Monterey(12.1)</p>
+</blockquote>
+<h2 id="环境准备">环境准备</h2>
+<h3 id="安装xcode和相关工具">安装xcode和相关工具</h3>
+<ul>
+<li>从appstore安装Xcode</li>
+<li>安装xcode command line tools：</li>
+</ul>
+<blockquote>
+<p>$ xcode-select &ndash;install</p>
+</blockquote>
+<ul>
+<li>安装Rosetta（M1芯片需要，x86芯片不需要）</li>
+</ul>
+<blockquote>
+<p>$ softwareupdate &ndash;install-rosetta</p>
+</blockquote>
+<h3 id="创建大小写敏感的磁盘映像">创建大小写敏感的磁盘映像</h3>
+<p>我们先创建个350GB的大小</p>
+<blockquote>
+<p>$ hdiutil create -type SPARSE -fs &lsquo;Case-sensitive Journaled HFS+&rsquo; -size 350g ~/forest.dmg</p>
+</blockquote>
+<h3 id="设置环境变量">设置环境变量</h3>
+<p>我本地用的zsh，直接在.zsh_env中写，并配置挂载映像的方法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#  设置最大打开文件数量，防止编译过程中因为打开文件数量太多失败</span>
+</span></span><span style="display:flex;"><span>ulimit -S -n <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 编译缓存</span>
+</span></span><span style="display:flex;"><span>export USE_CCACHE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 挂载映像</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> mountForest <span style="color:#f92672">{</span> hdiutil attach ~/forest.dmg.sparseimage -mountpoint /Volumes/Forest; <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#卸下挂载</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> umountForest<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> hdiutil detach /Volumes/Forest; <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/opt/local/bin:/opt/local/sbin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>~/.bin:$PATH
+</span></span></code></pre></div><p>编辑完保存之后，执行一下如下语句使配置当前就能生效
+<code>source ~/.zshenv</code></p>
+<h2 id="下载源码">下载源码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ mkdir ~/.bin
+</span></span><span style="display:flex;"><span>$ curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/.bin/repo <span style="color:#75715e">#下载repo</span>
+</span></span><span style="display:flex;"><span>$ chmod a+x ~/.bin/repo <span style="color:#75715e">#设置repo权限</span>
+</span></span><span style="display:flex;"><span>$ mountForest <span style="color:#75715e">#挂载映像</span>
+</span></span><span style="display:flex;"><span>$ cd /Volumes/Forest
+</span></span><span style="display:flex;"><span>$ mkdir aosp_mata
+</span></span><span style="display:flex;"><span>$ cd aosp_mata
+</span></span><span style="display:flex;"><span>$ git config --global user.name <span style="color:#e6db74">&#34;Your Name&#34;</span>
+</span></span><span style="display:flex;"><span>$ git config --global user.email <span style="color:#e6db74">&#34;you@example.com&#34;</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ repo init -u https://android.googlesource.com/platform/manifest -b android-11.0.0_r48 <span style="color:#75715e">#可自选版本，我这用的是11.0.0的最后一个tag</span>
+</span></span><span style="display:flex;"><span>$ repo sync
+</span></span></code></pre></div><p>之后便是无尽的等待去下载源码，国内的网络下载不了，自己想办法爬墙吧。</p>
+<h2 id="开始编译">开始编译</h2>
+<p>如果没有问题，在源码目录直接执行以下命令就可以编译了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ source build/envsetup.sh
+</span></span><span style="display:flex;"><span>$ lunch aosp_arm-eng
+</span></span><span style="display:flex;"><span>$ make -j4
+</span></span></code></pre></div><p>lunch后面的参数也可以不填，则会显示出来所有可以的选项，自己选一个进行设置就行。
+make就开始编译， -jN用于设置任务数， N应该介于计算机上的CPU线程数的1-2倍之间为宜，我的M1 MAC 是10核，就先设置了24。</p>
+<p>理论上这样就可以慢慢的等就能编译成功了，然而，如果可以这么简单就不需要我写一篇文章了，直接看android官方文档就行了。为了节省时间，先把下面的问题改改再编译。</p>
+<h2 id="问题解决">问题解决</h2>
+<h4 id="问题一could-not-find-a-supported-mac-sdk">问题一：Could not find a supported mac sdk</h4>
+<p>大概是这样的log</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span> 94% 171/181<span style="color:#f92672">]</span> test android/soong/cc
+</span></span><span style="display:flex;"><span>FAILED: out/soong/.bootstrap/soong-cc/test/test.passed
+</span></span><span style="display:flex;"><span>out/soong/.bootstrap/bin/gotestrunner -p ./build/soong/cc -f out/soong/.bootstrap/soong-cc/test/test.passed 
+</span></span><span style="display:flex;"><span>-- out/soong/.bootstrap/soong-cc/test/test -test.short
+</span></span><span style="display:flex;"><span>--- FAIL: TestDefaults <span style="color:#f92672">(</span>10.86s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    cc_test.go:3075: <span style="color:#e6db74">&#34;Could not find a supported mac sdk: [\&#34;10.10\&#34; \&#34;10.11\&#34; \&#34;10.12\&#34; \&#34;10.13\&#34; \&#34;10.14\&#34; \&#34;10.15\&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>    cc_test.go:3075: <span style="color:#e6db74">&#34;Could not find a supported mac sdk: [\&#34;10.10\&#34; \&#34;10.11\&#34; \&#34;10.12\&#34; \&#34;10.13\&#34; \&#34;10.14\&#34; \&#34;10.15\&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>    cc_test.go:3075: <span style="color:#e6db74">&#34;Could not find a supported mac sdk: [\&#34;10.10\&#34; \&#34;10.11\&#34; \&#34;10.12\&#34; \&#34;10.13\&#34; \&#34;10.14\&#34; \&#34;10.15\&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>    cc_test.go:3075: <span style="color:#e6db74">&#34;Could not find a supported mac sdk: [\&#34;10.10\&#34; \&#34;10.11\&#34; \&#34;10.12\&#34; \&#34;10.13\&#34; \&#34;10.14\&#34; \&#34;10.15\&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>    cc_test.go:3075: <span style="color:#e6db74">&#34;Could not find a supported mac sdk: [\&#34;10.10\&#34; \&#34;10.11\&#34; \&#34;10.12\&#34; \&#34;10.13\&#34; \&#34;10.14\&#34; \&#34;10.15\&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>    cc_test.go:3075: <span style="color:#e6db74">&#34;Could not find a supported mac sdk: [\&#34;10.10\&#34; \&#34;10.11\&#34; \&#34;10.12\&#34; \&#34;10.13\&#34; \&#34;10.14\&#34; \&#34;10.15\&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>--- FAIL: TestDoubleLoadbleDep <span style="color:#f92672">(</span>0.05s<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    cc_test.go:733: <span style="color:#e6db74">&#34;Could not find a supported mac sdk: [\&#34;10.10\&#34; \&#34;10.11\&#34; \&#34;10.12\&#34; \&#34;10.13\&#34; \&#34;10.14\&#34; \&#34;10.15\&#34;]&#34;</span>
+</span></span><span style="display:flex;"><span>..... ....
+</span></span></code></pre></div><p>原因是指不到指定的mac sdk
+可以看一下<code>/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs</code>文件下有没有<em>MacOSX12.3.sdk</em>， 然后在然后在 <em>/build/soong/cc/config/x86_darwin_host.go</em> 文件中找到 “darwinSupportedSdkVersions“ 添加 MacOSX12.3.sdk 对应的版本号——12.3，如果你的macosx的sdk是别的就填别的。</p>
+<pre tabindex="0"><code>darwinSupportedSdkVersions = []string{
+		&#34;10.10&#34;,
+		&#34;10.11&#34;,
+		&#34;10.12&#34;,
+		&#34;10.13&#34;,
+		&#34;10.14&#34;,
+		&#34;10.15&#34;,
+		&#34;12.3&#34;,
+}
+</code></pre><p>另外你也可以到<a href="https://github.com/phracker/MacOSX-SDKs/releases">https://github.com/phracker/MacOSX-SDKs/releases</a> 去下载10.15的sdk放到上面的文件夹里面。</p>
+<h4 id="问题二-v8引擎无法编译一些文件找不到">问题二： v8引擎无法编译，一些文件找不到</h4>
+<p>由于2021年后，官方不维护mac上的开发环境了，所以external/v8下面有很多编译错误，这里直接采用回滚代码的方式，我是回滚到了<em>Upgrade V8 to 8.8.278.14</em>提交的前一个Commit</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd external/v8
+</span></span><span style="display:flex;"><span>git checkout 9304fbb
+</span></span></code></pre></div><h4 id="问题三-undeclared-identifier-page_size">问题三： undeclared identifier ‘PAGE_SIZE’</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>system/core/base/cmsg.cpp:36:21: error: use of undeclared identifier <span style="color:#e6db74">&#39;PAGE_SIZE&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>cmsg_space &gt;<span style="color:#f92672">=</span> PAGE_SIZE<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    ^
+</span></span><span style="display:flex;"><span>system/core/base/cmsg.cpp:78:21: error: use of undeclared identifier <span style="color:#e6db74">&#39;PAGE_SIZE&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>cmsg_space &gt;<span style="color:#f92672">=</span> PAGE_SIZE<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    ^
+</span></span></code></pre></div><p>看起来是PAGE_SIZE这个常量没定义，那就去补上呗。去<em>system/core/base/cmsg.cpp</em>文件开头添加 PAGE_SIZE 的声明</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifndef PAGE_SIZE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define PAGE_SIZE (size_t)(sysconf(_SC_PAGESIZE))
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span></code></pre></div><h4 id="问题四-incompatible-pointer-types-passing-unsigned-long--to-parameter-of-type-uint32_t-">问题四： incompatible pointer types passing ‘unsigned long *’ to parameter of type ‘uint32_t *‘</h4>
+<pre tabindex="0"><code>external/python/cpython2/Modules/getpath.c:414:50: error: incompatible pointer types passing &#39;unsigned long *&#39; to parameter of type &#39;uint32_t *&#39; (aka &#39;unsigned int *&#39;) [-Werror,-Wincompatible-pointer-types]
+else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpath[0] == SEP)
+</code></pre><p>把<em>external/python/cpython2/Modules/getpath.c</em>中：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#if MAC_OS_X_VERSION_MAX_ALLOWED &gt;= MAC_OS_X_VERSION_10_4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> MAXPATHLEN;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#else
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> nsexeclength <span style="color:#f92672">=</span> MAXPATHLEN;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span></code></pre></div><p>改成：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> MAXPATHLEN;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span></code></pre></div><p>把<em>external/python/cpython3/Modules/getpath.c</em>中的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> execpath[MAXPATHLEN <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#if MAC_OS_X_VERSION_MAX_ALLOWED &gt;= MAC_OS_X_VERSION_10_4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> Py_ARRAY_LENGTH(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#else
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span>  nsexeclength <span style="color:#f92672">=</span> Py_ARRAY_LENGTH(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">改成：</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>c
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> execpath[MAXPATHLEN <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> Py_ARRAY_LENGTH(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
+</span></span></span></code></pre></div><p>以上问题改完应该就可以编译成功了，如果是在后面java编译阶段失败，可以先试试重新执行make试试，如果还是不行的话就上网找解决方案吧。</p>
+<h2 id="编译idegen模块导入android-studio">编译idegen模块导入Android Studio</h2>
+<p>使用如下命令编译idegen模块：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mmm development/tools/idegen/
+</span></span></code></pre></div><p>完成之后，执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>development/tools/idegen/idegen.sh
+</span></span></code></pre></div><p>之后就会在根目录生成对应的<code>android.ipr</code>、<code>android.iml</code> IEDA工程配置文件,之后在IDEA或者Android Studio中打开android.ipr就能浏览源码了。</p>
+<h2 id="参考">参考</h2>
+<p>参考了以下资料和网友的分享，非常感谢：</p>
+<ul>
+<li><a href="">https://source.android.com/setup/build/building</a></li>
+<li><a href="https://nf4789.medium.com/building-android-11-for-ph-1-on-apple-silicon-6600436a36a0">https://nf4789.medium.com/building-android-11-for-ph-1-on-apple-silicon-6600436a36a0</a></li>
+<li><a href="https://51wlb.top/aosp/">https://51wlb.top/aosp/</a></li>
+</ul>
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/2017-07-12-blog-https/">
+                  <span class="button__text">记录博客转HTTPS</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+<p></p>
+<script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+<style>
+    :root {
+        --waline-theme-color: #fd281a;
+        --waline-active-color: #e24d42;
+    }
+</style>
+<div id="waline"></div>
+  <script>
+    Waline({
+      el: '#waline',
+      serverURL: 'https://my-waline-comments-53wsfjmo5-sangmingming.vercel.app/',
+      uploadImage: false,
+      dark: "body.dark-theme",
+      login: "disable",
+      number: 3,
+      mathTagSupport: false,
+      visitor: true,
+      avatar: 'wavatar',
+    });
+  </script>
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__title">
+      <span class="footer__title-h">
+        <a href="https://github.com/sangmingming" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-github"></i></a>
+      <a href="https://www.instagram.com/isming.me/" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-instagram"></i></a>
+      <a href="https://twitter.com/mingmingsang" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-twitter"></i></a>
+      <a href="https://weibo.com/mingmingsang" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-weibo"></i></a>
+      <a href="mailto:linming1007@gmail.com" target="_blank" rel="noopener noreferrer" title="Email me"><i class="iconfont icon-mail"></i></a>
+      </span>
+      
+    </div>
+    
+      <div class="copyright">
+        <span
+          >© 2022 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer><script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

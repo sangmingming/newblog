@@ -228,23 +228,23 @@ Conversion to Dalvik format failed: Unable to execute dex: method ID not in [0, 
 <h3 id="开发工具升级">开发工具升级</h3>
 <p>将android sdks build tools 和android support library要升级到最新的，这个使用android sdks manager很容易就完成了。</p>
 <h3 id="配置buildgradle">配置build.gradle</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">android <span style="color:#f92672">{</span> 
-compileSdkVersion <span style="color:#ae81ff">21</span> 
-buildToolsVersion <span style="color:#e6db74">&#34;21.1.0&#34;</span> 
-defaultConfig <span style="color:#f92672">{</span>     
-<span style="color:#f92672">...</span>     
-minSdkVersion <span style="color:#ae81ff">14</span>     
-targetSdkVersion <span style="color:#ae81ff">21</span>     
-<span style="color:#f92672">...</span>     
-<span style="color:#75715e">// Enabling multidex support.     
-</span><span style="color:#75715e"></span>multiDexEnabled <span style="color:#66d9ef">true</span> 
-<span style="color:#f92672">}</span> 
-<span style="color:#f92672">...</span> 
-<span style="color:#f92672">}</span> 
-dependencies<span style="color:#f92672">{</span> 
-compile <span style="color:#960050;background-color:#1e0010">&#39;</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">android</span><span style="color:#f92672">.</span><span style="color:#a6e22e">support</span><span style="color:#f92672">:</span>multidex:<span style="color:#ae81ff">1.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">’</span> <span style="color:#75715e">//dependencies
-</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
-</code></pre></div><h3 id="让应用支持多dex">让应用支持多dex</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>android <span style="color:#f92672">{</span> 
+</span></span><span style="display:flex;"><span>compileSdkVersion <span style="color:#ae81ff">21</span> 
+</span></span><span style="display:flex;"><span>buildToolsVersion <span style="color:#e6db74">&#34;21.1.0&#34;</span> 
+</span></span><span style="display:flex;"><span>defaultConfig <span style="color:#f92672">{</span>     
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>     
+</span></span><span style="display:flex;"><span>minSdkVersion <span style="color:#ae81ff">14</span>     
+</span></span><span style="display:flex;"><span>targetSdkVersion <span style="color:#ae81ff">21</span>     
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>     
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Enabling multidex support.     
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>multiDexEnabled <span style="color:#66d9ef">true</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span> 
+</span></span><span style="display:flex;"><span>dependencies<span style="color:#f92672">{</span> 
+</span></span><span style="display:flex;"><span>compile <span style="color:#960050;background-color:#1e0010">&#39;</span>com<span style="color:#f92672">.</span><span style="color:#a6e22e">android</span><span style="color:#f92672">.</span><span style="color:#a6e22e">support</span><span style="color:#f92672">:</span>multidex:<span style="color:#ae81ff">1.0</span><span style="color:#f92672">.</span><span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">’</span> <span style="color:#75715e">//dependencies
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="让应用支持多dex">让应用支持多dex</h3>
 <p>androidManifest.xml中application中声明android.support.multidex.MultiDexApplication;</p>
 <p>或自己定义一个Application类，继承自MultiDexApplication；</p>
 <p>或者自己定义的Application类，在attachBaseContext()方法中，添加MultiDex.install(this);</p>
@@ -333,7 +333,7 @@ compile <span style="color:#960050;background-color:#1e0010">&#39;</span>com<spa
     
       <div class="copyright">
         <span
-          >© 2021 码农明明桑 Powered by
+          >© 2022 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

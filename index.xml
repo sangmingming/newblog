@@ -9,10 +9,31 @@
     <description>Recent content in 首页 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 29 Nov 2019 10:33:48 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 May 2022 22:30:52 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2022年在MacOs上编译AOSP</title>
+      <link>/2022-05-17-build-android-system/</link>
+      <pubDate>Tue, 17 May 2022 22:30:52 +0800</pubDate>
+      
+      <guid>/2022-05-17-build-android-system/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;之前苦于电脑磁盘空间比较小，而android系统的源码越来越大，一直没有机会自己编译Android系统。这次换了电脑，磁盘足够大，可以尝试一下了。
+而android源码的网站红色的字写着&lt;em&gt;Platform development on MacOS isn&amp;rsquo;t supported as of June 22, 2021.&lt;/em&gt;，我就知道不会那么容易了。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>印度孟买、昌迪加尔、加尔各答之行</title>
@@ -373,8 +394,8 @@
 &lt;li&gt;&lt;code&gt;C:\Users\&amp;lt;username&amp;gt;\.gradle&lt;/code&gt; (Windows)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;并在文件中增加：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;org&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;gradle&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;daemon&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-groovy&#34; data-lang=&#34;groovy&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;org&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;gradle&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;daemon&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
           
         
         </description>

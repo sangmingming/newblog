@@ -211,44 +211,44 @@
       
       <p>随着手机性能的提高，以及iOS和Android两个平台的普及，更多的App都会选择两个平台的App都进行开发，在有些时候，为了更加快速的开发，我们会采用hybird方式开发，这个时候我们需要使用webview并且自己进行一些配置。Android的webview在低版本和高版本采用了不同的webkit版本内核，4.4后直接使用了chrome，因此问题很多，这里分享一些我使用过程的一些技巧和遇到的坑。</p>
 <h3 id="webview配置">webview配置</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">getSettings</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setJavaScriptEnabled</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span> <span style="color:#75715e">//设置允许运行javascript
-</span><span style="color:#75715e">// HTML5 API flags
-</span><span style="color:#75715e"></span>mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">getSettings</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setAppCacheEnabled</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>  <span style="color:#75715e">//设置允许缓存
-</span><span style="color:#75715e"></span>mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">getSettings</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setDatabaseEnabled</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span> <span style="color:#75715e">//设置允许使用localstore
-</span></code></pre></div><p>上面webview.getSettings()会获得WebSettings对象，在这个对象中会保存Webview的一些设置，比如上面所设置的这些，更多的设置请查看WebSettings的api文档。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">getSettings</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setJavaScriptEnabled</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span> <span style="color:#75715e">//设置允许运行javascript
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// HTML5 API flags
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">getSettings</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setAppCacheEnabled</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>  <span style="color:#75715e">//设置允许缓存
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">getSettings</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setDatabaseEnabled</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span> <span style="color:#75715e">//设置允许使用localstore
+</span></span></span></code></pre></div><p>上面webview.getSettings()会获得WebSettings对象，在这个对象中会保存Webview的一些设置，比如上面所设置的这些，更多的设置请查看WebSettings的api文档。</p>
 <p>通常我们还会使用WebViewClient和WebChromeClient这两个组件来辅助WebView。WebViewClient主要帮助处理各种通知请求事件等，比如页面开始加载，加载完成等。WebChromeClient主要辅助WebView处理javascript对话框，网站图标，网站标题，加载进度等等。
 实际应该根据实际情况使用这两个组件，重写响应的方法，在其中执行自己的一些操作。</p>
 <h3 id="javascript的使用">Javascript的使用</h3>
 <p>开启javascript的方法上面已经提到了。</p>
 <p>客户端调用网页中的js代码，或者执行相应的代码。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">evaluateJavascript</span><span style="color:#f92672">(</span>String js<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>  
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION</span><span style="color:#f92672">.</span><span style="color:#a6e22e">SDK_INT</span> <span style="color:#f92672">&gt;=</span> Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_CODES</span><span style="color:#f92672">.</span><span style="color:#a6e22e">KITKAT</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">evaluateJavascript</span><span style="color:#f92672">(</span>js<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-        mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">loadUrl</span><span style="color:#f92672">(</span>js<span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>在android4.4开始系统提供了evaluateJavascript方法来执行js方法，并且可以进行回调。但是在低于4.4的版本并没有这个方法，我们需要只要直接通过loadUrl的方式来执行js，此时需要在js代码前加”javascript:”。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">evaluateJavascript</span><span style="color:#f92672">(</span>String js<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION</span><span style="color:#f92672">.</span><span style="color:#a6e22e">SDK_INT</span> <span style="color:#f92672">&gt;=</span> Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_CODES</span><span style="color:#f92672">.</span><span style="color:#a6e22e">KITKAT</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">evaluateJavascript</span><span style="color:#f92672">(</span>js<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        mWebview<span style="color:#f92672">.</span><span style="color:#a6e22e">loadUrl</span><span style="color:#f92672">(</span>js<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>在android4.4开始系统提供了evaluateJavascript方法来执行js方法，并且可以进行回调。但是在低于4.4的版本并没有这个方法，我们需要只要直接通过loadUrl的方式来执行js，此时需要在js代码前加”javascript:”。</p>
 <p>另外可以在客户端定义一些javascript给网页中调用。
 比如这样:</p>
 <p>首先定义一个给js执行的类：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WebAppInterface</span> <span style="color:#f92672">{</span>
-    Context mContext<span style="color:#f92672">;</span>
-
-    <span style="color:#75715e">/** Instantiate the interface and set the context */</span>
-    WebAppInterface<span style="color:#f92672">(</span>Context c<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        mContext <span style="color:#f92672">=</span> c<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#75715e">/** Show a toast from the web page */</span>
-    <span style="color:#a6e22e">@JavascriptInterface</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">showToast</span><span style="color:#f92672">(</span>String toast<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">makeText</span><span style="color:#f92672">(</span>mContext<span style="color:#f92672">,</span> toast<span style="color:#f92672">,</span> Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">LENGTH_SHORT</span><span style="color:#f92672">).</span><span style="color:#a6e22e">show</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-
-webView<span style="color:#f92672">.</span><span style="color:#a6e22e">addJavascriptInterface</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> WebAppInterface<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">),</span> <span style="color:#e6db74">&#34;Android&#34;</span><span style="color:#f92672">);</span>
-</code></pre></div><p>之后用*addJavascriptInterface&amp;设置到webview上，在js中就可以用<code>Android.showToast(“fdf&quot;)</code>调用了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WebAppInterface</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Context mContext<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** Instantiate the interface and set the context */</span>
+</span></span><span style="display:flex;"><span>    WebAppInterface<span style="color:#f92672">(</span>Context c<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        mContext <span style="color:#f92672">=</span> c<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/** Show a toast from the web page */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@JavascriptInterface</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">showToast</span><span style="color:#f92672">(</span>String toast<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">makeText</span><span style="color:#f92672">(</span>mContext<span style="color:#f92672">,</span> toast<span style="color:#f92672">,</span> Toast<span style="color:#f92672">.</span><span style="color:#a6e22e">LENGTH_SHORT</span><span style="color:#f92672">).</span><span style="color:#a6e22e">show</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>webView<span style="color:#f92672">.</span><span style="color:#a6e22e">addJavascriptInterface</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> WebAppInterface<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">),</span> <span style="color:#e6db74">&#34;Android&#34;</span><span style="color:#f92672">);</span>
+</span></span></code></pre></div><p>之后用*addJavascriptInterface&amp;设置到webview上，在js中就可以用<code>Android.showToast(“fdf&quot;)</code>调用了。</p>
 <p>需要注意的是，在我们给js的接口方法需要是public的，使用到了JavascriptInterface的注解，这个注解在Android4.2的时候添加,更新的android如果不加这个注解是不可以使用的。</p>
 <h3 id="硬件加速">硬件加速</h3>
 <p>硬件加速是个大坑，请勿打开。
@@ -337,7 +337,7 @@ webView<span style="color:#f92672">.</span><span style="color:#a6e22e">addJavasc
     
       <div class="copyright">
         <span
-          >© 2021 码农明明桑 Powered by
+          >© 2022 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

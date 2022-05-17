@@ -213,29 +213,29 @@
 <p>最近在网上找到了改变的方法，首先来说一下。</p>
 <h3 id="改变alertdialog的样式">改变AlertDialog的样式</h3>
 <p>在xml中定义一个主题：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;MyAlertDialogStyle&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;Theme.AppCompat.Light.Dialog.Alert&#34;</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#75715e">&lt;!-- Used for the buttons --&gt;</span>
-    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;colorAccent&#34;</span><span style="color:#f92672">&gt;</span>#FFC107<span style="color:#f92672">&lt;/item&gt;</span>
-    <span style="color:#75715e">&lt;!-- Used for the title and text --&gt;</span>
-    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:textColorPrimary&#34;</span><span style="color:#f92672">&gt;</span>#FFFFFF<span style="color:#f92672">&lt;/item&gt;</span>
-    <span style="color:#75715e">&lt;!-- Used for the background --&gt;</span>
-    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:background&#34;</span><span style="color:#f92672">&gt;</span>#4CAF50<span style="color:#f92672">&lt;/item&gt;</span>
-<span style="color:#f92672">&lt;/style&gt;</span>
-</code></pre></div><p>样式如下图所示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;MyAlertDialogStyle&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;Theme.AppCompat.Light.Dialog.Alert&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!-- Used for the buttons --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;colorAccent&#34;</span><span style="color:#f92672">&gt;</span>#FFC107<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!-- Used for the title and text --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:textColorPrimary&#34;</span><span style="color:#f92672">&gt;</span>#FFFFFF<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!-- Used for the background --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:background&#34;</span><span style="color:#f92672">&gt;</span>#4CAF50<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/style&gt;</span>
+</span></span></code></pre></div><p>样式如下图所示：</p>
 <p><img src="/images/modify_dialog_style.jpg" alt=""></p>
 <p>在创建的对话框的时候，这样创建就可以了。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">AlertDialog<span style="color:#f92672">.</span><span style="color:#a6e22e">Builder</span> builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AlertDialog<span style="color:#f92672">.</span><span style="color:#a6e22e">Builder</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">style</span><span style="color:#f92672">.</span><span style="color:#a6e22e">MyAlertDialogStyle</span><span style="color:#f92672">);</span>
-builder<span style="color:#f92672">.</span><span style="color:#a6e22e">setTitle</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AppCompatDialog&#34;</span><span style="color:#f92672">);</span>
-builder<span style="color:#f92672">.</span><span style="color:#a6e22e">setMessage</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Lorem ipsum dolor...&#34;</span><span style="color:#f92672">);</span>
-builder<span style="color:#f92672">.</span><span style="color:#a6e22e">setPositiveButton</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;OK&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-builder<span style="color:#f92672">.</span><span style="color:#a6e22e">setNegativeButton</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Cancel&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-builder<span style="color:#f92672">.</span><span style="color:#a6e22e">show</span><span style="color:#f92672">();</span>
-</code></pre></div><p>这样的方法是每个地方使用的时候，都要在构造函数传我们的这个Dialog的Theme，我们也可以全局的定义对话框的样式。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;MyTheme&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;Base.Theme.AppCompat.Light&#34;</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;alertDialogTheme&#34;</span><span style="color:#f92672">&gt;</span>@style/MyAlertDialogStyle<span style="color:#f92672">&lt;/item&gt;</span>
-    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;colorAccent&#34;</span><span style="color:#f92672">&gt;</span>@color/accent<span style="color:#f92672">&lt;/item&gt;</span>
-<span style="color:#f92672">&lt;/style&gt;</span>
-</code></pre></div><p>在我们的AndroidManifest.xml文件中声明application或者activity的时候设置theme为MyTheme即可，不过需要注意的一点是，我们的Activity需要继承自AppCompatActivity。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>AlertDialog<span style="color:#f92672">.</span><span style="color:#a6e22e">Builder</span> builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AlertDialog<span style="color:#f92672">.</span><span style="color:#a6e22e">Builder</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> R<span style="color:#f92672">.</span><span style="color:#a6e22e">style</span><span style="color:#f92672">.</span><span style="color:#a6e22e">MyAlertDialogStyle</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>builder<span style="color:#f92672">.</span><span style="color:#a6e22e">setTitle</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AppCompatDialog&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>builder<span style="color:#f92672">.</span><span style="color:#a6e22e">setMessage</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Lorem ipsum dolor...&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>builder<span style="color:#f92672">.</span><span style="color:#a6e22e">setPositiveButton</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;OK&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>builder<span style="color:#f92672">.</span><span style="color:#a6e22e">setNegativeButton</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Cancel&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>builder<span style="color:#f92672">.</span><span style="color:#a6e22e">show</span><span style="color:#f92672">();</span>
+</span></span></code></pre></div><p>这样的方法是每个地方使用的时候，都要在构造函数传我们的这个Dialog的Theme，我们也可以全局的定义对话框的样式。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;MyTheme&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;Base.Theme.AppCompat.Light&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;alertDialogTheme&#34;</span><span style="color:#f92672">&gt;</span>@style/MyAlertDialogStyle<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;colorAccent&#34;</span><span style="color:#f92672">&gt;</span>@color/accent<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/style&gt;</span>
+</span></span></code></pre></div><p>在我们的AndroidManifest.xml文件中声明application或者activity的时候设置theme为MyTheme即可，不过需要注意的一点是，我们的Activity需要继承自AppCompatActivity。</p>
 <h3 id="其他">其他</h3>
 <p>从上面改变对话框的样式，可以想到用同样的思路来实现应用的换肤，应用主题之类的功能。</p>
     </div>
@@ -318,7 +318,7 @@ builder<span style="color:#f92672">.</span><span style="color:#a6e22e">show</spa
     
       <div class="copyright">
         <span
-          >© 2021 码农明明桑 Powered by
+          >© 2022 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

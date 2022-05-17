@@ -222,10 +222,10 @@
 <p>上面说到的几种动画，以及AnimationSet都是Animation的之类，因此Animation中有的属性，以及xml的配置属性，他们都有，因此，单独说每个动画的时候只说其特有的方法和属性。对于使用xml配置时需要放到res下面的animation文件夹下。</p>
 <h3 id="alphaanimation-透明度动画">AlphaAnimation 透明度动画</h3>
 <p>就是改变视图的透明度，可以实现淡入淡出等动画。这个动画比较简单只需要设置开始透明度和结束透明度即可。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Animation animation <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AlphaAnimation<span style="color:#f92672">(</span>0<span style="color:#f92672">.</span><span style="color:#a6e22e">1f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">);</span> <span style="color:#75715e">//fromAlpha 0.1f   toAlpha 1.0f
-</span></code></pre></div><p>或</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;alpha</span> <span style="color:#a6e22e">android:fromAlpha =</span> <span style="color:#e6db74">&#34;0.1f&#34;</span> <span style="color:#a6e22e">android:toAlpha=</span><span style="color:#e6db74">&#34;1.0f&#34;</span> <span style="color:#f92672">/&gt;</span>
-</code></pre></div><h3 id="scaleanimation-缩放">ScaleAnimation 缩放</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Animation animation <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AlphaAnimation<span style="color:#f92672">(</span>0<span style="color:#f92672">.</span><span style="color:#a6e22e">1f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">);</span> <span style="color:#75715e">//fromAlpha 0.1f   toAlpha 1.0f
+</span></span></span></code></pre></div><p>或</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;alpha</span> <span style="color:#a6e22e">android:fromAlpha =</span> <span style="color:#e6db74">&#34;0.1f&#34;</span> <span style="color:#a6e22e">android:toAlpha=</span><span style="color:#e6db74">&#34;1.0f&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h3 id="scaleanimation-缩放">ScaleAnimation 缩放</h3>
 <p>缩放动画，支持设置开始x缩放（宽度缩放倍数），开始y缩放， 结束x缩放，结束y缩放，以及缩放基点x坐标，缩放基点y坐标。</p>
 <p>x缩放和y缩放都是相对于原始的宽度和高度的，1.0表示不缩放。</p>
 <p>坐标基点，同时有参数可以设置坐标基点类型，分别是：</p>
@@ -236,76 +236,75 @@
 </ul>
 <p>默认基点是视图的0点，默认坐标基点类型是ABSOLUTE。</p>
 <p>有如下几种构造函数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">ScaleAnimation<span style="color:#f92672">(</span>Context context<span style="color:#f92672">,</span> AttributeSet attrs<span style="color:#f92672">)</span>
-ScaleAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromY<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toY<span style="color:#f92672">)</span>
-<span style="color:#66d9ef">new</span> ScaleAnimation<span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">);</span>
-ScaleAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromY<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toY<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotY<span style="color:#f92672">)</span>
-<span style="color:#66d9ef">new</span> ScaleAnimation<span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> 10<span style="color:#f92672">,</span> 10<span style="color:#f92672">);</span>
-ScaleAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromY<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toY<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> pivotXType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotXValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> pivotYType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotYValue<span style="color:#f92672">)</span>
-<span style="color:#66d9ef">new</span> ScaleAnimation<span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> Animation<span style="color:#f92672">.</span><span style="color:#a6e22e">RELATIVE_TO_SELF</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> Animation<span style="color:#f92672">.</span><span style="color:#a6e22e">RELATIVE_TO_SELF</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">);</span> <span style="color:#75715e">//以中心点为基点
-</span><span style="color:#75715e"></span>
-</code></pre></div><p>XML配置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;scale</span>
-        <span style="color:#a6e22e">android:fromXScale=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:toXScale=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:fromYScale=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:toYScale=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:pivotX=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:pivotY=</span><span style="color:#e6db74">&#34;float&#34;</span> <span style="color:#f92672">/&gt;</span>
-</code></pre></div><h3 id="translateanimation-位移">TranslateAnimation 位移</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>ScaleAnimation<span style="color:#f92672">(</span>Context context<span style="color:#f92672">,</span> AttributeSet attrs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>ScaleAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromY<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toY<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> ScaleAnimation<span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>ScaleAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromY<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toY<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotY<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> ScaleAnimation<span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> 10<span style="color:#f92672">,</span> 10<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>ScaleAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromY<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toY<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> pivotXType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotXValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> pivotYType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotYValue<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">new</span> ScaleAnimation<span style="color:#f92672">(</span>1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> Animation<span style="color:#f92672">.</span><span style="color:#a6e22e">RELATIVE_TO_SELF</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">,</span> Animation<span style="color:#f92672">.</span><span style="color:#a6e22e">RELATIVE_TO_SELF</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">5f</span><span style="color:#f92672">);</span> <span style="color:#75715e">//以中心点为基点
+</span></span></span></code></pre></div><p>XML配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;scale</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:fromXScale=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:toXScale=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:fromYScale=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:toYScale=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:pivotX=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:pivotY=</span><span style="color:#e6db74">&#34;float&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h3 id="translateanimation-位移">TranslateAnimation 位移</h3>
 <p>平移支持x轴平移起点和y轴平移起点，以及设置结束点。同时每个点都可以设置type，type和上面缩放动画的基点类型一样,默认类型是ABSOLUTE.</p>
 <p>有以下几个构造函数：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">TranslateAnimation<span style="color:#f92672">(</span>Context context<span style="color:#f92672">,</span> AttributeSet attrs<span style="color:#f92672">)</span>
-TranslateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromXDelta<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toXDelta<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromYDelta<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toYDelta<span style="color:#f92672">)</span>
-TranslateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> fromXType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromXValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> toXType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toXValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> fromYType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromYValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> toYType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toYValue<span style="color:#f92672">)</span>
-</code></pre></div><p>XML配置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;translate</span>
-        <span style="color:#a6e22e">android:fromXDelta=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:toXDelta=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:fromYDelta=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:toYDelta=</span><span style="color:#e6db74">&#34;float&#34;</span> <span style="color:#f92672">/&gt;</span>
-</code></pre></div><h3 id="roatationanimation-旋转">RoatationAnimation 旋转</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>TranslateAnimation<span style="color:#f92672">(</span>Context context<span style="color:#f92672">,</span> AttributeSet attrs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>TranslateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromXDelta<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toXDelta<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromYDelta<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toYDelta<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>TranslateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> fromXType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromXValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> toXType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toXValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> fromYType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> fromYValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> toYType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toYValue<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>XML配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;translate</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:fromXDelta=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:toXDelta=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:fromYDelta=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:toYDelta=</span><span style="color:#e6db74">&#34;float&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h3 id="roatationanimation-旋转">RoatationAnimation 旋转</h3>
 <p>旋转支持设置旋转开始角度，和旋转结束角度，以及旋转基点，和旋转基点类型。类型同上面一样,默认旋转基点是（0，0），默认类型同上面一样，也不多说了。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">RotateAnimation<span style="color:#f92672">(</span>Context context<span style="color:#f92672">,</span> AttributeSet attrs<span style="color:#f92672">)</span>
-RotateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toDegrees<span style="color:#f92672">)</span>
-RotateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotY<span style="color:#f92672">)</span>
-RotateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> pivotXType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotXValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> pivotYType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotYValue<span style="color:#f92672">)</span>
-</code></pre></div><p>XML配置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;rotate</span>
-        <span style="color:#a6e22e">android:fromDegrees=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:toDegrees=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:pivotX=</span><span style="color:#e6db74">&#34;float&#34;</span>
-        <span style="color:#a6e22e">android:pivotY=</span><span style="color:#e6db74">&#34;float&#34;</span> <span style="color:#f92672">/&gt;</span>
-</code></pre></div><h3 id="animationset-动画集合">AnimationSet 动画集合</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>RotateAnimation<span style="color:#f92672">(</span>Context context<span style="color:#f92672">,</span> AttributeSet attrs<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>RotateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toDegrees<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>RotateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotX<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotY<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>RotateAnimation<span style="color:#f92672">(</span><span style="color:#66d9ef">float</span> fromDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> toDegrees<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> pivotXType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotXValue<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> pivotYType<span style="color:#f92672">,</span> <span style="color:#66d9ef">float</span> pivotYValue<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>XML配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;rotate</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:fromDegrees=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:toDegrees=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:pivotX=</span><span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">android:pivotY=</span><span style="color:#e6db74">&#34;float&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h3 id="animationset-动画集合">AnimationSet 动画集合</h3>
 <p>动画集合就是可以让多个动画一起运行，或者依次运行。</p>
 <p>通过<code>addAnimation(Animation a)</code>向集合中添加动画，使用子动画的<code>setStartOffset(long offset)</code>设置延时，从而实现子动画之间的间隔。可以设置是否共享时间插值器。</p>
 <p>xml配置：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;set&gt;</span>
-<span style="color:#75715e">&lt;!--这里写子动画--&gt;</span>
-<span style="color:#f92672">&lt;rotation</span> <span style="color:#960050;background-color:#1e0010">....</span><span style="color:#f92672">/&gt;</span>
-<span style="color:#f92672">&lt;alpha</span> <span style="color:#960050;background-color:#1e0010">.....</span><span style="color:#f92672">/&gt;</span>
-<span style="color:#f92672">&lt;/set&gt;</span>
-</code></pre></div><p>属性动画(Property Animation)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;set&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&lt;!--这里写子动画--&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;rotation</span> <span style="color:#960050;background-color:#1e0010">....</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;alpha</span> <span style="color:#960050;background-color:#1e0010">.....</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/set&gt;</span>
+</span></span></code></pre></div><p>属性动画(Property Animation)</p>
 <h3 id="animation">Animation</h3>
 <p>单独把Animation拿出来说，是因为前面几个都是Animation,他们有一些属性都是从父类继承的。包括时常，插值器，是否重复，监听器等。</p>
 <p>setFillBefore(boolean)和setFillAfter(boolean)分别是动画开始前和动画结束后是否保持动画状态，默认前者为ture，后者为false;</p>
 <p>xml中可以配置的属性（这些在前面几个动画中省略了，也是可以使用的）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">android:detachWallpaper
-android:duration
-android:fillAfter
-android:fillBefore
-android:fillEnabled
-android:interpolator
-android:repeatCount
-android:repeatMode   INFINTE(无限期)，RESTART（重新开始，默认值）
-android:startOffset
-android:zAdjustment   ZORDER_BOTTOM,ZORDER_NORMAL, ZORDER_TOP
-</code></pre></div><h4 id="启动动画">启动动画：</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">view<span style="color:#f92672">.</span><span style="color:#a6e22e">startAnimation</span><span style="color:#f92672">(</span>animation<span style="color:#f92672">);</span>
-<span style="color:#75715e">//或者这样
-</span><span style="color:#75715e"></span>view<span style="color:#f92672">.</span><span style="color:#a6e22e">setAnimation</span><span style="color:#f92672">(</span>animation<span style="color:#f92672">);</span>
-animation<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
-</code></pre></div><h3 id="interpolator-插值器">Interpolator 插值器</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>android:detachWallpaper
+</span></span><span style="display:flex;"><span>android:duration
+</span></span><span style="display:flex;"><span>android:fillAfter
+</span></span><span style="display:flex;"><span>android:fillBefore
+</span></span><span style="display:flex;"><span>android:fillEnabled
+</span></span><span style="display:flex;"><span>android:interpolator
+</span></span><span style="display:flex;"><span>android:repeatCount
+</span></span><span style="display:flex;"><span>android:repeatMode   INFINTE(无限期)，RESTART（重新开始，默认值）
+</span></span><span style="display:flex;"><span>android:startOffset
+</span></span><span style="display:flex;"><span>android:zAdjustment   ZORDER_BOTTOM,ZORDER_NORMAL, ZORDER_TOP
+</span></span></code></pre></div><h4 id="启动动画">启动动画：</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>view<span style="color:#f92672">.</span><span style="color:#a6e22e">startAnimation</span><span style="color:#f92672">(</span>animation<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//或者这样
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>view<span style="color:#f92672">.</span><span style="color:#a6e22e">setAnimation</span><span style="color:#f92672">(</span>animation<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>animation<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
+</span></span></code></pre></div><h3 id="interpolator-插值器">Interpolator 插值器</h3>
 <p>通过设置插值器可以改变动画的速度，以及最终效果。
 android sdk提供了几种默认插值器，而且这些插值器在新的protery animation上仍然可以使用，这个后面再说。</p>
 <ul>
@@ -407,7 +406,7 @@ android sdk提供了几种默认插值器，而且这些插值器在新的proter
     
       <div class="copyright">
         <span
-          >© 2021 码农明明桑 Powered by
+          >© 2022 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

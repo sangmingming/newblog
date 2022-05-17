@@ -242,37 +242,37 @@ org.gradle.daemon=true
 <li><code>C:\Users\&lt;username&gt;\.gradle</code> (Windows)</li>
 </ul>
 <p>并在文件中增加：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">daemon</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
-</code></pre></div><p>同时修改项目下的<code>gradle.properties</code>文件也可以优化：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"><span style="color:#960050;background-color:#1e0010">#</span> Project<span style="color:#f92672">-</span>wide Gradle settings<span style="color:#f92672">.</span>
-
-<span style="color:#960050;background-color:#1e0010">#</span> IDE <span style="color:#f92672">(</span>e<span style="color:#f92672">.</span><span style="color:#a6e22e">g</span><span style="color:#f92672">.</span> Android Studio<span style="color:#f92672">)</span> users:
-<span style="color:#960050;background-color:#1e0010">#</span> Settings specified <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">this</span> file will override any Gradle settings
-<span style="color:#960050;background-color:#1e0010">#</span> configured through the IDE<span style="color:#f92672">.</span>
-
-<span style="color:#960050;background-color:#1e0010">#</span> For more details on how to configure your build environment visit
-<span style="color:#960050;background-color:#1e0010">#</span> http:<span style="color:#75715e">//www.gradle.org/docs/current/userguide/build_environment.html
-</span><span style="color:#75715e"></span>
-<span style="color:#960050;background-color:#1e0010">#</span> The Gradle daemon aims to improve the startup and execution time of Gradle<span style="color:#f92672">.</span>
-<span style="color:#960050;background-color:#1e0010">#</span> When set to <span style="color:#66d9ef">true</span> the Gradle daemon is to run the build<span style="color:#f92672">.</span>
-<span style="color:#960050;background-color:#1e0010">#</span> TODO: disable daemon on CI<span style="color:#f92672">,</span> since builds should be clean and reliable on servers
-org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">daemon</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
-
-<span style="color:#960050;background-color:#1e0010">#</span> Specifies the JVM arguments used <span style="color:#66d9ef">for</span> the daemon process<span style="color:#f92672">.</span>
-<span style="color:#960050;background-color:#1e0010">#</span> The setting is particularly useful <span style="color:#66d9ef">for</span> tweaking memory settings<span style="color:#f92672">.</span>
-<span style="color:#960050;background-color:#1e0010">#</span> Default value: <span style="color:#f92672">-</span>Xmx10248m <span style="color:#f92672">-</span>XX:MaxPermSize<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span>m
-org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">jvmargs</span><span style="color:#f92672">=-</span>Xmx2048m <span style="color:#f92672">-</span>XX:MaxPermSize<span style="color:#f92672">=</span><span style="color:#ae81ff">512</span>m <span style="color:#f92672">-</span>XX:<span style="color:#f92672">+</span>HeapDumpOnOutOfMemoryError <span style="color:#f92672">-</span>Dfile<span style="color:#f92672">.</span><span style="color:#a6e22e">encoding</span><span style="color:#f92672">=</span>UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>
-
-<span style="color:#960050;background-color:#1e0010">#</span> When configured<span style="color:#f92672">,</span> Gradle will run <span style="color:#66d9ef">in</span> incubating parallel mode<span style="color:#f92672">.</span>
-<span style="color:#960050;background-color:#1e0010">#</span> This option should only be used with decoupled projects<span style="color:#f92672">.</span> More details<span style="color:#f92672">,</span> visit
-<span style="color:#960050;background-color:#1e0010">#</span> http:<span style="color:#75715e">//www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
-</span><span style="color:#75715e"></span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">parallel</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
-
-<span style="color:#960050;background-color:#1e0010">#</span> Enables <span style="color:#66d9ef">new</span> incubating mode that makes Gradle selective when configuring projects<span style="color:#f92672">.</span> 
-<span style="color:#960050;background-color:#1e0010">#</span> Only relevant projects are configured which results <span style="color:#66d9ef">in</span> faster builds <span style="color:#66d9ef">for</span> large multi<span style="color:#f92672">-</span>projects<span style="color:#f92672">.</span>
-<span style="color:#960050;background-color:#1e0010">#</span> http:<span style="color:#75715e">//www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand
-</span><span style="color:#75715e"></span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">configureondemand</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
-</code></pre></div><p>同时上面的这些参数也可以配置到前面的用户目录下的gradle.properties文件里，那样就不是针对一个项目生效，而是针对所有项目生效。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">daemon</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><p>同时修改项目下的<code>gradle.properties</code>文件也可以优化：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-groovy" data-lang="groovy"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> Project<span style="color:#f92672">-</span>wide Gradle settings<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> IDE <span style="color:#f92672">(</span>e<span style="color:#f92672">.</span><span style="color:#a6e22e">g</span><span style="color:#f92672">.</span> Android Studio<span style="color:#f92672">)</span> users:
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> Settings specified <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">this</span> file will override any Gradle settings
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> configured through the IDE<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> For more details on how to configure your build environment visit
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> http:<span style="color:#75715e">//www.gradle.org/docs/current/userguide/build_environment.html
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> The Gradle daemon aims to improve the startup and execution time of Gradle<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> When set to <span style="color:#66d9ef">true</span> the Gradle daemon is to run the build<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> TODO: disable daemon on CI<span style="color:#f92672">,</span> since builds should be clean and reliable on servers
+</span></span><span style="display:flex;"><span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">daemon</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> Specifies the JVM arguments used <span style="color:#66d9ef">for</span> the daemon process<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> The setting is particularly useful <span style="color:#66d9ef">for</span> tweaking memory settings<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> Default value: <span style="color:#f92672">-</span>Xmx10248m <span style="color:#f92672">-</span>XX:MaxPermSize<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span>m
+</span></span><span style="display:flex;"><span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">jvmargs</span><span style="color:#f92672">=-</span>Xmx2048m <span style="color:#f92672">-</span>XX:MaxPermSize<span style="color:#f92672">=</span><span style="color:#ae81ff">512</span>m <span style="color:#f92672">-</span>XX:<span style="color:#f92672">+</span>HeapDumpOnOutOfMemoryError <span style="color:#f92672">-</span>Dfile<span style="color:#f92672">.</span><span style="color:#a6e22e">encoding</span><span style="color:#f92672">=</span>UTF<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> When configured<span style="color:#f92672">,</span> Gradle will run <span style="color:#66d9ef">in</span> incubating parallel mode<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> This option should only be used with decoupled projects<span style="color:#f92672">.</span> More details<span style="color:#f92672">,</span> visit
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> http:<span style="color:#75715e">//www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">parallel</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> Enables <span style="color:#66d9ef">new</span> incubating mode that makes Gradle selective when configuring projects<span style="color:#f92672">.</span> 
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> Only relevant projects are configured which results <span style="color:#66d9ef">in</span> faster builds <span style="color:#66d9ef">for</span> large multi<span style="color:#f92672">-</span>projects<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> http:<span style="color:#75715e">//www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:configuration_on_demand
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span><span style="color:#f92672">.</span><span style="color:#a6e22e">configureondemand</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><p>同时上面的这些参数也可以配置到前面的用户目录下的gradle.properties文件里，那样就不是针对一个项目生效，而是针对所有项目生效。</p>
 <p>上面的配置文件主要就是做， 增大gradle运行的java虚拟机的大小，让gradle在编译的时候使用独立进程，让gradle可以平行的运行。</p>
 <h3 id="修改android-studio配置">修改android studio配置</h3>
 <p>在android studio的配置中，开启offline模式，以及修改配置。实际上的配置和上面的一大段一样，主要是在这个地方配置的只会在ide构建的时候生效，命令行构建不会生效。</p>
@@ -365,7 +365,7 @@ org<span style="color:#f92672">.</span><span style="color:#a6e22e">gradle</span>
     
       <div class="copyright">
         <span
-          >© 2021 码农明明桑 Powered by
+          >© 2022 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

@@ -212,241 +212,241 @@
       <p>默认情况下情况下，使用Android的WebView是不能够支持上传文件的。而这个，也是在我们的前端工程师告知之后才了解的。因为Android的每个版本WebView的实现有差异，因此需要对不同版本去适配。花了一点时间，参考别人的代码，这个问题已经解决，这里把我踩过的坑分享出来。</p>
 <p>主要思路是重写WebChromeClient，然后在WebViewActivity中接收选择到的文件Uri，传给页面去上传就可以了。</p>
 <h3 id="创建一个webviewactivity的内部类">创建一个WebViewActivity的内部类</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">XHSWebChromeClient</span> <span style="color:#66d9ef">extends</span> WebChromeClient <span style="color:#f92672">{</span>
-
-    <span style="color:#75715e">// For Android 3.0+
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">openFileChooser</span><span style="color:#f92672">(</span>ValueCallback<span style="color:#f92672">&lt;</span>Uri<span style="color:#f92672">&gt;</span> uploadMsg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;in openFile Uri Callback&#34;</span><span style="color:#f92672">);</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mUploadMessage <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-        mUploadMessage <span style="color:#f92672">=</span> uploadMsg<span style="color:#f92672">;</span>
-        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
-        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
-        i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*/*&#34;</span><span style="color:#f92672">);</span>
-        startActivityForResult<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">createChooser</span><span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;File Chooser&#34;</span><span style="color:#f92672">),</span> FILECHOOSER_RESULTCODE<span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#75715e">// For Android 3.0+
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">openFileChooser</span><span style="color:#f92672">(</span>ValueCallback uploadMsg<span style="color:#f92672">,</span> String acceptType<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;in openFile Uri Callback has accept Type&#34;</span> <span style="color:#f92672">+</span> acceptType<span style="color:#f92672">);</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mUploadMessage <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-        mUploadMessage <span style="color:#f92672">=</span> uploadMsg<span style="color:#f92672">;</span>
-        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
-        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
-        String type <span style="color:#f92672">=</span> TextUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">(</span>acceptType<span style="color:#f92672">)</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;*/*&#34;</span> <span style="color:#f92672">:</span> acceptType<span style="color:#f92672">;</span>
-        i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span>type<span style="color:#f92672">);</span>
-        startActivityForResult<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">createChooser</span><span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;File Chooser&#34;</span><span style="color:#f92672">),</span>
-                FILECHOOSER_RESULTCODE<span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#75715e">// For Android 4.1
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">openFileChooser</span><span style="color:#f92672">(</span>ValueCallback<span style="color:#f92672">&lt;</span>Uri<span style="color:#f92672">&gt;</span> uploadMsg<span style="color:#f92672">,</span> String acceptType<span style="color:#f92672">,</span> String capture<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;in openFile Uri Callback has accept Type&#34;</span> <span style="color:#f92672">+</span> acceptType <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;has capture&#34;</span> <span style="color:#f92672">+</span> capture<span style="color:#f92672">);</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mUploadMessage <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-        mUploadMessage <span style="color:#f92672">=</span> uploadMsg<span style="color:#f92672">;</span>
-        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
-        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
-        String type <span style="color:#f92672">=</span> TextUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">(</span>acceptType<span style="color:#f92672">)</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;*/*&#34;</span> <span style="color:#f92672">:</span> acceptType<span style="color:#f92672">;</span>
-        i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span>type<span style="color:#f92672">);</span>
-        startActivityForResult<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">createChooser</span><span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;File Chooser&#34;</span><span style="color:#f92672">),</span> FILECHOOSER_RESULTCODE<span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-
-
-<span style="color:#75715e">//Android 5.0+
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#a6e22e">@SuppressLint</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;NewApi&#34;</span><span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">onShowFileChooser</span><span style="color:#f92672">(</span>WebView webView<span style="color:#f92672">,</span> ValueCallback<span style="color:#f92672">&lt;</span>Uri<span style="color:#f92672">[]&gt;</span> filePathCallback<span style="color:#f92672">,</span> FileChooserParams fileChooserParams<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mUploadMessage <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;file chooser params：&#34;</span> <span style="color:#f92672">+</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
-        mUploadMessage <span style="color:#f92672">=</span> filePathCallback<span style="color:#f92672">;</span>
-        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
-        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>fileChooserParams <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>
-                <span style="color:#f92672">&amp;&amp;</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">().</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span>fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">()[</span>0<span style="color:#f92672">]);</span>
-        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-            i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*/*&#34;</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-        startActivityForResult<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">createChooser</span><span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;File Chooser&#34;</span><span style="color:#f92672">),</span> FILECHOOSER_RESULTCODE<span style="color:#f92672">);</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>上面openFileChooser是系统未暴露的接口，因此不需要加Override的注解，同时不同版本有不同的参数，其中的参数，第一个ValueCallback用于我们在选择完文件后，接收文件回调到网页内处理，acceptType为接受的文件mime type。在Android 5.0之后，系统提供了onShowFileChooser来让我们实现选择文件的方法，仍然有ValueCallback，在FileChooserParams参数中，同样包括acceptType。我们可以根据acceptType，来打开系统的或者我们自己创建文件选择器。当然如果需要打开相机拍照，也可以自己去使用打开相机拍照的Intent去打开即可。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">XHSWebChromeClient</span> <span style="color:#66d9ef">extends</span> WebChromeClient <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// For Android 3.0+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">openFileChooser</span><span style="color:#f92672">(</span>ValueCallback<span style="color:#f92672">&lt;</span>Uri<span style="color:#f92672">&gt;</span> uploadMsg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;in openFile Uri Callback&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mUploadMessage <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        mUploadMessage <span style="color:#f92672">=</span> uploadMsg<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*/*&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        startActivityForResult<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">createChooser</span><span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;File Chooser&#34;</span><span style="color:#f92672">),</span> FILECHOOSER_RESULTCODE<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// For Android 3.0+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">openFileChooser</span><span style="color:#f92672">(</span>ValueCallback uploadMsg<span style="color:#f92672">,</span> String acceptType<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;in openFile Uri Callback has accept Type&#34;</span> <span style="color:#f92672">+</span> acceptType<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mUploadMessage <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        mUploadMessage <span style="color:#f92672">=</span> uploadMsg<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        String type <span style="color:#f92672">=</span> TextUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">(</span>acceptType<span style="color:#f92672">)</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;*/*&#34;</span> <span style="color:#f92672">:</span> acceptType<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span>type<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        startActivityForResult<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">createChooser</span><span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;File Chooser&#34;</span><span style="color:#f92672">),</span>
+</span></span><span style="display:flex;"><span>                FILECHOOSER_RESULTCODE<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// For Android 4.1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">openFileChooser</span><span style="color:#f92672">(</span>ValueCallback<span style="color:#f92672">&lt;</span>Uri<span style="color:#f92672">&gt;</span> uploadMsg<span style="color:#f92672">,</span> String acceptType<span style="color:#f92672">,</span> String capture<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;in openFile Uri Callback has accept Type&#34;</span> <span style="color:#f92672">+</span> acceptType <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;has capture&#34;</span> <span style="color:#f92672">+</span> capture<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mUploadMessage <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        mUploadMessage <span style="color:#f92672">=</span> uploadMsg<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        String type <span style="color:#f92672">=</span> TextUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">(</span>acceptType<span style="color:#f92672">)</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;*/*&#34;</span> <span style="color:#f92672">:</span> acceptType<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span>type<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        startActivityForResult<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">createChooser</span><span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;File Chooser&#34;</span><span style="color:#f92672">),</span> FILECHOOSER_RESULTCODE<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Android 5.0+
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@SuppressLint</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;NewApi&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">onShowFileChooser</span><span style="color:#f92672">(</span>WebView webView<span style="color:#f92672">,</span> ValueCallback<span style="color:#f92672">&lt;</span>Uri<span style="color:#f92672">[]&gt;</span> filePathCallback<span style="color:#f92672">,</span> FileChooserParams fileChooserParams<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>mUploadMessage <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;file chooser params：&#34;</span> <span style="color:#f92672">+</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        mUploadMessage <span style="color:#f92672">=</span> filePathCallback<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>fileChooserParams <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&amp;&amp;</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">().</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span>fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">()[</span>0<span style="color:#f92672">]);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*/*&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        startActivityForResult<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">createChooser</span><span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;File Chooser&#34;</span><span style="color:#f92672">),</span> FILECHOOSER_RESULTCODE<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>上面openFileChooser是系统未暴露的接口，因此不需要加Override的注解，同时不同版本有不同的参数，其中的参数，第一个ValueCallback用于我们在选择完文件后，接收文件回调到网页内处理，acceptType为接受的文件mime type。在Android 5.0之后，系统提供了onShowFileChooser来让我们实现选择文件的方法，仍然有ValueCallback，在FileChooserParams参数中，同样包括acceptType。我们可以根据acceptType，来打开系统的或者我们自己创建文件选择器。当然如果需要打开相机拍照，也可以自己去使用打开相机拍照的Intent去打开即可。</p>
 <h3 id="处理选择的文件">处理选择的文件</h3>
 <p>以上是打开响应的选择文件的界面，我们还需要处理接收到文件之后，传给网页来响应。因为我们前面是使用startActivityForResult来打开的选择页面，我们会在onActivityResult中接收到选择的结果。Show code：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Override</span>
-<span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onActivityResult</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> requestCode<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> resultCode<span style="color:#f92672">,</span> Intent data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onActivityResult</span><span style="color:#f92672">(</span>requestCode<span style="color:#f92672">,</span> resultCode<span style="color:#f92672">,</span> data<span style="color:#f92672">);</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>requestCode <span style="color:#f92672">==</span> FILECHOOSER_RESULTCODE<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> mUploadMessage<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-        Uri result <span style="color:#f92672">=</span> data <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> resultCode <span style="color:#f92672">!=</span> RESULT_OK <span style="color:#f92672">?</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">:</span> data<span style="color:#f92672">.</span><span style="color:#a6e22e">getData</span><span style="color:#f92672">();</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>result <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-            mUploadMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
-        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;onActivityResult&#34;</span> <span style="color:#f92672">+</span> result<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
-        String path <span style="color:#f92672">=</span>  FileUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> result<span style="color:#f92672">);</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>TextUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">(</span>path<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-            mUploadMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
-        Uri uri <span style="color:#f92672">=</span> Uri<span style="color:#f92672">.</span><span style="color:#a6e22e">fromFile</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>path<span style="color:#f92672">));</span>
-        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;onActivityResult after parser uri:&#34;</span> <span style="color:#f92672">+</span> uri<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION</span><span style="color:#f92672">.</span><span style="color:#a6e22e">SDK_INT</span> <span style="color:#f92672">&gt;=</span> Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_CODES</span><span style="color:#f92672">.</span><span style="color:#a6e22e">LOLLIPOP</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Uri<span style="color:#f92672">[]{</span>uri<span style="color:#f92672">});</span>
-        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-
-        mUploadMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>以上代码主要就是调用ValueCallback的onReceiveValue方法，将结果传回web。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onActivityResult</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> requestCode<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> resultCode<span style="color:#f92672">,</span> Intent data<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onActivityResult</span><span style="color:#f92672">(</span>requestCode<span style="color:#f92672">,</span> resultCode<span style="color:#f92672">,</span> data<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>requestCode <span style="color:#f92672">==</span> FILECHOOSER_RESULTCODE<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> mUploadMessage<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        Uri result <span style="color:#f92672">=</span> data <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> resultCode <span style="color:#f92672">!=</span> RESULT_OK <span style="color:#f92672">?</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">:</span> data<span style="color:#f92672">.</span><span style="color:#a6e22e">getData</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>result <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;onActivityResult&#34;</span> <span style="color:#f92672">+</span> result<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        String path <span style="color:#f92672">=</span>  FileUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> result<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>TextUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">(</span>path<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        Uri uri <span style="color:#f92672">=</span> Uri<span style="color:#f92672">.</span><span style="color:#a6e22e">fromFile</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>path<span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>        CLog<span style="color:#f92672">.</span><span style="color:#a6e22e">i</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;UPFILE&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;onActivityResult after parser uri:&#34;</span> <span style="color:#f92672">+</span> uri<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION</span><span style="color:#f92672">.</span><span style="color:#a6e22e">SDK_INT</span> <span style="color:#f92672">&gt;=</span> Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_CODES</span><span style="color:#f92672">.</span><span style="color:#a6e22e">LOLLIPOP</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Uri<span style="color:#f92672">[]{</span>uri<span style="color:#f92672">});</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            mUploadMessage<span style="color:#f92672">.</span><span style="color:#a6e22e">onReceiveValue</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        mUploadMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>以上代码主要就是调用ValueCallback的onReceiveValue方法，将结果传回web。</p>
 <h3 id="注意其他要说的重要">注意，其他要说的，重要</h3>
 <p>由于不同版本的差别，Android 5.0以下的版本，ValueCallback 的onReceiveValue接收的参数类型是Uri, 5.0及以上版本接收的是Uri数组，在传值的时候需要注意。</p>
 <p>选择文件会使用系统提供的组件或者其他支持的app，返回的uri有的直接是文件的url，有的是contentprovider的uri，因此我们需要统一处理一下，转成文件的uri，可参考以下代码（获取文件的路径）。</p>
 <p>调用getPath可以将Uri转成真实文件的Path，然后可以自己生成文件的Uri</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileUtils</span> <span style="color:#f92672">{</span>
-    <span style="color:#75715e">/**
-</span><span style="color:#75715e">     * @param uri The Uri to check.
-</span><span style="color:#75715e">     * @return Whether the Uri authority is ExternalStorageProvider.
-</span><span style="color:#75715e">     */</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isExternalStorageDocument</span><span style="color:#f92672">(</span>Uri uri<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;com.android.externalstorage.documents&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getAuthority</span><span style="color:#f92672">());</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#75715e">/**
-</span><span style="color:#75715e">     * @param uri The Uri to check.
-</span><span style="color:#75715e">     * @return Whether the Uri authority is DownloadsProvider.
-</span><span style="color:#75715e">     */</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isDownloadsDocument</span><span style="color:#f92672">(</span>Uri uri<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;com.android.providers.downloads.documents&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getAuthority</span><span style="color:#f92672">());</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#75715e">/**
-</span><span style="color:#75715e">     * @param uri The Uri to check.
-</span><span style="color:#75715e">     * @return Whether the Uri authority is MediaProvider.
-</span><span style="color:#75715e">     */</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isMediaDocument</span><span style="color:#f92672">(</span>Uri uri<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;com.android.providers.media.documents&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getAuthority</span><span style="color:#f92672">());</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#75715e">/**
-</span><span style="color:#75715e">     * Get the value of the data column for this Uri. This is useful for
-</span><span style="color:#75715e">     * MediaStore Uris, and other file-based ContentProviders.
-</span><span style="color:#75715e">     *
-</span><span style="color:#75715e">     * @param context The context.
-</span><span style="color:#75715e">     * @param uri The Uri to query.
-</span><span style="color:#75715e">     * @param selection (Optional) Filter used in the query.
-</span><span style="color:#75715e">     * @param selectionArgs (Optional) Selection arguments used in the query.
-</span><span style="color:#75715e">     * @return The value of the _data column, which is typically a file path.
-</span><span style="color:#75715e">     */</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getDataColumn</span><span style="color:#f92672">(</span>Context context<span style="color:#f92672">,</span> Uri uri<span style="color:#f92672">,</span> String selection<span style="color:#f92672">,</span>
-                                       String<span style="color:#f92672">[]</span> selectionArgs<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-
-        Cursor cursor <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">final</span> String column <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;_data&#34;</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> projection <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
-                column
-        <span style="color:#f92672">};</span>
-
-        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
-            cursor <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getContentResolver</span><span style="color:#f92672">().</span><span style="color:#a6e22e">query</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">,</span> projection<span style="color:#f92672">,</span> selection<span style="color:#f92672">,</span> selectionArgs<span style="color:#f92672">,</span>
-                    <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>cursor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> cursor<span style="color:#f92672">.</span><span style="color:#a6e22e">moveToFirst</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
-                <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> column_index <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span><span style="color:#a6e22e">getColumnIndexOrThrow</span><span style="color:#f92672">(</span>column<span style="color:#f92672">);</span>
-                <span style="color:#66d9ef">return</span> cursor<span style="color:#f92672">.</span><span style="color:#a6e22e">getString</span><span style="color:#f92672">(</span>column_index<span style="color:#f92672">);</span>
-            <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>cursor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
-                cursor<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
-        <span style="color:#f92672">}</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-    <span style="color:#75715e">/**
-</span><span style="color:#75715e">     * Get a file path from a Uri. This will get the the path for Storage Access
-</span><span style="color:#75715e">     * Framework Documents, as well as the _data field for the MediaStore and
-</span><span style="color:#75715e">     * other file-based ContentProviders.
-</span><span style="color:#75715e">     *
-</span><span style="color:#75715e">     * @param context The context.
-</span><span style="color:#75715e">     * @param uri The Uri to query.
-</span><span style="color:#75715e">     * @author paulburke
-</span><span style="color:#75715e">     */</span>
-    <span style="color:#a6e22e">@SuppressLint</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;NewApi&#34;</span><span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getPath</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> Context context<span style="color:#f92672">,</span> <span style="color:#66d9ef">final</span> Uri uri<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-
-        <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> isKitKat <span style="color:#f92672">=</span> Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION</span><span style="color:#f92672">.</span><span style="color:#a6e22e">SDK_INT</span> <span style="color:#f92672">&gt;=</span> Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_CODES</span><span style="color:#f92672">.</span><span style="color:#a6e22e">KITKAT</span><span style="color:#f92672">;</span>
-
-        <span style="color:#75715e">// DocumentProvider
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isKitKat <span style="color:#f92672">&amp;&amp;</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">isDocumentUri</span><span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-            <span style="color:#75715e">// ExternalStorageProvider
-</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isExternalStorageDocument<span style="color:#f92672">(</span>uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-                <span style="color:#66d9ef">final</span> String docId <span style="color:#f92672">=</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentId</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
-                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> split <span style="color:#f92672">=</span> docId<span style="color:#f92672">.</span><span style="color:#a6e22e">split</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">);</span>
-                <span style="color:#66d9ef">final</span> String type <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span>0<span style="color:#f92672">];</span>
-
-                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;primary&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-                    <span style="color:#66d9ef">return</span> Environment<span style="color:#f92672">.</span><span style="color:#a6e22e">getExternalStorageDirectory</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> split<span style="color:#f92672">[</span>1<span style="color:#f92672">];</span>
-                <span style="color:#f92672">}</span>
-
-                <span style="color:#75715e">// TODO handle non-primary volumes
-</span><span style="color:#75715e"></span>            <span style="color:#f92672">}</span>
-            <span style="color:#75715e">// DownloadsProvider
-</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isDownloadsDocument<span style="color:#f92672">(</span>uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-
-                <span style="color:#66d9ef">final</span> String id <span style="color:#f92672">=</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentId</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
-                <span style="color:#66d9ef">final</span> Uri contentUri <span style="color:#f92672">=</span> ContentUris<span style="color:#f92672">.</span><span style="color:#a6e22e">withAppendedId</span><span style="color:#f92672">(</span>
-                        Uri<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;content://downloads/public_downloads&#34;</span><span style="color:#f92672">),</span> Long<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>id<span style="color:#f92672">));</span>
-
-                <span style="color:#66d9ef">return</span> getDataColumn<span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> contentUri<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-            <span style="color:#f92672">}</span>
-            <span style="color:#75715e">// MediaProvider
-</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isMediaDocument<span style="color:#f92672">(</span>uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-                <span style="color:#66d9ef">final</span> String docId <span style="color:#f92672">=</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentId</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
-                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> split <span style="color:#f92672">=</span> docId<span style="color:#f92672">.</span><span style="color:#a6e22e">split</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">);</span>
-                <span style="color:#66d9ef">final</span> String type <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span>0<span style="color:#f92672">];</span>
-
-                Uri contentUri <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;image&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-                    contentUri <span style="color:#f92672">=</span> MediaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">Images</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Media</span><span style="color:#f92672">.</span><span style="color:#a6e22e">EXTERNAL_CONTENT_URI</span><span style="color:#f92672">;</span>
-                <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;video&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-                    contentUri <span style="color:#f92672">=</span> MediaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">Video</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Media</span><span style="color:#f92672">.</span><span style="color:#a6e22e">EXTERNAL_CONTENT_URI</span><span style="color:#f92672">;</span>
-                <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;audio&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-                    contentUri <span style="color:#f92672">=</span> MediaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">Audio</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Media</span><span style="color:#f92672">.</span><span style="color:#a6e22e">EXTERNAL_CONTENT_URI</span><span style="color:#f92672">;</span>
-                <span style="color:#f92672">}</span>
-
-                <span style="color:#66d9ef">final</span> String selection <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;_id=?&#34;</span><span style="color:#f92672">;</span>
-                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> selectionArgs <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span> <span style="color:#f92672">{</span>
-                        split<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>
-                <span style="color:#f92672">};</span>
-
-                <span style="color:#66d9ef">return</span> getDataColumn<span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> contentUri<span style="color:#f92672">,</span> selection<span style="color:#f92672">,</span> selectionArgs<span style="color:#f92672">);</span>
-            <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span>
-        <span style="color:#75715e">// MediaStore (and general)
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;content&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getScheme</span><span style="color:#f92672">()))</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">return</span> getDataColumn<span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> uri<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-        <span style="color:#f92672">}</span>
-        <span style="color:#75715e">// File
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;file&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getScheme</span><span style="color:#f92672">()))</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">return</span> uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">();</span>
-        <span style="color:#f92672">}</span>
-
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-
-<span style="color:#f92672">}</span>
-</code></pre></div><p>再有，即使获取的结果为null，也要传给web，即直接调用<code>mUploadMessage.onReceiveValue(null)</code>,否则网页会阻塞。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileUtils</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param uri The Uri to check.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Whether the Uri authority is ExternalStorageProvider.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isExternalStorageDocument</span><span style="color:#f92672">(</span>Uri uri<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;com.android.externalstorage.documents&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getAuthority</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param uri The Uri to check.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Whether the Uri authority is DownloadsProvider.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isDownloadsDocument</span><span style="color:#f92672">(</span>Uri uri<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;com.android.providers.downloads.documents&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getAuthority</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param uri The Uri to check.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return Whether the Uri authority is MediaProvider.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isMediaDocument</span><span style="color:#f92672">(</span>Uri uri<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;com.android.providers.media.documents&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getAuthority</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Get the value of the data column for this Uri. This is useful for
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * MediaStore Uris, and other file-based ContentProviders.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param context The context.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param uri The Uri to query.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param selection (Optional) Filter used in the query.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param selectionArgs (Optional) Selection arguments used in the query.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return The value of the _data column, which is typically a file path.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getDataColumn</span><span style="color:#f92672">(</span>Context context<span style="color:#f92672">,</span> Uri uri<span style="color:#f92672">,</span> String selection<span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                                       String<span style="color:#f92672">[]</span> selectionArgs<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Cursor cursor <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">final</span> String column <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;_data&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> projection <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                column
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            cursor <span style="color:#f92672">=</span> context<span style="color:#f92672">.</span><span style="color:#a6e22e">getContentResolver</span><span style="color:#f92672">().</span><span style="color:#a6e22e">query</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">,</span> projection<span style="color:#f92672">,</span> selection<span style="color:#f92672">,</span> selectionArgs<span style="color:#f92672">,</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>cursor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> cursor<span style="color:#f92672">.</span><span style="color:#a6e22e">moveToFirst</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> column_index <span style="color:#f92672">=</span> cursor<span style="color:#f92672">.</span><span style="color:#a6e22e">getColumnIndexOrThrow</span><span style="color:#f92672">(</span>column<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> cursor<span style="color:#f92672">.</span><span style="color:#a6e22e">getString</span><span style="color:#f92672">(</span>column_index<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span> <span style="color:#66d9ef">finally</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>cursor <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>                cursor<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Get a file path from a Uri. This will get the the path for Storage Access
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * Framework Documents, as well as the _data field for the MediaStore and
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * other file-based ContentProviders.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     *
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param context The context.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param uri The Uri to query.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @author paulburke
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@SuppressLint</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;NewApi&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">getPath</span><span style="color:#f92672">(</span><span style="color:#66d9ef">final</span> Context context<span style="color:#f92672">,</span> <span style="color:#66d9ef">final</span> Uri uri<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">boolean</span> isKitKat <span style="color:#f92672">=</span> Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION</span><span style="color:#f92672">.</span><span style="color:#a6e22e">SDK_INT</span> <span style="color:#f92672">&gt;=</span> Build<span style="color:#f92672">.</span><span style="color:#a6e22e">VERSION_CODES</span><span style="color:#f92672">.</span><span style="color:#a6e22e">KITKAT</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// DocumentProvider
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isKitKat <span style="color:#f92672">&amp;&amp;</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">isDocumentUri</span><span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// ExternalStorageProvider
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isExternalStorageDocument<span style="color:#f92672">(</span>uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String docId <span style="color:#f92672">=</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentId</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> split <span style="color:#f92672">=</span> docId<span style="color:#f92672">.</span><span style="color:#a6e22e">split</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String type <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span>0<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;primary&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> Environment<span style="color:#f92672">.</span><span style="color:#a6e22e">getExternalStorageDirectory</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> split<span style="color:#f92672">[</span>1<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// TODO handle non-primary volumes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// DownloadsProvider
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isDownloadsDocument<span style="color:#f92672">(</span>uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String id <span style="color:#f92672">=</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentId</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> Uri contentUri <span style="color:#f92672">=</span> ContentUris<span style="color:#f92672">.</span><span style="color:#a6e22e">withAppendedId</span><span style="color:#f92672">(</span>
+</span></span><span style="display:flex;"><span>                        Uri<span style="color:#f92672">.</span><span style="color:#a6e22e">parse</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;content://downloads/public_downloads&#34;</span><span style="color:#f92672">),</span> Long<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>id<span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> getDataColumn<span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> contentUri<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// MediaProvider
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isMediaDocument<span style="color:#f92672">(</span>uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String docId <span style="color:#f92672">=</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentId</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> split <span style="color:#f92672">=</span> docId<span style="color:#f92672">.</span><span style="color:#a6e22e">split</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String type <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span>0<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                Uri contentUri <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;image&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    contentUri <span style="color:#f92672">=</span> MediaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">Images</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Media</span><span style="color:#f92672">.</span><span style="color:#a6e22e">EXTERNAL_CONTENT_URI</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;video&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    contentUri <span style="color:#f92672">=</span> MediaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">Video</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Media</span><span style="color:#f92672">.</span><span style="color:#a6e22e">EXTERNAL_CONTENT_URI</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;audio&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    contentUri <span style="color:#f92672">=</span> MediaStore<span style="color:#f92672">.</span><span style="color:#a6e22e">Audio</span><span style="color:#f92672">.</span><span style="color:#a6e22e">Media</span><span style="color:#f92672">.</span><span style="color:#a6e22e">EXTERNAL_CONTENT_URI</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String selection <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;_id=?&#34;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> selectionArgs <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                        split<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> getDataColumn<span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> contentUri<span style="color:#f92672">,</span> selection<span style="color:#f92672">,</span> selectionArgs<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// MediaStore (and general)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;content&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getScheme</span><span style="color:#f92672">()))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> getDataColumn<span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> uri<span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// File
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;file&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getScheme</span><span style="color:#f92672">()))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> uri<span style="color:#f92672">.</span><span style="color:#a6e22e">getPath</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>再有，即使获取的结果为null，也要传给web，即直接调用<code>mUploadMessage.onReceiveValue(null)</code>,否则网页会阻塞。</p>
 <p>最后，在打release包的时候，因为我们会混淆，要特别设置不要混淆WebChromeClient子类里面的openFileChooser方法，由于不是继承的方法，所以默认会被混淆，然后就无法选择文件了。</p>
 <p>就这样吧。</p>
     </div>
@@ -529,7 +529,7 @@
     
       <div class="copyright">
         <span
-          >© 2021 码农明明桑 Powered by
+          >© 2022 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span
