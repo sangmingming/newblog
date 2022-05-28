@@ -298,7 +298,7 @@ make就开始编译， -jN用于设置任务数， N应该介于计算机上的C
 }
 </code></pre><p>另外你也可以到<a href="https://github.com/phracker/MacOSX-SDKs/releases">https://github.com/phracker/MacOSX-SDKs/releases</a> 去下载10.15的sdk放到上面的文件夹里面。</p>
 <h4 id="问题二-v8引擎无法编译一些文件找不到">问题二： v8引擎无法编译，一些文件找不到</h4>
-<p>由于2021年后，官方不维护mac上的开发环境了，所以external/v8下面有很多编译错误，这里直接采用回滚代码的方式，我是回滚到了 <em>Upgrade V8 to 8.8.278.14</em>提交的前一个Commit</p>
+<p>由于2021年后，官方不维护mac上的开发环境了，所以external/v8下面有很多编译错误，这里直接采用回滚代码的方式，我是回滚到了 <em>Upgrade V8 to 8.8.278.14</em> 提交的前一个Commit</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd external/v8
 </span></span><span style="display:flex;"><span>git checkout 9304fbb
 </span></span></code></pre></div><h4 id="问题三-undeclared-identifier-page_size">问题三： undeclared identifier ‘PAGE_SIZE’</h4>
@@ -308,14 +308,14 @@ make就开始编译， -jN用于设置任务数， N应该介于计算机上的C
 </span></span><span style="display:flex;"><span>system/core/base/cmsg.cpp:78:21: error: use of undeclared identifier <span style="color:#e6db74">&#39;PAGE_SIZE&#39;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>cmsg_space &gt;<span style="color:#f92672">=</span> PAGE_SIZE<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>                    ^
-</span></span></code></pre></div><p>看起来是PAGE_SIZE这个常量没定义，那就去补上呗。去 <em>system/core/base/cmsg.cpp</em>文件开头添加 PAGE_SIZE 的声明</p>
+</span></span></code></pre></div><p>看起来是PAGE_SIZE这个常量没定义，那就去补上呗。去 <em>system/core/base/cmsg.cpp</em> 文件开头添加 PAGE_SIZE 的声明</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifndef PAGE_SIZE
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define PAGE_SIZE (size_t)(sysconf(_SC_PAGESIZE))
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
 </span></span></span></code></pre></div><h4 id="问题四-incompatible-pointer-types-passing-unsigned-long--to-parameter-of-type-uint32_t-">问题四： incompatible pointer types passing ‘unsigned long *’ to parameter of type ‘uint32_t *‘</h4>
 <pre tabindex="0"><code>external/python/cpython2/Modules/getpath.c:414:50: error: incompatible pointer types passing &#39;unsigned long *&#39; to parameter of type &#39;uint32_t *&#39; (aka &#39;unsigned int *&#39;) [-Werror,-Wincompatible-pointer-types]
 else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpath[0] == SEP)
-</code></pre><p>把 <em>external/python/cpython2/Modules/getpath.c</em>中：</p>
+</code></pre><p>把 <em>external/python/cpython2/Modules/getpath.c</em> 中：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#if MAC_OS_X_VERSION_MAX_ALLOWED &gt;= MAC_OS_X_VERSION_10_4
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> MAXPATHLEN;
@@ -327,7 +327,7 @@ else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpa
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> MAXPATHLEN;
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
-</span></span></span></code></pre></div><p>把 <em>external/python/cpython3/Modules/getpath.c</em>中的：</p>
+</span></span></span></code></pre></div><p>把 <em>external/python/cpython3/Modules/getpath.c</em> 中的：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> execpath[MAXPATHLEN <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#if MAC_OS_X_VERSION_MAX_ALLOWED &gt;= MAC_OS_X_VERSION_10_4
@@ -352,7 +352,7 @@ else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpa
 <p>参考了以下资料和网友的分享，非常感谢：</p>
 <ul>
 <li>
-<p><a href="">https://source.android.com/setup/build/building</a></p>
+<p><a href="https://source.android.com/setup/build/building">https://source.android.com/setup/build/building</a></p>
 </li>
 <li>
 <p><a href="https://nf4789.medium.com/building-android-11-for-ph-1-on-apple-silicon-6600436a36a0">https://nf4789.medium.com/building-android-11-for-ph-1-on-apple-silicon-6600436a36a0</a></p>
