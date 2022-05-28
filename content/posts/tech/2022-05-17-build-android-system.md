@@ -6,7 +6,7 @@ comments: true
 ---
 
 之前苦于电脑磁盘空间比较小，而android系统的源码越来越大，一直没有机会自己编译Android系统。这次换了电脑，磁盘足够大，可以尝试一下了。
-而android源码的网站红色的字写着*Platform development on MacOS isn't supported as of June 22, 2021.*，我就知道不会那么容易了。
+而android源码的网站红色的字写着 *Platform development on MacOS isn't supported as of June 22, 2021.* ，我就知道不会那么容易了。
 
 <!--more-->
 我的电脑环境：
@@ -18,12 +18,16 @@ comments: true
 ### 安装xcode和相关工具
 + 从appstore安装Xcode
 + 安装xcode command line tools：
+
 > $ xcode-select --install
+
 + 安装Rosetta（M1芯片需要，x86芯片不需要）
+
 > $ softwareupdate --install-rosetta
 
 ### 创建大小写敏感的磁盘映像
 我们先创建个350GB的大小
+
 > $ hdiutil create -type SPARSE -fs 'Case-sensitive Journaled HFS+' -size 350g ~/forest.dmg
 
 ### 设置环境变量
@@ -95,7 +99,7 @@ out/soong/.bootstrap/bin/gotestrunner -p ./build/soong/cc -f out/soong/.bootstra
 ..... ....
 ```
 原因是指不到指定的mac sdk
-可以看一下`/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs`文件下有没有*MacOSX12.3.sdk*， 然后在然后在 */build/soong/cc/config/x86_darwin_host.go* 文件中找到 “darwinSupportedSdkVersions“ 添加 MacOSX12.3.sdk 对应的版本号——12.3，如果你的macosx的sdk是别的就填别的。
+可以看一下`/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs`文件下有没有 *MacOSX12.3.sdk* ， 然后在然后在 */build/soong/cc/config/x86_darwin_host.go* 文件中找到 “darwinSupportedSdkVersions“ 添加 MacOSX12.3.sdk 对应的版本号——12.3，如果你的macosx的sdk是别的就填别的。
 ```
 darwinSupportedSdkVersions = []string{
 		"10.10",
@@ -111,7 +115,7 @@ darwinSupportedSdkVersions = []string{
 另外你也可以到[https://github.com/phracker/MacOSX-SDKs/releases](https://github.com/phracker/MacOSX-SDKs/releases) 去下载10.15的sdk放到上面的文件夹里面。
 
 #### 问题二： v8引擎无法编译，一些文件找不到
-由于2021年后，官方不维护mac上的开发环境了，所以external/v8下面有很多编译错误，这里直接采用回滚代码的方式，我是回滚到了*Upgrade V8 to 8.8.278.14*提交的前一个Commit
+由于2021年后，官方不维护mac上的开发环境了，所以external/v8下面有很多编译错误，这里直接采用回滚代码的方式，我是回滚到了 *Upgrade V8 to 8.8.278.14*提交的前一个Commit
 ```shell
 cd external/v8
 git checkout 9304fbb
@@ -127,7 +131,7 @@ system/core/base/cmsg.cpp:78:21: error: use of undeclared identifier 'PAGE_SIZE'
   if (cmsg_space >= PAGE_SIZE) {
                     ^
 ```
-看起来是PAGE_SIZE这个常量没定义，那就去补上呗。去*system/core/base/cmsg.cpp*文件开头添加 PAGE_SIZE 的声明
+看起来是PAGE_SIZE这个常量没定义，那就去补上呗。去 *system/core/base/cmsg.cpp*文件开头添加 PAGE_SIZE 的声明
 ```c
 #ifndef PAGE_SIZE
 #define PAGE_SIZE (size_t)(sysconf(_SC_PAGESIZE))
@@ -139,7 +143,7 @@ system/core/base/cmsg.cpp:78:21: error: use of undeclared identifier 'PAGE_SIZE'
 external/python/cpython2/Modules/getpath.c:414:50: error: incompatible pointer types passing 'unsigned long *' to parameter of type 'uint32_t *' (aka 'unsigned int *') [-Werror,-Wincompatible-pointer-types]
 else if(0 == _NSGetExecutablePath(progpath, &nsexeclength) && progpath[0] == SEP)
 ```
-把*external/python/cpython2/Modules/getpath.c*中：
+把 *external/python/cpython2/Modules/getpath.c*中：
 ```c
 #ifdef __APPLE__
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
@@ -156,7 +160,7 @@ else if(0 == _NSGetExecutablePath(progpath, &nsexeclength) && progpath[0] == SEP
 #endif
 ```
 
-把*external/python/cpython3/Modules/getpath.c*中的：
+把 *external/python/cpython3/Modules/getpath.c*中的：
 ```c
 #ifdef __APPLE__
 char execpath[MAXPATHLEN + 1];
@@ -166,7 +170,10 @@ char execpath[MAXPATHLEN + 1];
     unsigned long  nsexeclength = Py_ARRAY_LENGTH(execpath) - 1;
 #endif
 #endif
+```
+
 改成：
+
 ```c
 #ifdef __APPLE__
 char execpath[MAXPATHLEN + 1];
@@ -179,18 +186,23 @@ uint32_t nsexeclength = Py_ARRAY_LENGTH(execpath) - 1;
 
 ## 编译idegen模块导入Android Studio
 使用如下命令编译idegen模块：
+
 ```shell
 mmm development/tools/idegen/
 ```
+
 完成之后，执行如下命令：
 ```shell
 development/tools/idegen/idegen.sh
 ```
-之后就会在根目录生成对应的`android.ipr`、`android.iml` IEDA工程配置文件,之后在IDEA或者Android Studio中打开android.ipr就能浏览源码了。
+之后就会在根目录生成对应的 `android.ipr`、 `android.iml` IEDA工程配置文件,之后在IDEA或者Android Studio中打开android.ipr就能浏览源码了。
 
 
 ## 参考
 参考了以下资料和网友的分享，非常感谢：
+
 + [https://source.android.com/setup/build/building]()
+
 + [https://nf4789.medium.com/building-android-11-for-ph-1-on-apple-silicon-6600436a36a0](https://nf4789.medium.com/building-android-11-for-ph-1-on-apple-silicon-6600436a36a0)
+
 + [https://51wlb.top/aosp/](https://51wlb.top/aosp/)
