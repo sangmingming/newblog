@@ -115,7 +115,7 @@ darwinSupportedSdkVersions = []string{
 另外你也可以到[https://github.com/phracker/MacOSX-SDKs/releases](https://github.com/phracker/MacOSX-SDKs/releases) 去下载10.15的sdk放到上面的文件夹里面。
 
 #### 问题二： v8引擎无法编译，一些文件找不到
-由于2021年后，官方不维护mac上的开发环境了，所以external/v8下面有很多编译错误，这里直接采用回滚代码的方式，我是回滚到了 *Upgrade V8 to 8.8.278.14*提交的前一个Commit
+由于2021年后，官方不维护mac上的开发环境了，所以external/v8下面有很多编译错误，这里直接采用回滚代码的方式，我是回滚到了 *Upgrade V8 to 8.8.278.14* 提交的前一个Commit
 ```shell
 cd external/v8
 git checkout 9304fbb
@@ -131,7 +131,7 @@ system/core/base/cmsg.cpp:78:21: error: use of undeclared identifier 'PAGE_SIZE'
   if (cmsg_space >= PAGE_SIZE) {
                     ^
 ```
-看起来是PAGE_SIZE这个常量没定义，那就去补上呗。去 *system/core/base/cmsg.cpp*文件开头添加 PAGE_SIZE 的声明
+看起来是PAGE_SIZE这个常量没定义，那就去补上呗。去 *system/core/base/cmsg.cpp* 文件开头添加 PAGE_SIZE 的声明
 ```c
 #ifndef PAGE_SIZE
 #define PAGE_SIZE (size_t)(sysconf(_SC_PAGESIZE))
@@ -143,7 +143,7 @@ system/core/base/cmsg.cpp:78:21: error: use of undeclared identifier 'PAGE_SIZE'
 external/python/cpython2/Modules/getpath.c:414:50: error: incompatible pointer types passing 'unsigned long *' to parameter of type 'uint32_t *' (aka 'unsigned int *') [-Werror,-Wincompatible-pointer-types]
 else if(0 == _NSGetExecutablePath(progpath, &nsexeclength) && progpath[0] == SEP)
 ```
-把 *external/python/cpython2/Modules/getpath.c*中：
+把 *external/python/cpython2/Modules/getpath.c* 中：
 ```c
 #ifdef __APPLE__
 #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
@@ -160,7 +160,7 @@ else if(0 == _NSGetExecutablePath(progpath, &nsexeclength) && progpath[0] == SEP
 #endif
 ```
 
-把 *external/python/cpython3/Modules/getpath.c*中的：
+把 *external/python/cpython3/Modules/getpath.c* 中的：
 ```c
 #ifdef __APPLE__
 char execpath[MAXPATHLEN + 1];
@@ -201,7 +201,7 @@ development/tools/idegen/idegen.sh
 ## 参考
 参考了以下资料和网友的分享，非常感谢：
 
-+ [https://source.android.com/setup/build/building]()
++ [https://source.android.com/setup/build/building](https://source.android.com/setup/build/building)
 
 + [https://nf4789.medium.com/building-android-11-for-ph-1-on-apple-silicon-6600436a36a0](https://nf4789.medium.com/building-android-11-for-ph-1-on-apple-silicon-6600436a36a0)
 
