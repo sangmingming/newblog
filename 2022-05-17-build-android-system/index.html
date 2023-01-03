@@ -74,7 +74,6 @@
 
 
 
-
   </head>
   <body class="">
     <div class="container">
@@ -331,15 +330,15 @@ else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpa
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> execpath[MAXPATHLEN <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#if MAC_OS_X_VERSION_MAX_ALLOWED &gt;= MAC_OS_X_VERSION_10_4
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> Py_ARRAY_LENGTH(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> <span style="color:#a6e22e">Py_ARRAY_LENGTH</span>(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#else
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span>  nsexeclength <span style="color:#f92672">=</span> Py_ARRAY_LENGTH(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span>  nsexeclength <span style="color:#f92672">=</span> <span style="color:#a6e22e">Py_ARRAY_LENGTH</span>(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
 </span></span></span></code></pre></div><p>改成：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#ifdef __APPLE__
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> execpath[MAXPATHLEN <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> Py_ARRAY_LENGTH(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">uint32_t</span> nsexeclength <span style="color:#f92672">=</span> <span style="color:#a6e22e">Py_ARRAY_LENGTH</span>(execpath) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#endif
 </span></span></span></code></pre></div><p>以上问题改完应该就可以编译成功了，如果是在后面java编译阶段失败，可以先试试重新执行make试试，如果还是不行的话就上网找解决方案吧。</p>
 <h2 id="编译idegen模块导入android-studio">编译idegen模块导入Android Studio</h2>
@@ -434,7 +433,7 @@ else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpa
     
       <div class="copyright">
         <span
-          >© 2022 码农明明桑 Powered by
+          >© 2023 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

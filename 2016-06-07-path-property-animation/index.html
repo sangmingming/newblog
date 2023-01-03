@@ -72,7 +72,6 @@
 
 
 
-
   </head>
   <body class="">
     <div class="container">
@@ -219,9 +218,9 @@
 </span></span><span style="display:flex;"><span>paint<span style="color:#f92672">.</span><span style="color:#a6e22e">setColor</span><span style="color:#f92672">(</span>Color<span style="color:#f92672">.</span><span style="color:#a6e22e">BLACK</span><span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>paint<span style="color:#f92672">.</span><span style="color:#a6e22e">setStyle</span><span style="color:#f92672">(</span>Paint<span style="color:#f92672">.</span><span style="color:#a6e22e">Style</span><span style="color:#f92672">.</span><span style="color:#a6e22e">STROKE</span><span style="color:#f92672">);</span> <span style="color:#75715e">//一定要设置为画线条
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Path path <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Path<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">moveTo</span><span style="color:#f92672">(</span>100<span style="color:#f92672">,</span> 100<span style="color:#f92672">);</span>   <span style="color:#75715e">//定位path的起点
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">lineTo</span><span style="color:#f92672">(</span>100<span style="color:#f92672">,</span> 200<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">lineTo</span><span style="color:#f92672">(</span>200<span style="color:#f92672">,</span> 150<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">moveTo</span><span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">);</span>   <span style="color:#75715e">//定位path的起点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">lineTo</span><span style="color:#f92672">(</span><span style="color:#ae81ff">100</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">200</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">lineTo</span><span style="color:#f92672">(</span><span style="color:#ae81ff">200</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">150</span><span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>path<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
 </span></span><span style="display:flex;"><span>canvas<span style="color:#f92672">.</span><span style="color:#a6e22e">drawPath</span><span style="color:#f92672">(</span>path<span style="color:#f92672">,</span> paint<span style="color:#f92672">);</span>
 </span></span></code></pre></div><p>通过以上的方法代码我们就可以画出三角形了。</p>
@@ -231,16 +230,16 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> length <span style="color:#f92672">=</span> measure<span style="color:#f92672">.</span><span style="color:#a6e22e">getLength</span><span style="color:#f92672">();</span>
 </span></span></code></pre></div><h3 id="只绘制path的一部分">只绘制Path的一部分</h3>
 <p>为了让Path能够逐步显示出来，或者逐步隐藏。我们需要做到能够显示path的一部分，并且改变显示的长度。我们知道可以通过<code>DashPathEffect</code>来显示虚线效果。同时我们可以借助DashPathEffect让我们的实线和虚线的部分的长度分别为我们的Path的长度，然后来改变偏移量，实现只显示path的一部分。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DashPathEffect<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">float</span><span style="color:#f92672">[]{</span>pathLength<span style="color:#f92672">,</span> pathLength<span style="color:#f92672">},</span> pathLength<span style="color:#f92672">/</span>2<span style="color:#f92672">);</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DashPathEffect<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">float</span><span style="color:#f92672">[]{</span>pathLength<span style="color:#f92672">,</span> pathLength<span style="color:#f92672">},</span> pathLength<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>paint<span style="color:#f92672">.</span><span style="color:#a6e22e">setPathEffect</span><span style="color:#f92672">(</span>effect<span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>canvas<span style="color:#f92672">.</span><span style="color:#a6e22e">drawPath</span><span style="color:#f92672">(</span>path<span style="color:#f92672">,</span> paint<span style="color:#f92672">)</span>
 </span></span></code></pre></div><h3 id="让path动起来">让Path动起来</h3>
 <p>通过上面说的，我们改变PathEffect的偏移量就可以改变path显示的长度，因此我们可以给我们的View或者对象定义个属性，通过Property Animation来改变这个属性的值，即可实现动画。</p>
 <p>PathEffect 属性值变化</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> percentage <span style="color:#f92672">=</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> percentage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span><span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span>PathEffect effect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> DashPathEffect<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">float</span><span style="color:#f92672">[]{</span>pathLength<span style="color:#f92672">,</span> pathLength<span style="color:#f92672">},</span> pathLength <span style="color:#f92672">-</span> pathLength<span style="color:#f92672">*</span>percentage<span style="color:#f92672">);</span>
 </span></span></code></pre></div><p>动画定义:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Animator animatorLine <span style="color:#f92672">=</span> ObjectAnimator<span style="color:#f92672">.</span><span style="color:#a6e22e">ofFloat</span><span style="color:#f92672">(</span>view<span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">“</span>percentage<span style="color:#960050;background-color:#1e0010">”</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">.</span><span style="color:#a6e22e">0f</span><span style="color:#f92672">);</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Animator animatorLine <span style="color:#f92672">=</span> ObjectAnimator<span style="color:#f92672">.</span><span style="color:#a6e22e">ofFloat</span><span style="color:#f92672">(</span>view<span style="color:#f92672">,</span> <span style="color:#960050;background-color:#1e0010">“</span>percentage<span style="color:#960050;background-color:#1e0010">”</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">0.0f</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">1.0f</span><span style="color:#f92672">);</span>
 </span></span></code></pre></div><h3 id="其他">其他</h3>
 <p>就这样就实现了。思路甚至代码都是参考一篇国外的博客。思路很重要，一年前做这个动画的时候百思不得姐，花了好多时间，后面实现的效果还是比较僵硬。这次发现了其他人的思路之后，很容易就解决了。</p>
 <p><em>思路很重要，以及要了解更加全面的知识</em>，不然很多东西都不知道，自己的思路还是会被限制。</p>
@@ -326,7 +325,7 @@
     
       <div class="copyright">
         <span
-          >© 2022 码农明明桑 Powered by
+          >© 2023 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

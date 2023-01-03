@@ -72,7 +72,6 @@
 
 
 
-
   </head>
   <body class="">
     <div class="container">
@@ -269,8 +268,8 @@
 </span></span><span style="display:flex;"><span>        Intent i <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Intent<span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_GET_CONTENT</span><span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>        i<span style="color:#f92672">.</span><span style="color:#a6e22e">addCategory</span><span style="color:#f92672">(</span>Intent<span style="color:#f92672">.</span><span style="color:#a6e22e">CATEGORY_OPENABLE</span><span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>fileChooserParams <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&amp;&amp;</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">().</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span>fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">()[</span>0<span style="color:#f92672">]);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&amp;&amp;</span> fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">().</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span>fileChooserParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getAcceptTypes</span><span style="color:#f92672">()[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]);</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>            i<span style="color:#f92672">.</span><span style="color:#a6e22e">setType</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;*/*&#34;</span><span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
@@ -393,10 +392,10 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isExternalStorageDocument<span style="color:#f92672">(</span>uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String docId <span style="color:#f92672">=</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentId</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> split <span style="color:#f92672">=</span> docId<span style="color:#f92672">.</span><span style="color:#a6e22e">split</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String type <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span>0<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String type <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">];</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;primary&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equalsIgnoreCase</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> Environment<span style="color:#f92672">.</span><span style="color:#a6e22e">getExternalStorageDirectory</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> split<span style="color:#f92672">[</span>1<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> Environment<span style="color:#f92672">.</span><span style="color:#a6e22e">getExternalStorageDirectory</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> split<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">];</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>                <span style="color:#75715e">// TODO handle non-primary volumes
@@ -414,7 +413,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isMediaDocument<span style="color:#f92672">(</span>uri<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String docId <span style="color:#f92672">=</span> DocumentsContract<span style="color:#f92672">.</span><span style="color:#a6e22e">getDocumentId</span><span style="color:#f92672">(</span>uri<span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> split <span style="color:#f92672">=</span> docId<span style="color:#f92672">.</span><span style="color:#a6e22e">split</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String type <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span>0<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String type <span style="color:#f92672">=</span> split<span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">];</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>                Uri contentUri <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;image&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>type<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
@@ -427,7 +426,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String selection <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;_id=?&#34;</span><span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">final</span> String<span style="color:#f92672">[]</span> selectionArgs <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                        split<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>                        split<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#f92672">};</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> getDataColumn<span style="color:#f92672">(</span>context<span style="color:#f92672">,</span> contentUri<span style="color:#f92672">,</span> selection<span style="color:#f92672">,</span> selectionArgs<span style="color:#f92672">);</span>
@@ -529,7 +528,7 @@
     
       <div class="copyright">
         <span
-          >© 2022 码农明明桑 Powered by
+          >© 2023 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

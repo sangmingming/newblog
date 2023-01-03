@@ -72,7 +72,6 @@
 
 
 
-
   </head>
   <body class="">
     <div class="container">
@@ -217,8 +216,8 @@
 <p>首先创建的视图在设置完贴纸图片之后，要创建一个浮点型数组，用于保存默认未进行任何变换的时候贴纸图片的关键点，以及一个原始矩形用于保存一个默认绘制区域的矩形，用代码表示就是：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> imgWidth <span style="color:#f92672">=</span> mBitmap<span style="color:#f92672">.</span><span style="color:#a6e22e">getWidth</span><span style="color:#f92672">();</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> imgHeight <span style="color:#f92672">=</span> mBitmap<span style="color:#f92672">.</span><span style="color:#a6e22e">getHeight</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span><span style="color:#f92672">[]</span> originPoints <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">float</span><span style="color:#f92672">[]{</span>0<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span>0<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">/</span>2<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">/</span>2<span style="color:#f92672">};</span> <span style="color:#75715e">//分别为矩形的四个点，与中心点
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>RectF mOriginRect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RectF<span style="color:#f92672">(</span>0<span style="color:#f92672">,</span> 0<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span><span style="color:#f92672">[]</span> originPoints <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">float</span><span style="color:#f92672">[]{</span><span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span><span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">,</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#f92672">};</span> <span style="color:#75715e">//分别为矩形的四个点，与中心点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>RectF mOriginRect <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RectF<span style="color:#f92672">(</span><span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> imgWidth<span style="color:#f92672">,</span> imgHeight<span style="color:#f92672">);</span>
 </span></span></code></pre></div><p>变换后的点通过Matrix.mapPoints(newPoints, originPoints)进行映射，变换后的矩形通过Matrix.mapRect(newRect, originRect)进行映射，可以通过这些新的点画一些附加元素。至于贴纸图，可以通过获取后的rect进行定位画，也可以直接使用canvas.drawBitmap(bitmap, matrix, paint)方法绘制。</p>
 <p>至于如何进行变换操作，如何进行变换，则是在onTouch中处理各种触摸事件，或者在dispatchTouchEvent。</p>
 <h4 id="平移">平移</h4>
@@ -310,7 +309,7 @@
     
       <div class="copyright">
         <span
-          >© 2022 码农明明桑 Powered by
+          >© 2023 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

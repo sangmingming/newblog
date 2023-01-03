@@ -72,7 +72,6 @@
 
 
 
-
   </head>
   <body class="">
     <div class="container">
@@ -214,12 +213,12 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">setMiuiStatusBarDarkMode</span><span style="color:#f92672">(</span>Activity activity<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> darkmode<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>        Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> Window<span style="color:#f92672">&gt;</span> clazz <span style="color:#f92672">=</span> activity<span style="color:#f92672">.</span><span style="color:#a6e22e">getWindow</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">();</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> darkModeFlag <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> darkModeFlag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span>            Class<span style="color:#f92672">&lt;?&gt;</span> layoutParams <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;android.view.MiuiWindowManager$LayoutParams&#34;</span><span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>            Field field <span style="color:#f92672">=</span> layoutParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getField</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;EXTRA_FLAG_STATUS_BAR_DARK_MODE&#34;</span><span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>            darkModeFlag <span style="color:#f92672">=</span> field<span style="color:#f92672">.</span><span style="color:#a6e22e">getInt</span><span style="color:#f92672">(</span>layoutParams<span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>            Method extraFlagField <span style="color:#f92672">=</span> clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">getMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;setExtraFlags&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            extraFlagField<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>activity<span style="color:#f92672">.</span><span style="color:#a6e22e">getWindow</span><span style="color:#f92672">(),</span> darkmode <span style="color:#f92672">?</span> darkModeFlag <span style="color:#f92672">:</span> 0<span style="color:#f92672">,</span> darkModeFlag<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            extraFlagField<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>activity<span style="color:#f92672">.</span><span style="color:#a6e22e">getWindow</span><span style="color:#f92672">(),</span> darkmode <span style="color:#f92672">?</span> darkModeFlag <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> darkModeFlag<span style="color:#f92672">);</span>
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
 </span></span><span style="display:flex;"><span>            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
@@ -343,7 +342,7 @@
     
       <div class="copyright">
         <span
-          >© 2022 码农明明桑 Powered by
+          >© 2023 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span
