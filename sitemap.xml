@@ -2,19 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/posts/tech/</loc>
+    <lastmod>2023-01-16T23:30:52+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2023-01-16T23:30:52+08:00</lastmod>
+  </url><url>
+    <loc>/2023-01-16-talk-about-interview/</loc>
+    <lastmod>2023-01-16T23:30:52+08:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2023-01-16T23:30:52+08:00</lastmod>
+  </url><url>
     <loc>/2023-01-03-2022-summary/</loc>
     <lastmod>2023-01-03T21:30:52+08:00</lastmod>
   </url><url>
-    <loc>/posts/</loc>
-    <lastmod>2023-01-03T21:30:52+08:00</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2023-01-03T21:30:52+08:00</lastmod>
-  </url><url>
     <loc>/2022-05-17-build-android-system/</loc>
-    <lastmod>2022-05-17T22:30:52+08:00</lastmod>
-  </url><url>
-    <loc>/posts/tech/</loc>
     <lastmod>2022-05-17T22:30:52+08:00</lastmod>
   </url><url>
     <loc>/2019-11-india-travel/</loc>

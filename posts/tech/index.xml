@@ -9,10 +9,31 @@
     <description>Recent content in 技术 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 17 May 2022 22:30:52 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Jan 2023 23:30:52 +0800</lastBuildDate>
     
 	<atom:link href="/posts/tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>面试官谈面试</title>
+      <link>/2023-01-16-talk-about-interview/</link>
+      <pubDate>Mon, 16 Jan 2023 23:30:52 +0800</pubDate>
+      
+      <guid>/2023-01-16-talk-about-interview/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;&lt;img src=&#34;/images/photo/shengjinhu.jpg&#34; alt=&#34; 图: 明明&#34;&gt;
+参加工作多年，找工作时参加过一些面试，经历过笔试，面试，电话面试等多种形式 。也作为面试官面试过很多人，也参加过公司的面试培训，观摩过其他同事的面试。最近系统学习了一下极客时间的《技术面试官识人手册》，课程介绍的东西虽然不能全盘拿来使用，但是还是有很多东西指的借鉴，今天想要从面试官的角度分享一下个人的学习体会以及个人对于面试的一些见解。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>2022年在MacOs上编译AOSP</title>
