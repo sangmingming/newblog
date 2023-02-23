@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        新版Android Studio Logcat view使用简明教程 ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
+<meta
+  name="description"
+  content="
+从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。
+"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#fd281a" />
+<link rel="canonical" href="/2023-02-23-android-studio-logcat/" />
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+<link rel="stylesheet" href="/style.css" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" href="/ming.ico" />
+<link rel="manifest" href="/manifest.json" />
+
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link rel="preload" href="//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.css">
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="新版Android Studio Logcat view使用简明教程"/>
+<meta name="twitter:description" content="
+从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。"/>
+
+
+
+<meta property="og:title" content="新版Android Studio Logcat view使用简明教程" />
+<meta property="og:description" content="
+从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2023-02-23-android-studio-logcat/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-23T23:10:52+08:00" />
+<meta property="article:modified_time" content="2023-02-23T23:10:52+08:00" />
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">摄影</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/links/">友链</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">摄影</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/links/">友链</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">新版Android Studio Logcat view使用简明教程</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2023-02-23
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <p><img src="/images/photo/logcat-window.png" alt="logcat-window.png"></p>
+<p>从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。</p>
+<h3 id="定义自己专属的log-view">定义自己专属的log view</h3>
+<p>log view 默认提供了两种视图，Standard View 和Compat View。Stand View会展示每一条log的日期，时间，进程线程id，tag，包名，log level以及message。Compat View只展示时间，log level和详细的message。可以通过log view左边的<strong>Configure Logcat Formatting Options</strong>按钮来修改，同时这个按钮中还有一个<strong>Modify Views</strong>选项可以来修改standard和 Compat视图的具体展示内容，可以定制自己的logview样式，如下图所示。</p>
+<p><img src="/images/photo/logcat-view-setting.jpg" alt="logcat-view-setting.jpg"></p>
+<p>个性化的logcat 视图不仅仅是可以自定义展示的内容，还可以修改log和filter的配色方案。前往<strong>Settings(Windows)/Preferences(Mac) -&gt;Editor -&gt; Color Scheme</strong>，选择<strong>Android Logcat</strong>即可修改log 的颜色，选择<strong>Logcat Filter</strong>即可修改filter的颜色。</p>
+<p>以上修改的是logcat view的外表，我们还可以修改它的内核，一个是logcat循环滚动区的大小，以及新logcat window的默认filter，可以通过前往<strong>Settings(Windows)/Preferences(Mac) -&gt; Tools -&gt; Logcat</strong> 设置。</p>
+<h3 id="一些操作技巧">一些操作技巧</h3>
+<p>在标准布局下，或者我们的log太长的时候，一屏通常展示不下，我们需要不停的向右滑动，滚动才能看到log的信息，我们可以用log view左侧的<strong>Soft-Wrap</strong> <img src="/images/photo/logcat-soft-wrap.png" alt="logcat-soft-wrap.png">按钮来让log换行。</p>
+<p>左侧的Clear Logcat按钮可以清空logcat。左侧的Pause按钮可以暂停logcat的输出，方便看错误日志，可以避免关心的日志被新的日志冲掉。</p>
+<p>新版本中，可以通过点击logcat tab右侧的<strong>New tab</strong> <img src="/images/photo/logcat-new-tab.png" alt="logcat-new-tab.png">按钮来同时创建多个logcat view窗口。这种方式创建的不能同时展示，而利用logcat view左侧的split Panels 按钮则可以创建多个窗口，并且同时展示。每一个窗口都可以设置自己要展示的连接设备，展示样式，以及过滤选项。这样就可以很方便的同时观察多种log。</p>
+<p><img src="/images/photo/logcat-multi-window.jpg" alt="logcat-multi-window.jpg"></p>
+<h3 id="通过键值对来过滤log">通过键值对来过滤Log</h3>
+<p><img src="/images/photo/logcat-query-suggestions.png" alt="logcat-query-suggestions.png"></p>
+<p>新的过滤器，看起来简单，实际上更加复杂且强大了。通过<code>Ctrl</code>+<code>Space</code>按键可以查看系统建议的一些查询列表。这里介绍一下查询中会用到的键：</p>
+<ul>
+<li><strong>tag</strong>: 匹配日志的tag字段</li>
+<li><strong>package</strong>：匹配记录日志的软件包名，其中特殊值<strong>mine</strong>匹配当前打开项目对应的应用log。</li>
+<li><strong>process</strong>：匹配记录日志的进程名</li>
+<li><strong>message</strong>：匹配日志中我们自己填写的message的部分。</li>
+<li><strong>level</strong>：与指定或者更高级别的日志匹配，比如debug或者error，输入level后as会自动提示可以选择。</li>
+<li><strong>age</strong>：让窗口中只保留最近一段时间的log，值为数字加单位，s表示秒，m表示分钟，h表示小时，d表示天。如age:10s就只保留最近10s的日志。</li>
+<li><strong>is</strong>: 这个键有两个固定的value取值，<code>crash</code>匹配应用崩溃日志，<code>stacktrace</code>匹配任意类似java堆栈轨迹的日志，这两个对于看crash查问题是非常好用的。</li>
+</ul>
+<p>这么多的键匹配，是可以逻辑组合的。我们可以使用<code>&amp;</code>和<code>|</code>以及圆括号，系统会强制执行常规的运算符优先级。<code>level:ERROR | tag:foo &amp; package:mine</code> 会被强转为<code>level:ERROR | （tag:foo &amp; package:mine ) </code>。如果我们没有填写逻辑运算符，查询语言会将多个具有相同键的非否定过滤视为<code>OR</code>，其他过滤视为<code>AND</code>。
+如：
+<code>tag:fa tag:ba package:mine</code> 计算逻辑是 <code>(tag:fa | tag:ba) &amp; package:mine</code>
+但<code>tag:fa -tag:ba package:mine</code> 计算逻辑是 <code>tag:fa &amp; -tag:ba &amp; package:mine</code>。这里的-用来表示否定，既tag不包含ba的情况。</p>
+<p>新版的logcat view当然也是支持正则的，tag、message、package、process这几项是支持正则的。使用正则需要在键后面加一个<code>~</code>，例如： <code>tag~:My.*Report</code>。
+除了正则这个选项之外，这几个键还有完全匹配和包含字符串即可的选项。不加修饰符号就是包含指定的字符串即可匹配。如果后面加<code>=</code>则要完全匹配才可以，例如<code>process=:system_server</code>和<code>process:system_ser</code>可以匹配到system_server的log，但是<code>process=:system_ser</code>则无法匹配到。</p>
+<p>同时如上几个匹配选项都支持和前面说的否定符号连用如：<code>-process=:system_server</code>。</p>
+<p>既然新版支持了这么复杂和强大过滤功能，如果每次都现想现写，那肯定是头皮发麻。as也为我们提供了收藏和历史记录功能。点击右侧的的星星按钮即可收藏当前的过滤条件，点击左侧的漏斗即可查看历史和收藏，并且可以删除不想要的记录。</p>
+<h3 id="切换回旧版log-view">切换回旧版log view</h3>
+<p>最后的最后，如果你觉得新版本适应不了，还是想要切换回旧版本的log view，还想要保留新版的android studio，也还是可以通过修改设置进行切换的。
+前往<strong>Settings(Windows)/Preferences(Mac) -&gt; Experimental</strong>, 反选<code>Enable new logcat tool window</code> 即可，如下图所示。</p>
+<p><img src="/images/photo/disable_new_logview.jpg" alt="disable_new_logview.jpg"></p>
+<p>学习工具的目的，是为了让工具更好的为我们服务。希望大家都能够通过使用as提供的新功能来提高效率，从而有更多的时间去风花雪月。</p>
+<p>参考：<a href="https://developer.android.com/studio/debug/logcat"></a></p>
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/2023-01-16-talk-about-interview/">
+                  <span class="button__text">面试官谈面试</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+<p></p>
+<script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+<style>
+    :root {
+        --waline-theme-color: #fd281a;
+        --waline-active-color: #e24d42;
+    }
+</style>
+<div id="waline"></div>
+  <script>
+    Waline({
+      el: '#waline',
+      serverURL: 'https://my-waline-comments-53wsfjmo5-sangmingming.vercel.app/',
+      uploadImage: false,
+      dark: "body.dark-theme",
+      login: "disable",
+      number: 3,
+      mathTagSupport: false,
+      visitor: true,
+      avatar: 'wavatar',
+    });
+  </script>
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__title">
+      <span class="footer__title-h">
+        <a href="https://github.com/sangmingming" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-github"></i></a>
+      <a href="https://www.instagram.com/isming.me/" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-instagram"></i></a>
+      <a href="https://twitter.com/mingmingsang" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-twitter"></i></a>
+      <a href="https://weibo.com/mingmingsang" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-weibo"></i></a>
+      <a href="mailto:linming1007@gmail.com" target="_blank" rel="noopener noreferrer" title="Email me"><i class="iconfont icon-mail"></i></a>
+      </span>
+      
+    </div>
+    
+      <div class="copyright">
+        <span
+          >© 2023 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer><script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

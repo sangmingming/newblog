@@ -9,10 +9,31 @@
     <description>Recent content in 技术 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 16 Jan 2023 23:30:52 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Feb 2023 23:10:52 +0800</lastBuildDate>
     
 	<atom:link href="/posts/tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>新版Android Studio Logcat view使用简明教程</title>
+      <link>/2023-02-23-android-studio-logcat/</link>
+      <pubDate>Thu, 23 Feb 2023 23:10:52 +0800</pubDate>
+      
+      <guid>/2023-02-23-android-studio-logcat/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;&lt;img src=&#34;/images/photo/logcat-window.png&#34; alt=&#34;logcat-window.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>面试官谈面试</title>
