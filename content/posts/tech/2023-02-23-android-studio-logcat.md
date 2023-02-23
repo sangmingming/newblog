@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "新版Android Studio Logcat view使用简明教程"
-date: 2023-02-23 23:30:52 +0800
+date: 2023-02-23 23:10:52 +0800
 comments: true
 slug: "android-studio-logcat"
 ---
@@ -11,7 +11,6 @@ slug: "android-studio-logcat"
 从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。
 
 <!--more-->
-
 
 
 ### 定义自己专属的log view
