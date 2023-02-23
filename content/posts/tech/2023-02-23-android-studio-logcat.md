@@ -6,10 +6,13 @@ comments: true
 slug: "android-studio-logcat"
 ---
 
+![logcat-window.png](/images/photo/logcat-window.png)
+
 从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。
 
+<!--more-->
 
-![logcat-window.png](/images/photo/logcat-window.png)
+
 
 ### 定义自己专属的log view
 log view 默认提供了两种视图，Standard View 和Compat View。Stand View会展示每一条log的日期，时间，进程线程id，tag，包名，log level以及message。Compat View只展示时间，log level和详细的message。可以通过log view左边的**Configure Logcat Formatting Options**按钮来修改，同时这个按钮中还有一个**Modify Views**选项可以来修改standard和 Compat视图的具体展示内容，可以定制自己的logview样式，如下图所示。
