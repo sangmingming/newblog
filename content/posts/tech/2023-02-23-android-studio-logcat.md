@@ -68,4 +68,4 @@ log view 默认提供了两种视图，Standard View 和Compat View。Stand View
 
 学习工具的目的，是为了让工具更好的为我们服务。希望大家都能够通过使用as提供的新功能来提高效率，从而有更多的时间去风花雪月。
 
-参考：[](https://developer.android.com/studio/debug/logcat)
+参考：[https://developer.android.com/studio/debug/logcat](https://developer.android.com/studio/debug/logcat)
