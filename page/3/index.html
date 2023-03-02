@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<meta name="generator" content="Hugo 0.110.0">
+	<meta name="generator" content="Hugo 0.111.0">
     
       <title>
         码农明明桑
@@ -184,6 +184,48 @@
   
 
   <div class="posts">
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/2015-05-01-android-multi-dex/">打破Android应用65K方法数魔咒</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            2015-05-01
+          </span>
+
+          
+        
+
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/android/">#android</a>&nbsp;
+          
+        </span>
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            <p>近日，我们的应用，在编译的时候不幸的遇到这个错误</p>
+<blockquote>
+<p>Conversion to Dalvik format failed: Unable to execute dex: method ID not in [0, 0xffff]: 65536</p>
+</blockquote>
+<p>这才让我意识到原来我们的程序中，方法数已经超过了65536。在之前，已经知道了android系统的java虚拟机dalvik在执行java程序时，使用原生类型short来索引dex文件中的方法，因此方法数就呗限制在65536了。之前我一直以为，这个数量已经很大了，不会达到上限，结果今天就达到了。</p>
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/2015-05-01-android-multi-dex/">Read more →</a></div>
+      
+    </div>
     
     <div class="post on-list">
       <h1 class="post-title"><a href="/2015-03-18-android-build-speed-up/">加速Android Studio/Gradle构建</a></h1>
@@ -538,44 +580,6 @@
       </div>
       
         <div><a class="read-more button" href="/2014-06-22-my-soft-in-ubuntu/">Read more →</a></div>
-      
-    </div>
-    
-    <div class="post on-list">
-      <h1 class="post-title"><a href="/2014-03-16-android-async-task/">android异步操作总结</a></h1>
-      <div class="post-meta">
-        
-          <span class="post-date">
-            2014-03-16
-          </span>
-
-          
-        
-
-        
-
-        
-      </div>
-
-      
-        <span class="post-tags">
-          
-            <a href="/tags/android/">#android</a>&nbsp;
-          
-        </span>
-      
-
-      
-
-      <div class="post-content">
-        
-          
-            <p>Android中经常会有一些操作比如网络请求，文件读写，数据库操作，比较耗时，我们需要将其放在非UI线程去处理，此时，我们需要处理任务前后UI的变化和交互。我们需要通过类似js中异步请求处理，这里总结我所了解到的，方便自己记忆，也方便别人的浏览。</p>
-          
-        
-      </div>
-      
-        <div><a class="read-more button" href="/2014-03-16-android-async-task/">Read more →</a></div>
       
     </div>
     
