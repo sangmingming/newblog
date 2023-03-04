@@ -5,12 +5,12 @@
     
     
     
-    <link>/categories/</link>
+    <link>https://isming.me/categories/</link>
     <description>Recent content in Categories on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://isming.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

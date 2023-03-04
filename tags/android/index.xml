@@ -5,21 +5,21 @@
     
     
     
-    <link>/tags/android/</link>
+    <link>https://isming.me/tags/android/</link>
     <description>Recent content in android on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 18 May 2017 20:01:38 +0800</lastBuildDate>
     
-	<atom:link href="/tags/android/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://isming.me/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>简单聊聊Android Architecture Componets</title>
-      <link>/2017-05-18-android-architecture-components-guide/</link>
+      <link>https://isming.me/2017-05-18-android-architecture-components-guide/</link>
       <pubDate>Thu, 18 May 2017 20:01:38 +0800</pubDate>
       
-      <guid>/2017-05-18-android-architecture-components-guide/</guid>
+      <guid>https://isming.me/2017-05-18-android-architecture-components-guide/</guid>
       <description>
         
           
@@ -41,10 +41,10 @@
     
     <item>
       <title>聊聊Android N开始支持的Lambda</title>
-      <link>/2016-09-13-android-lambda/</link>
+      <link>https://isming.me/2016-09-13-android-lambda/</link>
       <pubDate>Tue, 13 Sep 2016 20:39:03 +0800</pubDate>
       
-      <guid>/2016-09-13-android-lambda/</guid>
+      <guid>https://isming.me/2016-09-13-android-lambda/</guid>
       <description>
         
           
@@ -63,10 +63,10 @@
     
     <item>
       <title>小红书Android客户端演进之路</title>
-      <link>/2016-08-08-red-android-evolution/</link>
+      <link>https://isming.me/2016-08-08-red-android-evolution/</link>
       <pubDate>Mon, 08 Aug 2016 19:13:00 +0800</pubDate>
       
-      <guid>/2016-08-08-red-android-evolution/</guid>
+      <guid>https://isming.me/2016-08-08-red-android-evolution/</guid>
       <description>
         
           
@@ -77,7 +77,7 @@
         
           &lt;p&gt;小红书Android客户端第一个版本于2014年8月8日发布，转眼到了2016年8月8日，小红书Android版本发版两周年。趁机回顾一下小红书的Android版本，两年中我们踩过很多坑，收获很多经验，分享出来与大家共勉。
 小红书从最初1.0到现在目前4.7版本，历经两年，安装包从原先的5M发展到现在的17M，产品模块也从原先的只有社区模块发展到了具有社区和电商两个大模块。App包含社区、电商、支付、推送、直播、统计等各种功能和模块，那么开始吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
           
         
         </description>
@@ -85,10 +85,10 @@
     
     <item>
       <title>Path和Property Animation配合让线条动起来</title>
-      <link>/2016-06-07-path-property-animation/</link>
+      <link>https://isming.me/2016-06-07-path-property-animation/</link>
       <pubDate>Tue, 07 Jun 2016 14:03:39 +0800</pubDate>
       
-      <guid>/2016-06-07-path-property-animation/</guid>
+      <guid>https://isming.me/2016-06-07-path-property-animation/</guid>
       <description>
         
           
@@ -105,10 +105,10 @@
     
     <item>
       <title>Android系统更改状态栏字体颜色</title>
-      <link>/2016-01-09-chang-android-statusbar-text-color/</link>
+      <link>https://isming.me/2016-01-09-chang-android-statusbar-text-color/</link>
       <pubDate>Sat, 09 Jan 2016 00:41:39 +0800</pubDate>
       
-      <guid>/2016-01-09-chang-android-statusbar-text-color/</guid>
+      <guid>https://isming.me/2016-01-09-chang-android-statusbar-text-color/</guid>
       <description>
         
           
@@ -125,10 +125,10 @@
     
     <item>
       <title>Android WebView 上传文件支持全解析</title>
-      <link>/2015-12-21-android-webview-upload-file/</link>
+      <link>https://isming.me/2015-12-21-android-webview-upload-file/</link>
       <pubDate>Mon, 21 Dec 2015 20:02:30 +0800</pubDate>
       
-      <guid>/2015-12-21-android-webview-upload-file/</guid>
+      <guid>https://isming.me/2015-12-21-android-webview-upload-file/</guid>
       <description>
         
           
@@ -145,10 +145,10 @@
     
     <item>
       <title>Android WebView使用的技巧与一些坑</title>
-      <link>/2015-10-18-webview-use/</link>
+      <link>https://isming.me/2015-10-18-webview-use/</link>
       <pubDate>Sun, 18 Oct 2015 17:10:09 +0800</pubDate>
       
-      <guid>/2015-10-18-webview-use/</guid>
+      <guid>https://isming.me/2015-10-18-webview-use/</guid>
       <description>
         
           
@@ -165,10 +165,10 @@
     
     <item>
       <title>改变support中AlertDialog的样式</title>
-      <link>/2015-08-31-modify-alert-style/</link>
+      <link>https://isming.me/2015-08-31-modify-alert-style/</link>
       <pubDate>Mon, 31 Aug 2015 19:57:15 +0800</pubDate>
       
-      <guid>/2015-08-31-modify-alert-style/</guid>
+      <guid>https://isming.me/2015-08-31-modify-alert-style/</guid>
       <description>
         
           
@@ -185,10 +185,10 @@
     
     <item>
       <title>一个上传apk到fir的gradle插件</title>
-      <link>/2015-08-01-gradle-fir-plugin/</link>
+      <link>https://isming.me/2015-08-01-gradle-fir-plugin/</link>
       <pubDate>Sat, 01 Aug 2015 23:19:07 +0800</pubDate>
       
-      <guid>/2015-08-01-gradle-fir-plugin/</guid>
+      <guid>https://isming.me/2015-08-01-gradle-fir-plugin/</guid>
       <description>
         
           
@@ -207,10 +207,10 @@
     
     <item>
       <title>Android应用使用自定义字体的一些探究</title>
-      <link>/2015-07-07-android-custom-font/</link>
+      <link>https://isming.me/2015-07-07-android-custom-font/</link>
       <pubDate>Tue, 07 Jul 2015 19:04:22 +0800</pubDate>
       
-      <guid>/2015-07-07-android-custom-font/</guid>
+      <guid>https://isming.me/2015-07-07-android-custom-font/</guid>
       <description>
         
           
@@ -227,10 +227,10 @@
     
     <item>
       <title>图片贴纸旋转缩放功能的实现</title>
-      <link>/2015-05-10-sticker-view/</link>
+      <link>https://isming.me/2015-05-10-sticker-view/</link>
       <pubDate>Sun, 10 May 2015 22:55:04 +0800</pubDate>
       
-      <guid>/2015-05-10-sticker-view/</guid>
+      <guid>https://isming.me/2015-05-10-sticker-view/</guid>
       <description>
         
           
@@ -247,10 +247,10 @@
     
     <item>
       <title>打破Android应用65K方法数魔咒</title>
-      <link>/2015-05-01-android-multi-dex/</link>
+      <link>https://isming.me/2015-05-01-android-multi-dex/</link>
       <pubDate>Fri, 01 May 2015 00:33:08 +0800</pubDate>
       
-      <guid>/2015-05-01-android-multi-dex/</guid>
+      <guid>https://isming.me/2015-05-01-android-multi-dex/</guid>
       <description>
         
           
@@ -271,10 +271,10 @@
     
     <item>
       <title>加速Android Studio/Gradle构建</title>
-      <link>/2015-03-18-android-build-speed-up/</link>
+      <link>https://isming.me/2015-03-18-android-build-speed-up/</link>
       <pubDate>Wed, 18 Mar 2015 22:56:10 +0800</pubDate>
       
-      <guid>/2015-03-18-android-build-speed-up/</guid>
+      <guid>https://isming.me/2015-03-18-android-build-speed-up/</guid>
       <description>
         
           
@@ -301,10 +301,10 @@
     
     <item>
       <title>java注解</title>
-      <link>/2015-03-06-java-annotation/</link>
+      <link>https://isming.me/2015-03-06-java-annotation/</link>
       <pubDate>Fri, 06 Mar 2015 00:19:19 +0800</pubDate>
       
-      <guid>/2015-03-06-java-annotation/</guid>
+      <guid>https://isming.me/2015-03-06-java-annotation/</guid>
       <description>
         
           
@@ -321,10 +321,10 @@
     
     <item>
       <title>android动画-View Animation</title>
-      <link>/2015-02-01-android-view-animation/</link>
+      <link>https://isming.me/2015-02-01-android-view-animation/</link>
       <pubDate>Sun, 01 Feb 2015 11:10:50 +0800</pubDate>
       
-      <guid>/2015-02-01-android-view-animation/</guid>
+      <guid>https://isming.me/2015-02-01-android-view-animation/</guid>
       <description>
         
           
@@ -341,10 +341,10 @@
     
     <item>
       <title>android动画-Frame Animation</title>
-      <link>/2015-01-28-android-frame-animation/</link>
+      <link>https://isming.me/2015-01-28-android-frame-animation/</link>
       <pubDate>Wed, 28 Jan 2015 20:13:47 +0800</pubDate>
       
-      <guid>/2015-01-28-android-frame-animation/</guid>
+      <guid>https://isming.me/2015-01-28-android-frame-animation/</guid>
       <description>
         
           
@@ -361,10 +361,10 @@
     
     <item>
       <title>android反编译-如何防止反编译</title>
-      <link>/2015-01-18-android-anti-decompile/</link>
+      <link>https://isming.me/2015-01-18-android-anti-decompile/</link>
       <pubDate>Sun, 18 Jan 2015 01:35:53 +0800</pubDate>
       
-      <guid>/2015-01-18-android-anti-decompile/</guid>
+      <guid>https://isming.me/2015-01-18-android-anti-decompile/</guid>
       <description>
         
           
@@ -382,10 +382,10 @@
     
     <item>
       <title>android反编译-smali语法</title>
-      <link>/2015-01-14-android-decompile-smali/</link>
+      <link>https://isming.me/2015-01-14-android-decompile-smali/</link>
       <pubDate>Wed, 14 Jan 2015 23:52:44 +0800</pubDate>
       
-      <guid>/2015-01-14-android-decompile-smali/</guid>
+      <guid>https://isming.me/2015-01-14-android-decompile-smali/</guid>
       <description>
         
           
@@ -403,10 +403,10 @@
     
     <item>
       <title>android反编译-反编译工具和方法</title>
-      <link>/2015-01-11-android-decompile-tools/</link>
+      <link>https://isming.me/2015-01-11-android-decompile-tools/</link>
       <pubDate>Sun, 11 Jan 2015 22:19:17 +0800</pubDate>
       
-      <guid>/2015-01-11-android-decompile-tools/</guid>
+      <guid>https://isming.me/2015-01-11-android-decompile-tools/</guid>
       <description>
         
           
@@ -424,10 +424,10 @@
     
     <item>
       <title>android异步操作总结</title>
-      <link>/2014-03-16-android-async-task/</link>
+      <link>https://isming.me/2014-03-16-android-async-task/</link>
       <pubDate>Sun, 16 Mar 2014 16:18:25 +0800</pubDate>
       
-      <guid>/2014-03-16-android-async-task/</guid>
+      <guid>https://isming.me/2014-03-16-android-async-task/</guid>
       <description>
         
           

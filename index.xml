@@ -5,21 +5,21 @@
     
     
     
-    <link>/</link>
+    <link>https://isming.me/</link>
     <description>Recent content in 首页 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 23 Feb 2023 23:10:52 +0800</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://isming.me/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>新版Android Studio Logcat view使用简明教程</title>
-      <link>/2023-02-23-android-studio-logcat/</link>
+      <link>https://isming.me/2023-02-23-android-studio-logcat/</link>
       <pubDate>Thu, 23 Feb 2023 23:10:52 +0800</pubDate>
       
-      <guid>/2023-02-23-android-studio-logcat/</guid>
+      <guid>https://isming.me/2023-02-23-android-studio-logcat/</guid>
       <description>
         
           
@@ -28,7 +28,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;/images/photo/logcat-window.png&#34; alt=&#34;logcat-window.png&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/logcat-window.png&#34; alt=&#34;logcat-window.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。&lt;/p&gt;
           
         
@@ -37,10 +37,10 @@
     
     <item>
       <title>景德镇一日匆匆游</title>
-      <link>/2023-02-jingdezhen/</link>
+      <link>https://isming.me/2023-02-jingdezhen/</link>
       <pubDate>Sat, 04 Feb 2023 01:18:57 +0800</pubDate>
       
-      <guid>/2023-02-jingdezhen/</guid>
+      <guid>https://isming.me/2023-02-jingdezhen/</guid>
       <description>
         
           
@@ -49,7 +49,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;/images/photo/jingdezhen/20230204-05-27.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/jingdezhen/20230204-05-27.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;老婆家在皖赣交界的县，自驾只需要两个多小时就能到达景德镇，因此，很早就有想要自驾前往的想法，由于自己没有车因此一直没能成行。&lt;/p&gt;
           
         
@@ -58,10 +58,10 @@
     
     <item>
       <title>面试官谈面试</title>
-      <link>/2023-01-16-talk-about-interview/</link>
+      <link>https://isming.me/2023-01-16-talk-about-interview/</link>
       <pubDate>Mon, 16 Jan 2023 23:30:52 +0800</pubDate>
       
-      <guid>/2023-01-16-talk-about-interview/</guid>
+      <guid>https://isming.me/2023-01-16-talk-about-interview/</guid>
       <description>
         
           
@@ -70,7 +70,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;/images/photo/shengjinhu.jpg&#34; alt=&#34; 图: 明明&#34;&gt;
+          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/shengjinhu.jpg&#34; alt=&#34; 图: 明明&#34;&gt;
 参加工作多年，找工作时参加过一些面试，经历过笔试，面试，电话面试等多种形式 。也作为面试官面试过很多人，也参加过公司的面试培训，观摩过其他同事的面试。最近系统学习了一下极客时间的《技术面试官识人手册》，课程介绍的东西虽然不能全盘拿来使用，但是还是有很多东西指的借鉴，今天想要从面试官的角度分享一下个人的学习体会以及个人对于面试的一些见解。&lt;/p&gt;
           
         
@@ -79,10 +79,10 @@
     
     <item>
       <title>2022年个人总结</title>
-      <link>/2023-01-03-2022-summary/</link>
+      <link>https://isming.me/2023-01-03-2022-summary/</link>
       <pubDate>Tue, 03 Jan 2023 21:30:52 +0800</pubDate>
       
-      <guid>/2023-01-03-2022-summary/</guid>
+      <guid>https://isming.me/2023-01-03-2022-summary/</guid>
       <description>
         
           
@@ -91,7 +91,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;/images/photo/dianshanlake.jpg&#34; alt=&#34;向上生长 图: 明明&#34;&gt;
+          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/dianshanlake.jpg&#34; alt=&#34;向上生长 图: 明明&#34;&gt;
 已经有几个年头没有写过年终总结了。 2022年是非凡的一年，看到很多人写了年终总结，忍不住也来写一写。
 这一年如果使用几个关键词来总结，我想我的关键词是魔幻，起伏和充实。&lt;/p&gt;
           
@@ -101,10 +101,10 @@
     
     <item>
       <title>2022年在MacOs上编译AOSP</title>
-      <link>/2022-05-17-build-android-system/</link>
+      <link>https://isming.me/2022-05-17-build-android-system/</link>
       <pubDate>Tue, 17 May 2022 22:30:52 +0800</pubDate>
       
-      <guid>/2022-05-17-build-android-system/</guid>
+      <guid>https://isming.me/2022-05-17-build-android-system/</guid>
       <description>
         
           
@@ -122,10 +122,10 @@
     
     <item>
       <title>印度孟买、昌迪加尔、加尔各答之行</title>
-      <link>/2019-11-india-travel/</link>
+      <link>https://isming.me/2019-11-india-travel/</link>
       <pubDate>Fri, 29 Nov 2019 10:33:48 +0800</pubDate>
       
-      <guid>/2019-11-india-travel/</guid>
+      <guid>https://isming.me/2019-11-india-travel/</guid>
       <description>
         
           
@@ -134,7 +134,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;/images/photo/india/DSC01103.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/india/DSC01103.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;跟着同事一起出差，去了印度这个神奇的国度，真实的见到了火车挂人的情景和当地的一些风土人情。&lt;/p&gt;
           
         
@@ -143,10 +143,10 @@
     
     <item>
       <title>美国湾区参加Google IO大会之行</title>
-      <link>/2018-05-us/</link>
+      <link>https://isming.me/2018-05-us/</link>
       <pubDate>Tue, 29 May 2018 01:18:57 +0800</pubDate>
       
-      <guid>/2018-05-us/</guid>
+      <guid>https://isming.me/2018-05-us/</guid>
       <description>
         
           
@@ -155,7 +155,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;/images/photo/america/DSC07744.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/america/DSC07744.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
           
         
         </description>
@@ -163,10 +163,10 @@
     
     <item>
       <title>日本关西蜜月旅行</title>
-      <link>/2018-04-japan/</link>
+      <link>https://isming.me/2018-04-japan/</link>
       <pubDate>Thu, 26 Apr 2018 01:18:46 +0800</pubDate>
       
-      <guid>/2018-04-japan/</guid>
+      <guid>https://isming.me/2018-04-japan/</guid>
       <description>
         
           
@@ -175,7 +175,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;/images/photo/japan/DSC06750.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/japan/DSC06750.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
           
         
         </description>
@@ -183,10 +183,10 @@
     
     <item>
       <title>记录博客转HTTPS</title>
-      <link>/2017-07-12-blog-https/</link>
+      <link>https://isming.me/2017-07-12-blog-https/</link>
       <pubDate>Wed, 12 Jul 2017 21:30:52 +0800</pubDate>
       
-      <guid>/2017-07-12-blog-https/</guid>
+      <guid>https://isming.me/2017-07-12-blog-https/</guid>
       <description>
         
           
@@ -203,10 +203,10 @@
     
     <item>
       <title>简单聊聊Android Architecture Componets</title>
-      <link>/2017-05-18-android-architecture-components-guide/</link>
+      <link>https://isming.me/2017-05-18-android-architecture-components-guide/</link>
       <pubDate>Thu, 18 May 2017 20:01:38 +0800</pubDate>
       
-      <guid>/2017-05-18-android-architecture-components-guide/</guid>
+      <guid>https://isming.me/2017-05-18-android-architecture-components-guide/</guid>
       <description>
         
           
@@ -228,10 +228,10 @@
     
     <item>
       <title>聊聊Android N开始支持的Lambda</title>
-      <link>/2016-09-13-android-lambda/</link>
+      <link>https://isming.me/2016-09-13-android-lambda/</link>
       <pubDate>Tue, 13 Sep 2016 20:39:03 +0800</pubDate>
       
-      <guid>/2016-09-13-android-lambda/</guid>
+      <guid>https://isming.me/2016-09-13-android-lambda/</guid>
       <description>
         
           
@@ -250,10 +250,10 @@
     
     <item>
       <title>小红书Android客户端演进之路</title>
-      <link>/2016-08-08-red-android-evolution/</link>
+      <link>https://isming.me/2016-08-08-red-android-evolution/</link>
       <pubDate>Mon, 08 Aug 2016 19:13:00 +0800</pubDate>
       
-      <guid>/2016-08-08-red-android-evolution/</guid>
+      <guid>https://isming.me/2016-08-08-red-android-evolution/</guid>
       <description>
         
           
@@ -264,7 +264,7 @@
         
           &lt;p&gt;小红书Android客户端第一个版本于2014年8月8日发布，转眼到了2016年8月8日，小红书Android版本发版两周年。趁机回顾一下小红书的Android版本，两年中我们踩过很多坑，收获很多经验，分享出来与大家共勉。
 小红书从最初1.0到现在目前4.7版本，历经两年，安装包从原先的5M发展到现在的17M，产品模块也从原先的只有社区模块发展到了具有社区和电商两个大模块。App包含社区、电商、支付、推送、直播、统计等各种功能和模块，那么开始吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
           
         
         </description>
@@ -272,10 +272,10 @@
     
     <item>
       <title>Path和Property Animation配合让线条动起来</title>
-      <link>/2016-06-07-path-property-animation/</link>
+      <link>https://isming.me/2016-06-07-path-property-animation/</link>
       <pubDate>Tue, 07 Jun 2016 14:03:39 +0800</pubDate>
       
-      <guid>/2016-06-07-path-property-animation/</guid>
+      <guid>https://isming.me/2016-06-07-path-property-animation/</guid>
       <description>
         
           
@@ -292,10 +292,10 @@
     
     <item>
       <title>Android系统更改状态栏字体颜色</title>
-      <link>/2016-01-09-chang-android-statusbar-text-color/</link>
+      <link>https://isming.me/2016-01-09-chang-android-statusbar-text-color/</link>
       <pubDate>Sat, 09 Jan 2016 00:41:39 +0800</pubDate>
       
-      <guid>/2016-01-09-chang-android-statusbar-text-color/</guid>
+      <guid>https://isming.me/2016-01-09-chang-android-statusbar-text-color/</guid>
       <description>
         
           
@@ -312,10 +312,10 @@
     
     <item>
       <title>Android WebView 上传文件支持全解析</title>
-      <link>/2015-12-21-android-webview-upload-file/</link>
+      <link>https://isming.me/2015-12-21-android-webview-upload-file/</link>
       <pubDate>Mon, 21 Dec 2015 20:02:30 +0800</pubDate>
       
-      <guid>/2015-12-21-android-webview-upload-file/</guid>
+      <guid>https://isming.me/2015-12-21-android-webview-upload-file/</guid>
       <description>
         
           
@@ -332,10 +332,10 @@
     
     <item>
       <title>Android WebView使用的技巧与一些坑</title>
-      <link>/2015-10-18-webview-use/</link>
+      <link>https://isming.me/2015-10-18-webview-use/</link>
       <pubDate>Sun, 18 Oct 2015 17:10:09 +0800</pubDate>
       
-      <guid>/2015-10-18-webview-use/</guid>
+      <guid>https://isming.me/2015-10-18-webview-use/</guid>
       <description>
         
           
@@ -352,10 +352,10 @@
     
     <item>
       <title>改变support中AlertDialog的样式</title>
-      <link>/2015-08-31-modify-alert-style/</link>
+      <link>https://isming.me/2015-08-31-modify-alert-style/</link>
       <pubDate>Mon, 31 Aug 2015 19:57:15 +0800</pubDate>
       
-      <guid>/2015-08-31-modify-alert-style/</guid>
+      <guid>https://isming.me/2015-08-31-modify-alert-style/</guid>
       <description>
         
           
@@ -372,10 +372,10 @@
     
     <item>
       <title>一个上传apk到fir的gradle插件</title>
-      <link>/2015-08-01-gradle-fir-plugin/</link>
+      <link>https://isming.me/2015-08-01-gradle-fir-plugin/</link>
       <pubDate>Sat, 01 Aug 2015 23:19:07 +0800</pubDate>
       
-      <guid>/2015-08-01-gradle-fir-plugin/</guid>
+      <guid>https://isming.me/2015-08-01-gradle-fir-plugin/</guid>
       <description>
         
           
@@ -394,10 +394,10 @@
     
     <item>
       <title>Android应用使用自定义字体的一些探究</title>
-      <link>/2015-07-07-android-custom-font/</link>
+      <link>https://isming.me/2015-07-07-android-custom-font/</link>
       <pubDate>Tue, 07 Jul 2015 19:04:22 +0800</pubDate>
       
-      <guid>/2015-07-07-android-custom-font/</guid>
+      <guid>https://isming.me/2015-07-07-android-custom-font/</guid>
       <description>
         
           
@@ -414,10 +414,10 @@
     
     <item>
       <title>图片贴纸旋转缩放功能的实现</title>
-      <link>/2015-05-10-sticker-view/</link>
+      <link>https://isming.me/2015-05-10-sticker-view/</link>
       <pubDate>Sun, 10 May 2015 22:55:04 +0800</pubDate>
       
-      <guid>/2015-05-10-sticker-view/</guid>
+      <guid>https://isming.me/2015-05-10-sticker-view/</guid>
       <description>
         
           
@@ -434,10 +434,10 @@
     
     <item>
       <title>打破Android应用65K方法数魔咒</title>
-      <link>/2015-05-01-android-multi-dex/</link>
+      <link>https://isming.me/2015-05-01-android-multi-dex/</link>
       <pubDate>Fri, 01 May 2015 00:33:08 +0800</pubDate>
       
-      <guid>/2015-05-01-android-multi-dex/</guid>
+      <guid>https://isming.me/2015-05-01-android-multi-dex/</guid>
       <description>
         
           
@@ -458,10 +458,10 @@
     
     <item>
       <title>加速Android Studio/Gradle构建</title>
-      <link>/2015-03-18-android-build-speed-up/</link>
+      <link>https://isming.me/2015-03-18-android-build-speed-up/</link>
       <pubDate>Wed, 18 Mar 2015 22:56:10 +0800</pubDate>
       
-      <guid>/2015-03-18-android-build-speed-up/</guid>
+      <guid>https://isming.me/2015-03-18-android-build-speed-up/</guid>
       <description>
         
           
@@ -488,10 +488,10 @@
     
     <item>
       <title>java注解</title>
-      <link>/2015-03-06-java-annotation/</link>
+      <link>https://isming.me/2015-03-06-java-annotation/</link>
       <pubDate>Fri, 06 Mar 2015 00:19:19 +0800</pubDate>
       
-      <guid>/2015-03-06-java-annotation/</guid>
+      <guid>https://isming.me/2015-03-06-java-annotation/</guid>
       <description>
         
           
@@ -508,10 +508,10 @@
     
     <item>
       <title>android动画-View Animation</title>
-      <link>/2015-02-01-android-view-animation/</link>
+      <link>https://isming.me/2015-02-01-android-view-animation/</link>
       <pubDate>Sun, 01 Feb 2015 11:10:50 +0800</pubDate>
       
-      <guid>/2015-02-01-android-view-animation/</guid>
+      <guid>https://isming.me/2015-02-01-android-view-animation/</guid>
       <description>
         
           
@@ -528,10 +528,10 @@
     
     <item>
       <title>android动画-Frame Animation</title>
-      <link>/2015-01-28-android-frame-animation/</link>
+      <link>https://isming.me/2015-01-28-android-frame-animation/</link>
       <pubDate>Wed, 28 Jan 2015 20:13:47 +0800</pubDate>
       
-      <guid>/2015-01-28-android-frame-animation/</guid>
+      <guid>https://isming.me/2015-01-28-android-frame-animation/</guid>
       <description>
         
           
@@ -548,10 +548,10 @@
     
     <item>
       <title>android反编译-如何防止反编译</title>
-      <link>/2015-01-18-android-anti-decompile/</link>
+      <link>https://isming.me/2015-01-18-android-anti-decompile/</link>
       <pubDate>Sun, 18 Jan 2015 01:35:53 +0800</pubDate>
       
-      <guid>/2015-01-18-android-anti-decompile/</guid>
+      <guid>https://isming.me/2015-01-18-android-anti-decompile/</guid>
       <description>
         
           
@@ -569,10 +569,10 @@
     
     <item>
       <title>android反编译-smali语法</title>
-      <link>/2015-01-14-android-decompile-smali/</link>
+      <link>https://isming.me/2015-01-14-android-decompile-smali/</link>
       <pubDate>Wed, 14 Jan 2015 23:52:44 +0800</pubDate>
       
-      <guid>/2015-01-14-android-decompile-smali/</guid>
+      <guid>https://isming.me/2015-01-14-android-decompile-smali/</guid>
       <description>
         
           
@@ -590,10 +590,10 @@
     
     <item>
       <title>android反编译-反编译工具和方法</title>
-      <link>/2015-01-11-android-decompile-tools/</link>
+      <link>https://isming.me/2015-01-11-android-decompile-tools/</link>
       <pubDate>Sun, 11 Jan 2015 22:19:17 +0800</pubDate>
       
-      <guid>/2015-01-11-android-decompile-tools/</guid>
+      <guid>https://isming.me/2015-01-11-android-decompile-tools/</guid>
       <description>
         
           
@@ -611,10 +611,10 @@
     
     <item>
       <title>2014年总结</title>
-      <link>/2015-01-05-2014-review/</link>
+      <link>https://isming.me/2015-01-05-2014-review/</link>
       <pubDate>Mon, 05 Jan 2015 22:24:37 +0800</pubDate>
       
-      <guid>/2015-01-05-2014-review/</guid>
+      <guid>https://isming.me/2015-01-05-2014-review/</guid>
       <description>
         
           
@@ -632,10 +632,10 @@
     
     <item>
       <title>一个程序员的Ubuntu安装的那些软件</title>
-      <link>/2014-06-22-my-soft-in-ubuntu/</link>
+      <link>https://isming.me/2014-06-22-my-soft-in-ubuntu/</link>
       <pubDate>Sun, 22 Jun 2014 12:57:52 +0800</pubDate>
       
-      <guid>/2014-06-22-my-soft-in-ubuntu/</guid>
+      <guid>https://isming.me/2014-06-22-my-soft-in-ubuntu/</guid>
       <description>
         
           
@@ -654,10 +654,10 @@
     
     <item>
       <title>android异步操作总结</title>
-      <link>/2014-03-16-android-async-task/</link>
+      <link>https://isming.me/2014-03-16-android-async-task/</link>
       <pubDate>Sun, 16 Mar 2014 16:18:25 +0800</pubDate>
       
-      <guid>/2014-03-16-android-async-task/</guid>
+      <guid>https://isming.me/2014-03-16-android-async-task/</guid>
       <description>
         
           
@@ -674,10 +674,10 @@
     
     <item>
       <title>解决Ubuntu下Sublime text 3中文输入的问题</title>
-      <link>/2014-03-15-ubuntu-sublime-text-error/</link>
+      <link>https://isming.me/2014-03-15-ubuntu-sublime-text-error/</link>
       <pubDate>Sat, 15 Mar 2014 00:24:45 +0800</pubDate>
       
-      <guid>/2014-03-15-ubuntu-sublime-text-error/</guid>
+      <guid>https://isming.me/2014-03-15-ubuntu-sublime-text-error/</guid>
       <description>
         
           
@@ -695,10 +695,10 @@
     
     <item>
       <title>Android图像开源视图：SmartImageView</title>
-      <link>/2013-09-11-android-smartimageview/</link>
+      <link>https://isming.me/2013-09-11-android-smartimageview/</link>
       <pubDate>Wed, 11 Sep 2013 23:19:11 +0800</pubDate>
       
-      <guid>/2013-09-11-android-smartimageview/</guid>
+      <guid>https://isming.me/2013-09-11-android-smartimageview/</guid>
       <description>
         
           
@@ -716,10 +716,10 @@
     
     <item>
       <title>Java中HashMap和HashTable的区别</title>
-      <link>/2013-07-28-java-hashmaphe-hashtable/</link>
+      <link>https://isming.me/2013-07-28-java-hashmaphe-hashtable/</link>
       <pubDate>Sun, 28 Jul 2013 21:30:01 +0800</pubDate>
       
-      <guid>/2013-07-28-java-hashmaphe-hashtable/</guid>
+      <guid>https://isming.me/2013-07-28-java-hashmaphe-hashtable/</guid>
       <description>
         
           
@@ -737,10 +737,10 @@ HashMap 是Hashtable 的轻量级实现（非线程安全的实现），他们�
     
     <item>
       <title>Java中Collection和Collections的区别</title>
-      <link>/2013-07-23-java-collection-collections/</link>
+      <link>https://isming.me/2013-07-23-java-collection-collections/</link>
       <pubDate>Tue, 23 Jul 2013 19:12:46 +0800</pubDate>
       
-      <guid>/2013-07-23-java-collection-collections/</guid>
+      <guid>https://isming.me/2013-07-23-java-collection-collections/</guid>
       <description>
         
           
@@ -757,10 +757,10 @@ HashMap 是Hashtable 的轻量级实现（非线程安全的实现），他们�
     
     <item>
       <title>Linux下SVN的使用</title>
-      <link>/2013-07-12-use-svn-in-linux/</link>
+      <link>https://isming.me/2013-07-12-use-svn-in-linux/</link>
       <pubDate>Fri, 12 Jul 2013 21:30:52 +0800</pubDate>
       
-      <guid>/2013-07-12-use-svn-in-linux/</guid>
+      <guid>https://isming.me/2013-07-12-use-svn-in-linux/</guid>
       <description>
         
           
@@ -777,10 +777,10 @@ HashMap 是Hashtable 的轻量级实现（非线程安全的实现），他们�
     
     <item>
       <title>互联网上的朋友们</title>
-      <link>/links/</link>
+      <link>https://isming.me/links/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/links/</guid>
+      <guid>https://isming.me/links/</guid>
       <description>
         
           
@@ -798,10 +798,10 @@ HashMap 是Hashtable 的轻量级实现（非线程安全的实现），他们�
     
     <item>
       <title>关于我</title>
-      <link>/about/</link>
+      <link>https://isming.me/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>https://isming.me/about/</guid>
       <description>
         
           

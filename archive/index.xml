@@ -5,12 +5,12 @@
     
     
     
-    <link>/archive/</link>
+    <link>https://isming.me/archive/</link>
     <description>Recent content in 归档 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     
-	<atom:link href="/archive/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://isming.me/archive/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

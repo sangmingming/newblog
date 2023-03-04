@@ -5,21 +5,21 @@
     
     
     
-    <link>/tags/%E6%9E%B6%E6%9E%84/</link>
+    <link>https://isming.me/tags/%E6%9E%B6%E6%9E%84/</link>
     <description>Recent content in 架构 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Mon, 08 Aug 2016 19:13:00 +0800</lastBuildDate>
     
-	<atom:link href="/tags/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://isming.me/tags/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>小红书Android客户端演进之路</title>
-      <link>/2016-08-08-red-android-evolution/</link>
+      <link>https://isming.me/2016-08-08-red-android-evolution/</link>
       <pubDate>Mon, 08 Aug 2016 19:13:00 +0800</pubDate>
       
-      <guid>/2016-08-08-red-android-evolution/</guid>
+      <guid>https://isming.me/2016-08-08-red-android-evolution/</guid>
       <description>
         
           
@@ -30,7 +30,7 @@
         
           &lt;p&gt;小红书Android客户端第一个版本于2014年8月8日发布，转眼到了2016年8月8日，小红书Android版本发版两周年。趁机回顾一下小红书的Android版本，两年中我们踩过很多坑，收获很多经验，分享出来与大家共勉。
 小红书从最初1.0到现在目前4.7版本，历经两年，安装包从原先的5M发展到现在的17M，产品模块也从原先的只有社区模块发展到了具有社区和电商两个大模块。App包含社区、电商、支付、推送、直播、统计等各种功能和模块，那么开始吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
           
         
         </description>
