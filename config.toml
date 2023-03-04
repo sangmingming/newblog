@@ -1,4 +1,4 @@
-baseURL = '/'
+baseURL = "https://isming.me/"
 languageCode = 'zh-CN'
 title = '码农明明桑'
 theme = "hello-friend"
