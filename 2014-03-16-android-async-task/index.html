@@ -274,7 +274,8 @@ View.post(Runnable)方法。在post(Runnable action)方法里，View获得当前
       
         
 <p></p>
-<script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -283,7 +284,7 @@ View.post(Runnable)方法。在post(Runnable action)方法里，View获得当前
 </style>
 <div id="waline"></div>
   <script>
-    Waline({
+    Waline.init({
       el: '#waline',
       serverURL: 'https://my-waline-comments-53wsfjmo5-sangmingming.vercel.app/',
       uploadImage: false,

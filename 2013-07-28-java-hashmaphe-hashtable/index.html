@@ -253,7 +253,8 @@ HashMap 是Hashtable 的轻量级实现（非线程安全的实现），他们�
       
         
 <p></p>
-<script src="//cdn.jsdelivr.net/npm/@waline/client"></script>
+<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -262,7 +263,7 @@ HashMap 是Hashtable 的轻量级实现（非线程安全的实现），他们�
 </style>
 <div id="waline"></div>
   <script>
-    Waline({
+    Waline.init({
       el: '#waline',
       serverURL: 'https://my-waline-comments-53wsfjmo5-sangmingming.vercel.app/',
       uploadImage: false,
