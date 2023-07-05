@@ -33,5 +33,14 @@ theme = "hello-friend"
   url="/about/"
   weight="5"
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 1
+
 
 
