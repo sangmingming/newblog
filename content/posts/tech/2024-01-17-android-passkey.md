@@ -203,6 +203,6 @@ During create public key credential， fido registration failure： advy： Algo
 ### 参考资料
 
 + [Bringing seamless authentication to your apps with passkeys using Credential Manager API](https://medium.com/androiddevelopers/bringing-seamless-authentication-to-your-apps-using-credential-manager-api-b3f0d09e0093#172a)
-+ [Web Authentication:An API for accessing Public Key Credentials Level 3](https://www.w3.org/TR/webauthn-3/)
++ [Web Authentication:An API for accessing Public Key Credentials Level 2](https://www.w3.org/TR/webauthn-2/)
 + [Sign in your user with Credential Manager](https://developer.android.com/training/sign-in/passkeys)
 + [What is a passkey? | Passkey.org](https://passkey.org/)
