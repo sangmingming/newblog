@@ -6,8 +6,8 @@ Hugo directory and insert:
 
 or whatever comment engine you want -> https://gohugo.io/content-management/comments/#readout -->
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<script src='//unpkg.com/@waline/client@v3/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v3/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -15,16 +15,15 @@ or whatever comment engine you want -> https://gohugo.io/content-management/comm
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
