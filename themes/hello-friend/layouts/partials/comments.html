@@ -6,7 +6,7 @@ Hugo directory and insert:
 
 or whatever comment engine you want -> https://gohugo.io/content-management/comments/#readout -->
 <p></p>
-<link href='https://unpkg.com/@waline/client@v3/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -15,7 +15,7 @@ or whatever comment engine you want -> https://gohugo.io/content-management/comm
 </style>
 <div id="waline"></div>
 <script type="module">
-    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.umd.js';
 
     init({
       el: '#waline',
