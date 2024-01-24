@@ -13,6 +13,7 @@ layout: 'posts'
 
 
 {{< friend des="" url="https://zhengzexin.com/" src="https://zhengzexin.com/assets/static/author.e6b6009.efb8001502fac3cdd18d6a5681b57971.jpg" name="郑泽鑫的博客" >}}
+{{< friend des="" url="https://blog.cuger.cn" src="https://blog.cuger.cn/images/avatar.png" name="遐说-Dorad" >}}
 
 
 申请友链接可在本页留言，本站信息：
