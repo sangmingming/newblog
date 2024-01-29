@@ -41,7 +41,6 @@ header {
 
 html:not([data-scroll="0"]) .header  {
   
-    position: fixed;
     top: 0;
     background: var(--header);
     box-shadow: 0 0 0.5em rgb(0 0 0 / 10%);
