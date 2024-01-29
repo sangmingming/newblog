@@ -9,10 +9,51 @@
     <description>Recent content in 技术 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 23 Feb 2023 23:10:52 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jan 2024 23:02:30 +0800</lastBuildDate>
     
 	<atom:link href="https://isming.me/posts/tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Passkey在Android端的应用实践</title>
+      <link>https://isming.me/2024-01-17-android-passkey/</link>
+      <pubDate>Wed, 17 Jan 2024 23:02:30 +0800</pubDate>
+      
+      <guid>https://isming.me/2024-01-17-android-passkey/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;Passkey，中文名通行密钥，他是WebAuthn的一部分，由FIDO联盟开发，可以做到让用户不使用用户名和密码，来直接验证身份。在2022年的WWDC上，Apple正式宣布了对Passkey的支持，当前10月份，google也宣布了对于passkey的支持。目前已经有一些应用支持了passkey，包括谷歌，微软，github，whatsapp等。最近在我们的Android应用上集成Passkey踩了很多的坑，简单记录一下。
+&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/what-is-fido-fingerprint-authenticator.svg&#34; alt=&#34;Passkey&#34;  /&gt;&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>记解决MaterialButton背景颜色与设置值不同</title>
+      <link>https://isming.me/2024-01-04-android-material-color-issue/</link>
+      <pubDate>Thu, 04 Jan 2024 22:02:30 +0800</pubDate>
+      
+      <guid>https://isming.me/2024-01-04-android-material-color-issue/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;最近的开发过程中，因为设计的风格采用了Android的Material风格，因此我们在项目开发过程中也使用了Android 的Material组件和主题，但是开发过程中法使用MaterialButton的时候，我们给按钮设置的背景颜色和实际展示的背景颜色不一样。网上搜索了一番也没找到原因，于是便开始查阅MateriButton的代码。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>新版Android Studio Logcat view使用简明教程</title>
@@ -28,7 +69,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/logcat-window.png&#34; alt=&#34;logcat-window.png&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/logcat-window.png&#34; alt=&#34;logcat-window.png&#34;  /&gt;&lt;/p&gt;
 &lt;p&gt;从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。&lt;/p&gt;
           
         
@@ -49,7 +90,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/shengjinhu.jpg&#34; alt=&#34; 图: 明明&#34;&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/shengjinhu.jpg&#34; alt=&#34; 图: 明明&#34;  /&gt;
 参加工作多年，找工作时参加过一些面试，经历过笔试，面试，电话面试等多种形式 。也作为面试官面试过很多人，也参加过公司的面试培训，观摩过其他同事的面试。最近系统学习了一下极客时间的《技术面试官识人手册》，课程介绍的东西虽然不能全盘拿来使用，但是还是有很多东西指的借鉴，今天想要从面试官的角度分享一下个人的学习体会以及个人对于面试的一些见解。&lt;/p&gt;
           
         
@@ -160,7 +201,7 @@
         
           &lt;p&gt;小红书Android客户端第一个版本于2014年8月8日发布，转眼到了2016年8月8日，小红书Android版本发版两周年。趁机回顾一下小红书的Android版本，两年中我们踩过很多坑，收获很多经验，分享出来与大家共勉。
 小红书从最初1.0到现在目前4.7版本，历经两年，安装包从原先的5M发展到现在的17M，产品模块也从原先的只有社区模块发展到了具有社区和电商两个大模块。App包含社区、电商、支付、推送、直播、统计等各种功能和模块，那么开始吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
           
         
         </description>

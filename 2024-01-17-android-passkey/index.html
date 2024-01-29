@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Passkey在Android端的应用实践 ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
+<meta
+  name="description"
+  content="Passkey，中文名通行密钥，他是WebAuthn的一部分，由FIDO联盟开发，可以做到让用户不使用用户名和密码，来直接验证身份。在2022年的WWDC上，Apple正式宣布了对Passkey的支持，当前10月份，google也宣布了对于passkey的支持。目前已经有一些应用支持了passkey，包括谷歌，微软，github，whatsapp等。最近在我们的Android应用上集成Passkey踩了很多的坑，简单记录一下。 "
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#fd281a" />
+<link rel="canonical" href="https://isming.me/2024-01-17-android-passkey/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://isming.me/assets/style.css" />
+
+<link rel="stylesheet" href="https://isming.me/style.css" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" href="/ming.ico" />
+<link rel="manifest" href="/manifest.json" />
+
+
+
+<link href="https://isming.me/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link rel="preload" href="//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<style>
+  @font-face {
+  font-family: "iconfont";  
+  src: url('//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2') format('woff2'),
+       url('//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2') format('woff'),
+       url('//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-twitter:before {
+  content: "\e88a";
+}
+.icon-weibo:before {
+  content: "\e88b";
+}
+.icon-mail:before {
+  content: "\e743";
+}
+.icon-facebook:before {
+  content: "\eb8d";
+}
+.icon-github:before {
+  content: "\e673";
+}
+.icon-instagram:before {
+  content: "\e81e";
+}
+</style>
+
+
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Passkey在Android端的应用实践"/>
+<meta name="twitter:description" content="Passkey，中文名通行密钥，他是WebAuthn的一部分，由FIDO联盟开发，可以做到让用户不使用用户名和密码，来直接验证身份。在2022年的WWDC上，Apple正式宣布了对Passkey的支持，当前10月份，google也宣布了对于passkey的支持。目前已经有一些应用支持了passkey，包括谷歌，微软，github，whatsapp等。最近在我们的Android应用上集成Passkey踩了很多的坑，简单记录一下。
+"/>
+
+
+
+<meta property="og:title" content="Passkey在Android端的应用实践" />
+<meta property="og:description" content="Passkey，中文名通行密钥，他是WebAuthn的一部分，由FIDO联盟开发，可以做到让用户不使用用户名和密码，来直接验证身份。在2022年的WWDC上，Apple正式宣布了对Passkey的支持，当前10月份，google也宣布了对于passkey的支持。目前已经有一些应用支持了passkey，包括谷歌，微软，github，whatsapp等。最近在我们的Android应用上集成Passkey踩了很多的坑，简单记录一下。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isming.me/2024-01-17-android-passkey/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-17T23:02:30+08:00" />
+<meta property="article:modified_time" content="2024-01-17T23:02:30+08:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="https://isming.me/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">行摄</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/links/">友链</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">行摄</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/links/">友链</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Passkey在Android端的应用实践</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2024-01-17 23:02:30
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="https://isming.me/tags/android/">#android</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>Passkey，中文名通行密钥，他是WebAuthn的一部分，由FIDO联盟开发，可以做到让用户不使用用户名和密码，来直接验证身份。在2022年的WWDC上，Apple正式宣布了对Passkey的支持，当前10月份，google也宣布了对于passkey的支持。目前已经有一些应用支持了passkey，包括谷歌，微软，github，whatsapp等。最近在我们的Android应用上集成Passkey踩了很多的坑，简单记录一下。
+<img loading='lazy' decoding="async" src="/images/what-is-fido-fingerprint-authenticator.svg" alt="Passkey"  /></p>
+<h3 id="passkey原理简介">Passkey原理简介</h3>
+<p>简单来说，Passkey就是通过密钥对验证替代密码验证，原理和SSL/TLS验证类似，密钥对即公钥和私钥。用户的设备上存储的是私钥，创建的时候会将公钥发送到服务器端进行存储。验证的时候，服务端发送一段通过公钥加密的options信息，设备端使用私钥解密后回传给服务器，则能够验证成功。设备上的私钥需要验证用户的指纹、faceid或者yubikey才能使用。
+Android系统需要Android 9.0以后，iOS系统需要iOS116以后才能支持，除此之外，Android设备需要登录google 账号，并且手机上有google play service才行，iOS需要开启iCloud 钥匙串。Appple 和 Google 还会通过他们的Cloud来帮助我们在多台设备之间同步同一个用户的身份验证，从而可以让我们实现同一个passkey在同一个用户的多台设备使用。
+具体到Android系统，首先需要用户的手机系统在Android 9.0以上，我猜测这是因为在Android 9.0之后要求手机要有安全硬件，放到StrongBox的密钥必须是放到安全硬件中的。web用户可以在手机的chrome浏览器中使用passkey。对于Android应用则需要用户手机上安装的最新的（至少是2023年版本的）Google play service，且手机上的play services不能是中国特色的阉割版本，否则google password manager不能使用，应用也不能够使用Passkey。对于Android 14以后的系统，应用是可以使用第三方密码管理器的，不过我还没有实践，这里不做讨论。</p>
+<h3 id="android应用接入">Android应用接入</h3>
+<p><img loading='lazy' decoding="async" src="/images/passkeys_accountcreation.png" alt="Passkey验证流程"  />
+在Android中接入Passkey其实是比较简单的，具体是有两个场景，分别是创建Passkey和验证Passkey。</p>
+<h4 id="准备工作">准备工作</h4>
+<p>为了让Android系统能够识别我们的应用支持Passkey，需要在我们的后端服务器中配置我们的Digital Asset Links JSON文件，这个文件如果我们配置过Android的App Links支持，应该是已经有的，这个文件的路径应该为<code>https://example.com/.well-known/assetlinks.json</code>，配置的内容如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[  
+</span></span><span style="display:flex;"><span>	{    
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&#34;relation&#34;</span> : [<span style="color:#e6db74">&#34;delegate_permission/common.handle_all_urls&#34;</span>,      <span style="color:#e6db74">&#34;delegate_permission/common.get_login_creds&#34;</span> ],
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">&#34;target&#34;</span> : {      
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">&#34;namespace&#34;</span> : <span style="color:#e6db74">&#34;android_app&#34;</span>, 
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">&#34;package_name&#34;</span> : <span style="color:#e6db74">&#34;com.example.android&#34;</span>,
+</span></span><span style="display:flex;"><span>				<span style="color:#f92672">&#34;sha256_cert_fingerprints&#34;</span> : [
+</span></span><span style="display:flex;"><span>				<span style="color:#960050;background-color:#1e0010">SHA_HEX_VALUE</span>
+</span></span><span style="display:flex;"><span>				]
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>其中的relation用来指定声明的关系，handle_all_urls就是指可以让app处理所有的app links， get_login_creds指的是处理登录验证。
+target是表示该声明应用到的目标，namespace指定为android应用，package_name为我们应用的包名，sha256_cert_fingerprints为应用的签名SHA256。
+这个文件放到我们的服务器，需要保证访问路径，跟我们前面说到的一样。并且请求返回的Content-Type为application/json。如果我们的服务端有robots.txt文件要配置允许google去访问该文件：</p>
+<pre tabindex="0"><code>User-agent : *
+Allow: /.well-known/
+</code></pre><p>Google为我们提供了<code>Credential Manager</code> 来使用Passkey,需要添加如下依赖:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>dependencies {
+</span></span><span style="display:flex;"><span>	implementation(<span style="color:#e6db74">&#34;androidx.credentials:credentials:1.3.0-alpha01&#34;</span>)
+</span></span><span style="display:flex;"><span>	implementation(<span style="color:#e6db74">&#34;androidx.credentials:credentials-play-services-auth:1.3.0-alpha01&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上面第二个依赖，如果我们是只支持Android 14以上，且不用谷歌的密码管理器，可以不用。
+Proguard文件中需要添加如下内容：</p>
+<pre tabindex="0"><code>-if class androidx.credentials.CredentialManager
+-keep class androidx.credentials.playservices.** {
+  *;
+}
+</code></pre><p>创建和验证Passkey都需要<code>CredentialManager</code>,创建方式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> credentialManager = <span style="color:#a6e22e">CredentialManager</span>.create(context)
+</span></span></code></pre></div><h4 id="创建passkey">创建Passkey</h4>
+<p><img loading='lazy' decoding="async" src="/images/create-passkey.svg" alt="创建Passkey"  />
+创建Passkey的流程如上图所示，首先需要从服务端的接口拿到一些数据，把这个作为requestJson创建<code>CreatePublicKeyCredentialRequest</code>去调用创建Credential，代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> createPublicKeyCredentialRequest = CreatePublicKeyCredentialRequest(
+</span></span><span style="display:flex;"><span>requestJson = requestJson,
+</span></span><span style="display:flex;"><span>preferImmediatelyAvailableCredentials = <span style="color:#66d9ef">true</span>/<span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>coroutineScope.launch {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> { 
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">val</span> result = credentialManager.createCredential(
+</span></span><span style="display:flex;"><span>			context = activityContext,
+</span></span><span style="display:flex;"><span>			request = createPublicKeyCredentialRequest
+</span></span><span style="display:flex;"><span>		)
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">catch</span> (e: CreateCredentialException) {
+</span></span><span style="display:flex;"><span>		handleFailure(e)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>上面的requestJson是我们从服务端拿到的，他应该是符合WebAuthn标准的json内容，prefImmediatelyAvailableCredentials, 如何设置为true，手机上没有可用的passkey注册提供者会直接报错，而不是看有没有混合可用的passkey。requestJson的demo如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;challenge&#34;</span>: <span style="color:#e6db74">&#34;abc123&#34;</span>, <span style="color:#75715e">//服务端随机生成的字符串，用于后续判断客户端回传，用于避免被攻击
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">&#34;rp&#34;</span>: {   <span style="color:#75715e">//Replay party信赖方试题，用来表示应用信息，id为域名，需要和wellknown用的域名相同
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Credential Manager example&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;credential-manager-test.example.com&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;user&#34;</span>: {  <span style="color:#75715e">//用户信息，id和name不能缺少，displayName是可选的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;def456&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;helloandroid@gmail.com&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;displayName&#34;</span>: <span style="color:#e6db74">&#34;helloandroid@gmail.com&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;pubKeyCredParams&#34;</span>: [  <span style="color:#75715e">//公钥凭据支持的算法类型和密钥类型，这个在webAuthn网站上可以找到相同的文档
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;public-key&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;alg&#34;</span>: <span style="color:#ae81ff">-7</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;public-key&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;alg&#34;</span>: <span style="color:#ae81ff">-257</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">1800000</span>, <span style="color:#75715e">//验证超时时间，毫秒
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">&#34;attestation&#34;</span>: <span style="color:#e6db74">&#34;none&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;excludeCredentials&#34;</span>: [ <span style="color:#75715e">//可选项，排除的凭据，可通过这个来限制不让同一台设备设置多个passkey
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    {<span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;ghi789&#34;</span>, <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;public-key&#34;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;jkl012&#34;</span>, <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;public-key&#34;</span>}
+</span></span><span style="display:flex;"><span>  ],
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;authenticatorSelection&#34;</span>: { <span style="color:#75715e">//设置支持的类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">&#34;authenticatorAttachment&#34;</span>: <span style="color:#e6db74">&#34;platform&#34;</span>, <span style="color:#75715e">//platform就只支持手机内置的，若为cross-platform就可支持usb的验证，yubikey等
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">&#34;requireResidentKey&#34;</span>: <span style="color:#66d9ef">true</span>, <span style="color:#75715e">//设置为true，则可检测到的凭据会将用户信息存到passkey中，并可以让用户在进行身份验证时选择账号。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">&#34;userVerification&#34;</span>: <span style="color:#e6db74">&#34;required&#34;</span> <span style="color:#75715e">//用于设置使用设备屏幕锁定功能进行用户验证，默认是preferred，用户可以跳过，建议设置为required。 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>以上json更多的解释可以看webauthn的网站： <a href="https://w3c.github.io/webauthn/#dictionary-makecredentialoptions">Web Authentication: An API for accessing Public Key Credentials - Level 3 (w3c.github.io)</a></p>
+<p>我们客户端调用<code>createCredential</code>方法后拿到的结果，类似如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;KEDetxZcUfinhVi6Za5nZQ&#34;</span>, <span style="color:#75715e">//创建的passkey的base64网址编码id，需要后端存储
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;public-key&#34;</span>, <span style="color:#75715e">//此值始终为public-key，不过ios手机上可能为passkey
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">&#34;rawId&#34;</span>: <span style="color:#e6db74">&#34;KEDetxZcUfinhVi6Za5nZQ&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;response&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;clientDataJSON&#34;</span>:   <span style="color:#e6db74">&#34;eyJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIiwiY2hhbGxlbmdlIjoibmhrUVhmRTU5SmI5N1Z5eU5Ka3ZEaVh1Y01Fdmx0ZHV2Y3JEbUdyT0RIWSIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOk1MTHpEdll4UTRFS1R3QzZVNlpWVnJGUXRIOEdjVi0xZDQ0NEZLOUh2YUkiLCJhbmRyb2lkUGFja2FnZU5hbWUiOiJjb20uZ29vZ2xlLmNyZWRlbnRpYWxtYW5hZ2VyLnNhbXBsZSJ9&#34;</span>, <span style="color:#75715e">//ArrayBuffer编码的客户端数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">&#34;attestationObject&#34;</span>: <span style="color:#e6db74">&#34;o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YViUj5r_fLFhV-qdmGEwiukwD5E_5ama9g0hzXgN8thcFGRdAAAAAAAAAAAAAAAAAAAAAAAAAAAAEChA3rcWXFH4p4VYumWuZ2WlAQIDJiABIVgg4RqZaJyaC24Pf4tT-8ONIZ5_Elddf3dNotGOx81jj3siWCAWXS6Lz70hvC2g8hwoLllOwlsbYatNkO2uYFO-eJID6A&#34;</span> <span style="color:#75715e">//arraybuffer编码的证明对象，包含rpid，标志，公钥等
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>我们需要将这个json回传给服务器端，服务器会从其中拿到公钥，并检查其中的数据跟服务端之前给客户端的challenge是否相同，相同后会将公钥，id，与用户id对应保存起来。</p>
+<h4 id="验证passkey">验证Passkey</h4>
+<p><img loading='lazy' decoding="async" src="/images/sign-with-passkey.svg" alt="验证Passkey"  />
+使用Passkey进行身份验证，首先也是需要从服务端拿一些信息，如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;challenge&#34;</span>: <span style="color:#e6db74">&#34;T1xCsnxM2DNL2KdK5CLa6fMhD7OBqho6syzInk_n-Uo&#34;</span>,   <span style="color:#75715e">//服务端生成防止被重现攻击，跟创建流程中的一样
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">&#34;allowCredentials&#34;</span>: [], <span style="color:#75715e">//允许的凭证，比如只允许当前设备之前创建的凭证
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#f92672">&#34;timeout&#34;</span>: <span style="color:#ae81ff">1800000</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;userVerification&#34;</span>: <span style="color:#e6db74">&#34;required&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;rpId&#34;</span>: <span style="color:#e6db74">&#34;credential-manager-app-test.glitch.me&#34;</span>  <span style="color:#75715e">//信任实体Id
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>客户端使用这个json来进行验证：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> getPublicKeyCredentialOption = GetPublicKeyCredentialOption(requestJson = requestJson)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> getCredRequest = GetCredentialRequest(listOf(getPublicKeyCredentialOption))
+</span></span><span style="display:flex;"><span>coroutineScope.launch {
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>	 <span style="color:#66d9ef">val</span> result = credentialManager.getCredential(context = activityContext, request = getCredRequest)
+</span></span><span style="display:flex;"><span>	 handleSignIn(result)
+</span></span><span style="display:flex;"><span> } <span style="color:#66d9ef">catch</span> (e: GetCredentialException) {
+</span></span><span style="display:flex;"><span>	 handleFailure(e)
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>google play service的凭据提供者会找到与rpid匹配的凭据，并且弹窗让用户选择，如果我们设置了allowCredentials并且只有一条会直接弹出指纹或生物验证，成功后会返回类似如下信息给我们：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;KEDetxZcUfinhVi6Za5nZQ&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;public-key&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;rawId&#34;</span>: <span style="color:#e6db74">&#34;KEDetxZcUfinhVi6Za5nZQ&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;response&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;clientDataJSON&#34;</span>: <span style="color:#e6db74">&#34;eyJ0eXBlIjoid2ViYXV0aG4uZ2V0IiwiY2hhbGxlbmdlIjoiVDF4Q3NueE0yRE5MMktkSzVDTGE2Zk1oRDdPQnFobzZzeXpJbmtfbi1VbyIsIm9yaWdpbiI6ImFuZHJvaWQ6YXBrLWtleS1oYXNoOk1MTHpEdll4UTRFS1R3QzZVNlpWVnJGUXRIOEdjVi0xZDQ0NEZLOUh2YUkiLCJhbmRyb2lkUGFja2FnZU5hbWUiOiJjb20uZ29vZ2xlLmNyZWRlbnRpYWxtYW5hZ2VyLnNhbXBsZSJ9&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;authenticatorData&#34;</span>: <span style="color:#e6db74">&#34;j5r_fLFhV-qdmGEwiukwD5E_5ama9g0hzXgN8thcFGQdAAAAAA&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;signature&#34;</span>: <span style="color:#e6db74">&#34;MEUCIQCO1Cm4SA2xiG5FdKDHCJorueiS04wCsqHhiRDbbgITYAIgMKMFirgC2SSFmxrh7z9PzUqr0bK1HZ6Zn8vZVhETnyQ&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;userHandle&#34;</span>: <span style="color:#e6db74">&#34;2HzoHm_hY0CjuEESY9tY6-3SdjmNHOoNqaPDcZGzsr0&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>回传以上信息给服务端，服务端会通过存储的公钥来验证signature，能验证则说明是匹配的用户，验证通过。</p>
+<h3 id="踩坑分享与总结">踩坑分享与总结</h3>
+<p>从上面的接入代码可以看到，google 的credentials libary已经帮我们把大部分的工作做掉了，我们更多的主要是去除了requestJson中的一些参数，客户端的代码还是比较简单的。当然也遇到很多的坑。
+首先就是一定要保证服务端的返回json是要符合协议的，比如authenticatorSelection要按照格式来写，pubKeyCredParams最好把常见的支持的都加上，rp信息中的的name和id一定要有，id一定要用域名。</p>
+<p>如果存在测试版本和线上版本包名不同，签名不同的情况，一定要分别设置好digital asset设置，如果用的是同一个域名，那么是可以在一个asset文件中设置多个app的。</p>
+<p>因为google play services是该功能的基础，所以开发测试阶段使用的网络需要能够流畅的访问谷歌的服务。使用的测试机最好也是能够使用完整的google play services的。如果测试中出现类似下面的错误，可以去尝试升级google play services解决。</p>
+<pre tabindex="0"><code>During create public key credential， fido registration failure： advy： Algorithm with COSE value -8 not supported
+</code></pre><p>总体来说，如果是一个出海应用，并且对于应用的安全性有很高的要求，passkey是一个很好的解决方案。但是对于一个中国的应用来说，目前passkey还是不可用的，如果使用类似的公钥-私钥验证机制，那可以使用FIDO来实现。当然因为不是像google 和apple这样对于passkey支持这么好，实现起来会更加复杂，以后有机会可以再写一写。</p>
+<h3 id="参考资料">参考资料</h3>
+<ul>
+<li><a href="https://medium.com/androiddevelopers/bringing-seamless-authentication-to-your-apps-using-credential-manager-api-b3f0d09e0093#172a">Bringing seamless authentication to your apps with passkeys using Credential Manager API</a></li>
+<li><a href="https://www.w3.org/TR/webauthn-2/">Web Authentication:An API for accessing Public Key Credentials Level 2</a></li>
+<li><a href="https://developer.android.com/training/sign-in/passkeys">Sign in your user with Credential Manager</a></li>
+<li><a href="https://passkey.org/">What is a passkey? | Passkey.org</a></li>
+</ul>
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="https://isming.me/2024-01-04-android-material-color-issue/">
+                  <span class="button__text">记解决MaterialButton背景颜色与设置值不同</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+<p></p>
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
+<style>
+    :root {
+        --waline-theme-color: #fd281a;
+        --waline-active-color: #e24d42;
+    }
+</style>
+<div id="waline"></div>
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://my-waline-comments.vercel.app',
+      dark: "body.dark-theme",
+      login: "disable",
+      imageUploader: false
+      
+    });
+  </script>
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__title">
+      <span class="footer__title-h">
+        <a href="https://github.com/sangmingming" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-github"></i></a>
+      <a href="https://www.instagram.com/isming.me/" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-instagram"></i></a>
+      <a href="https://twitter.com/mingmingsang" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-twitter"></i></a>
+      <a href="https://weibo.com/mingmingsang" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-weibo"></i></a>
+      <a href="mailto:linming1007@gmail.com" target="_blank" rel="noopener noreferrer" title="Email me"><i class="iconfont icon-mail"></i></a>
+      </span>
+      
+    </div>
+    
+      <div class="copyright">
+        <span
+          >© 2024 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer><script src="https://isming.me/assets/main.js"></script>
+<script src="https://isming.me/assets/prism.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TZXP13SK8E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TZXP13SK8E');
+</script>
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

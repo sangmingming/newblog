@@ -86,8 +86,7 @@
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Android系统更改状态栏字体颜色"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Android系统更改状态栏字体颜色"/>
 <meta name="twitter:description" content="随着时代的发展，Android的状态栏都不是乌黑一片了，在Android4.4之后我们可以修改状态栏的颜色或者让我们自己的View延伸到状态栏下面。我们可以进行更多的定制化了，然而有的时候我们使用的是淡色的颜色比如白色，由于状态栏上面的文字为白色，这样的话状态栏上面的文字就无法看清了。因此本文提供一些解决方案，可以是MIUI6&#43;,Flyme4&#43;，Android6.0&#43;支持切换状态栏的文字颜色为暗色。"/>
 
 
@@ -98,6 +97,7 @@
 <meta property="og:url" content="https://isming.me/2016-01-09-chang-android-statusbar-text-color/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2016-01-09T00:41:39+08:00" />
 <meta property="article:modified_time" content="2016-01-09T00:41:39+08:00" />
+
 
 
 
@@ -132,7 +132,7 @@
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -157,7 +157,7 @@
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -214,7 +214,7 @@
     <div class="post-meta">
       
         <span class="post-date">
-          2016-01-09
+          2016-01-09 00:41:39
         </span>
 
         
@@ -242,49 +242,49 @@
       
       <p>随着时代的发展，Android的状态栏都不是乌黑一片了，在Android4.4之后我们可以修改状态栏的颜色或者让我们自己的View延伸到状态栏下面。我们可以进行更多的定制化了，然而有的时候我们使用的是淡色的颜色比如白色，由于状态栏上面的文字为白色，这样的话状态栏上面的文字就无法看清了。因此本文提供一些解决方案，可以是MIUI6+,Flyme4+，Android6.0+支持切换状态栏的文字颜色为暗色。</p>
 <h3 id="修改miui">修改MIUI</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">setMiuiStatusBarDarkMode</span><span style="color:#f92672">(</span>Activity activity<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> darkmode<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> Window<span style="color:#f92672">&gt;</span> clazz <span style="color:#f92672">=</span> activity<span style="color:#f92672">.</span><span style="color:#a6e22e">getWindow</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> darkModeFlag <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>            Class<span style="color:#f92672">&lt;?&gt;</span> layoutParams <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;android.view.MiuiWindowManager$LayoutParams&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            Field field <span style="color:#f92672">=</span> layoutParams<span style="color:#f92672">.</span><span style="color:#a6e22e">getField</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;EXTRA_FLAG_STATUS_BAR_DARK_MODE&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            darkModeFlag <span style="color:#f92672">=</span> field<span style="color:#f92672">.</span><span style="color:#a6e22e">getInt</span><span style="color:#f92672">(</span>layoutParams<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            Method extraFlagField <span style="color:#f92672">=</span> clazz<span style="color:#f92672">.</span><span style="color:#a6e22e">getMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;setExtraFlags&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            extraFlagField<span style="color:#f92672">.</span><span style="color:#a6e22e">invoke</span><span style="color:#f92672">(</span>activity<span style="color:#f92672">.</span><span style="color:#a6e22e">getWindow</span><span style="color:#f92672">(),</span> darkmode <span style="color:#f92672">?</span> darkModeFlag <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">,</span> darkModeFlag<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">setMiuiStatusBarDarkMode</span>(Activity activity, <span style="color:#66d9ef">boolean</span> darkmode) {
+</span></span><span style="display:flex;"><span>        Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> Window<span style="color:#f92672">&gt;</span> clazz <span style="color:#f92672">=</span> activity.<span style="color:#a6e22e">getWindow</span>().<span style="color:#a6e22e">getClass</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> darkModeFlag <span style="color:#f92672">=</span> 0;
+</span></span><span style="display:flex;"><span>            Class<span style="color:#f92672">&lt;?&gt;</span> layoutParams <span style="color:#f92672">=</span> Class.<span style="color:#a6e22e">forName</span>(<span style="color:#e6db74">&#34;android.view.MiuiWindowManager$LayoutParams&#34;</span>);
+</span></span><span style="display:flex;"><span>            Field field <span style="color:#f92672">=</span> layoutParams.<span style="color:#a6e22e">getField</span>(<span style="color:#e6db74">&#34;EXTRA_FLAG_STATUS_BAR_DARK_MODE&#34;</span>);
+</span></span><span style="display:flex;"><span>            darkModeFlag <span style="color:#f92672">=</span> field.<span style="color:#a6e22e">getInt</span>(layoutParams);
+</span></span><span style="display:flex;"><span>            Method extraFlagField <span style="color:#f92672">=</span> clazz.<span style="color:#a6e22e">getMethod</span>(<span style="color:#e6db74">&#34;setExtraFlags&#34;</span>, <span style="color:#66d9ef">int</span>.<span style="color:#a6e22e">class</span>, <span style="color:#66d9ef">int</span>.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>            extraFlagField.<span style="color:#a6e22e">invoke</span>(activity.<span style="color:#a6e22e">getWindow</span>(), darkmode <span style="color:#f92672">?</span> darkModeFlag : 0, darkModeFlag);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>上面为小米官方提供的解决方案，主要为MIUI内置了可以修改状态栏的模式，支持Dark和Light两种模式。</p>
 <h3 id="修改flyme">修改Flyme</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">setMeizuStatusBarDarkIcon</span><span style="color:#f92672">(</span>Activity activity<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> dark<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>activity <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                WindowManager<span style="color:#f92672">.</span><span style="color:#a6e22e">LayoutParams</span> lp <span style="color:#f92672">=</span> activity<span style="color:#f92672">.</span><span style="color:#a6e22e">getWindow</span><span style="color:#f92672">().</span><span style="color:#a6e22e">getAttributes</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>                Field darkFlag <span style="color:#f92672">=</span> WindowManager<span style="color:#f92672">.</span><span style="color:#a6e22e">LayoutParams</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span>
-</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredField</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;MEIZU_FLAG_DARK_STATUS_BAR_ICON&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                Field meizuFlags <span style="color:#f92672">=</span> WindowManager<span style="color:#f92672">.</span><span style="color:#a6e22e">LayoutParams</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span>
-</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">.</span><span style="color:#a6e22e">getDeclaredField</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;meizuFlags&#34;</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                darkFlag<span style="color:#f92672">.</span><span style="color:#a6e22e">setAccessible</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                meizuFlags<span style="color:#f92672">.</span><span style="color:#a6e22e">setAccessible</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> darkFlag<span style="color:#f92672">.</span><span style="color:#a6e22e">getInt</span><span style="color:#f92672">(</span><span style="color:#66d9ef">null</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> meizuFlags<span style="color:#f92672">.</span><span style="color:#a6e22e">getInt</span><span style="color:#f92672">(</span>lp<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>dark<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                    value <span style="color:#f92672">|=</span> bit<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>                    value <span style="color:#f92672">&amp;=</span> <span style="color:#f92672">~</span>bit<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                meizuFlags<span style="color:#f92672">.</span><span style="color:#a6e22e">setInt</span><span style="color:#f92672">(</span>lp<span style="color:#f92672">,</span> value<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                activity<span style="color:#f92672">.</span><span style="color:#a6e22e">getWindow</span><span style="color:#f92672">().</span><span style="color:#a6e22e">setAttributes</span><span style="color:#f92672">(</span>lp<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>                result <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>Exception e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">setMeizuStatusBarDarkIcon</span>(Activity activity, <span style="color:#66d9ef">boolean</span> dark) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> result <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (activity <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                WindowManager.<span style="color:#a6e22e">LayoutParams</span> lp <span style="color:#f92672">=</span> activity.<span style="color:#a6e22e">getWindow</span>().<span style="color:#a6e22e">getAttributes</span>();
+</span></span><span style="display:flex;"><span>                Field darkFlag <span style="color:#f92672">=</span> WindowManager.<span style="color:#a6e22e">LayoutParams</span>.<span style="color:#a6e22e">class</span>
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;MEIZU_FLAG_DARK_STATUS_BAR_ICON&#34;</span>);
+</span></span><span style="display:flex;"><span>                Field meizuFlags <span style="color:#f92672">=</span> WindowManager.<span style="color:#a6e22e">LayoutParams</span>.<span style="color:#a6e22e">class</span>
+</span></span><span style="display:flex;"><span>                        .<span style="color:#a6e22e">getDeclaredField</span>(<span style="color:#e6db74">&#34;meizuFlags&#34;</span>);
+</span></span><span style="display:flex;"><span>                darkFlag.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>                meizuFlags.<span style="color:#a6e22e">setAccessible</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> bit <span style="color:#f92672">=</span> darkFlag.<span style="color:#a6e22e">getInt</span>(<span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> meizuFlags.<span style="color:#a6e22e">getInt</span>(lp);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (dark) {
+</span></span><span style="display:flex;"><span>                    value <span style="color:#f92672">|=</span> bit;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                    value <span style="color:#f92672">&amp;=</span> <span style="color:#f92672">~</span>bit;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                meizuFlags.<span style="color:#a6e22e">setInt</span>(lp, value);
+</span></span><span style="display:flex;"><span>                activity.<span style="color:#a6e22e">getWindow</span>().<span style="color:#a6e22e">setAttributes</span>(lp);
+</span></span><span style="display:flex;"><span>                result <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>同理使用跟miui类似的方式</p>
 <h3 id="修改android60">修改Android6.0+</h3>
 <p>Android 6.0开始，谷歌官方提供了支持，在style属性中配置<em>android:windowLightStatusBar</em>
@@ -330,8 +330,7 @@
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -339,17 +338,16 @@
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -375,7 +373,7 @@
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

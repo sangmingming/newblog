@@ -86,8 +86,7 @@
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="2022年个人总结"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="2022年个人总结"/>
 <meta name="twitter:description" content="
 已经有几个年头没有写过年终总结了。 2022年是非凡的一年，看到很多人写了年终总结，忍不住也来写一写。
 这一年如果使用几个关键词来总结，我想我的关键词是魔幻，起伏和充实。"/>
@@ -102,6 +101,7 @@
 <meta property="og:url" content="https://isming.me/2023-01-03-2022-summary/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-03T21:30:52+08:00" />
 <meta property="article:modified_time" content="2023-01-03T21:30:52+08:00" />
+
 
 
 
@@ -136,7 +136,7 @@
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -161,7 +161,7 @@
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -218,7 +218,7 @@
     <div class="post-meta">
       
         <span class="post-date">
-          2023-01-03
+          2023-01-03 21:30:52
         </span>
 
         
@@ -238,7 +238,7 @@
 
     <div class="post-content">
       
-      <p><img src="/images/photo/dianshanlake.jpg" alt="向上生长 图: 明明">
+      <p><img loading='lazy' decoding="async" src="/images/photo/dianshanlake.jpg" alt="向上生长 图: 明明"  />
 已经有几个年头没有写过年终总结了。 2022年是非凡的一年，看到很多人写了年终总结，忍不住也来写一写。
 这一年如果使用几个关键词来总结，我想我的关键词是魔幻，起伏和充实。</p>
 <h3 id="魔幻">魔幻</h3>
@@ -284,8 +284,7 @@
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -293,17 +292,16 @@
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -329,7 +327,7 @@
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        记解决MaterialButton背景颜色与设置值不同 ::
+        码农明明桑
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover" />
+<meta
+  name="description"
+  content="最近的开发过程中，因为设计的风格采用了Android的Material风格，因此我们在项目开发过程中也使用了Android 的Material组件和主题，但是开发过程中法使用MaterialButton的时候，我们给按钮设置的背景颜色和实际展示的背景颜色不一样。网上搜索了一番也没找到原因，于是便开始查阅MateriButton的代码。
+"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#fd281a" />
+<link rel="canonical" href="https://isming.me/2024-01-04-android-material-color-issue/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://isming.me/assets/style.css" />
+
+<link rel="stylesheet" href="https://isming.me/style.css" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" href="/ming.ico" />
+<link rel="manifest" href="/manifest.json" />
+
+
+
+<link href="https://isming.me/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://isming.me/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link rel="preload" href="//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<style>
+  @font-face {
+  font-family: "iconfont";  
+  src: url('//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2') format('woff2'),
+       url('//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2') format('woff'),
+       url('//at.alicdn.com/t/font_2858056_rpjqaqfi5ie.woff2') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-twitter:before {
+  content: "\e88a";
+}
+.icon-weibo:before {
+  content: "\e88b";
+}
+.icon-mail:before {
+  content: "\e743";
+}
+.icon-facebook:before {
+  content: "\eb8d";
+}
+.icon-github:before {
+  content: "\e673";
+}
+.icon-instagram:before {
+  content: "\e81e";
+}
+</style>
+
+
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="记解决MaterialButton背景颜色与设置值不同"/>
+<meta name="twitter:description" content="最近的开发过程中，因为设计的风格采用了Android的Material风格，因此我们在项目开发过程中也使用了Android 的Material组件和主题，但是开发过程中法使用MaterialButton的时候，我们给按钮设置的背景颜色和实际展示的背景颜色不一样。网上搜索了一番也没找到原因，于是便开始查阅MateriButton的代码。"/>
+
+
+
+<meta property="og:title" content="记解决MaterialButton背景颜色与设置值不同" />
+<meta property="og:description" content="最近的开发过程中，因为设计的风格采用了Android的Material风格，因此我们在项目开发过程中也使用了Android 的Material组件和主题，但是开发过程中法使用MaterialButton的时候，我们给按钮设置的背景颜色和实际展示的背景颜色不一样。网上搜索了一番也没找到原因，于是便开始查阅MateriButton的代码。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isming.me/2024-01-04-android-material-color-issue/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-04T22:02:30+08:00" />
+<meta property="article:modified_time" content="2024-01-04T22:02:30+08:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="https://isming.me/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__text">码农明明桑</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts/tech/">技术</a></li>
+        
+      
+        
+          <li><a href="/posts/photography/">行摄</a></li>
+        
+      
+        
+          <li><a href="/archive/">归档</a></li>
+        
+      
+        
+          <li><a href="/links/">友链</a></li>
+        
+      
+        
+          <li><a href="/about/">关于</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts/tech/">技术</a></li>
+      
+    
+      
+        <li><a href="/posts/photography/">行摄</a></li>
+      
+    
+      
+        <li><a href="/archive/">归档</a></li>
+      
+    
+      
+        <li><a href="/links/">友链</a></li>
+      
+    
+      
+        <li><a href="/about/">关于</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">记解决MaterialButton背景颜色与设置值不同</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2024-01-04 22:02:30
+        </span>
+
+        
+          
+        
+      
+
+      
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="https://isming.me/tags/android/">#android</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>最近的开发过程中，因为设计的风格采用了Android的Material风格，因此我们在项目开发过程中也使用了Android 的Material组件和主题，但是开发过程中法使用MaterialButton的时候，我们给按钮设置的背景颜色和实际展示的背景颜色不一样。网上搜索了一番也没找到原因，于是便开始查阅MateriButton的代码。</p>
+<p><img loading='lazy' decoding="async" src="/images/materialbutton-background-correct.png" alt="期望的背景"  />
+<img loading='lazy' decoding="async" src="/images/materialbutton-background-wrong.png" alt="实际的背景"  /></p>
+<p>经过一番研读终于找到原因，最终通过在style文件中添加如下设置解决。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;elevationOverlayEnabled&#34;</span><span style="color:#f92672">&gt;</span>false<span style="color:#f92672">&lt;/item&gt;</span>
+</span></span></code></pre></div><h3 id="materialbutton介绍">MaterialButton介绍</h3>
+<p>Google在Material库中给我们提供了MaterialButton组件，我们可以通过设置很多属性来设置它的样式，仅仅背景就可以设置它的边框，背景的圆角，背景的颜色，甚至可以自己设置背景的形状，除此之外还能设置文字样式，按钮上的图标等等。因为我们今天的主题是关于背景的问题的，这里我们仅仅介绍背景设置相关的东西。</p>
+<p>正常情况下，对于一个Android的View我们可以通过设置<code>setBackground()</code> <code>setBackgroundColor()</code> <code>setBackgroundResource()</code>等方法来设置View的背景，而MaterialButton为了让我们能够直接修改颜色，设置圆角，则重写了<code>setBackgroundColor()</code>方法，实现如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setBackgroundColor</span>(<span style="color:#a6e22e">@ColorInt</span> <span style="color:#66d9ef">int</span> color) {  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (isUsingOriginalBackground()) {  
+</span></span><span style="display:flex;"><span>    materialButtonHelper.<span style="color:#a6e22e">setBackgroundColor</span>(color);  
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// If default MaterialButton background has been overwritten, we will let View handle  </span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// setting the background color.    super.setBackgroundColor(color);  </span>
+</span></span><span style="display:flex;"><span>  }  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>通过查阅代码，我们可以看到MaterialButton内部通过MaterialButtonHelper这个类来管理它的背景，如果我们没有通过setBackground给这个Button设置一个背景Drawable，MaterialButtonHelper会帮我们创建一个Drawable，当我们调用 setBackgroundColor的时候，实际上也会在MaterialButtonHelper内部处理，至于MaterialButtonHelper如何创建BackgroundDrawabale的流程，可以自行去看源码。</p>
+<h3 id="修改背景颜色的具体过程">修改背景颜色的具体过程</h3>
+<p>上面说到的MaterialButtonHelper创建的背景Drawable就是一个<code>MaterialShapeDrawable</code>，前面的<code>setBackgroundColor</code>调用后实际上会调用到MaterialShapeDrawable的<code>setTintList()</code>方法来修改背景的颜色，实际上就是使用了Tint来修改我们的背景，在draw方法中我们可以看到如下的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>fillPaint.<span style="color:#a6e22e">setColorFilter</span>(tintFilter);
+</span></span></code></pre></div><p>以上代码实现来背景颜色的修改。</p>
+<p>在setTintList()的代码中和调用的函数中，我们发现了这样一行代码它修改了<code>tintFilter</code>这个变量。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>tintFilter <span style="color:#f92672">=</span>  
+</span></span><span style="display:flex;"><span>    calculateTintFilter(  
+</span></span><span style="display:flex;"><span>        drawableState.<span style="color:#a6e22e">tintList</span>,  
+</span></span><span style="display:flex;"><span>        drawableState.<span style="color:#a6e22e">tintMode</span>,  
+</span></span><span style="display:flex;"><span>        fillPaint,  
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/* requiresElevationOverlay= */</span> <span style="color:#66d9ef">true</span>);
+</span></span></code></pre></div><p>此处的tintList为我们刚刚设置的颜色，tintMode默认值是SRC_IN均不为空，该方法内部又调用了<code>calculateTintColorTintFilter()</code>方法。</p>
+<p>到这里我们总结一下，setBackgroud是通过tint来修改了背景的颜色，tint的实现其实就是使用了Android画笔的颜色混合滤镜(PorterDuffColorFilter)来实现的。</p>
+<h3 id="背景颜色为什么与设置的不同">背景颜色为什么与设置的不同？</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> PorterDuffColorFilter <span style="color:#a6e22e">calculateTintColorTintFilter</span>(  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NonNull</span> ColorStateList tintList,  
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@NonNull</span> PorterDuff.<span style="color:#a6e22e">Mode</span> tintMode,  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">boolean</span> requiresElevationOverlay) {  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> tintColor <span style="color:#f92672">=</span> tintList.<span style="color:#a6e22e">getColorForState</span>(getState(), Color.<span style="color:#a6e22e">TRANSPARENT</span>);  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (requiresElevationOverlay) {  
+</span></span><span style="display:flex;"><span>    tintColor <span style="color:#f92672">=</span> compositeElevationOverlayIfNeeded(tintColor);  
+</span></span><span style="display:flex;"><span>  }  
+</span></span><span style="display:flex;"><span>  resolvedTintColor <span style="color:#f92672">=</span> tintColor;  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> PorterDuffColorFilter(tintColor, tintMode);  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>以上是<code>calculateTintColorTintFilter</code>方法的代码，我们知道requiresElevationOverlay总是<code>true</code>，那就一定会执行到<code>compositeElevationOverlayIfNeeded</code>，那就说明这个方法内部把我们的颜色修改了，查看其实现，果然如此，代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">compositeElevationOverlayIfNeeded</span>(<span style="color:#a6e22e">@ColorInt</span> <span style="color:#66d9ef">int</span> backgroundColor) {  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">float</span> elevation <span style="color:#f92672">=</span> getZ() <span style="color:#f92672">+</span> getParentAbsoluteElevation();  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> drawableState.<span style="color:#a6e22e">elevationOverlayProvider</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>  
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">?</span> drawableState.<span style="color:#a6e22e">elevationOverlayProvider</span>.<span style="color:#a6e22e">compositeOverlayIfNeeded</span>(  
+</span></span><span style="display:flex;"><span>          backgroundColor, elevation)  
+</span></span><span style="display:flex;"><span>      : backgroundColor;  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>翻阅代码我们可以看到drawableState是在Drawable创建的时候就创建了，而elevationOverlayProvider则是在MaterialButtonHelper中调用drawable的initializeElevationOverlay方法来初始化的，为<code>ElevationOverlayProvider</code>,而正是它的compsiteOverlayIfNeeded方法来变化了颜色。</p>
+<h3 id="修改颜色为我们设置的颜色">修改颜色为我们设置的颜色</h3>
+<p>看到这里，首先想到是吧这个elevationOverlayProvider设置为null，那我们不就不会调用这个方法，颜色也就是我们最初设置的颜色了吗。然而，我们没法在MaterialButton中或者它的子类中去拿到Drawable的DrawableState，因此只能作罢。</p>
+<p>再来继续看，ElevationOverlayProvider的compositeOverlayIfNeeded方法，它既然有个IfNeeded，那看来也不是一定会改变颜色了，继续看它的实现。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">compositeOverlayIfNeeded</span>(<span style="color:#a6e22e">@ColorInt</span> <span style="color:#66d9ef">int</span> backgroundColor, <span style="color:#66d9ef">float</span> elevation) {  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (elevationOverlayEnabled <span style="color:#f92672">&amp;&amp;</span> isThemeSurfaceColor(backgroundColor)) {  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> compositeOverlay(backgroundColor, elevation);  
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">else</span> {  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> backgroundColor;  
+</span></span><span style="display:flex;"><span>  }  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可以看到满足elevationOverlayEnabled且 backgroudColor和themSurfaceColor相同的情况下才会改变颜色，原来我设置的按钮颜色和主题中设置的colorSurface相同，此处我不可能去修改按钮颜色，我们只能去看看elevationOverlayEnabled能否修改，查看ElevationOverlayProvider的源码可以看到初始化的时候通过如下代码初始化了该值。</p>
+<pre tabindex="0"><code>MaterialAttributes.resolveBoolean(context, R.attr.elevationOverlayEnabled, false)
+</code></pre><p>看到这里，我们也就知道该如何解决我们的问题了，也就是在AppTheme或者当前Activity的Theme中修改<code>elevationOverlayEnabled</code> 为false。</p>
+<p>除了Button之外，Material的其他一些组件也有同样使用这个属性来设置是否修改颜色的，遇到的时候也可以同样的方式解决。</p>
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://isming.me/2024-01-17-android-passkey/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Passkey在Android端的应用实践</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://isming.me/2023-02-23-android-studio-logcat/">
+                  <span class="button__text">新版Android Studio Logcat view使用简明教程</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+<p></p>
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
+<style>
+    :root {
+        --waline-theme-color: #fd281a;
+        --waline-active-color: #e24d42;
+    }
+</style>
+<div id="waline"></div>
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://my-waline-comments.vercel.app',
+      dark: "body.dark-theme",
+      login: "disable",
+      imageUploader: false
+      
+    });
+  </script>
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__title">
+      <span class="footer__title-h">
+        <a href="https://github.com/sangmingming" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-github"></i></a>
+      <a href="https://www.instagram.com/isming.me/" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-instagram"></i></a>
+      <a href="https://twitter.com/mingmingsang" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-twitter"></i></a>
+      <a href="https://weibo.com/mingmingsang" target="_blank" rel="noopener noreferrer"><i class="iconfont icon-weibo"></i></a>
+      <a href="mailto:linming1007@gmail.com" target="_blank" rel="noopener noreferrer" title="Email me"><i class="iconfont icon-mail"></i></a>
+      </span>
+      
+    </div>
+    
+      <div class="copyright">
+        <span
+          >© 2024 码农明明桑 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
+        >
+        <span
+          >Theme created by
+          <a href="https://twitter.com/panr" target="_blank" rel="noopener">panr</a></span
+        >
+      </div>
+    
+  </div>
+</footer><script src="https://isming.me/assets/main.js"></script>
+<script src="https://isming.me/assets/prism.js"></script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TZXP13SK8E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TZXP13SK8E');
+</script>
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script>
+    
+    if ("serviceWorker" in navigator) {
+        
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js");
+        });
+    }
+</script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

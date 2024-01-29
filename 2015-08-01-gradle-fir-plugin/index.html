@@ -88,8 +88,7 @@ App内测需要把安装把安装包放在一个地方进行托管，方便内�
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="一个上传apk到fir的gradle插件"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="一个上传apk到fir的gradle插件"/>
 <meta name="twitter:description" content="声明，这不是广告，没有任何利益瓜葛。
 App内测需要把安装把安装包放在一个地方进行托管，方便内测人员下载。国内有蒲公英，fir，等等这些网站可以用。
 最近fir上了新版本了，上了新的api，新界面，本以为它们会提供gradle的上传工具，结果没有，而且它们新版本还不好用，原本的下载统计浏览统计都没有了，结果上传很慢，甚至上传不了，我便写了一个gradle的上传工具。"/>
@@ -104,6 +103,7 @@ App内测需要把安装把安装包放在一个地方进行托管，方便内�
 <meta property="og:url" content="https://isming.me/2015-08-01-gradle-fir-plugin/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2015-08-01T23:19:07+08:00" />
 <meta property="article:modified_time" content="2015-08-01T23:19:07+08:00" />
+
 
 
 
@@ -138,7 +138,7 @@ App内测需要把安装把安装包放在一个地方进行托管，方便内�
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -163,7 +163,7 @@ App内测需要把安装把安装包放在一个地方进行托管，方便内�
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -220,7 +220,7 @@ App内测需要把安装把安装包放在一个地方进行托管，方便内�
     <div class="post-meta">
       
         <span class="post-date">
-          2015-08-01
+          2015-08-01 23:19:07
         </span>
 
         
@@ -341,8 +341,7 @@ App内测需要把安装把安装包放在一个地方进行托管，方便内�
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -350,17 +349,16 @@ App内测需要把安装把安装包放在一个地方进行托管，方便内�
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -386,7 +384,7 @@ App内测需要把安装把安装包放在一个地方进行托管，方便内�
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

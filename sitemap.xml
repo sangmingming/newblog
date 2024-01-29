@@ -2,26 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://isming.me/2024-01-24-2023-summary/</loc>
+    <lastmod>2024-01-24T23:30:52+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/tags/</loc>
+    <lastmod>2024-01-24T23:30:52+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/tags/%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2024-01-24T23:30:52+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/posts/</loc>
+    <lastmod>2024-01-24T23:30:52+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/</loc>
+    <lastmod>2024-01-24T23:30:52+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/tags/android/</loc>
+    <lastmod>2024-01-17T23:02:30+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/2024-01-17-android-passkey/</loc>
+    <lastmod>2024-01-17T23:02:30+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/posts/tech/</loc>
+    <lastmod>2024-01-17T23:02:30+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/2024-01-04-android-material-color-issue/</loc>
+    <lastmod>2024-01-04T22:02:30+08:00</lastmod>
+  </url><url>
     <loc>https://isming.me/tags/books/</loc>
-    <lastmod>2023-03-21T21:30:52+08:00</lastmod>
+    <lastmod>2023-04-13T22:30:52+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/tags/selfimprovement/</loc>
+    <lastmod>2023-04-13T22:30:52+08:00</lastmod>
+  </url><url>
+    <loc>https://isming.me/2023-04-13-the-courage-to-be-disliked/</loc>
+    <lastmod>2023-04-13T22:30:52+08:00</lastmod>
   </url><url>
     <loc>https://isming.me/tags/investment/</loc>
     <lastmod>2023-03-21T21:30:52+08:00</lastmod>
   </url><url>
-    <loc>https://isming.me/tags/</loc>
-    <lastmod>2023-03-21T21:30:52+08:00</lastmod>
-  </url><url>
-    <loc>https://isming.me/posts/</loc>
-    <lastmod>2023-03-21T21:30:52+08:00</lastmod>
-  </url><url>
     <loc>https://isming.me/2023-03-21-the-intelligent-investor/</loc>
     <lastmod>2023-03-21T21:30:52+08:00</lastmod>
-  </url><url>
-    <loc>https://isming.me/</loc>
-    <lastmod>2023-03-21T21:30:52+08:00</lastmod>
-  </url><url>
-    <loc>https://isming.me/posts/tech/</loc>
-    <lastmod>2023-02-23T23:10:52+08:00</lastmod>
   </url><url>
     <loc>https://isming.me/2023-02-23-android-studio-logcat/</loc>
     <lastmod>2023-02-23T23:10:52+08:00</lastmod>
@@ -52,9 +73,6 @@
   </url><url>
     <loc>https://isming.me/2017-07-12-blog-https/</loc>
     <lastmod>2017-07-12T21:30:52+08:00</lastmod>
-  </url><url>
-    <loc>https://isming.me/tags/android/</loc>
-    <lastmod>2017-05-18T20:01:38+08:00</lastmod>
   </url><url>
     <loc>https://isming.me/2017-05-18-android-architecture-components-guide/</loc>
     <lastmod>2017-05-18T20:01:38+08:00</lastmod>

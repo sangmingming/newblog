@@ -9,10 +9,51 @@
     <description>Recent content in android on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 18 May 2017 20:01:38 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jan 2024 23:02:30 +0800</lastBuildDate>
     
 	<atom:link href="https://isming.me/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Passkey在Android端的应用实践</title>
+      <link>https://isming.me/2024-01-17-android-passkey/</link>
+      <pubDate>Wed, 17 Jan 2024 23:02:30 +0800</pubDate>
+      
+      <guid>https://isming.me/2024-01-17-android-passkey/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;Passkey，中文名通行密钥，他是WebAuthn的一部分，由FIDO联盟开发，可以做到让用户不使用用户名和密码，来直接验证身份。在2022年的WWDC上，Apple正式宣布了对Passkey的支持，当前10月份，google也宣布了对于passkey的支持。目前已经有一些应用支持了passkey，包括谷歌，微软，github，whatsapp等。最近在我们的Android应用上集成Passkey踩了很多的坑，简单记录一下。
+&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/what-is-fido-fingerprint-authenticator.svg&#34; alt=&#34;Passkey&#34;  /&gt;&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>记解决MaterialButton背景颜色与设置值不同</title>
+      <link>https://isming.me/2024-01-04-android-material-color-issue/</link>
+      <pubDate>Thu, 04 Jan 2024 22:02:30 +0800</pubDate>
+      
+      <guid>https://isming.me/2024-01-04-android-material-color-issue/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;最近的开发过程中，因为设计的风格采用了Android的Material风格，因此我们在项目开发过程中也使用了Android 的Material组件和主题，但是开发过程中法使用MaterialButton的时候，我们给按钮设置的背景颜色和实际展示的背景颜色不一样。网上搜索了一番也没找到原因，于是便开始查阅MateriButton的代码。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>简单聊聊Android Architecture Componets</title>
@@ -77,7 +118,7 @@
         
           &lt;p&gt;小红书Android客户端第一个版本于2014年8月8日发布，转眼到了2016年8月8日，小红书Android版本发版两周年。趁机回顾一下小红书的Android版本，两年中我们踩过很多坑，收获很多经验，分享出来与大家共勉。
 小红书从最初1.0到现在目前4.7版本，历经两年，安装包从原先的5M发展到现在的17M，产品模块也从原先的只有社区模块发展到了具有社区和电商两个大模块。App包含社区、电商、支付、推送、直播、统计等各种功能和模块，那么开始吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
           
         
         </description>

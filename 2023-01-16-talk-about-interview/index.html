@@ -86,8 +86,7 @@
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="面试官谈面试"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="面试官谈面试"/>
 <meta name="twitter:description" content="
 参加工作多年，找工作时参加过一些面试，经历过笔试，面试，电话面试等多种形式 。也作为面试官面试过很多人，也参加过公司的面试培训，观摩过其他同事的面试。最近系统学习了一下极客时间的《技术面试官识人手册》，课程介绍的东西虽然不能全盘拿来使用，但是还是有很多东西指的借鉴，今天想要从面试官的角度分享一下个人的学习体会以及个人对于面试的一些见解。"/>
 
@@ -100,6 +99,7 @@
 <meta property="og:url" content="https://isming.me/2023-01-16-talk-about-interview/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-16T23:30:52+08:00" />
 <meta property="article:modified_time" content="2023-01-16T23:30:52+08:00" />
+
 
 
 
@@ -134,7 +134,7 @@
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -159,7 +159,7 @@
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -216,7 +216,7 @@
     <div class="post-meta">
       
         <span class="post-date">
-          2023-01-16
+          2023-01-16 23:30:52
         </span>
 
         
@@ -236,7 +236,7 @@
 
     <div class="post-content">
       
-      <p><img src="/images/photo/shengjinhu.jpg" alt=" 图: 明明">
+      <p><img loading='lazy' decoding="async" src="/images/photo/shengjinhu.jpg" alt=" 图: 明明"  />
 参加工作多年，找工作时参加过一些面试，经历过笔试，面试，电话面试等多种形式 。也作为面试官面试过很多人，也参加过公司的面试培训，观摩过其他同事的面试。最近系统学习了一下极客时间的《技术面试官识人手册》，课程介绍的东西虽然不能全盘拿来使用，但是还是有很多东西指的借鉴，今天想要从面试官的角度分享一下个人的学习体会以及个人对于面试的一些见解。</p>
 <p>面试其实是一个公司与候选人进行双向交流的机会，也是双方进行双向选择的过程，公司通过面试官向候选人展示公司员工的风采以及介绍公司的业务技术等，候选人则是通过面试向面试官展示自己的技术素养，业务能力等。同时，面试的过程也是面试官和 候选人进行双向学习的机会。</p>
 <p>公司和候选人双方都需要几轮面试过程中互相评估对方是否和自己匹配，公司需要确认候选人是否具有公司所需的技术能力（包括相关岗位必须的知识能力，软件编程能力，系统设计能力等），业务能力（对产品较好的理解能力，项目管理能力等），个人的综合软素质（学习能力，沟通能力，好奇心等）。</p>
@@ -284,8 +284,7 @@
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -293,17 +292,16 @@
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -329,7 +327,7 @@
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

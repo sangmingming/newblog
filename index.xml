@@ -9,10 +9,93 @@
     <description>Recent content in 首页 on 码农明明桑</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 21 Mar 2023 21:30:52 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jan 2024 23:30:52 +0800</lastBuildDate>
     
 	<atom:link href="https://isming.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2023年个人总结</title>
+      <link>https://isming.me/2024-01-24-2023-summary/</link>
+      <pubDate>Wed, 24 Jan 2024 23:30:52 +0800</pubDate>
+      
+      <guid>https://isming.me/2024-01-24-2023-summary/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/20231204-siping.jpg&#34; alt=&#34;柿柿如意 图: 明明&#34;  /&gt;
+又是一年的结束，又是一年的开始，看到很多人写了年度总结，才想到我的年度总结还没有写。终于马上要到农历新年了，匆匆动笔。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Passkey在Android端的应用实践</title>
+      <link>https://isming.me/2024-01-17-android-passkey/</link>
+      <pubDate>Wed, 17 Jan 2024 23:02:30 +0800</pubDate>
+      
+      <guid>https://isming.me/2024-01-17-android-passkey/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;Passkey，中文名通行密钥，他是WebAuthn的一部分，由FIDO联盟开发，可以做到让用户不使用用户名和密码，来直接验证身份。在2022年的WWDC上，Apple正式宣布了对Passkey的支持，当前10月份，google也宣布了对于passkey的支持。目前已经有一些应用支持了passkey，包括谷歌，微软，github，whatsapp等。最近在我们的Android应用上集成Passkey踩了很多的坑，简单记录一下。
+&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/what-is-fido-fingerprint-authenticator.svg&#34; alt=&#34;Passkey&#34;  /&gt;&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>记解决MaterialButton背景颜色与设置值不同</title>
+      <link>https://isming.me/2024-01-04-android-material-color-issue/</link>
+      <pubDate>Thu, 04 Jan 2024 22:02:30 +0800</pubDate>
+      
+      <guid>https://isming.me/2024-01-04-android-material-color-issue/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;最近的开发过程中，因为设计的风格采用了Android的Material风格，因此我们在项目开发过程中也使用了Android 的Material组件和主题，但是开发过程中法使用MaterialButton的时候，我们给按钮设置的背景颜色和实际展示的背景颜色不一样。网上搜索了一番也没找到原因，于是便开始查阅MateriButton的代码。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>与自我和解-读《被讨厌的勇气》</title>
+      <link>https://isming.me/2023-04-13-the-courage-to-be-disliked/</link>
+      <pubDate>Thu, 13 Apr 2023 22:30:52 +0800</pubDate>
+      
+      <guid>https://isming.me/2023-04-13-the-courage-to-be-disliked/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/20230203birds.jpg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
+&lt;p&gt;由于有了娃之后，对于小孩的管教很头大，先是看了《正面管教》这本书，书中作者的很多思想源于阿德勒的个体心理学，又看很多人推荐这本 《被讨厌的勇气》也便在微信读书将其读了。&lt;/p&gt;
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>防御型投资者的投资基础-读《聪明的投资者》</title>
@@ -28,7 +111,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/investor.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/investor.jpg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://book.douban.com/subject/26752026/&#34;&gt;《聪明的投资者》&lt;/a&gt;这本书在微信读书的各个投资书单书单中都有推荐，在看有知有行的&lt;a href=&#34;https://book.douban.com/subject/36295222/&#34;&gt;《投资第一课》&lt;/a&gt;中也多次提到这本书的内容。便找来花了一点时间读完了，读完之后觉得还是要写点东西方能将书本内容消化吸收。&lt;/p&gt;
           
         
@@ -49,7 +132,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/logcat-window.png&#34; alt=&#34;logcat-window.png&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/logcat-window.png&#34; alt=&#34;logcat-window.png&#34;  /&gt;&lt;/p&gt;
 &lt;p&gt;从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。&lt;/p&gt;
           
         
@@ -70,7 +153,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/jingdezhen/20230204-05-27.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/jingdezhen/20230204-05-27.jpg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
 &lt;p&gt;老婆家在皖赣交界的县，自驾只需要两个多小时就能到达景德镇，因此，很早就有想要自驾前往的想法，由于自己没有车因此一直没能成行。&lt;/p&gt;
           
         
@@ -91,7 +174,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/shengjinhu.jpg&#34; alt=&#34; 图: 明明&#34;&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/shengjinhu.jpg&#34; alt=&#34; 图: 明明&#34;  /&gt;
 参加工作多年，找工作时参加过一些面试，经历过笔试，面试，电话面试等多种形式 。也作为面试官面试过很多人，也参加过公司的面试培训，观摩过其他同事的面试。最近系统学习了一下极客时间的《技术面试官识人手册》，课程介绍的东西虽然不能全盘拿来使用，但是还是有很多东西指的借鉴，今天想要从面试官的角度分享一下个人的学习体会以及个人对于面试的一些见解。&lt;/p&gt;
           
         
@@ -112,7 +195,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/dianshanlake.jpg&#34; alt=&#34;向上生长 图: 明明&#34;&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/dianshanlake.jpg&#34; alt=&#34;向上生长 图: 明明&#34;  /&gt;
 已经有几个年头没有写过年终总结了。 2022年是非凡的一年，看到很多人写了年终总结，忍不住也来写一写。
 这一年如果使用几个关键词来总结，我想我的关键词是魔幻，起伏和充实。&lt;/p&gt;
           
@@ -155,7 +238,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/india/DSC01103.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/india/DSC01103.jpg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
 &lt;p&gt;跟着同事一起出差，去了印度这个神奇的国度，真实的见到了火车挂人的情景和当地的一些风土人情。&lt;/p&gt;
           
         
@@ -176,7 +259,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/america/DSC07744.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/america/DSC07744.jpg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
           
         
         </description>
@@ -196,7 +279,7 @@
         
         
         
-          &lt;p&gt;&lt;img src=&#34;https://isming.me/images/photo/japan/DSC06750.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/photo/japan/DSC06750.jpg&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
           
         
         </description>
@@ -285,7 +368,7 @@
         
           &lt;p&gt;小红书Android客户端第一个版本于2014年8月8日发布，转眼到了2016年8月8日，小红书Android版本发版两周年。趁机回顾一下小红书的Android版本，两年中我们踩过很多坑，收获很多经验，分享出来与大家共勉。
 小红书从最初1.0到现在目前4.7版本，历经两年，安装包从原先的5M发展到现在的17M，产品模块也从原先的只有社区模块发展到了具有社区和电商两个大模块。App包含社区、电商、支付、推送、直播、统计等各种功能和模块，那么开始吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
           
         
         </description>
@@ -810,7 +893,7 @@ HashMap 是Hashtable 的轻量级实现（非线程安全的实现），他们�
         
         
         
-          朋友们 郑泽鑫的博客 https://zhengzexin.com/ 申请友链接可在本页留言，本站信息：
+          朋友们 郑泽鑫的博客 https://zhengzexin.com/ 遐说-Dorad https://blog.cuger.cn 申请友链接可在本页留言，本站信息：
 标题: 码农明明桑 Url: https://isming.me 头像: https://isming.me/chrome-512.png 简介： 个人的技术和日常记录 
           
         

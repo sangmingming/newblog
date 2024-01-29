@@ -86,8 +86,7 @@
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="记录博客转HTTPS"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="记录博客转HTTPS"/>
 <meta name="twitter:description" content="越来越多的网站已经支持https了，谷歌浏览器对于未使用https的网站会提示不安全。本站采用hexo来静态生成页面，之前托管在github pages上面，因为一直也没有弄。周末在家闲来无事，顺便就把博客改到vps上面，然后添加了https支持。"/>
 
 
@@ -98,6 +97,7 @@
 <meta property="og:url" content="https://isming.me/2017-07-12-blog-https/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-07-12T21:30:52+08:00" />
 <meta property="article:modified_time" content="2017-07-12T21:30:52+08:00" />
+
 
 
 
@@ -132,7 +132,7 @@
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -157,7 +157,7 @@
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -214,7 +214,7 @@
     <div class="post-meta">
       
         <span class="post-date">
-          2017-07-12
+          2017-07-12 21:30:52
         </span>
 
         
@@ -294,8 +294,7 @@ sudo certbot &ndash;nginx</p>
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -303,17 +302,16 @@ sudo certbot &ndash;nginx</p>
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -339,7 +337,7 @@ sudo certbot &ndash;nginx</p>
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

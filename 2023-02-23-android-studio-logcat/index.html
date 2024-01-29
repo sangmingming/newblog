@@ -87,8 +87,7 @@
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="新版Android Studio Logcat view使用简明教程"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="新版Android Studio Logcat view使用简明教程"/>
 <meta name="twitter:description" content="
 从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。"/>
 
@@ -101,6 +100,7 @@
 <meta property="og:url" content="https://isming.me/2023-02-23-android-studio-logcat/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-02-23T23:10:52+08:00" />
 <meta property="article:modified_time" content="2023-02-23T23:10:52+08:00" />
+
 
 
 
@@ -135,7 +135,7 @@
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -160,7 +160,7 @@
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -217,7 +217,7 @@
     <div class="post-meta">
       
         <span class="post-date">
-          2023-02-23
+          2023-02-23 23:10:52
         </span>
 
         
@@ -237,20 +237,20 @@
 
     <div class="post-content">
       
-      <p><img src="/images/photo/logcat-window.png" alt="logcat-window.png"></p>
+      <p><img loading='lazy' decoding="async" src="/images/photo/logcat-window.png" alt="logcat-window.png"  /></p>
 <p>从Android Studio Dophin开始，Android Studio中的默认展示了新版的logcat。新版的logcat色彩上是更加的好看了，不同的tag会有不同的颜色，不同level等级的log默认也有不同的颜色。log过滤修改的更简洁了，当然使用起来也更加复杂了。原先的log视图只需要勾选就可以选择不同level的log了，只需要选择只展示当前应用的log就可以过滤掉其他应用的log了，但是新版只提供了一个输入框去过滤。在经过几个月的适应和对于官方文档的学习后，终于使用了，这里简单记录和分享一下。</p>
 <h3 id="定义自己专属的log-view">定义自己专属的log view</h3>
 <p>log view 默认提供了两种视图，Standard View 和Compat View。Stand View会展示每一条log的日期，时间，进程线程id，tag，包名，log level以及message。Compat View只展示时间，log level和详细的message。可以通过log view左边的<strong>Configure Logcat Formatting Options</strong>按钮来修改，同时这个按钮中还有一个<strong>Modify Views</strong>选项可以来修改standard和 Compat视图的具体展示内容，可以定制自己的logview样式，如下图所示。</p>
-<p><img src="/images/photo/logcat-view-setting.jpg" alt="logcat-view-setting.jpg"></p>
+<p><img loading='lazy' decoding="async" src="/images/photo/logcat-view-setting.jpg" alt="logcat-view-setting.jpg"  /></p>
 <p>个性化的logcat 视图不仅仅是可以自定义展示的内容，还可以修改log和filter的配色方案。前往<strong>Settings(Windows)/Preferences(Mac) -&gt;Editor -&gt; Color Scheme</strong>，选择<strong>Android Logcat</strong>即可修改log 的颜色，选择<strong>Logcat Filter</strong>即可修改filter的颜色。</p>
 <p>以上修改的是logcat view的外表，我们还可以修改它的内核，一个是logcat循环滚动区的大小，以及新logcat window的默认filter，可以通过前往<strong>Settings(Windows)/Preferences(Mac) -&gt; Tools -&gt; Logcat</strong> 设置。</p>
 <h3 id="一些操作技巧">一些操作技巧</h3>
-<p>在标准布局下，或者我们的log太长的时候，一屏通常展示不下，我们需要不停的向右滑动，滚动才能看到log的信息，我们可以用log view左侧的<strong>Soft-Wrap</strong> <img src="/images/photo/logcat-soft-wrap.png" alt="logcat-soft-wrap.png">按钮来让log换行。</p>
+<p>在标准布局下，或者我们的log太长的时候，一屏通常展示不下，我们需要不停的向右滑动，滚动才能看到log的信息，我们可以用log view左侧的<strong>Soft-Wrap</strong> <img loading='lazy' decoding="async" src="/images/photo/logcat-soft-wrap.png" alt="logcat-soft-wrap.png"  />按钮来让log换行。</p>
 <p>左侧的Clear Logcat按钮可以清空logcat。左侧的Pause按钮可以暂停logcat的输出，方便看错误日志，可以避免关心的日志被新的日志冲掉。</p>
-<p>新版本中，可以通过点击logcat tab右侧的<strong>New tab</strong> <img src="/images/photo/logcat-new-tab.png" alt="logcat-new-tab.png">按钮来同时创建多个logcat view窗口。这种方式创建的不能同时展示，而利用logcat view左侧的split Panels 按钮则可以创建多个窗口，并且同时展示。每一个窗口都可以设置自己要展示的连接设备，展示样式，以及过滤选项。这样就可以很方便的同时观察多种log。</p>
-<p><img src="/images/photo/logcat-multi-window.jpg" alt="logcat-multi-window.jpg"></p>
+<p>新版本中，可以通过点击logcat tab右侧的<strong>New tab</strong> <img loading='lazy' decoding="async" src="/images/photo/logcat-new-tab.png" alt="logcat-new-tab.png"  />按钮来同时创建多个logcat view窗口。这种方式创建的不能同时展示，而利用logcat view左侧的split Panels 按钮则可以创建多个窗口，并且同时展示。每一个窗口都可以设置自己要展示的连接设备，展示样式，以及过滤选项。这样就可以很方便的同时观察多种log。</p>
+<p><img loading='lazy' decoding="async" src="/images/photo/logcat-multi-window.jpg" alt="logcat-multi-window.jpg"  /></p>
 <h3 id="通过键值对来过滤log">通过键值对来过滤Log</h3>
-<p><img src="/images/photo/logcat-query-suggestions.png" alt="logcat-query-suggestions.png"></p>
+<p><img loading='lazy' decoding="async" src="/images/photo/logcat-query-suggestions.png" alt="logcat-query-suggestions.png"  /></p>
 <p>新的过滤器，看起来简单，实际上更加复杂且强大了。通过<code>Ctrl</code>+<code>Space</code>按键可以查看系统建议的一些查询列表。这里介绍一下查询中会用到的键：</p>
 <ul>
 <li><strong>tag</strong>: 匹配日志的tag字段</li>
@@ -272,7 +272,7 @@
 <h3 id="切换回旧版log-view">切换回旧版log view</h3>
 <p>最后的最后，如果你觉得新版本适应不了，还是想要切换回旧版本的log view，还想要保留新版的android studio，也还是可以通过修改设置进行切换的。
 前往<strong>Settings(Windows)/Preferences(Mac) -&gt; Experimental</strong>, 反选<code>Enable new logcat tool window</code> 即可，如下图所示。</p>
-<p><img src="/images/photo/disable_new_logview.jpg" alt="disable_new_logview.jpg"></p>
+<p><img loading='lazy' decoding="async" src="/images/photo/disable_new_logview.jpg" alt="disable_new_logview.jpg"  /></p>
 <p>学习工具的目的，是为了让工具更好的为我们服务。希望大家都能够通过使用as提供的新功能来提高效率，从而有更多的时间去风花雪月。</p>
 <p>参考：<a href="https://developer.android.com/studio/debug/logcat">https://developer.android.com/studio/debug/logcat</a></p>
     </div>
@@ -286,6 +286,13 @@
             <hr />
           </div>
           <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://isming.me/2024-01-04-android-material-color-issue/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">记解决MaterialButton背景颜色与设置值不同</span>
+                </a>
+              </span>
             
             
               <span class="button next">
@@ -304,8 +311,7 @@
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -313,17 +319,16 @@
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -349,7 +354,7 @@
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

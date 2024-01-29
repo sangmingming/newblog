@@ -86,8 +86,7 @@
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="android动画-Frame Animation"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="android动画-Frame Animation"/>
 <meta name="twitter:description" content="动画可以在视觉上增加程序的流畅度，我之前对于动画这一块，是会用，但是不全面，这里写下博客，全面梳理一下Android动画方面的知识。当然，关于动画这块，也有很多前人写了很多内容，大家可以去参考。"/>
 
 
@@ -98,6 +97,7 @@
 <meta property="og:url" content="https://isming.me/2015-01-28-android-frame-animation/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2015-01-28T20:13:47+08:00" />
 <meta property="article:modified_time" content="2015-01-28T20:13:47+08:00" />
+
 
 
 
@@ -132,7 +132,7 @@
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -157,7 +157,7 @@
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -214,7 +214,7 @@
     <div class="post-meta">
       
         <span class="post-date">
-          2015-01-28
+          2015-01-28 20:13:47
         </span>
 
         
@@ -257,49 +257,49 @@ android中提供了<code>AnimationDrawable</code>类来实现帧动画，我们�
 </span></span></code></pre></div><p>上面代码中，<code>onshot</code>若为<code>true</code>，则动画只播放一次，否则动画会循环播放。item中的duration用于设置当前帧的停留时间。</p>
 <h4 id="在代码中获取并启动动画">在代码中获取并，启动动画。</h4>
 <p>如上面的xml文件为rocket_thrust.xml，则在代码中使用如下：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>AnimationDrawable rocketAnimation<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>AnimationDrawable rocketAnimation;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onCreate</span><span style="color:#f92672">(</span>Bundle savedInstanceState<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onCreate</span><span style="color:#f92672">(</span>savedInstanceState<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>  setContentView<span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">layout</span><span style="color:#f92672">.</span><span style="color:#a6e22e">main</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onCreate</span>(Bundle savedInstanceState) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">onCreate</span>(savedInstanceState);
+</span></span><span style="display:flex;"><span>  setContentView(R.<span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">main</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  ImageView rocketImage <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>ImageView<span style="color:#f92672">)</span> findViewById<span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">.</span><span style="color:#a6e22e">rocket_image</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>  rocketImage<span style="color:#f92672">.</span><span style="color:#a6e22e">setBackgroundResource</span><span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">drawable</span><span style="color:#f92672">.</span><span style="color:#a6e22e">rocket_thrust</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>  rocketAnimation <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>AnimationDrawable<span style="color:#f92672">)</span> rocketImage<span style="color:#f92672">.</span><span style="color:#a6e22e">getBackground</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  ImageView rocketImage <span style="color:#f92672">=</span> (ImageView) findViewById(R.<span style="color:#a6e22e">id</span>.<span style="color:#a6e22e">rocket_image</span>);
+</span></span><span style="display:flex;"><span>  rocketImage.<span style="color:#a6e22e">setBackgroundResource</span>(R.<span style="color:#a6e22e">drawable</span>.<span style="color:#a6e22e">rocket_thrust</span>);
+</span></span><span style="display:flex;"><span>  rocketAnimation <span style="color:#f92672">=</span> (AnimationDrawable) rocketImage.<span style="color:#a6e22e">getBackground</span>();
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">onTouchEvent</span><span style="color:#f92672">(</span>MotionEvent event<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>event<span style="color:#f92672">.</span><span style="color:#a6e22e">getAction</span><span style="color:#f92672">()</span> <span style="color:#f92672">==</span> MotionEvent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_DOWN</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    rocketAnimation<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onTouchEvent</span><span style="color:#f92672">(</span>event<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">onTouchEvent</span>(MotionEvent event) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (event.<span style="color:#a6e22e">getAction</span>() <span style="color:#f92672">==</span> MotionEvent.<span style="color:#a6e22e">ACTION_DOWN</span>) {
+</span></span><span style="display:flex;"><span>    rocketAnimation.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">onTouchEvent</span>(event);
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>上面代码具体就是首先从资源中获取到我们的动画，然后设置为view的背景，之后启动动画。</p>
 <p><em>需要注意的是，动画的启动需要在view和window建立连接后才可以绘制，比如上面代码是在用户触摸后启动。如果我们需要打开界面就启动动画的话，则可以在Activity的<code>onWindowFocusChanged()</code>方法中启动。</em></p>
 <p>上面介绍的是在xml中定义动画，当然也可以在java代码中定义动画。如：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>AnimationDrawable rocketAnimation<span style="color:#f92672">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>AnimationDrawable rocketAnimation;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onCreate</span><span style="color:#f92672">(</span>Bundle savedInstanceState<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onCreate</span><span style="color:#f92672">(</span>savedInstanceState<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>  setContentView<span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">layout</span><span style="color:#f92672">.</span><span style="color:#a6e22e">main</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onCreate</span>(Bundle savedInstanceState) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">onCreate</span>(savedInstanceState);
+</span></span><span style="display:flex;"><span>  setContentView(R.<span style="color:#a6e22e">layout</span>.<span style="color:#a6e22e">main</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  ImageView rocketImage <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>ImageView<span style="color:#f92672">)</span> findViewById<span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">.</span><span style="color:#a6e22e">rocket_image</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>  ImageView rocketImage <span style="color:#f92672">=</span> (ImageView) findViewById(R.<span style="color:#a6e22e">id</span>.<span style="color:#a6e22e">rocket_image</span>);
 </span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>  rocketAnimation <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AnimationDrawable<span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>  rocketAnimation<span style="color:#f92672">.</span><span style="color:#a6e22e">addFrame</span><span style="color:#f92672">(</span>getResources<span style="color:#f92672">().</span><span style="color:#a6e22e">getDrawable</span><span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">drawable</span><span style="color:#f92672">.</span><span style="color:#a6e22e">rocket_thrust1</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">200</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>  rocketAnimation<span style="color:#f92672">.</span><span style="color:#a6e22e">addFrame</span><span style="color:#f92672">(</span>getResources<span style="color:#f92672">().</span><span style="color:#a6e22e">getDrawable</span><span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">drawable</span><span style="color:#f92672">.</span><span style="color:#a6e22e">rocket_thrust2</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">200</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>  rocketAnimation<span style="color:#f92672">.</span><span style="color:#a6e22e">addFrame</span><span style="color:#f92672">(</span>getResources<span style="color:#f92672">().</span><span style="color:#a6e22e">getDrawable</span><span style="color:#f92672">(</span>R<span style="color:#f92672">.</span><span style="color:#a6e22e">drawable</span><span style="color:#f92672">.</span><span style="color:#a6e22e">rocket_thrust3</span><span style="color:#f92672">,</span> <span style="color:#ae81ff">200</span><span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span>rocketImage<span style="color:#f92672">.</span><span style="color:#a6e22e">setBackground</span><span style="color:#f92672">(</span>rocketAnimation<span style="color:#f92672">);</span>  
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>  rocketAnimation <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AnimationDrawable();
+</span></span><span style="display:flex;"><span>  rocketAnimation.<span style="color:#a6e22e">addFrame</span>(getResources().<span style="color:#a6e22e">getDrawable</span>(R.<span style="color:#a6e22e">drawable</span>.<span style="color:#a6e22e">rocket_thrust1</span>, 200);
+</span></span><span style="display:flex;"><span>  rocketAnimation.<span style="color:#a6e22e">addFrame</span>(getResources().<span style="color:#a6e22e">getDrawable</span>(R.<span style="color:#a6e22e">drawable</span>.<span style="color:#a6e22e">rocket_thrust2</span>, 200);
+</span></span><span style="display:flex;"><span>  rocketAnimation.<span style="color:#a6e22e">addFrame</span>(getResources().<span style="color:#a6e22e">getDrawable</span>(R.<span style="color:#a6e22e">drawable</span>.<span style="color:#a6e22e">rocket_thrust3</span>, 200);
+</span></span><span style="display:flex;"><span>rocketImage.<span style="color:#a6e22e">setBackground</span>(rocketAnimation);  
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">onTouchEvent</span><span style="color:#f92672">(</span>MotionEvent event<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>event<span style="color:#f92672">.</span><span style="color:#a6e22e">getAction</span><span style="color:#f92672">()</span> <span style="color:#f92672">==</span> MotionEvent<span style="color:#f92672">.</span><span style="color:#a6e22e">ACTION_DOWN</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    rocketAnimation<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">();</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">onTouchEvent</span><span style="color:#f92672">(</span>event<span style="color:#f92672">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">onTouchEvent</span>(MotionEvent event) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (event.<span style="color:#a6e22e">getAction</span>() <span style="color:#f92672">==</span> MotionEvent.<span style="color:#a6e22e">ACTION_DOWN</span>) {
+</span></span><span style="display:flex;"><span>    rocketAnimation.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">super</span>.<span style="color:#a6e22e">onTouchEvent</span>(event);
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>更多使用方法，可以去查看AnimationDrawable的api手册.</p>
 <p>另外，看了一下相关代码，AnimationDrawable代码不长，其父类是<code>DrawableContainer</code>，用于保存Drawable list，另外有一个数组保存每一帧的停顿时间。每隔一定时间，替换Drawable,重新刷新，实现动画。</p>
     </div>
@@ -338,8 +338,7 @@ android中提供了<code>AnimationDrawable</code>类来实现帧动画，我们�
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -347,17 +346,16 @@ android中提供了<code>AnimationDrawable</code>类来实现帧动画，我们�
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -383,7 +381,7 @@ android中提供了<code>AnimationDrawable</code>类来实现帧动画，我们�
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

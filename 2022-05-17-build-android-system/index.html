@@ -86,8 +86,7 @@
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="2022年在MacOs上编译AOSP"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="2022年在MacOs上编译AOSP"/>
 <meta name="twitter:description" content="之前苦于电脑磁盘空间比较小，而android系统的源码越来越大，一直没有机会自己编译Android系统。这次换了电脑，磁盘足够大，可以尝试一下了。
 而android源码的网站红色的字写着 Platform development on MacOS isn&rsquo;t supported as of June 22, 2021. ，我就知道不会那么容易了。"/>
 
@@ -100,6 +99,7 @@
 <meta property="og:url" content="https://isming.me/2022-05-17-build-android-system/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-17T22:30:52+08:00" />
 <meta property="article:modified_time" content="2022-05-17T22:30:52+08:00" />
+
 
 
 
@@ -134,7 +134,7 @@
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -159,7 +159,7 @@
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -216,7 +216,7 @@
     <div class="post-meta">
       
         <span class="post-date">
-          2022-05-17
+          2022-05-17 22:30:52
         </span>
 
         
@@ -428,8 +428,7 @@ else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpa
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -437,17 +436,16 @@ else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpa
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -473,7 +471,7 @@ else if(0 == _NSGetExecutablePath(progpath, &amp;nsexeclength) &amp;&amp; progpa
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

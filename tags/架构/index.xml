@@ -30,7 +30,7 @@
         
           &lt;p&gt;小红书Android客户端第一个版本于2014年8月8日发布，转眼到了2016年8月8日，小红书Android版本发版两周年。趁机回顾一下小红书的Android版本，两年中我们踩过很多坑，收获很多经验，分享出来与大家共勉。
 小红书从最初1.0到现在目前4.7版本，历经两年，安装包从原先的5M发展到现在的17M，产品模块也从原先的只有社区模块发展到了具有社区和电商两个大模块。App包含社区、电商、支付、推送、直播、统计等各种功能和模块，那么开始吧。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#39;lazy&#39; decoding=&#34;async&#34; src=&#34;https://isming.me/images/xingin_banner1.png&#34; alt=&#34;&#34;  /&gt;&lt;/p&gt;
           
         
         </description>

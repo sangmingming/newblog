@@ -86,8 +86,7 @@
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="简单聊聊Android Architecture Componets"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="简单聊聊Android Architecture Componets"/>
 <meta name="twitter:description" content="Google IO大会进行中，本次大会Android最大的新闻当属Android O以及Kotlin被官方认可。我发现了原来还有发布官方的架构库，以及推荐使用指南，分享给大家。
 架构原则
 
@@ -108,6 +107,7 @@
 <meta property="og:url" content="https://isming.me/2017-05-18-android-architecture-components-guide/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-05-18T20:01:38+08:00" />
 <meta property="article:modified_time" content="2017-05-18T20:01:38+08:00" />
+
 
 
 
@@ -142,7 +142,7 @@
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -167,7 +167,7 @@
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -224,7 +224,7 @@
     <div class="post-meta">
       
         <span class="post-date">
-          2017-05-18
+          2017-05-18 20:01:38
         </span>
 
         
@@ -257,7 +257,7 @@
 <li>模型驱动UI,优先持久化模型</li>
 </ul>
 <h2 id="新架构">新架构</h2>
-<p><img src="/images/imgac_architecture.png" alt="架构图"></p>
+<p><img loading='lazy' decoding="async" src="/images/imgac_architecture.png" alt="架构图"  /></p>
 <p>如上图所示，为新的架构模式：</p>
 <h3 id="activityfragment">Activity/Fragment</h3>
 <p>UI层，通常是Activity/Fragment等</p>
@@ -317,7 +317,7 @@
 <p>​    使用JUnit测试</p>
 <p>​    数据库，使用Room的话官方提供了测试支持，在测试时候创建内存数据库即可。</p>
 <p>​    网络请求，使用MockWebServer来提供假的服务端即可。</p>
-<p><img src="/images/imgac_profilefragment.png" alt="示例"></p>
+<p><img loading='lazy' decoding="async" src="/images/imgac_profilefragment.png" alt="示例"  /></p>
 <p>再补一个会议时的项目结构图，以一个用户信息页面为例。</p>
 <h2 id="最后的话">最后的话</h2>
 <p>​    目前这个库还不完善，api可能随时会变，公司项目不建议使用，个人项目可以尝鲜。另外对于已经有的项目，也不建议更换到现在的架构。不过这个项目的好的思想可以借鉴到我们自己的项目中来，同时这个库的方式我们其实可以借助其他的开源库来实现。</p>
@@ -362,8 +362,7 @@
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -371,17 +370,16 @@
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -407,7 +405,7 @@
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span

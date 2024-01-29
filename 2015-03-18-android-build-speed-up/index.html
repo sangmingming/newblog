@@ -88,8 +88,7 @@ org.gradle.daemon=true "
 
 
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="加速Android Studio/Gradle构建"/>
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="加速Android Studio/Gradle构建"/>
 <meta name="twitter:description" content="已经使用Android Studio进行开发超过一年，随着项目的增大，依赖库的增多，构建速度越来越慢，现在最慢要6分钟才能build一个release的安装包，在网上查找资料，发现可以通过一些配置可以加快速度，这里跟大家分享一下。
 开启gradle单独的守护进程
 在下面的目录下面创建gradle.properties文件：
@@ -126,6 +125,7 @@ org.gradle.daemon=true
 
 
 
+
   </head>
   <body class="">
     <div class="container">
@@ -154,7 +154,7 @@ org.gradle.daemon=true
         
       
         
-          <li><a href="/posts/photography/">摄影</a></li>
+          <li><a href="/posts/photography/">行摄</a></li>
         
       
         
@@ -179,7 +179,7 @@ org.gradle.daemon=true
       
     
       
-        <li><a href="/posts/photography/">摄影</a></li>
+        <li><a href="/posts/photography/">行摄</a></li>
       
     
       
@@ -236,7 +236,7 @@ org.gradle.daemon=true
     <div class="post-meta">
       
         <span class="post-date">
-          2015-03-18
+          2015-03-18 22:56:10
         </span>
 
         
@@ -307,8 +307,8 @@ org.gradle.daemon=true
 <p>上面的配置文件主要就是做， 增大gradle运行的java虚拟机的大小，让gradle在编译的时候使用独立进程，让gradle可以平行的运行。</p>
 <h3 id="修改android-studio配置">修改android studio配置</h3>
 <p>在android studio的配置中，开启offline模式，以及修改配置。实际上的配置和上面的一大段一样，主要是在这个地方配置的只会在ide构建的时候生效，命令行构建不会生效。</p>
-<p><img src="http://isming.qiniudn.com/as_gradle_offline.png" alt="开启offline"></p>
-<p><img src="http://isming.qiniudn.com/as_gradle_config.png" alt="设置运行模式和VM配置"></p>
+<p><img loading='lazy' decoding="async" src="http://isming.qiniudn.com/as_gradle_offline.png" alt="开启offline"  /></p>
+<p><img loading='lazy' decoding="async" src="http://isming.qiniudn.com/as_gradle_config.png" alt="设置运行模式和VM配置"  /></p>
 <h3 id="命令行构建">命令行构建</h3>
 <p>基于上面的配置，命令行构建时在命令后面加上这个参数即可 <code>--daemon --parallel --offline</code>。</p>
 <h3 id="引入依赖库时使用aar">引入依赖库时使用aar</h3>
@@ -352,8 +352,7 @@ org.gradle.daemon=true
       
         
 <p></p>
-<script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
-<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet' />
+<link href='//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.css' rel='stylesheet' />
 <style>
     :root {
         --waline-theme-color: #fd281a;
@@ -361,17 +360,16 @@ org.gradle.daemon=true
     }
 </style>
 <div id="waline"></div>
-  <script>
-    Waline.init({
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.0.0-alpha.10/dist/waline.js';
+
+    init({
       el: '#waline',
       serverURL: 'https://my-waline-comments.vercel.app',
-      uploadImage: false,
       dark: "body.dark-theme",
       login: "disable",
-      number: 3,
-      mathTagSupport: false,
-      visitor: true,
-      avatar: 'wavatar',
+      imageUploader: false
+      
     });
   </script>
 
@@ -397,7 +395,7 @@ org.gradle.daemon=true
     
       <div class="copyright">
         <span
-          >© 2023 码农明明桑 Powered by
+          >© 2024 码农明明桑 Powered by
           <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span
         >
         <span
