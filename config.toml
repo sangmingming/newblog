@@ -10,6 +10,10 @@ theme = "hello-friend"
 [params]
  defaultTheme = "light" #light or dark
  contentTypeName="posts"
+ MenuMore = "更多"
+ dateFormatList = "2006-01-02 15:04:05"
+ dateFormatSingle = "2006-01-02 15:04:05"
+ readMore = "阅读全文"
 
 [menu]
  [[menu.main]]
