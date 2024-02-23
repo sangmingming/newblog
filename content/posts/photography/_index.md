@@ -1,4 +1,4 @@
 ---
-title: "摄影"
-sulg: "photography"
+title: 行摄
+sulg: photography
 ---
