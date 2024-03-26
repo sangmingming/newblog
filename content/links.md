@@ -16,6 +16,7 @@ layout: 'posts'
 {{< friend url="https://blog.cuger.cn" src="https://blog.cuger.cn/images/avatar.png" name="遐说-Dorad" des="❤编程❤摄影，期待走遍万水千山" >}}
 {{< friend url="https://www.yunyitang.me/zh/" src="https://www.yunyitang.me/img/Avatar.png" name="Yunyi's Blog" des="Little squirrel Hopping around" >}}
 {{< friend url="https://www.5had0w.com/" src="https://www.5had0w.com/assets/logo.png" name="5had0w" des="一个游走在互联网边缘的影子，希望在这个世界留下一点痕迹。" >}}
+{{< friend url="https://blog.gadore.top/" src="https://blog.gadore.top/upload/Snipaste_2023-05-19_15-20-47.jpg" name="千里之豪" des="Fun to life, fun to coding." >}}
 
 ### 博客导航
 {{< friend url="https://www.foreverblog.cn/" src="https://img.isming.me/image/foreverblog.png" name="十年之约" des="一个人的寂寞，一群人的狂欢" >}}
