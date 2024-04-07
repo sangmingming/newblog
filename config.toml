@@ -14,6 +14,8 @@ theme = "hello-friend"
  dateFormatList = "2006-01-02"
  dateFormatSingle = "2006-01-02"
  readMore = "阅读全文"
+ RssFullText = true
+ 
 
 [menu]
  [[menu.main]]
