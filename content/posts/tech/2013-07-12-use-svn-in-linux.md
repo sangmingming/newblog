@@ -47,4 +47,3 @@ ubuntu下面安装svn，就是这么简单。
 或者直接svn delete test.php 然后再svn ci -m ‘delete test file‘，推荐使用这种简写：svn (del, remove, rm)
 
 更多使用方法，自己查看手册吧。
-[test](wello://app.wellowallet.com/home)
