@@ -4,7 +4,7 @@ title: "防御型投资者的投资基础-读《聪明的投资者》"
 date: 2023-03-21 21:30:52 +0800
 comments: true
 slug: "the-intlligent-investor"
-tags: ["Books", "Investment"]
+tags: ["读书", "Books", "Investment"]
 ---
 
 ![](/images/investor.jpg)

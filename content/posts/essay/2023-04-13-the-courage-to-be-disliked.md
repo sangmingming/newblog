@@ -4,7 +4,7 @@ title: "与自我和解-读《被讨厌的勇气》"
 date: 2023-04-13 22:30:52 +0800
 comments: true
 slug: "courage-be-disliked"
-tags: ["Books", "SelfImprovement"]
+tags: ["读书","Books", "SelfImprovement"]
 ---
 
 ![](/images/photo/20230203birds.jpg)
