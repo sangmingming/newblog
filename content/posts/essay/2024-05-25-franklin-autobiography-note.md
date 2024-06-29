@@ -2,7 +2,7 @@
 layout: post
 title: "向伟人学习-读《富兰克林自传》"
 date: 2024-05-25T20:05:21+0800
-tag: ["读书","Books", "SelfImprovement"]
+tags: ["读书","Books", "SelfImprovement"]
 feature: 
 comments: true
 slug: "2024-05-25-franklin-autobiography-note"

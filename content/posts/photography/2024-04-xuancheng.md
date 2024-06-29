@@ -2,7 +2,7 @@
 layout: post
 title: "看皖南山水-皖南川藏线及查济桃花潭自驾游"
 date: 2024-05-08T20:42:32+0800
-tag: ["旅行", "摄影"]
+tags: ["旅行", "摄影"]
 comments: true
 feature: 
 ---

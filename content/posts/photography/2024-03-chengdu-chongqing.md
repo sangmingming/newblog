@@ -2,7 +2,7 @@
 layout: post
 title: "一场美食美景之旅-记成都重庆游"
 date: 2024-03-24T22:03:23+0800
-tag: ["旅行", "摄影"]
+tags: ["旅行", "摄影"]
 comments: true
 feature: 
 ---

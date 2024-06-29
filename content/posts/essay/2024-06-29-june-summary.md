@@ -2,7 +2,7 @@
 layout: post
 title: "六月小记"
 date: 2024-06-29T15:52:33+0800
-tag: [杂谈, 折腾, 摄影]
+tags: ["杂谈", "折腾", "摄影"]
 feature: 
 comments: true
 ---

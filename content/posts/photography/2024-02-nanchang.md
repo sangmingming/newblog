@@ -2,7 +2,7 @@
 layout: post
 title: "历史之城英雄之城-南昌游记"
 date: 2024-02-23T18:44:29+0800
-tag: ["旅行", "摄影"]
+tags: ["旅行", "摄影"]
 comments: true
 feature: 
 ---

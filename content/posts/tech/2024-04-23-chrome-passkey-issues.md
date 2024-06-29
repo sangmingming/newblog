@@ -2,7 +2,7 @@
 layout: post
 title: "记国产手机无法在Chrome使用Passkey问题解决"
 date: 2024-04-23 20:30:12 +0800
-tag: ["android", "技术杂谈"]
+tags: ["android", "技术杂谈"]
 comments: true
 feature: 
 ---
