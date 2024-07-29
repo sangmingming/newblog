@@ -75,8 +75,8 @@ lunch sdk_phone_x86_64-eng
 以上就是我这次的编译过程，期待对大家有用。在此立个Flag，后续把阅读Android源码的内容也写出来。
 
 一些参考的资料：
-1. [下载 Android 源代码-官方资料](https://source.android.com/docs/setup/download/downloading?hl=zh-cn)
-2. [针对 AOSP 开发进行设置（9.0 或更高版本）-官方资料](https://source.android.com/docs/setup/start/requirements?hl=zh-cn)
-3. [构建Android-官方资料](https://source.android.com/docs/setup/build/building?hl=zh-cn)
+1. [下载 Android 源代码-官方资料](https://source.android.com/docs/setup/download/downloading?hl=zh-cn)      
+2. [针对 AOSP 开发进行设置（9.0 或更高版本）-官方资料](https://source.android.com/docs/setup/start/requirements?hl=zh-cn)        
+3. [构建Android-官方资料](https://source.android.com/docs/setup/build/building?hl=zh-cn)      
 4. [AndroidStudio导入Android系统源码](https://juejin.cn/post/7276812358663733263)
 
