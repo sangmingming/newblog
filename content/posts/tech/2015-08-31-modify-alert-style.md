@@ -2,7 +2,7 @@
 title: 改变support中AlertDialog的样式
 comments: true
 date: 2015-08-31 19:57:15 +0800
-tags: ['android']
+tags: ['Android']
 ---
 
 

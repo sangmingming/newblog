@@ -2,7 +2,7 @@
 title: 打破Android应用65K方法数魔咒
 comments: true
 date: 2015-05-01 00:33:08 +0800
-tags: [android]
+tags: [Android]
 ---
 
 近日，我们的应用，在编译的时候不幸的遇到这个错误

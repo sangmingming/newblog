@@ -2,7 +2,7 @@
 title: 一个上传apk到fir的gradle插件
 comments: true
 date: 2015-08-01 23:19:07 +0800
-tags: ['android', 'gradle']
+tags: ['Android', 'gradle']
 ---
 
 

@@ -2,7 +2,7 @@
 title: 记解决MaterialButton背景颜色与设置值不同
 comments: true
 date: 2024-01-04 22:02:30 +0800
-tags: [android]
+tags: [Android]
 ---
 
 最近的开发过程中，因为设计的风格采用了Android的Material风格，因此我们在项目开发过程中也使用了Android 的Material组件和主题，但是开发过程中法使用MaterialButton的时候，我们给按钮设置的背景颜色和实际展示的背景颜色不一样。网上搜索了一番也没找到原因，于是便开始查阅MateriButton的代码。

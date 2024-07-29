@@ -2,7 +2,7 @@
 title: 加速Android Studio/Gradle构建
 comments: true
 date: 2015-03-18 22:56:10 +0800
-tags: [android, gradle]
+tags: [Android, gradle]
 ---
 
 

@@ -2,7 +2,7 @@
 title: android反编译-如何防止反编译
 comments: true
 date: 2015-01-18 01:35:53 +0800
-tags: [android]
+tags: [Android,技术]
 ---
 
 

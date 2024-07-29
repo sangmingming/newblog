@@ -3,6 +3,7 @@ layout: post
 title: "新版Android Studio Logcat view使用简明教程"
 date: 2023-02-23 23:10:52 +0800
 comments: true
+tags: [Android,技术]
 slug: "android-studio-logcat"
 ---
 

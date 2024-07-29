@@ -2,7 +2,7 @@
 title: Android WebView 上传文件支持全解析
 comments: true
 date: 2015-12-21 20:02:30 +0800
-tags: [android]
+tags: [Android]
 ---
 
 默认情况下情况下，使用Android的WebView是不能够支持上传文件的。而这个，也是在我们的前端工程师告知之后才了解的。因为Android的每个版本WebView的实现有差异，因此需要对不同版本去适配。花了一点时间，参考别人的代码，这个问题已经解决，这里把我踩过的坑分享出来。

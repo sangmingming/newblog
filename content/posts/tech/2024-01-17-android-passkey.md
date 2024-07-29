@@ -2,7 +2,7 @@
 title: Passkey在Android端的应用实践
 comments: true
 date: 2024-01-17 23:02:30 +0800
-tags: [android]
+tags: [Android]
 ---
 
 Passkey，中文名通行密钥，他是WebAuthn的一部分，由FIDO联盟开发，可以做到让用户不使用用户名和密码，来直接验证身份。在2022年的WWDC上，Apple正式宣布了对Passkey的支持，当前10月份，google也宣布了对于passkey的支持。目前已经有一些应用支持了passkey，包括谷歌，微软，github，whatsapp等。最近在我们的Android应用上集成Passkey踩了很多的坑，简单记录一下。

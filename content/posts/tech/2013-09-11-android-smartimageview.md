@@ -2,6 +2,7 @@
 layout: post
 title: "Android图像开源视图：SmartImageView"
 date: 2013-09-11 23:19:11 +0800
+tags: [Android,技术]
 comments: true
 ---
 

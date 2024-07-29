@@ -2,7 +2,7 @@
 title: android动画-Frame Animation
 comments: true
 date: 2015-01-28 20:13:47 +0800
-tags: [android]
+tags: [Android,技术]
 ---
 
 

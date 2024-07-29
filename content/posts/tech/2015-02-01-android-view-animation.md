@@ -2,7 +2,7 @@
 title: android动画-View Animation
 comments: true
 date: 2015-02-01 11:10:50 +0800
-tags: [android]
+tags: [Android,技术]
 ---
 
 

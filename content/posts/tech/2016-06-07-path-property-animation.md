@@ -2,7 +2,7 @@
 title: Path和Property Animation配合让线条动起来   
 comments: true   
 date: 2016-06-07 14:03:39 +0800
-tags: [android, animation]
+tags: [Android, animation]
 ---
 
 

@@ -2,6 +2,7 @@
 layout: post
 title: "2022年在MacOs上编译AOSP"
 date: 2022-05-17 22:30:52 +0800
+tags: ["Android"]
 comments: true
 ---
 
