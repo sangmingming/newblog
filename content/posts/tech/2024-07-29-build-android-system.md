@@ -2,7 +2,7 @@
 layout: post
 title: "记录再次编译Android系统的坑"
 date: 2024-07-29T11:05:34+0800
-tags: ["Android", "系统解析"]
+tags: ["Android", "Android源码"]
 comments: true
 feature: 
 ---
