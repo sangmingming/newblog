@@ -1,6 +1,6 @@
 .footer,
 .top-link {
-    font-size: 1em;
+    font-size: 0.98em;
     color: var(--secondary);
 }
 
@@ -58,6 +58,14 @@
 
 .footer-right {
     display: flex;
-    justify-content: center;
     align-items: center;
+}
+
+@media only screen and (max-width:683px) {
+	.footer {
+        flex-direction: column;
+        justify-content: start;
+        font-size: 0.8em;
+    }
+
 }

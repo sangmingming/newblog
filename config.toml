@@ -16,7 +16,6 @@ theme = "zen"
  dateFormat = "2006-1-2"
  readMore = "阅读全文"
  RssFullText = true
- disableScrollToTop = true
 
  
 
