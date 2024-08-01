@@ -1,0 +1,24 @@
+{{- define "main" }}
+<div class="post">
+    <h1 class="post-title">
+      {{ .Title | markdownify }}
+    </h1>
+    <div class="post-content">
+      <p>
+        {{ "Hmm... Sorry, this page seems to be missing." | markdownify }}
+      </p>
+
+      {{ if .Site.Taxonomies.tags }}
+        <p>
+          {{ "Maybe these tags will help you find what you're looking for. :smile:" | markdownify | emojify }}
+        </p>
+        <h2>Tags</h2>
+        <div id="all-tags">
+          {{- range .Site.Taxonomies.tags -}}
+          <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}<sup class="archive-count">{{ .Count }}</sup></a>
+          {{- end -}}
+        </div>
+      {{ end }}
+    </div>
+  </div>
+{{- end }}{{/* end main */ -}}

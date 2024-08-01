@@ -4,6 +4,13 @@
 
   <div class="archive">
     <h1>{{ .Title }}</h1>
+        共计 {{ len (where .Site.RegularPages "Section" "posts") }} 篇文章
+
+    <div id="all-tags">
+      {{- range $name, $taxonomy := .Site.Taxonomies.tags -}}
+      <a href="/tags/{{ $name | urlize }}">#{{ $name }}<small>({{ .Count }})</small></a>
+      {{- end -}}
+    </div>
     {{ range .Site.RegularPages.GroupByPublishDate "2006" }}
       {{ if ne .Key "0001" }}
         <div class="archive__group-year">

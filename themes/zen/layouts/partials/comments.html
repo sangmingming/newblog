@@ -1,0 +1,24 @@
+{{- /* Comments area start */ -}}
+{{- /* to add comments read => https://gohugo.io/content-management/comments/ */ -}}
+{{- /* Comments area end */ -}}
+<p></p>
+<link href='//unpkg.com/@waline/client@3.3.0/dist/waline.css' rel='stylesheet' />
+<style>
+     :root {
+        --waline-theme-color: #121212;
+        --waline-active-color: #121212;
+    } 
+</style>
+<div id="waline"></div>
+<script type="module">
+    import { init } from '//unpkg.com/@waline/client@3.3.0/dist/waline.js';
+
+    init({
+      el: '#waline',
+      serverURL: 'https://waline-comments.isming.me',
+      dark: "body.dark-theme",
+      login: "disable",
+      imageUploader: false
+      
+    });
+  </script>

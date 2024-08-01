@@ -1,7 +1,7 @@
 baseURL = "https://isming.me/"
 languageCode = 'zh-CN'
 title = '码农明明桑'
-theme = "hello-friend"
+theme = "zen"
 
 [permalinks]
   posts = "/:filename/" # Don't miss the last slash: "/"
@@ -13,8 +13,11 @@ theme = "hello-friend"
  MenuMore = "更多"
  dateFormatList = "2006-01-02"
  dateFormatSingle = "2006-01-02"
+ dateFormat = "2006-1-2"
  readMore = "阅读全文"
  RssFullText = true
+ disableScrollToTop = true
+
  
 
 [menu]
@@ -28,7 +31,11 @@ theme = "hello-friend"
   weight="2"
  [[menu.main]]
   name="归档"
-  url="/archive/"
+  url="/archives/"
+  weight="3"
+ [[menu.main]]
+  name="搜索"
+  url="/search/"
   weight="3"
  [[menu.main]]
   name="友链"
@@ -47,6 +54,48 @@ theme = "hello-friend"
     endLevel = 3
     ordered = false
     startLevel = 1
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+    noHl = false
+    style = 'dracula'
+    tabWidth = 2
+
+
+[outputs]
+  home = ["HTML","Atom","JSON"]
+  page = ["HTML"]
+
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/sangmingming"
+
+[[params.socialIcons]]
+  name = "bilibili"
+  url = "https://space.bilibili.com/11883296"
+
+[[params.socialIcons]]
+  name = "instagram"
+  url = "https://www.instagram.com/isming.me/"
+[[params.socialIcons]]
+  name = "rss"
+  url = "https://isming.me/index.xml"
+
+[[params.socialIcons]]
+  name = "email"
+  url = "mailto:linming1007@gmail.com"
+
+
+
 
 
 
