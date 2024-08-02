@@ -33,10 +33,6 @@ theme = "zen"
   url="/archives/"
   weight="3"
  [[menu.main]]
-  name="搜索"
-  url="/search/"
-  weight="3"
- [[menu.main]]
   name="友链"
   url="/links/"
   weight="4"
