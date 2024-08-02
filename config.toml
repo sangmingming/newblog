@@ -16,6 +16,9 @@ theme = "zen"
  dateFormat = "2006-1-2"
  readMore = "阅读全文"
  RssFullText = true
+ [params.homeInfoParams]
+  Title =  "嗨，你好 👋"
+  Content = "欢迎光临码农明明桑的小站，这里是我的生活和技术内容记录。  <li>主业👨‍💻程序员</li><li>喜欢 📖读闲书，🎬看电影，📷拍照片，🍵喝茶。</li><p>更多关于我的信息可以查看👉[**关于我**](https://isming.me/about/)。</p>"
 
  
 
