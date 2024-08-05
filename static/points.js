@@ -29,5 +29,6 @@ let points = [
     ["<b>孟买</b><i>Mumbai</i><a href='/2019-11-india-travel/'><img src='/images/photo/india/DSC01103.jpg' />印度孟买、昌迪加尔、加尔各答之行</a>", 18.9733536,72.8281049],
     ["<b>加尔各答</b><i>Kolkata</i><a href='/2019-11-india-travel/'><img src='/images/photo/india/DSC01499.jpg' />印度孟买、昌迪加尔、加尔各答之行</a>", 22.5726459,88.3638953],
     ["<b>昌迪加尔</b><i>Chandigarh</i><a href='/2019-11-india-travel/'><img src='/images/photo/india/DSC01450.jpg' />印度孟买、昌迪加尔、加尔各答之行</a>", 30.7334421,76.7797143],
+    ["<b>湖州</b><i>Huzhou</i><a href='/2024-moganshan/'><img src='https://img.isming.me/photo/IMG_20240803_181046.jpg' />莫干山避暑玩水之旅</a>", 30.6297009,119.7518236],
 
 ];
