@@ -33,11 +33,14 @@
 {{- $pages = site.RegularPages }}
 {{- end }} -->
 
-{{- partial "location_map.html" . }}
+
 
 {{- $pages := union .RegularPages .Sections }}
 {{- $class := "post-entry" }}
 {{- $paginator := .Paginate $pages }}
+{{- if (eq $paginator.PageNumber 1) }}
+  {{- partial "location_map.html" . }}
+{{- end }}
 {{- range $index, $page := $paginator.Pages }}
 <article class="{{ $class }}">
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}

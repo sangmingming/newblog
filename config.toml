@@ -27,9 +27,13 @@ theme = "zen"
 
 [menu]
  [[menu.main]]
+  name="首页"
+  url="/"
+  weight="1"
+ [[menu.main]]
   name="技术"
   url="/posts/tech/"
-  weight="1"
+  weight="2"
  [[menu.main]]
   name="行摄"
   url="/posts/photography/"
