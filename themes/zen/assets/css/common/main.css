@@ -69,19 +69,19 @@ pre:hover .copy-code {
     margin-left: -20%;
     margin-right: -20%;
     width: 140%;
-    height: 660px; 
+    height: 50em; 
 
 }
 
 .home-map {
     width: 100%;
-    height: 560px; 
+    height: 38em; 
     margin-top: 16px;
 }
 
 
 .leaflet-popup-content {
-    width: 360px;
+    width: 20em;
 }
 
  .leaflet-popup-content b {
