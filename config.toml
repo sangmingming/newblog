@@ -20,7 +20,10 @@ theme = "zen"
   Title =  "嗨，你好 👋"
   Content = "欢迎光临码农明明桑的小站，这里是我的生活和技术内容记录。  <li>主业👨‍💻程序员</li><li>喜欢 📖读闲书，🎬看电影，📷拍照片，🍵喝茶。</li><p>更多关于我的信息可以查看👉[**关于我**](https://isming.me/about/)。</p>"
 
- 
+[pagination]
+  disableAliases = false
+  pagerSize = 6
+  path = 'page'
 
 [menu]
  [[menu.main]]
@@ -35,14 +38,18 @@ theme = "zen"
   name="归档"
   url="/archives/"
   weight="3"
+[[menu.main]]
+  name="搜索"
+  url="/search/"
+  weight="4"
  [[menu.main]]
   name="友链"
   url="/links/"
-  weight="4"
+  weight="5"
  [[menu.main]]
   name="关于"
   url="/about/"
-  weight="5"
+  weight="6"
 
 [markup]
   [markup.goldmark]
@@ -91,9 +98,5 @@ theme = "zen"
 [[params.socialIcons]]
   name = "email"
   url = "mailto:linming1007@gmail.com"
-
-
-
-
 
 
