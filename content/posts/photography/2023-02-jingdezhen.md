@@ -2,6 +2,7 @@
 title: "景德镇一日匆匆游"
 date: 2023-02-04T01:18:57+08:00
 tags: ["摄影", "旅行"]
+comments: true
 ---
 
 ![](/images/photo/jingdezhen/20230204-05-27.jpg)

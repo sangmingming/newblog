@@ -2,6 +2,7 @@
 title: "印度孟买、昌迪加尔、加尔各答之行"
 date: 2019-11-29T10:33:48+08:00
 tags: ["摄影", "旅行"]
+comments: true
 ---
 
 ![](/images/photo/india/DSC01103.jpg)
