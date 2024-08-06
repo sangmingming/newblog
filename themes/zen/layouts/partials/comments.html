@@ -1,7 +1,6 @@
 {{- /* Comments area start */ -}}
 {{- /* to add comments read => https://gohugo.io/content-management/comments/ */ -}}
 {{- /* Comments area end */ -}}
-<p></p>
 <link href='//unpkg.com/@waline/client@3.3.0/dist/waline.css' rel='stylesheet' />
 <style>
      :root {
@@ -14,6 +13,7 @@
         --waline-active-color: #A0A0A0;
     }
 </style>
+<p id="commentsanchor"></p>
 <div id="waline"></div>
 <script type="module">
     import { init } from '//unpkg.com/@waline/client@3.3.0/dist/waline.js';

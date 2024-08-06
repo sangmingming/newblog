@@ -51,12 +51,16 @@
           {{ with $featured }}{{ printf "<img src=\"%s\"/>" $featured.Permalink }}{{ end }}
         {{ end }}
         
-        {{ if .Site.Params.RssFullText }}{{ .Content | html }}
+        {{ if .Site.Params.RssFullText }}
+          {{ .Content | html }}
         {{ else }}
-          {{ with .Description }}{{ . | html }}
-          {{ else }}{{ .Summary | html }}
+          {{ with .Description }}
+            {{ . | html }}
+          {{ else }}
+            {{ .Summary | html }}
           {{ end }}
         {{ end }}
+        {{printf "<p><h4><a href=\"%s?source=rss#commentsanchor\">看完评论一下吧<a></h4></p>" .Permalink}}
         </description>
     </item>
     {{ end }}
