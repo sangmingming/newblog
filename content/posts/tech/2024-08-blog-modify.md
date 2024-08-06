@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "博客主题与版式更新记录"
+title: "博客主题装修更新记录"
 date: 2024-08-06T21:20:53+0800
 tags: ["Blog", "折腾"]
 comments: true
