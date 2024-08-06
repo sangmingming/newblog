@@ -97,7 +97,7 @@ theme = "zen"
   url = "https://www.instagram.com/isming.me/"
 [[params.socialIcons]]
   name = "rss"
-  url = "https://isming.me/index.xml"
+  url = "/index.xml"
 
 [[params.socialIcons]]
   name = "email"
