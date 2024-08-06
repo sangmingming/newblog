@@ -1,7 +1,8 @@
 baseURL = "https://isming.me/"
-languageCode = 'zh-CN'
+languageCode = 'zh'
 title = '码农明明桑'
 theme = "zen"
+defaultContentLanguage = "zh"
 
 [permalinks]
   posts = "/:filename/" # Don't miss the last slash: "/"

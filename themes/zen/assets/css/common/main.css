@@ -23,6 +23,10 @@
     padding: 0 16px;
 }
 
+.pagination a:active, .pagination a:focus,.pagination a:hover {
+    color: var(--tertiary)
+}
+
 .pagination .next {
     margin-inline-start: auto;
 }
