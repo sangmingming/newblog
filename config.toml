@@ -80,7 +80,7 @@ theme = "zen"
 
 
 [outputs]
-  home = ["HTML","Atom","JSON"]
+  home = ["HTML","RSS","JSON"]
   page = ["HTML"]
 
 
