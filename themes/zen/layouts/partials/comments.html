@@ -6,8 +6,13 @@
 <style>
      :root {
         --waline-theme-color: #121212;
-        --waline-active-color: #121212;
-    } 
+        --waline-active-color: #202020;
+    }
+
+    .dark {
+      --waline-theme-color: #AEAEAE;
+        --waline-active-color: #A0A0A0;
+    }
 </style>
 <div id="waline"></div>
 <script type="module">
@@ -16,7 +21,7 @@
     init({
       el: '#waline',
       serverURL: 'https://waline-comments.isming.me',
-      dark: "body.dark-theme",
+      dark: "body.dark",
       login: "disable",
       imageUploader: false
       
