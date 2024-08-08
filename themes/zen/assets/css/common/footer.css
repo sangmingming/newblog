@@ -69,3 +69,16 @@
     }
 
 }
+
+
+.travel {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: auto;
+    display: flex;
+    justify-content:center
+}
+
+.travel a {
+    padding-left: 8px;
+    padding-right: 8px;
+}
