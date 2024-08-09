@@ -18,6 +18,7 @@ layout: 'posts'
 {{< friend url="https://www.5had0w.com/" src="https://www.5had0w.com/assets/logo.png" name="5had0w" des="一个游走在互联网边缘的影子" >}}
 {{< friend url="https://blog.gadore.top/" src="https://blog.gadore.top/upload/Snipaste_2023-05-19_15-20-47.jpg" name="千里之豪" des="Fun to life, fun to coding." >}}
 {{< friend url="https://blog.zhheo.com/" src="https://bu.dusays.com/2022/12/28/63ac2812183aa.png" name="张洪Heo" des="分享设计与科技生活" >}}
+{{< friend url="https://feng.pub" src="https://cravatar.cn/avatar/868740183b995d2707e307ce0a89633a?s=200" name="阿锋的小宇宙" des="沧海一粟，微亮渺小一只虫。">}}
 
 ### 博客导航
 {{< friend url="https://www.foreverblog.cn/" src="https://img.isming.me/image/foreverblog.png" name="十年之约" des="一个人的寂寞，一群人的狂欢" >}}
