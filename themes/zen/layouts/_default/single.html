@@ -61,5 +61,25 @@
   {{- partial "comments.html" . }}
   {{- end }}
 </article>
-
+{{ if .Store.Get "hasMermaid" }}
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+    
+    mermaid.initialize({ startOnLoad: false });
+    function setMermaidTheme() {
+      const body = document.querySelector('body');
+      const theme = body.classList.contains('dark') ? 'dark' : 'default';
+      mermaid.initialize({theme: theme});
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      setMermaidTheme();
+      //mermaid.contentLoaded();
+      try {
+                mermaid.contentLoaded(); // Trigger rendering
+            } catch (error) {
+                console.error('Mermaid rendering error:', error);
+            }
+    });
+  </script>
+{{ end }}
 {{- end }}{{/* end main */}}
