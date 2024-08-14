@@ -24,8 +24,11 @@ private IBinder mActivityToken;
 ```mermaid
 classDiagram
 class Parcelable
+<<interface>> Parcelable
 class BaseClientRequest
+<<abstract>> BaseClientRequest
 class ClientTransactionItem
+<<abstract>> ClientTransactionItem
 BaseClientRequest <|-- ClientTransactionItem
 Parcelable <.. ClientTransactionItem
 BaseClientRequest: void preExecute(ClientTransactionHandler client, IBinder token)
@@ -34,6 +37,7 @@ BaseClientRequest: void postExecute(ClientTransactionHandler client, IBinder tok
 ClientTransactionItem: public int getPostExecutionState()
 ClientTransactionItem: boolean shouldHaveDefinedPreExecutionState()
 class ActivityTransactionItem
+<<abstract>> ActivityTransactionItem
 ClientTransactionItem <|-- ActivityTransactionItem
 ActivityTransactionItem: ActivityClientRecord getActivityClientRecord(ClientTransactionHandler client, IBinder token)
 ActivityTransactionItem <|-- LaunchActivityItem
@@ -371,6 +375,7 @@ classDiagram
 class ActivityThread
 class TransactionExecutor
 class ClientTransactionHandler
+<<abstract>> ClientTransactionHandler
 ClientTransactionHandler <|-- ActivityThread
 TransactionExecutor .. ClientTransactionHandler
 ActivityThread *-- TransactionExecutor
