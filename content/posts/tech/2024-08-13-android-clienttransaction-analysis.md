@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Android ClientTransaction机制分析"
+title: "Android源码分析之：ClientTransaction分析"
 date: 2024-08-13T21:59:04+0800
 tags: ["技术", "Android", "Android源码"]
 comments: true
@@ -424,3 +424,5 @@ private void scheduleResume(ActivityClientRecord r) {
 Android系统因为功能的代码，代码也更加复杂，很多地方因为许多的新功能多了很多逻辑判断，为我们看代码增加了难度。但是只要我们记住我们看的主线，关注我们一路传过来的值，关注我们自己会执行的那个分支，这样一路下来就可以把整个逻辑理清楚。
 
 本文以Android13的代码分析，如果读者对照最好也是以同样版本的代码看。以上是本人关于Android代码阅读的一点分享，由于个人可能存在一些误区，难免会有理解错误，或者笔误，如有发现，欢迎指正，也欢迎读者与我交流Android技术。
+
+(文中类图，时序图使用mermaid绘制，如果使用rss无法渲染，请点击原文查看)
