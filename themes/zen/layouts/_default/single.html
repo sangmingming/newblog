@@ -73,13 +73,18 @@
     }
     document.addEventListener('DOMContentLoaded', () => {
       setMermaidTheme();
-      //mermaid.contentLoaded();
-      try {
-                mermaid.contentLoaded(); // Trigger rendering
-            } catch (error) {
-                console.error('Mermaid rendering error:', error);
-            }
+      mermaid.contentLoaded(); // Trigger rendering
     });
+    // const observer = new MutationObserver((mutationsList) => {
+    //   for (const mutation of mutationsList) {
+    //     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+    //       console.log('change ' + mutation);
+    //       location.reload();
+    //     }
+    //   }
+    // });
+    // observer.observe(document.body, {attributes: true, attributeFilter: ['class']});
+    
   </script>
 {{ end }}
 {{- end }}{{/* end main */}}
