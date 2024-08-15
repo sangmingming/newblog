@@ -127,9 +127,9 @@ div#map .leaflet-popup-content a {
     }
 
     .mermaid {
-        margin-left: -var(--gap);
-        margin-right: -var(--gap);
-        width: 112%;
+        margin-left: -4%;
+        margin-right: -4%;
+        width: 108%;
 }
     
 }
