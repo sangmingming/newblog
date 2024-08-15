@@ -107,7 +107,7 @@ div#map .leaflet-popup-content a {
 }
 
 
-@media only screen and (max-width:683px) {
+@media only screen and (max-width: 768px) {
 	.other-map {
         margin-left: -10%;
         margin-right: -10%;
@@ -127,8 +127,8 @@ div#map .leaflet-popup-content a {
     }
 
     .mermaid {
-        margin-left: -6%;
-        margin-right: -6%;
+        margin-left: -var(--gap);
+        margin-right: -var(--gap);
         width: 112%;
 }
     
