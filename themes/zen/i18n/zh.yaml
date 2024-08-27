@@ -33,3 +33,9 @@
   translation: "已复制！"
 - id: read_all
   translation: "阅读全文"
+- id: see_also
+  translation: "相关内容"
+- id: pre_article
+  translation: "上一篇"
+- id: next_article
+  translation: "下一篇"

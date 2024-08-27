@@ -295,7 +295,7 @@
 }
 
 .post-footer {
-    margin-top: 56px;
+    margin-top: 28px;
 }
 
 .post-footer>* {
@@ -312,9 +312,8 @@
     display: inline-block;
 }
 
-.post-tags a,
-.share-buttons,
-.paginav {
+/* .post-tags a,
+.share-buttons {
     border-radius: var(--radius);
     background: var(--code-bg);
     border: 1px solid var(--border);
@@ -327,11 +326,26 @@
     font-size: 14px;
     line-height: 34px;
     background: var(--code-bg);
+} */
+
+/* .post-tags a:hover {
+    background: var(--border);
+} */
+
+.post-tags a {
+    display: block;
+    padding: 0 14px;
+    color: var(--primary);
+    font-size: 14px;
+    line-height: 34px;
+}
+.post-tags a::before {
+    content: "#"
 }
 
-.post-tags a:hover,
-.paginav a:hover {
-    background: var(--border);
+.post-tag a:hover {
+    color: var(--secondary);
+    box-shadow: 0 1px 0;
 }
 
 .share-buttons {
@@ -366,35 +380,28 @@ h6:hover .anchor {
 
 .paginav {
     display: flex;
-    line-height: 30px;
+    flex-direction: column;
 }
 
 .paginav a {
-    padding-inline-start: 14px;
     padding-inline-end: 14px;
+    padding-top: 10px;
+    padding-bottom: 18px;
     border-radius: var(--radius);
 }
 
 .paginav .title {
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-size: small;
+    font-size: 0.9em;
     color: var(--secondary);
 }
 
-.paginav .prev,
-.paginav .next {
-    width: 50%;
-}
 
 .paginav span:hover:not(.title) {
     box-shadow: 0 1px 0;
 }
 
-.paginav .next {
-    margin-inline-start: auto;
-    text-align: right;
-}
 
 [dir="rtl"] .paginav .next {
     text-align: left;
@@ -456,4 +463,13 @@ img.in-text {
 	.links-item {
         width:49%
     }
+}
+
+.related li {
+    margin-top: 8px;
+    margin-top: 8px;
+}
+
+.related {
+    margin-bottom: 30px;
 }

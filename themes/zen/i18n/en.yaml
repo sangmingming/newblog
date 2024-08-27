@@ -31,3 +31,9 @@
 
 - id: code_copied
   translation: "copied!"
+- id: see_also
+  translation: "See Also"
+- id: pre_article
+  translation: "Pre"
+- id: next_article
+  translation: "Next"
