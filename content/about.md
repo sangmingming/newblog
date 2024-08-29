@@ -4,7 +4,8 @@ date: 2014-03-15 01:02
 comments: true
 sharing: false
 footer: true
-layout: 'posts'
+layout: 'single'
+showReadingTime: false
 ---
 
 

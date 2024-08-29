@@ -6,13 +6,13 @@
 
 - id: read_time
   translation:
-    one : "1 分钟"
-    other: "{{ .Count }} 分钟"
+    one : "阅读约需1分钟"
+    other: "阅读约需{{ .Count }} 分钟"
 
 - id: words
   translation: 
-    one: "字"
-    other: "{{ .Count }} 字"
+    one: "全文1字"
+    other: "全文共约{{ .Count }} 字"
 
 - id: toc
   translation: "目录"

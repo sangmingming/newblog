@@ -22,6 +22,8 @@
     {{- if not (.Param "hideMeta") }}
     <div class="post-meta">
       {{- partial "post_meta.html" . -}}
+      &nbsp;&nbsp;
+      {{- partial "post_words.html" . -}}
       {{- partial "translation_list.html" . -}}
       {{- partial "edit_post.html" . -}}
       {{- partial "post_canonical.html" . -}}

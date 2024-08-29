@@ -5,6 +5,7 @@ comments: true
 sharing: false
 footer: true
 layout: 'posts'
+showReadingTime: false
 ---
 
 
