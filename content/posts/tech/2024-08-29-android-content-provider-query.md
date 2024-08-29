@@ -10,6 +10,7 @@ draft: false
 ---
 
 之前已经分析了启动应用安装ContentProvider，使用时获取ContentProvider，我们这里再分析一下使用ContentProvider查询数据已经监听ContentProvider数据变化的情况。
+<!--more-->
 
 ### 查询数据
 上次的文章已经介绍了使用`query`的方法，并且已经介绍完了通过`acquireProvider`获取到`ContentProvider`，如果是是本地应用的话拿到的是`Transport`对象，如果是查询其他应用（不严谨的说法，其他应用也要排查userId不同，且不共享签名），则拿到的是`ContentProviderProxy`，这里我们要分析的查询是其他应用的情况，因此我们需要关注`ContentProviderProxy`的`query`方法。
