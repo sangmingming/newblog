@@ -1,10 +1,10 @@
 {{- $scratch := newScratch }}
 
 {{- if (.Param "showReadingTime") | default true -}}
-{{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime))) }}
+{{ $readingTime := div (float .WordCount) .Site.Params.reading_speed }}
+{{ $readingTime = math.Ceil $readingTime }}
+{{- $scratch.Add "meta" (slice (i18n "read_time" (int $readingTime) | default (printf "%d min" (int $readingTime)))) }}
 {{- end }}
-
-
 
 {{- with ($scratch.Get "meta") }}
 {{- delimit . "&nbsp;,&nbsp;" | safeHTML -}}
