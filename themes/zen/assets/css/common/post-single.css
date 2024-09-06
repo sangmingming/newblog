@@ -44,6 +44,10 @@
     margin: 24px 0 16px;
 }
 
+.post-content {
+    line-height: 1.9;
+}
+
 .post-content h1 {
     margin: 40px auto 32px;
     font-size: 40px;
