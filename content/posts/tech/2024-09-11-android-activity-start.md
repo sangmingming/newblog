@@ -15,7 +15,7 @@ comments: true
 feature: 
 ---
 
-`Activity`是Android中四大组件使用最多的一种，不准确的说，一个`Activity`就是一个独立页面的承载，因此看Android系统的源码，`Activity`的启动也是必须要去阅读的。今天的文章就来介绍`Activity`的启动。因为之前的文章已经分析了[ClientTransaction](https://isming.me/2024-08-13-android-clienttransaction-analysis/)，因此我们对与最后`AMS`调用Activity的生命周期和启动有所了解。并且我们也已经分析过了[Binder](https://isming.me/2024-09-04-android-binder-overview/),对于跨进程通讯我们也比较清楚了，不需要细看。我们也分析了[应用进程的启动](https://isming.me/2024-09-04-android-binder-overview/)，我们分析Activity启动过程，就不需要去关注应用进程的启动了。
+`Activity`是Android中四大组件使用最多的一种，不准确的说，一个`Activity`就是一个独立页面的承载，因此看Android系统的源码，`Activity`的启动也是必须要去阅读的。今天的文章就来介绍`Activity`的启动。因为之前的文章已经分析了[ClientTransaction](https://isming.me/2024-08-13-android-clienttransaction-analysis/)，因此我们对于`AMS`调用Activity的生命周期和启动有所了解。并且我们也已经分析过了[Binder](https://isming.me/2024-09-04-android-binder-overview/),对于跨进程通讯我们也比较清楚了，不需要细看。我们也分析了[应用进程的启动](https://isming.me/2024-09-04-android-binder-overview/)，我们分析Activity启动过程，就不需要去关注应用进程的启动了。有了这些基础，分析Activity的启动会容易一点点。
 
 <!--more-->
 
