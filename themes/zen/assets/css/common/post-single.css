@@ -477,3 +477,13 @@ img.in-text {
 .related {
     margin-bottom: 30px;
 }
+
+.post-copywrite {
+    border-radius: var(--radius);
+    border: 1px solid  var(--tertiary);
+    padding: 16px;
+}
+
+.post-copywrite p{
+    margin-top: 12px;
+}

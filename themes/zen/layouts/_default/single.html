@@ -45,6 +45,7 @@
   {{- end }}
 
   <footer class="post-footer">
+
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
       {{- range ($.GetTerms $tags) }}
@@ -53,7 +54,9 @@
     </ul>
 
 
-
+    {{- if not (.Param "hideMeta") }}
+    {{- partial "post_copywrite.html" . -}}
+    {{- end }}
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
