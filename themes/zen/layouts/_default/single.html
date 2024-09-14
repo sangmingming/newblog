@@ -54,7 +54,7 @@
     </ul>
 
 
-    {{- if not (.Param "hideMeta") }}
+    {{- if (.Param "showCopyright") | default true -}}
     {{- partial "post_copywrite.html" . -}}
     {{- end }}
     {{- if (.Param "ShowPostNavLinks") }}

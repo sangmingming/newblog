@@ -6,6 +6,7 @@ sharing: false
 footer: true
 layout: 'posts'
 showReadingTime: false
+showCopyright: false
 ---
 
 

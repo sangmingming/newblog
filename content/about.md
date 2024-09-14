@@ -6,12 +6,13 @@ sharing: false
 footer: true
 layout: 'single'
 showReadingTime: false
+showCopyright: false
 ---
 
 
 
 
-+   程序员一枚，家里农民出身，工作跟农民好像也没有太大差别，自嘲为码农。
++   程序员一枚，家里世代农民，工作跟农民好像也没有太大差别，自嘲为码农。
 +   原在老家安徽耕田，现在上海码字搬砖。
 +   主要从事Android软件开发，对于Python，web前端也略有了解。
 +	热爱新技术，包括但不限于软件新技术、区块链、Web3等。常年混迹于网络。  
@@ -32,6 +33,11 @@ showReadingTime: false
 + 邮箱： [i@isming.me](mailto:i@isming.me)   [linming1007@gmail.com](mailto:linming1007@gmail.com)
 
 ![](/images/wechat-qrcode.png)
+
+### 版权声明
+本站文章遵循「[CC BY-NC-SA 4.0(署名—非商业性使用—相同方式共享)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)」协议，转载请保留署名并注明来源。
+
+本站作者照片同样遵循「[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)」协议，如需使用，请保留水印并著名来源，如需大图，请联系作者。
 	
 
 #### 你可以通过博客留言，或者公众号、邮箱与我联系。欢迎与我交流，共同进步成长！\^_\^
