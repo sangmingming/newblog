@@ -1,8 +1,11 @@
 ---
 layout: post
-title: "回村观察随记"
+title: 回皖北农村观察随记
 date: 2024-09-18T22:05:48+0800
-tags: ["杂谈", "生活", "摄影"]
+tags:
+  - 杂谈
+  - 生活
+  - 摄影
 feature: 
 comments: true
 ---
