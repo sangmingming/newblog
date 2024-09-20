@@ -128,6 +128,8 @@ div#map .leaflet-popup-content a {
 
     .mermaid {
         width: 100%;
+        display: flex;
+        justify-content: center;
 }
     
 }
@@ -136,6 +138,8 @@ div#map .leaflet-popup-content a {
         margin-left: -20%;
         margin-right: -20%;
         width: 140%;
+        display: flex;
+        justify-content: center;
 }
 
 div#map .leaflet-popup-content a:active,div#map .leaflet-popup-content a:focus,div#map .leaflet-popup-content a:hover {
