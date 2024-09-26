@@ -107,10 +107,30 @@ div#map .leaflet-popup-content a {
 }
 
 
+
+
+.mermaid {
+        margin-left: -20%;
+        margin-right: -20%;
+        width: 140%;
+        display: flex;
+        justify-content: center;
+}
+
+div#map .leaflet-popup-content a:active,div#map .leaflet-popup-content a:focus,div#map .leaflet-popup-content a:hover {
+    color: var(--color-a-hover)
+}
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: var(--entry);
+    color: var(--primary);
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
 @media only screen and (max-width: 768px) {
 	.other-map {
-        margin-left: -10%;
-        margin-right: -10%;
+        margin-left: 0-var(--gap);
+        margin-right: 0-var(--gap);
         width: 120%;
         height: 24rem; 
     
@@ -132,22 +152,4 @@ div#map .leaflet-popup-content a {
         justify-content: center;
 }
     
-}
-
-.mermaid {
-        margin-left: -20%;
-        margin-right: -20%;
-        width: 140%;
-        display: flex;
-        justify-content: center;
-}
-
-div#map .leaflet-popup-content a:active,div#map .leaflet-popup-content a:focus,div#map .leaflet-popup-content a:hover {
-    color: var(--color-a-hover)
-}
-
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    background: var(--entry);
-    color: var(--primary);
-    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
 }
