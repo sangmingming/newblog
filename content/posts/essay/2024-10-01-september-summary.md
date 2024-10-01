@@ -5,7 +5,7 @@ date: 2024-10-01T19:10:11+0800
 tags: ["杂谈", "折腾", "总结", "旅行", "投资"]
 feature: 
 comments: true
-draft: true
+draft: false
 ---
 九月学生开学，台风来袭，合肥地震，股票上涨。开了一夜的车到达皖南农村后，稍作休息，有空来写一写九月的月报。
 ![](https://img.isming.me/photo/IMG_20240917_173944.jpg)
