@@ -31,4 +31,6 @@ let points = [
     ["<b>昌迪加尔</b><i>Chandigarh</i><a href='/2019-11-india-travel/'><img src='/images/photo/india/DSC01450.jpg' />印度孟买、昌迪加尔、加尔各答之行</a>", 30.7334421,76.7797143],
     ["<b>湖州</b><i>Huzhou</i><a href='/2024-moganshan/'><img src='https://img.isming.me/photo/IMG_20240803_181046.jpg' />莫干山避暑玩水之旅</a>", 30.6003213,119.8951119],
     ["<b>安庆</b><i>Anqing</i><a href='/2024-10-anqing-travel-one-museum/'><img src='https://img.isming.me/photo/20241004-22-4.jpg' />安庆游记1-安庆博物馆</a>", 30.5370001,117.1164894],
+    ["<b>安庆</b><i>Anqing</i><a href='/2024-10-anqing-two-jixian/'><img src='https://img.isming.me/photo/20241005-22-4.jpg' />安庆游记2-集贤时空和倒扒狮街</a>", 30.5788349,117.0108666],
+    
 ];
