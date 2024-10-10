@@ -3,6 +3,7 @@ layout: post
 title: "Android消息循环分析"
 date: 2014-04-02T19:14:57+0800
 tags: ['Android', '技术']
+keywords: ["Android", "Framework", "SourceCode", "OS", "Looper", "Message"]
 comments: true
 feature: 
 ---
