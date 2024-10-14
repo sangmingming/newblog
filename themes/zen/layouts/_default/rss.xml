@@ -65,7 +65,7 @@ xmlns:wfw="http://wellformedweb.org/CommentAPI/">
         
         </description>
         {{if .Site.Params.RssFullText}}
-          <content:encoded>{{ .Content | html }}{{printf "<p><h4><a href=\"%s?utm_source=rss#commentsanchor\">看完评论一下吧<a></h4></p>" .Permalink}}</content:encoded>
+          <content:encoded  xml:lang="{{ .Site.LanguageCode }}">{{ .Content | html }}{{printf "<p><h4><a href=\"%s?utm_source=rss#commentsanchor\">看完评论一下吧<a></h4></p>" .Permalink}}</content:encoded>
         {{ end}}
         <comments>{{ printf "%s?utm_source=rss#commentsanchor" .Permalink }} </comments>
 
