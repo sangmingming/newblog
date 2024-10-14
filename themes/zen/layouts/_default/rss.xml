@@ -11,7 +11,7 @@
 {{- $pages = $pages | first $limit -}}
 {{- end -}}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" >
   <channel>
     <title>{{ .Site.Title }}</title>
     
@@ -23,12 +23,14 @@
     {{ end }}
     
     <link>{{ .Permalink }}</link>
-    <description>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}</description>
+    <description>{{ .Site.Params.rssdescription }}</description>
     <generator>Hugo -- gohugo.io</generator>{{ with .Site.LanguageCode }}
-    <language>{{.}}</language>{{end}}{{ with .Site.Author.email }}
-    <managingEditor>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</managingEditor>{{end}}{{ with .Site.Author.email }}
+    <language>{{.}}</language>{{end}}
+    {{ with .Site.Author.email }}
+    <managingEditor>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</managingEditor>{{end}}
+    {{ with .Site.Author.email }}
     <webMaster>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</webMaster>{{end}}{{ with .Site.Copyright }}
-    <copyright>{{.}}</copyright>{{end}}{{ if not .Date.IsZero }}
+    <copyright>{{(. | markdownify) | html }} </copyright>{{end}}{{ if not .Date.IsZero }}
     <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
     {{ with .OutputFormats.Get "RSS" }}
 	{{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
@@ -36,7 +38,7 @@
     {{ range $pages }}
     <item>
       <title>{{ .Title }}</title>
-      <link>{{ .Permalink }}</link>
+      <link>{{ .Permalink }}?utm_source=rss</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
       <guid>{{ .Permalink }}</guid>
@@ -50,18 +52,24 @@
           {{ $featured := $images.GetMatch "{*featured*,*cover*,*thumbnail*}" }}
           {{ with $featured }}{{ printf "<img src=\"%s\"/>" $featured.Permalink }}{{ end }}
         {{ end }}
-        
-        {{ if .Site.Params.RssFullText }}
-          {{ .Content | html }}
-        {{ else }}
-          {{ with .Description }}
+        {{ with .Description }}
             {{ . | html }}
-          {{ else }}
+        {{ else }}
             {{ .Summary | html }}
-          {{ end }}
         {{ end }}
-        {{printf "<p><h4><a href=\"%s?utm_source=rss#commentsanchor\">看完评论一下吧<a></h4></p>" .Permalink}}
+        
         </description>
+        {{if .Site.Params.RssFullText}}
+          <content:encoded>{{ .Content | html }}{{printf "<p><h4><a href=\"%s?utm_source=rss#commentsanchor\">看完评论一下吧<a></h4></p>" .Permalink}}</content:encoded>
+        {{ end}}
+        <comments>{{ printf "%s?utm_source=rss#commentsanchor" .Permalink }} </comments>
+
+        
+      {{ with .GetTerms "tags" }}
+      {{range .}}
+          <category domain="{{ .Permalink }}?utm_source=rss">{{ .LinkTitle }}</category>
+          {{end}}
+      {{ end }}
     </item>
     {{ end }}
 	<follow_challenge>
