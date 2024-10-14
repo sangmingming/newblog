@@ -14,7 +14,6 @@
 <rss version="2.0"
 xmlns:content="http://purl.org/rss/1.0/modules/content/"
 xmlns:dc="http://purl.org/dc/elements/1.1/"
-xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
 xmlns:atom="http://www.w3.org/2005/Atom"
 xmlns:wfw="http://wellformedweb.org/CommentAPI/">
   <channel>
@@ -57,16 +56,17 @@ xmlns:wfw="http://wellformedweb.org/CommentAPI/">
           {{ $featured := $images.GetMatch "{*featured*,*cover*,*thumbnail*}" }}
           {{ with $featured }}{{ printf "<img src=\"%s\"/>" $featured.Permalink }}{{ end }}
         {{ end }}
+        {{if .Site.Params.RssFullText}}
+        {{ .Content | html }}{{printf "<p><h4><a href=\"%s?utm_source=rss#commentsanchor\">看完评论一下吧<a></h4></p>" .Permalink}}
+        {{ else }}
         {{ with .Description }}
             {{ . | html }}
         {{ else }}
             {{ .Summary | html }}
         {{ end }}
-        
-        </description>
-        {{if .Site.Params.RssFullText}}
-          <content:encoded  xml:lang="{{ .Site.LanguageCode }}">{{ .Content | html }}{{printf "<p><h4><a href=\"%s?utm_source=rss#commentsanchor\">看完评论一下吧<a></h4></p>" .Permalink}}</content:encoded>
         {{ end}}
+        </description>
+
         <comments>{{ printf "%s?utm_source=rss#commentsanchor" .Permalink }} </comments>
 
         
