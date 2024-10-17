@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Android源码分析：广播注册与接收解析"
+title: "Android源码分析：广播接收器注册与发送广播流程解析"
 date: 2024-10-17T19:40:16+0800
 tags: ["技术", "Android", "Android源码"]
 keywords: ["Android", "Framework", "SourceCode", "OS", Broadcast"]
