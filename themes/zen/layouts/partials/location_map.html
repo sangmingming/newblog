@@ -19,10 +19,10 @@
     attribution: cartodbAttribution
 }).addTo(map);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-  attribution: cartodbAttribution,
-  pane: 'labels'
-}).addTo(map);
+// L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+//   attribution: cartodbAttribution,
+//   pane: 'labels'
+// }).addTo(map);
 
 for (let i = 0; i < points.length; i++) {
   const [popupText, lat, lng] = points[i];
