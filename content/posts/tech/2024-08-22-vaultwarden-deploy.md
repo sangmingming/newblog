@@ -2,7 +2,7 @@
 layout: post
 title: "在家搭建VaultWarden密码管理服务"
 date: 2024-08-22T19:33:25+0800
-tags: ["技术", "技术杂谈", "密码管理", "折腾"]
+tags: ["技术", "技术杂谈", "密码管理", "折腾", "NAS"]
 comments: true
 feature: 
 ---
