@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "使用Cuttlefish运行自编译Android固件"
-date: 2024-11-21T16:03:07+0800
-tags: ["Android", "Android源码"， 折腾]
+date: 2024-11-21T16:13:07+0800
+tags: ["Android", "Android源码", 折腾]
 comments: true
 feature: 
 ---
