@@ -10,7 +10,7 @@ comments: true
 feature:
 ---
 
-最近把电脑上面的Linux系统给重装了，同时呢也要配置新的MacBook，就整理了一个个人的dotfile，这个分享一下linux上的使用的软件，以及我的dotfile内容。
+最近把电脑上面的Linux系统给重装了，同时呢也要配置新的MacBook，就整理了一个个人的dotfile，这里分享一下linux上的我主要使用的软件，以及我的dotfile内容。
 
 <!--more-->
 
@@ -48,14 +48,23 @@ fi
 输入法在使用Fcitx5，输入方案则是使用了Rime，Rime的配置则是参考了雾凇拼音，而我主要使用小鹤双拼。
 
 其他还在使用的软件包括：
+
 项目开发： Android studio
+
 截图软件：Flameshot
+
 启动器： ULauncher， 使用简单，支持的插件数量也比较多
+
 文档搜索： Zeal doc，mac 上面dash的window和linux平台开源版本，支持dash的文档。
+
 文件同步： Syncthing
+
 局域网文件传输： LocalSend
+
 聊天软件： Weixin, telegram
+
 文档和博客编辑： Obsidian
+
 网页浏览器： Edge
 
 ### Linux 开启zram
