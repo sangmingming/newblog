@@ -7,6 +7,7 @@
 {{- end }}
 <div id="map" class="{{ $class }}"></div>
     <script type="text/javascript" src="/points.js"></script>
+    <script type="text/javascript" src="/areas.js"></script>
 
     <script type="text/javascript">
       var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution" target="_blank">CARTO</a>';
@@ -23,6 +24,15 @@
 //   attribution: cartodbAttribution,
 //   pane: 'labels'
 // }).addTo(map);
+var geojson = L.getJSON(areas, {
+  style: function (geoJsonFeature) {
+    return {
+      color: '#cc827c',
+      fillOpacity: 0.4,
+      stroke: false,
+    };
+  }
+}).addTo(map);
 
 for (let i = 0; i < points.length; i++) {
   const [popupText, lat, lng] = points[i];
