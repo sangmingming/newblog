@@ -24,7 +24,7 @@
 //   attribution: cartodbAttribution,
 //   pane: 'labels'
 // }).addTo(map);
-var geojson = L.getJSON(areas, {
+var geojson = L.geoJSON(areas, {
   style: function (geoJsonFeature) {
     return {
       color: '#cc827c',
