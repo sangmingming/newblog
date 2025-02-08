@@ -20,6 +20,24 @@
     attribution: cartodbAttribution
 }).addTo(map);
 
+function colorMarker() {
+  const svgTemplate = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="marker">
+      <path fill-opacity=".25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/>
+      <path stroke="#fff" fill="#ffccbb" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
+    </svg>`;
+
+  const icon = L.divIcon({
+    className: "marker",
+    html: svgTemplate,
+    iconSize: [40, 40],
+    iconAnchor: [12, 24],
+    popupAnchor: [7, -16],
+  });
+
+  return icon;
+}
+
 // L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
 //   attribution: cartodbAttribution,
 //   pane: 'labels'
@@ -27,7 +45,7 @@
 var geojson = L.geoJSON(areas, {
   style: function (geoJsonFeature) {
     return {
-      color: '#cc827c',
+      color: '#ffcc80',
       fillOpacity: 0.4,
       stroke: false,
     };
@@ -37,11 +55,8 @@ var geojson = L.geoJSON(areas, {
 for (let i = 0; i < points.length; i++) {
   const [popupText, lat, lng] = points[i];
 
-  marker = new L.circleMarker([lat, lng], {
-    radius: 10,
-    color: '#305370',
-    fillOpacity: 0.35,
-    stroke: false,
+  marker = new L.marker([lat, lng], {
+    icon: colorMarker(),
   }).bindPopup(popupText).addTo(map);
 }
 
