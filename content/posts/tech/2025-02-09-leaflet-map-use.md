@@ -17,7 +17,7 @@ feature:
 早前一直想要做一个足迹的功能，像是国内的百度地图和阿里地图都有js的sdk，但是他们的sdk使用不简单，并且他们的地图只有国内的。后来了解过google map以及mapbox，但是都没有深入研究。后来看到博主水八口记使用了[leaflet](https://leafletjs.com/examples/quick-start/)还比较简单，就使用这个库来实现了我的足迹功能。
 
 ### 地图图层
-使用leaflet的一大好处是，你可以自由使用你想要的地图图层，对于符合Leaflet的地图瓦片地址我们是可以直接使用的，通常是类似这种格式的地址： `https://{s}.somedomain.com/{foo}/{z}/{x}/{y}.png`，其中的`{z}/{x}/{y}`是必须要支持的，leaflet会在运行的时候替换具体的值，潮色人请求对应的放大级别（z,zoom）, 对应坐标(x, y)的瓦片进行渲染。
+使用leaflet的一大好处是，你可以自由使用你想要的地图图层，对于符合Leaflet的地图瓦片地址我们是可以直接使用的，通常是类似这种格式的地址： `https://{s}.somedomain.com/{foo}/{z}/{x}/{y}.png`，其中的`{z}/{x}/{y}`是必须要支持的，leaflet会在运行的时候替换具体的值，从而请求对应的放大级别（z,zoom）, 对应坐标(x, y)的瓦片进行渲染。
 
 一般使用cartocdn提供的openstreetmap的地图时，是可以直接使用的，但是我们如果想要使用mapbox地图或者其他地图供应商的时候，就需要借助插件了，可以在这个页面看看有没有[Plugins - Leaflet - a JavaScript library for interactive maps](https://leafletjs.com/plugins.html#basemap-providers)。
 
