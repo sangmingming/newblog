@@ -169,7 +169,7 @@ var geojson = L.geoJSON(areas, {
 对于geojson我们也可以在properties中设置弹框的内容进行展示。
 
 ### 总结
-到这里我们就完成了基于leaflet的一个足迹地图，既包括足迹点，也包括去过的城市的遮罩。而geojson和Leaflet的功能远远不止这些，感兴趣的可以去看相关文档。另外因为我使用的地图是openstreetmap的数据，关于中国领土有争议的部分标记不正确，这个不在我的解决能力只能，只能暂且使用，但是不代表本人观点。
+到这里我们就完成了基于leaflet的一个足迹地图，既包括足迹点，也包括去过的城市的遮罩。而geojson和Leaflet的功能远远不止这些，感兴趣的可以去看相关文档。另外因为我使用的地图是openstreetmap的数据，关于中国领土有争议的部分标记不正确，这个不在我的解决能力范围之内，只能暂且使用，但是不代表本人观点。
 
 参考资料：
 1. [Tutorials - Leaflet - a JavaScript library for interactive maps](https://leafletjs.com/examples.html)
