@@ -1,63 +1,86 @@
-{{- $class := "other-map" }}
-{{- if .IsHome }}
+{{- $class := "other-map" }} {{- if .IsHome }}
 <h1>我的足迹</h1>
-  {{- $class = "home-map" }}
-{{- else }}
-  {{- $class = "other-map" }}
-{{- end }}
+{{- $class = "home-map" }} {{- else }} {{- $class = "other-map" }} {{- end }}
 <div id="map" class="{{ $class }}"></div>
-    <script type="text/javascript" src="/points.js"></script>
-    <script type="text/javascript" src="/areas.js"></script>
+<script type="text/javascript" src="/points.js"></script>
+<script type="text/javascript" src="/areas.js"></script>
+{{- $mapjs := resources.Get "js/mymap.js" }}
+<script type="text/javascript" src="{{ $mapjs.RelPermalink }}"></script>
 
-    <script type="text/javascript">
-      var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution" target="_blank">CARTO</a>';
-      var map = L.map('map', {gestureHandling: true, minZoom: 1, maxZoom: 14}).setView([33.3007613,117.2345622], 4);
-      map.zoomControl.setPosition('topright');
-      map.createPane('labels');
-      map.getPane('labels').style.zIndex = 650;
-      map.getPane('labels').style.pointerEvents = 'none';
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-    attribution: cartodbAttribution
-}).addTo(map);
+<script type="text/javascript">
+    var cartodbAttribution =
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution" target="_blank">CARTO</a>';
+    var map = L.map("map", {
+        gestureHandling: true,
+        minZoom: 2,
+        maxZoom: 14,
+    }).setView([33.3007613, 117.2345622], 4);
+    map.zoomControl.setPosition("topright");
+    map.createPane("labels");
+    map.getPane("labels").style.zIndex = 650;
+    map.getPane("labels").style.pointerEvents = "none";
+    L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
+        {
+            attribution: cartodbAttribution,
+        },
+    ).addTo(map);
+    L.control.scale().addTo(map);
 
-function colorMarker() {
-  const svgTemplate = `
+    const aggregationThreshold = 1; //1km
+
+    function colorMarker() {
+        const svgTemplate = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="marker">
       <path fill-opacity=".25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/>
       <path stroke="#fff" fill="#ff471a" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
     </svg>`;
 
-  const icon = L.divIcon({
-    className: "marker",
-    html: svgTemplate,
-    iconSize: [28, 28],
-    iconAnchor: [12, 24],
-    popupAnchor: [7, -16],
-  });
+        const icon = L.divIcon({
+            className: "marker",
+            html: svgTemplate,
+            iconSize: [28, 28],
+            iconAnchor: [12, 24],
+            popupAnchor: [7, -16],
+        });
 
-  return icon;
-}
+        return icon;
+    }
 
-// L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-//   attribution: cartodbAttribution,
-//   pane: 'labels'
-// }).addTo(map);
-var geojson = L.geoJSON(areas, {
-  style: function (geoJsonFeature) {
-    return {
-      color: '#ffcc80',
-      fillOpacity: 0.4,
-      stroke: false,
-    };
-  }
-}).addTo(map);
+    // L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+    //   attribution: cartodbAttribution,
+    //   pane: 'labels'
+    // }).addTo(map);
+    var geojson = L.geoJSON(areas, {
+        style: function (geoJsonFeature) {
+            return {
+                color: "#ffcc80",
+                fillOpacity: 0.4,
+                stroke: false,
+            };
+        },
+    }).addTo(map);
 
-for (let i = 0; i < points.length; i++) {
-  const [popupText, lat, lng] = points[i];
+    var markers = points.map((item) => {
+        const [popupText, lat, lng] = item;
+        return new L.marker([lat, lng], {
+            icon: colorMarker(),
+        }).bindPopup(popupText);
+    });
 
-  marker = new L.marker([lat, lng], {
-    icon: colorMarker(),
-  }).bindPopup(popupText).addTo(map);
-}
+    var marketGrop = L.layerGroup(
+        aggregateMarkers(map, markers, getClusterRadius(4)),
+    ).addTo(map);
 
+    map.on("zoomend", function () {
+        marketGrop.clearLayers();
+        const clusters = aggregateMarkers(
+            map,
+            markers,
+            getClusterRadius(map.getZoom()),
+        );
+        clusters.forEach((cluster) => {
+            marketGrop.addLayer(cluster);
+        });
+    });
 </script>
