@@ -16,46 +16,46 @@ function getClusterRadius(zoom) {
   var radius = 100;
   switch (zoom) {
     case 14:
-      radius = 1;
+      radius = 0.8;
       break;
     case 13:
-      radius = 2;
+      radius = 1.6;
       break;
     case 12:
-      radius = 3;
+      radius = 2.4;
       break;
     case 11:
-      radius = 5;
+      radius = 4;
       break;
     case 10:
-      radius = 9;
+      radius = 8;
       break;
     case 9:
-      radius = 20;
+      radius = 16;
       break;
     case 8:
-      radius = 40;
+      radius = 30;
       break;
     case 7:
-      radius = 70;
+      radius = 60;
       break;
     case 6:
-      radius = 180;
+      radius = 120;
       break;
     case 5:
-      radius = 290;
+      radius = 180;
       break;
     case 4:
-      radius = 400;
+      radius = 300;
       break;
     case 3:
-      radius = 900;
+      radius = 600;
       break;
     case 2:
-      radius = 1800;
+      radius = 600;
       break;
     case 1:
-      radius = 1800;
+      radius = 600;
       break;
   }
   return radius;

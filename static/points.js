@@ -13,7 +13,6 @@ let points = [
     ["<b>杭州</b><i>Hangzhou</i>", 30.2450166,120.0915979],
     ["<b>曼谷</b><i>Bangkok</i>", 13.7524938,100.4935089],
     ["<b>普吉</b><i>Ko Phuket</i>", 7.9790846,98.3355238],
-    ["<b>东京</b><i>Tokyo</i>", 35.7102925,139.8033514],
     ["<b>南昌</b><i>Nanchang</i><a href='https://isming.me/2024-02-nanchang/'><img src='https://img.isming.me/photo/IMG_20240217_160538.jpg' />历史之城英雄之城-南昌游记</a>", 28.685125, 115.8760944],
     ["<b>青岛</b><i>Qingdao</i><a href='https://isming.me/2024-07-shandong/'><img src='https://img.isming.me/image/20240706-19-2.jpg' />想去海边-山东半岛自驾游</a>", 36.0906493, 120.4633972],
     ["<b>威海</b><i>Weihai</i><a href='https://isming.me/2024-07-shandong/'><img src='https://img.isming.me/image/IMG_20240707_165323.jpg' />想去海边-山东半岛自驾游</a>", 37.4614933, 122.1405723],
@@ -33,5 +32,6 @@ let points = [
     ["<b>安庆</b><i>Anqing</i><a href='/2024-10-anqing-travel-one-museum/'><img src='https://img.isming.me/photo/20241004-22-4.jpg' />安庆游记1-安庆博物馆</a>", 30.5370001,117.1164894],
     ["<b>安庆</b><i>Anqing</i><a href='/2024-10-anqing-two-jixian/'><img src='https://img.isming.me/photo/20241005-22-4.jpg' />安庆游记2-集贤时空和倒扒狮街</a>", 30.5788349,117.0108666],
     ["<b>宁波</b><i>Ningbo</i><a href='/2024-12-11-shiming-hiking/'><img src='https://img.isming.me/photo/20241130-25-7.jpg' />四明山赏秋蜘蛛岭徒步小记</a>", 29.7120781,121.1619776],
+    ["<b>东京</b><i>Tokyo</i>", 35.7102925,139.8033514],
 
 ];
