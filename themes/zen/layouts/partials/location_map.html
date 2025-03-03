@@ -2,12 +2,12 @@
 <h1>我的足迹</h1>
 {{- $class = "home-map" }} {{- else }} {{- $class = "other-map" }} {{- end }}
 <div id="map" class="{{ $class }}"></div>
-<script type="text/javascript" src="/points.js"></script>
-<script type="text/javascript" src="/areas.js"></script>
+<script type="text/javascript" src="/points.js" async></script>
+<script type="text/javascript" src="/areas.js" async></script>
 {{- $mapjs := resources.Get "js/mymap.js" }}
-<script type="text/javascript" src="{{ $mapjs.RelPermalink }}"></script>
+<script type="text/javascript" src="{{ $mapjs.RelPermalink }}" async></script>
 
-<script type="text/javascript">
+<script type="text/javascript" async>
     var cartodbAttribution =
         '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution" target="_blank">CARTO</a>';
     var map = L.map("map", {
