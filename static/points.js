@@ -1,4 +1,4 @@
-let points = [
+export let points = [
     ["<b>北京</b><i>Beijing</i><a href='/2025-01-beijing/'><img src='https://img.isming.me/photo/IMG_20250101_133455.jpg' />北京游流水账</a>", 40.190632,116.412144],
     ["<b>广州</b><i>Guangzhou</i>", 23.1220615,113.3714803],
     ["<b>深圳</b><i>Shenzhen</i>", 22.5445741,114.0545429],

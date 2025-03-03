@@ -12,7 +12,7 @@ function haversine(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-function getClusterRadius(zoom) {
+export function getClusterRadius(zoom) {
   var radius = 100;
   switch (zoom) {
     case 14:
@@ -61,7 +61,7 @@ function getClusterRadius(zoom) {
   return radius;
 }
 
-function aggregateMarkers(leafletMap, input, threshold) {
+export function aggregateMarkers(leafletMap, input, threshold) {
   const clusters = [];
   const ms = input.map((it) => {
     it._aggregated = false;

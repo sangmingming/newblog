@@ -7,7 +7,7 @@
 {{- $mapjs := resources.Get "js/mymap.js" }}
 <!-- <script type="text/javascript" src="{{ $mapjs.RelPermalink }}" async></script> -->
 
-<script type="text/javascript" type = "module" async>
+<script type = "module" async>
     import { points } from "/points.js";
     import { areas } from "/areas.js";
     import { aggregateMarkers, getClusterRadius} from "{{ $mapjs.RelPermalink }}";
