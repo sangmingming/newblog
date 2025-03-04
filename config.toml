@@ -3,6 +3,7 @@ languageCode = 'zh'
 title = '码农明明桑'
 theme = "zen"
 defaultContentLanguage = "zh"
+
 Copyright = '[码农明明桑的博客](https://isming.me)所有内容遵循[「CC BY-NC-SA 4.0」](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)协议，转载请保留署名并注明来源。'
 
 [permalinks]
@@ -24,6 +25,7 @@ Copyright = '[码农明明桑的博客](https://isming.me)所有内容遵循[「
  reading_speed=120
  readingSpeedRation=1.46
  RssImage='avatar.png'
+ description = "一个程序员的生活和技术记录，热爱生活，心向远方。"
  rssdescription = '码农明明桑，一个程序员的生活和技术内容记录。'
  Author = "明明同学"
  [params.homeInfoParams]
