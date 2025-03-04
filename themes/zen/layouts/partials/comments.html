@@ -4,9 +4,8 @@
 <!-- <link href='//unpkg.com/@waline/client@3.5.1/dist/waline.css' rel='stylesheet' /> -->
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/sodesu-comment@0.4.0/dist/sodesu-comment.css"
+    href="https://cdn.jsdelivr.net/npm/sodesu-comment@0.4.1/dist/sodesu-comment.css"
   />
-  <script src="https://cdn.jsdelivr.net/npm/sodesu-comment@0.4.0/dist/sodesu.aio.umd.js"></script>
 <style>
      :root {
         --sds-theme-color: #121212;
@@ -30,6 +29,7 @@
 <p id="commentsanchor"></p>
 <div id="waline"></div>
 <script type="module">
+  import { init } from "//cdn.jsdelivr.net/npm/sodesu-comment@0.4.1/dist/sodesu.aio.mjs";
     // import { init } from '//unpkg.com/@waline/client@3.5.1/dist/waline.js';
 
     // init({
@@ -42,7 +42,7 @@
       
     // });
 
-    Sodesu.init({
+    init({
       el: '#waline',
       serverURL: 'https://waline-comments.isming.me',
       dark: "body.dark"
