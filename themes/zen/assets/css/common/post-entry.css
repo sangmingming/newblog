@@ -60,6 +60,14 @@
     line-height: 1.6;
 }
 
+.entry-content img {
+    transition: transform .3s ease;
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 3.4/2;
+    
+}
+
 .entry-meta {
     color: var(--secondary);
     font-size: 0.95em;
