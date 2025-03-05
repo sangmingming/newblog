@@ -128,7 +128,7 @@ sudo ln -s /usr/lib/aarch64-linux-gnu/libtiff.so.6 /usr/lib/aarch64-linux-gnu/li
 
 ![](https://img.isming.me/image/20250305152713933.webp)
 
-并且如果停用的话也会讲Chromebook回复出厂设置，使用这个功能需要谨慎哦。
+并且如果停用的话也会将Chromebook恢复出厂设置，所有数据被清空，使用这个功能需要谨慎。
 
 再打开Linux命令行，执行如下命令安装adb工具。
 ```shell
