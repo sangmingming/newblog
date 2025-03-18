@@ -21,7 +21,7 @@ showCopyright: false
 {{< friend url="https://blog.gadore.top/" src="https://blog.gadore.top/upload/Snipaste_2023-05-19_15-20-47.jpg" name="千里之豪" des="Fun to life, fun to coding." >}}
 {{< friend url="https://blog.zhheo.com/" src="https://bu.dusays.com/2022/12/28/63ac2812183aa.png" name="张洪Heo" des="分享设计与科技生活" >}}
 {{< friend url="https://feng.pub" src="https://cravatar.cn/avatar/868740183b995d2707e307ce0a89633a?s=200" name="阿锋的小宇宙" des="沧海一粟，微亮渺小一只虫。">}}
-{{< friend url="https://exef-star.github.io" src="https://pic.imgdb.cn/item/65fe67989f345e8d03923ea6.jpg" name="可执行程序の天境小屋🥝" des="苦恼于空岛物资不足的学生党">}}
+{{< friend url="https://blog.hanta2011.top" src="https://pic.imgdb.cn/item/65fe67989f345e8d03923ea6.jpg" name="可执行程序の天境小屋🥝" des="The boy who lived">}}
 {{< friend url="https://siena.zone" src="https://siena.zone/favicon_compressed.png" name="小鹿的个人网站" des="跳吧，在无比宏大的星系！">}}
 
 ### 博客导航
