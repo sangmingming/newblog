@@ -33,5 +33,6 @@ export let points = [
     ["<b>安庆</b><i>Anqing</i><a href='/2024-10-anqing-two-jixian/'><img src='https://img.isming.me/photo/20241005-22-4.jpg' />安庆游记2-集贤时空和倒扒狮街</a>", 30.5788349,117.0108666],
     ["<b>宁波</b><i>Ningbo</i><a href='/2024-12-11-shiming-hiking/'><img src='https://img.isming.me/photo/20241130-25-7.jpg' />四明山赏秋蜘蛛岭徒步小记</a>", 29.7120781,121.1619776],
     ["<b>东京</b><i>Tokyo</i>", 35.7102925,139.8033514],
+    ["<b>台州</b><i>Taizhou</i><a href='/2025-04-10-taizhou/'><img src='https://img.isming.me/photo/20250410185319617.webp'/>清明台州游</a>", 28.8513646,121.0884757]
 
 ];
