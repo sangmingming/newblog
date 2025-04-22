@@ -35,6 +35,8 @@
 {{- if site.Params.analytics.naver.SiteVerificationTag }}
 <meta name="naver-site-verification" content="{{ site.Params.analytics.naver.SiteVerificationTag }}">
 {{- end }}
+<meta name="fediverse:creator" content="@isming@mastodon.social">
+<link rel="me" href="https://mastodon.social/@isming"/>
 
 {{- if (eq .Layout `locations`) | or .IsHome -}}
 <link rel=preconnect href="https://b.basemaps.cartocdn.com"/>
