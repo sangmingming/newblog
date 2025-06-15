@@ -487,3 +487,31 @@ img.in-text {
 .post-copywrite p{
     margin-top: 12px;
 }
+
+open-heart {
+    margin: var(--card-padding);
+    margin-top: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    border: 1px solid var(--primary);
+    border-radius: .4em;
+    padding: .4em;
+  
+  }
+  open-heart:not([disabled]):hover,
+  open-heart:not([disabled]):focus {
+    border-color: var(--accent-color);
+    cursor: pointer;
+  }
+  open-heart[disabled] {
+    background: #FFA7B6;
+    border: 1px solid #FFA7B6;
+    cursor: not-allowed;
+    color: #fff;
+  }
+  open-heart[count]:not([count="0"])::after {
+    content: attr(count);
+    padding: .2em;
+  }
