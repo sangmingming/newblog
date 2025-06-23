@@ -75,6 +75,11 @@
     font-weight: 600;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+}
+
 ::view-transition-group(root) {
     animation-timing-function: var(--expo-out);
   }
