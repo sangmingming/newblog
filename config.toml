@@ -30,7 +30,7 @@ Copyright = '[码农明明桑的博客](https://isming.me)所有内容遵循[「
  Author = "明明同学"
  [params.homeInfoParams]
   Title =  "嗨，你好 👋"
-  Content = "欢迎光临码农明明桑的小站，这里是我的生活和技术内容记录。  <li>主业👨‍💻程序员</li><li>喜欢 📖读闲书，🎬看电影，📷拍照片，🍵喝茶。</li><p>更多关于我的信息可以查看👉[**关于我**](https://isming.me/about/)。</p>"
+  Content = "欢迎光临码农明明桑的小站，这里是我的生活和技术内容记录。  <li>👨‍💻程序员</li><li>喜欢 📖读书，🎬看电影，📷拍照片，🍵喝茶&啤酒。</li><p>更多关于我的信息可以查看👉[**关于我**](https://isming.me/about/)。</p>"
 
 
 [pagination]
