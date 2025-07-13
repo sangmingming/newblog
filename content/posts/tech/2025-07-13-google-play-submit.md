@@ -7,7 +7,7 @@ tags:
   - Android
   - 技术
 comments: true
-feature: https://img.isming.me/image/20250305144744698.webp
+feature: https://img.isming.me/image/gp/googleplay.png
 ---
 
 首次上架应用到google play还是2015年的时候，那个时候上架应用限制比较少，注册个账号信用卡付个款就行了。自己之前有个账号，但是闲置许久，加上自己的一些骚操作账号被Google给永久禁用了，并且还给我发了个邮件告知不要再尝试注册新的账号了。最近自己的新应用想要上架，于是又重新注册了个个人账号。同时公司的产品也要上架Google play，前前后后经过了小半年的折腾才终于搞定，将应用上架，这里就来说道说道。
