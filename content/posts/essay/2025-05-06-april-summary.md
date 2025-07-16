@@ -6,7 +6,7 @@ tags:
   - 总结
   - 杂谈
   - 读书
-  - "#徒步"
+  - 徒步
 feature: 
 comments: true
 ---
