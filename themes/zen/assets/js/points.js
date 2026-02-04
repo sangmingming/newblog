@@ -34,6 +34,8 @@ export let points = [
     ["<b>宁波</b><i>Ningbo</i><a href='/2024-12-11-shiming-hiking/'><img src='https://img.isming.me/photo/20241130-25-7.jpg' />四明山赏秋蜘蛛岭徒步小记</a>", 29.7120781,121.1619776],
     ["<b>东京</b><i>Tokyo</i>", 35.7102925,139.8033514],
     ["<b>台州</b><i>Taizhou</i><a href='/2025-04-10-taizhou/'><img src='https://img.isming.me/photo/20250410185319617.webp'/>清明台州游</a>", 28.8513646,121.0884757],
-    ["<b>新加坡</b><i>Singapore</i><a href='/2025-12-singapore/'><img src='https://img.isming.me/photo/sg/IMG_20251126_185318.webp' />随便走走漫游新加坡</a>",1.2844917,103.8580793]
+    ["<b>新加坡</b><i>Singapore</i><a href='/2025-12-singapore/'><img src='https://img.isming.me/photo/sg/IMG_20251126_185318.webp' />随便走走漫游新加坡</a>",1.2844917,103.8580793],
+    ["<b>雪乡</b><i>Xuexiang</i><a href='https://isming.me/2026-01-harbin-one-xuexiang/'><img src='https://img.isming.me/photo/harbin/20260123-33-8.webp' />东北游记上-亚布力&雪乡玩雪之旅</a>", 44.3336795,128.2066632],
+    ["<b>哈尔滨</b><i>Harbin</i>", 45.7735719,126.5462066]
 
 ];
