@@ -16,46 +16,46 @@ export function getClusterRadius(zoom) {
   var radius = 100;
   switch (zoom) {
     case 14:
-      radius = 0.8;
+      radius = 0.5;
       break;
     case 13:
-      radius = 1.6;
+      radius = 1;
       break;
     case 12:
-      radius = 2.4;
+      radius = 2;
       break;
     case 11:
-      radius = 4;
+      radius = 3;
       break;
     case 10:
-      radius = 8;
+      radius = 5;
       break;
     case 9:
-      radius = 16;
+      radius = 15;
       break;
     case 8:
-      radius = 30;
+      radius = 25;
       break;
     case 7:
-      radius = 60;
+      radius = 50;
       break;
     case 6:
-      radius = 120;
+      radius = 100;
       break;
     case 5:
-      radius = 180;
+      radius = 200;
       break;
     case 4:
-      radius = 300;
+      radius = 500;
       break;
     case 3:
-      radius = 600;
+      radius = 1000;
       break;
     case 2:
-      radius = 600;
+      radius = 2000;
       break;
     case 1:
-      radius = 600;
+      radius = 2000;
       break;
   }
   return radius;
@@ -220,6 +220,7 @@ export function init() {
     marker.on("click", function() {
       const infoWindow = new AMap.InfoWindow({
         content: marker.getExtData().popupText,
+        closeWhenClickMap: true,
         offset: new AMap.Pixel(0, -30)
       });
       infoWindow.open(map, marker.getPosition());
