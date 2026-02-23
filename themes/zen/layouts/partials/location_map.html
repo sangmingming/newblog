@@ -2,19 +2,21 @@
 <h1>我的足迹</h1>
 {{- $class = "home-map" }} {{- else }} {{- $class = "other-map" }} {{- end }}
 <div id="map" class="{{ $class }}"></div>
-<!-- <script type="text/javascript" src="/points.js" async></script>
-<script type="text/javascript" src="/areas.js" async></script> -->
+<script type="text/javascript">
+  window._AMapSecurityConfig = {
+    securityJsCode: "9383d6e3db52700e4aa85583519ee38a",
+  };
+</script>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=9383d6e3db52700e4aa85583519ee38a"></script>
 {{- $pointjs := resources.Get "js/points.js" }}
 {{- $areajs := resources.Get "js/areas.js" }}
 {{- $mapjs := resources.Get "js/mymap.js" }}
-{{- $leaflet := resources.Get "js/leaflet-1.9.4.esm.js" }}
-{{- $res := slice $pointjs $areajs $leaflet $mapjs  | resources.Concat "js/mapbundle.js" }}
+{{- $res := slice $pointjs $areajs $mapjs | resources.Concat "js/mapbundle.js" }}
 {{- $compress := $res | resources.Minify}}
-<!-- <script type="text/javascript" src="{{ $mapjs.RelPermalink }}" async></script> -->
 
 <script type = "module" async>
 
 import { init } from "{{$compress.RelPermalink }}";
 init();
-    
+
 </script>

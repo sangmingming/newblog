@@ -84,16 +84,16 @@ pre:hover .copy-code {
 }
 
 
-.leaflet-popup-content {
+.amap-info-content {
     width: 14rem;
 }
 
- .leaflet-popup-content b {
+ .amap-info-content b {
     font-size: 1.6em;
     display: block;
 }
 
-.leaflet-popup-content i {
+.amap-info-content i {
     font-size: 1em;
     display: block;
     font-style: normal;
@@ -101,7 +101,7 @@ pre:hover .copy-code {
     margin-bottom: 8px;
 }
 
-div#map .leaflet-popup-content a {
+div#map .amap-info-content a {
     color: var(--primary);
     font-size: 1.2em;
 }
@@ -117,14 +117,20 @@ div#map .leaflet-popup-content a {
         justify-content: center;
 }
 
-div#map .leaflet-popup-content a:active,div#map .leaflet-popup-content a:focus,div#map .leaflet-popup-content a:hover {
+div#map .amap-info-content a:active,div#map .amap-info-content a:focus,div#map .amap-info-content a:hover {
     color: var(--color-a-hover)
 }
 
-.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+.amap-info-content, .leaflet-popup-tip {
     background: var(--entry);
     color: var(--primary);
     box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+.amap-info-content img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
 }
 
 @media only screen and (max-width: 768px) {
@@ -142,7 +148,7 @@ div#map .leaflet-popup-content a:active,div#map .leaflet-popup-content a:focus,d
         margin-top: 16px;
     }
 
-    .leaflet-popup-content {
+    .amap-info-content {
         width: 8rem;
     }
 

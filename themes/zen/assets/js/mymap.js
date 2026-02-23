@@ -1,9 +1,5 @@
-//import { points } from "/points.js";
-//import { areas } from "/areas.js";
-//import {map as createMap, tileLayer, divIcon, geoJSON, layerGroup, latLng, marker, } from "/js/leaflet-1.9.4.esm.js";
-
 function haversine(lat1, lon1, lat2, lon2) {
-  const R = 6371; // 地球半径 (km)
+  const R = 6371;
   const toRad = (angle) => angle * (Math.PI / 180);
 
   const dLat = toRad(lat2 - lat1);
@@ -20,52 +16,64 @@ export function getClusterRadius(zoom) {
   var radius = 100;
   switch (zoom) {
     case 14:
-      radius = 0.8;
+      radius = 0.5;
       break;
     case 13:
-      radius = 1.6;
+      radius = 1;
       break;
     case 12:
-      radius = 2.4;
+      radius = 2;
       break;
     case 11:
-      radius = 4;
+      radius = 3;
       break;
     case 10:
-      radius = 8;
+      radius = 5;
       break;
     case 9:
-      radius = 16;
+      radius = 6;
       break;
     case 8:
-      radius = 30;
+      radius = 10;
       break;
     case 7:
-      radius = 60;
+      radius = 20;
       break;
     case 6:
-      radius = 120;
+      radius = 50;
       break;
     case 5:
-      radius = 180;
+      radius = 100;
       break;
     case 4:
-      radius = 300;
+      radius = 200;
       break;
     case 3:
-      radius = 600;
+      radius = 500;
       break;
     case 2:
-      radius = 600;
+      radius = 1000;
       break;
     case 1:
-      radius = 600;
+      radius = 1000;
       break;
   }
   return radius;
 }
 
-export function aggregateMarkers(leafletMap, input, threshold) {
+function getThemeColors() {
+  const isDark = localStorage.getItem("pref-theme") === "dark";
+  return {
+    markerFill: isDark ? "#ff6b6b" : "#ff471a",
+    markerStroke: isDark ? "#333333" : "#ffffff",
+    clusterText: isDark ? "#333333" : "#ffffff",
+    clusterBorder: isDark ? "#ff000000" : "#ffffff",
+    areaFill: isDark ? "#ffd93d" : "#ffcc80",
+    areaStroke: isDark ? "#ffd93d" : "#ffcc80"
+  };
+}
+
+export function aggregateMarkers(amap, input, threshold, colors) {
   const clusters = [];
   const ms = input.map((it) => {
     it._aggregated = false;
@@ -79,13 +87,10 @@ export function aggregateMarkers(leafletMap, input, threshold) {
     m._aggregated = true;
     ms.forEach((om, oi) => {
       if (index != oi && !om._aggregated) {
-        const dist = haversine(
-          m.getLatLng().lat,
-          m.getLatLng().lng,
-          om.getLatLng().lat,
-          om.getLatLng().lng,
-        );
-        if (dist < threshold) {
+        const position1 = m.getPosition();
+        const position2 = om.getPosition();
+        const dist = haversine(position1.lat, position1.lng, position2.lat, position2.lng);
+        if (dist < threshold && amap.getZoom() < 10) {
           cluster.push(om);
           om._aggregated = true;
         }
@@ -93,22 +98,18 @@ export function aggregateMarkers(leafletMap, input, threshold) {
     });
 
     if (cluster.length > 1) {
-      const llg = toLatLng(
-        cluster[0].getLatLng().lat,
-        cluster[0].getLatLng().lng,
-      );
+      const position = cluster[0].getPosition();
       const markerCount = cluster.length;
 
-      const clusterMarker = marker(llg, {
-        icon: divIcon({
-          className: "my-cluster-icon",
-          html: `<b>${markerCount}</b>`,
-          iconSize: [32, 32],
-        }),
+      const clusterMarker = new AMap.Marker({
+        position: position,
+        content: `<div class="my-cluster-icon" style="width: 32px; height: 32px; background: linear-gradient(135deg, #ffb347, #ff6f61); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: ${colors.clusterText}; font-weight: bold; border: 2px solid ${colors.clusterBorder}; font-size: 14px;">${markerCount}</div>`,
+        offset: new AMap.Pixel(-16, -16),
+        zIndex: 100
       });
+      
       clusterMarker.on("click", function () {
-        leafletMap.flyTo(clusterMarker.getLatLng(), leafletMap.getZoom() + 1);
-        //leafletMap.zoomIn();
+        amap.setZoomAndCenter(amap.getZoom() + 1, clusterMarker.getPosition());
       });
       clusters.push(clusterMarker);
     } else {
@@ -119,78 +120,138 @@ export function aggregateMarkers(leafletMap, input, threshold) {
 }
 
 export function init() {
-  var cartodbAttribution =
-        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution" target="_blank">CARTO</a>';
-    var map = createMap("map", {
-        gestureHandling: true,
-        minZoom: 2,
-        maxZoom: 14,
-    }).setView([33.3007613, 117.2345622], 4);
-    map.zoomControl.setPosition("topright");
-    map.createPane("labels");
-    map.getPane("labels").style.zIndex = 650;
-    map.getPane("labels").style.pointerEvents = "none";
-    tileLayer(
-        "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
-        {
-            attribution: cartodbAttribution,
-        },
-    ).addTo(map);
+  var defaultTheme = localStorage.getItem("pref-theme") === "dark" ? "amap://styles/dark" : "amap://styles/whitesmoke";
+  var map = new AMap.Map("map", {
+    zoom: 4,
+    center: [117.2345622, 33.3007613],
+    zooms: [2, 14],
+    viewMode: "3D",
+    mapStyle: defaultTheme,
+    pitch: 0,
+    rotateEnable: false,
+    pitchEnable: false
+  });
 
-    const aggregationThreshold = 1; //1km
+  AMap.plugin(['AMap.Scale', 'AMap.MoveAnimation', 'AMap.ToolBar'], () => {
+    var toolbar = new AMap.ToolBar({position: "RT"});
+    map.addControl(toolbar);
+    var scale = new AMap.Scale({positaion: "LB"});
+    map.addControl(scale);
+  });
 
-    function colorMarker() {
-        const svgTemplate = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="marker">
-      <path fill-opacity=".25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/>
-      <path stroke="#fff" fill="#ff471a" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
-    </svg>`;
+  const aggregationThreshold = 1;
 
-        const icon = divIcon({
-            className: "marker",
-            html: svgTemplate,
-            iconSize: [28, 28],
-            iconAnchor: [12, 24],
-            popupAnchor: [7, -16],
+  function createMarkerIcon(colors) {
+    const svgTemplate = `
+    <div style="position: relative; width: 28px; height: 28px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="width: 100%; height: 100%;">
+        <path fill-opacity=".25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/>
+        <path stroke="${colors.markerStroke}" fill="${colors.markerFill}" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
+      </svg>
+    </div>`;
+
+    return svgTemplate;
+  }
+
+  function processGeoJSON(geojson, colors) {
+    if (!geojson || !geojson.features) return;
+    
+    geojson.features.forEach(function(feature) {
+      if (!feature.geometry) return;
+      
+      const geometry = feature.geometry;
+      const type = geometry.type;
+      const coordinates = geometry.coordinates;
+      
+      if (type === 'Polygon') {
+        const path = coordinates[0].map(function(coord) {
+          return new AMap.LngLat(coord[0], coord[1]);
         });
-
-        return icon;
-    }
-
-    // L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-    //   attribution: cartodbAttribution,
-    //   pane: 'labels'
-    // }).addTo(map);
-    var geojson = geoJSON(areas, {
-        style: function (geoJsonFeature) {
-            return {
-                color: "#ffcc80",
-                fillOpacity: 0.4,
-                stroke: false,
-            };
-        },
-    }).addTo(map);
-
-    var markers = points.map((item) => {
-        const [popupText, lat, lng] = item;
-        return new marker([lat, lng], {
-            icon: colorMarker(),
-        }).bindPopup(popupText);
-    });
-
-    var marketGrop = layerGroup(
-        aggregateMarkers(map, markers, getClusterRadius(4)),
-    ).addTo(map);
-
-    map.on("zoomend", function () {
-        marketGrop.clearLayers();
-        const clusters = aggregateMarkers(
-            map,
-            markers,
-            getClusterRadius(map.getZoom()),
-        );
-        clusters.forEach((cluster) => {
-            marketGrop.addLayer(cluster);
+        const polygon = new AMap.Polygon({
+          path: path,
+          fillColor: colors.areaFill,
+          fillOpacity: 0.4,
+          strokeColor: colors.areaStroke,
+          strokeWeight: 1,
         });
+        map.add(polygon);
+      } else if (type === 'MultiPolygon') {
+        coordinates.forEach(function(polygonCoords) {
+          const path = polygonCoords[0].map(function(coord) {
+            return new AMap.LngLat(coord[0], coord[1]);
+          });
+          const polygon = new AMap.Polygon({
+            path: path,
+            fillColor: colors.areaFill,
+            fillOpacity: 0.4,
+            strokeColor: colors.areaStroke,
+            strokeWeight: 1,
+          });
+          map.add(polygon);
+        });
+      }
     });
+  }
+
+  var colors = getThemeColors();
+  processGeoJSON(areas, colors);
+
+  var markers = points.map((item) => {
+    const [popupText, lat, lng] = item;
+    const marker = new AMap.Marker({
+      position: [lng, lat],
+      content: createMarkerIcon(colors),
+      offset: new AMap.Pixel(-12, -24),
+      zIndex: 50
+    });
+    marker.setExtData({ popupText: popupText });
+    return marker;
+  });
+
+  var markerGroup = new AMap.OverlayGroup(aggregateMarkers(map, markers, getClusterRadius(4), colors));
+  map.add(markerGroup);
+
+  markers.forEach((marker) => {
+    marker.on("click", function() {
+      const infoWindow = new AMap.InfoWindow({
+        content: marker.getExtData().popupText,
+        closeWhenClickMap: true,
+        offset: new AMap.Pixel(0, -30)
+      });
+      infoWindow.open(map, marker.getPosition());
+    });
+  });
+
+  map.on("zoomend", function () {
+    map.remove(markerGroup);
+    const clusters = aggregateMarkers(
+      map,
+      markers,
+      getClusterRadius(map.getZoom()),
+      colors
+    );
+    markerGroup = new AMap.OverlayGroup(clusters);
+    map.add(markerGroup);
+  });
+
+  function updateTheme() {
+    const theme = localStorage.getItem("pref-theme") === "dark" ? "amap://styles/dark" : "amap://styles/whitesmoke";
+    map.setMapStyle(theme);
+    
+    colors = getThemeColors();
+    
+    markers.forEach((marker) => {
+      marker.setContent(createMarkerIcon(colors));
+    });
+    
+    map.remove(markerGroup);
+    const clusters = aggregateMarkers(map, markers, getClusterRadius(map.getZoom()), colors);
+    markerGroup = new AMap.OverlayGroup(clusters);
+    map.add(markerGroup);
+  }
+
+  new MutationObserver(() => {
+    updateTheme();
+  }).observe(document.body, {attributes: true, attributeFilter: ["class"]});
+
 }
