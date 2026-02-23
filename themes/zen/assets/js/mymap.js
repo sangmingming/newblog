@@ -61,7 +61,7 @@ export function getClusterRadius(zoom) {
   return radius;
 }
 
-export function aggregateMarkers(leafletMap, input, threshold) {
+export function aggregateMarkers(amap, input, threshold) {
   const clusters = [];
   const ms = input.map((it) => {
     it._aggregated = false;
@@ -75,11 +75,13 @@ export function aggregateMarkers(leafletMap, input, threshold) {
     m._aggregated = true;
     ms.forEach((om, oi) => {
       if (index != oi && !om._aggregated) {
+        const position1 = m.getPosition();
+        const position2 = om.getPosition();
         const dist = haversine(
-          m.getPosition().lat,
-          m.getPosition().lng,
-          om.getPosition().lat,
-          om.getPosition().lng,
+          position1.lat,
+          position1.lng,
+          position2.lat,
+          position2.lng,
         );
         if (dist < threshold) {
           cluster.push(om);
@@ -89,20 +91,18 @@ export function aggregateMarkers(leafletMap, input, threshold) {
     });
 
     if (cluster.length > 1) {
-      const llg = new AMap.LngLat(
-        cluster[0].getPosition().lng,
-        cluster[0].getPosition().lat,
-      );
+      const position = cluster[0].getPosition();
       const markerCount = cluster.length;
 
       const clusterMarker = new AMap.Marker({
-        position: llg,
-        content: `<div class="my-cluster-icon" style="width: 32px; height: 32px; background: #ff471a; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 2px solid white;">${markerCount}</div>`,
+        position: position,
+        content: `<div class="my-cluster-icon" style="width: 32px; height: 32px; background: #ff471a; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 2px solid white; font-size: 14px;">${markerCount}</div>`,
         offset: new AMap.Pixel(-16, -16),
+        zIndex: 100
       });
       
       clusterMarker.on("click", function () {
-        leafletMap.setZoomAndCenter(leafletMap.getZoom() + 1, clusterMarker.getPosition());
+        amap.setZoomAndCenter(amap.getZoom() + 1, clusterMarker.getPosition());
       });
       clusters.push(clusterMarker);
     } else {
@@ -121,53 +121,79 @@ export function init() {
     mapStyle: "amap://styles/whitesmoke",
   });
 
-  map.addControl(new AMap.ControlBar({
-    position: {
-      top: '10px',
-      right: '10px'
-    }
-  }));
+  // map.addControl(new AMap.ControlBar({
+  //   position: {
+  //     top: '10px',
+  //     right: '10px'
+  //   }
+  // }));
 
   const aggregationThreshold = 1;
 
   function createMarkerIcon() {
     const svgTemplate = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="marker" style="width: 28px; height: 28px;">
-      <path fill-opacity=".25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/>
-      <path stroke="#fff" fill="#ff471a" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
-    </svg>`;
+    <div style="position: relative; width: 28px; height: 28px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="width: 100%; height: 100%;">
+        <path fill-opacity=".25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/>
+        <path stroke="#fff" fill="#ff471a" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
+      </svg>
+    </div>`;
 
     return svgTemplate;
   }
 
-  var geojson = new AMap.GeoJSON({
-    geoJSON: areas,
-    getMarker: function(geojson, lnglats) {
-      return null;
-    },
-    getPolyline: function(geojson, lnglats) {
-      return null;
-    },
-    getPolygon: function(geojson, lnglats) {
-      return new AMap.Polygon({
-        path: lnglats,
-        fillColor: "#ffcc80",
-        fillOpacity: 0.4,
-        strokeColor: "#ffcc80",
-        strokeWeight: 1,
-      });
-    }
-  });
-  map.add(geojson);
+  function processGeoJSON(geojson) {
+    if (!geojson || !geojson.features) return;
+    
+    geojson.features.forEach(function(feature) {
+      if (!feature.geometry) return;
+      
+      const geometry = feature.geometry;
+      const type = geometry.type;
+      const coordinates = geometry.coordinates;
+      
+      if (type === 'Polygon') {
+        const path = coordinates[0].map(function(coord) {
+          return new AMap.LngLat(coord[0], coord[1]);
+        });
+        const polygon = new AMap.Polygon({
+          path: path,
+          fillColor: "#ffcc80",
+          fillOpacity: 0.4,
+          strokeColor: "#ffcc80",
+          strokeWeight: 1,
+        });
+        map.add(polygon);
+      } else if (type === 'MultiPolygon') {
+        coordinates.forEach(function(polygonCoords) {
+          const path = polygonCoords[0].map(function(coord) {
+            return new AMap.LngLat(coord[0], coord[1]);
+          });
+          const polygon = new AMap.Polygon({
+            path: path,
+            fillColor: "#ffcc80",
+            fillOpacity: 0.4,
+            strokeColor: "#ffcc80",
+            strokeWeight: 1,
+          });
+          map.add(polygon);
+        });
+      }
+    });
+  }
+
+  processGeoJSON(areas);
 
   var markers = points.map((item) => {
     const [popupText, lat, lng] = item;
-    return new AMap.Marker({
+    const marker = new AMap.Marker({
       position: [lng, lat],
       content: createMarkerIcon(),
       offset: new AMap.Pixel(-12, -24),
-      extData: { popupText: popupText }
+      zIndex: 50
     });
+    marker.setExtData({ popupText: popupText });
+    return marker;
   });
 
   var markerGroup = new AMap.OverlayGroup(aggregateMarkers(map, markers, getClusterRadius(4)));
