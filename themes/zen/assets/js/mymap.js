@@ -132,10 +132,10 @@ export function init() {
   //   }
   // }));
 
-  AMap.plugin('AMap.ToolBar',function(){ 
-  var toolbar = new AMap.ToolBar({position: "RT"}); //缩放工具条实例化
+ AMap.plugin(['AMap.Scale', 'AMap.MoveAnimation', 'AMap.ToolBar'], () => {
+                var toolbar = new AMap.ToolBar({position: "RT"}); //缩放工具条实例化
   map.addControl(toolbar); //添加控件
-  var scale = new AMap.Scale();
+  var scale = new AMap.Scale({positaion: "LB"});
   map.addControl(scale);
 });
 
