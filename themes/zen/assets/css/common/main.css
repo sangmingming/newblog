@@ -127,9 +127,10 @@ div#map .amap-info-content a:active,div#map .amap-info-content a:focus,div#map .
     box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
 }
 
-.amap-info-content image {
+.amap-info-content img {
     width: 100%;
     height: auto;
+    border-radius: var(--radius);
 }
 
 @media only screen and (max-width: 768px) {

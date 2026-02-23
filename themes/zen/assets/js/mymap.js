@@ -65,8 +65,8 @@ function getThemeColors() {
   const isDark = localStorage.getItem("pref-theme") === "dark";
   return {
     markerFill: isDark ? "#ff6b6b" : "#ff471a",
-    markerStroke: isDark ? "#ffffff" : "#ffffff",
-    clusterText: isDark ? "#ff333333" : "#ffffff",
+    markerStroke: isDark ? "#333333" : "#ffffff",
+    clusterText: isDark ? "#333333" : "#ffffff",
     clusterBorder: isDark ? "#ff000000" : "#ffffff",
     areaFill: isDark ? "#ffd93d" : "#ffcc80",
     areaStroke: isDark ? "#ffd93d" : "#ffcc80"
