@@ -133,9 +133,9 @@ export function init() {
   // }));
 
   AMap.plugin('AMap.ToolBar',function(){ 
-  var toolbar = new AMap.ToolBar({position: "LB"}); //缩放工具条实例化
+  var toolbar = new AMap.ToolBar({position: "RT"}); //缩放工具条实例化
   map.addControl(toolbar); //添加控件
-  var scale = new AMap.Scale({position: "LB"});
+  var scale = new AMap.Scale();
   map.addControl(scale);
 });
 
@@ -234,6 +234,6 @@ export function init() {
   new MutationObserver(() => {
     const theme = localStorage.getItem("pref-theme") === "dark" ? "amap://styles/dark" : "amap://styles/whitesmoke";
     map.setMapStyle(theme);
-  }).observe(document.documentElement, {attributes: true, attributeFilter: ["class"]})
+  }).observe(document.body, {attributes: true, attributeFilter: ["class"]});
 
 }
