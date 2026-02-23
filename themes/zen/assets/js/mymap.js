@@ -113,12 +113,16 @@ export function aggregateMarkers(amap, input, threshold) {
 }
 
 export function init() {
+  var defaultTheme = localStorage.getItem("pref-theme") === "dark" ? "amap://styles/dark" : "amap://styles/whitesmoke";
   var map = new AMap.Map("map", {
     zoom: 4,
     center: [117.2345622, 33.3007613],
     zooms: [2, 14],
-    viewMode: "2D",
-    mapStyle: "amap://styles/whitesmoke",
+    viewMode: "3D",
+    mapStyle: defaultTheme,
+    pitch: 0,
+    rotateEnable: false,
+    pitchEnable: false
   });
 
   // map.addControl(new AMap.ControlBar({
@@ -127,6 +131,13 @@ export function init() {
   //     right: '10px'
   //   }
   // }));
+
+  AMap.plugin('AMap.ToolBar',function(){ 
+  var toolbar = new AMap.ToolBar({position: "LB"}); //缩放工具条实例化
+  map.addControl(toolbar); //添加控件
+  var scale = new AMap.Scale({position: "LB"});
+  map.addControl(scale);
+});
 
   const aggregationThreshold = 1;
 
@@ -219,4 +230,10 @@ export function init() {
     markerGroup = new AMap.OverlayGroup(clusters);
     map.add(markerGroup);
   });
+
+  new MutationObserver(() => {
+    const theme = localStorage.getItem("pref-theme") === "dark" ? "amap://styles/dark" : "amap://styles/whitesmoke";
+    map.setMapStyle(theme);
+  }).observe(document.documentElement, {attributes: true, attributeFilter: ["class"]})
+
 }
