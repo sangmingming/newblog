@@ -61,7 +61,19 @@ export function getClusterRadius(zoom) {
   return radius;
 }
 
-export function aggregateMarkers(amap, input, threshold) {
+function getThemeColors() {
+  const isDark = localStorage.getItem("pref-theme") === "dark";
+  return {
+    markerFill: isDark ? "#ff6b6b" : "#ff471a",
+    markerStroke: isDark ? "#ffffff" : "#ffffff",
+    clusterText: isDark ? "#ff333333" : "#ffffff",
+    clusterBorder: isDark ? "#ff000000" : "#ffffff",
+    areaFill: isDark ? "#ffd93d" : "#ffcc80",
+    areaStroke: isDark ? "#ffd93d" : "#ffcc80"
+  };
+}
+
+export function aggregateMarkers(amap, input, threshold, colors) {
   const clusters = [];
   const ms = input.map((it) => {
     it._aggregated = false;
@@ -96,7 +108,7 @@ export function aggregateMarkers(amap, input, threshold) {
 
       const clusterMarker = new AMap.Marker({
         position: position,
-        content: `<div class="my-cluster-icon" style="width: 32px; height: 32px; background: #ff471a; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 2px solid white; font-size: 14px;">${markerCount}</div>`,
+        content: `<div class="my-cluster-icon" style="width: 32px; height: 32px; background: linear-gradient(135deg, #ffb347, #ff6f61); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: ${colors.clusterText}; font-weight: bold; border: 2px solid ${colors.clusterBorder}; font-size: 14px;">${markerCount}</div>`,
         offset: new AMap.Pixel(-16, -16),
         zIndex: 100
       });
@@ -125,35 +137,28 @@ export function init() {
     pitchEnable: false
   });
 
-  // map.addControl(new AMap.ControlBar({
-  //   position: {
-  //     top: '10px',
-  //     right: '10px'
-  //   }
-  // }));
-
- AMap.plugin(['AMap.Scale', 'AMap.MoveAnimation', 'AMap.ToolBar'], () => {
-                var toolbar = new AMap.ToolBar({position: "RT"}); //缩放工具条实例化
-  map.addControl(toolbar); //添加控件
-  var scale = new AMap.Scale({positaion: "LB"});
-  map.addControl(scale);
-});
+  AMap.plugin(['AMap.Scale', 'AMap.MoveAnimation', 'AMap.ToolBar'], () => {
+    var toolbar = new AMap.ToolBar({position: "RT"});
+    map.addControl(toolbar);
+    var scale = new AMap.Scale({positaion: "LB"});
+    map.addControl(scale);
+  });
 
   const aggregationThreshold = 1;
 
-  function createMarkerIcon() {
+  function createMarkerIcon(colors) {
     const svgTemplate = `
     <div style="position: relative; width: 28px; height: 28px;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="width: 100%; height: 100%;">
         <path fill-opacity=".25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/>
-        <path stroke="#fff" fill="#ff471a" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
+        <path stroke="${colors.markerStroke}" fill="${colors.markerFill}" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
       </svg>
     </div>`;
 
     return svgTemplate;
   }
 
-  function processGeoJSON(geojson) {
+  function processGeoJSON(geojson, colors) {
     if (!geojson || !geojson.features) return;
     
     geojson.features.forEach(function(feature) {
@@ -169,9 +174,9 @@ export function init() {
         });
         const polygon = new AMap.Polygon({
           path: path,
-          fillColor: "#ffcc80",
+          fillColor: colors.areaFill,
           fillOpacity: 0.4,
-          strokeColor: "#ffcc80",
+          strokeColor: colors.areaStroke,
           strokeWeight: 1,
         });
         map.add(polygon);
@@ -182,9 +187,9 @@ export function init() {
           });
           const polygon = new AMap.Polygon({
             path: path,
-            fillColor: "#ffcc80",
+            fillColor: colors.areaFill,
             fillOpacity: 0.4,
-            strokeColor: "#ffcc80",
+            strokeColor: colors.areaStroke,
             strokeWeight: 1,
           });
           map.add(polygon);
@@ -193,13 +198,14 @@ export function init() {
     });
   }
 
-  processGeoJSON(areas);
+  var colors = getThemeColors();
+  processGeoJSON(areas, colors);
 
   var markers = points.map((item) => {
     const [popupText, lat, lng] = item;
     const marker = new AMap.Marker({
       position: [lng, lat],
-      content: createMarkerIcon(),
+      content: createMarkerIcon(colors),
       offset: new AMap.Pixel(-12, -24),
       zIndex: 50
     });
@@ -207,7 +213,7 @@ export function init() {
     return marker;
   });
 
-  var markerGroup = new AMap.OverlayGroup(aggregateMarkers(map, markers, getClusterRadius(4)));
+  var markerGroup = new AMap.OverlayGroup(aggregateMarkers(map, markers, getClusterRadius(4), colors));
   map.add(markerGroup);
 
   markers.forEach((marker) => {
@@ -226,14 +232,30 @@ export function init() {
       map,
       markers,
       getClusterRadius(map.getZoom()),
+      colors
     );
     markerGroup = new AMap.OverlayGroup(clusters);
     map.add(markerGroup);
   });
 
-  new MutationObserver(() => {
+  function updateTheme() {
     const theme = localStorage.getItem("pref-theme") === "dark" ? "amap://styles/dark" : "amap://styles/whitesmoke";
     map.setMapStyle(theme);
+    
+    colors = getThemeColors();
+    
+    markers.forEach((marker) => {
+      marker.setContent(createMarkerIcon(colors));
+    });
+    
+    map.remove(markerGroup);
+    const clusters = aggregateMarkers(map, markers, getClusterRadius(map.getZoom()), colors);
+    markerGroup = new AMap.OverlayGroup(clusters);
+    map.add(markerGroup);
+  }
+
+  new MutationObserver(() => {
+    updateTheme();
   }).observe(document.body, {attributes: true, attributeFilter: ["class"]});
 
 }
