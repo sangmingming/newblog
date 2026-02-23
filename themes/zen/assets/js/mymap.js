@@ -31,31 +31,31 @@ export function getClusterRadius(zoom) {
       radius = 5;
       break;
     case 9:
-      radius = 15;
+      radius = 6;
       break;
     case 8:
-      radius = 25;
+      radius = 10;
       break;
     case 7:
-      radius = 50;
+      radius = 20;
       break;
     case 6:
-      radius = 100;
+      radius = 50;
       break;
     case 5:
-      radius = 200;
+      radius = 100;
       break;
     case 4:
-      radius = 500;
+      radius = 200;
       break;
     case 3:
-      radius = 1000;
+      radius = 500;
       break;
     case 2:
-      radius = 2000;
+      radius = 1000;
       break;
     case 1:
-      radius = 2000;
+      radius = 1000;
       break;
   }
   return radius;
