@@ -89,7 +89,7 @@ export function aggregateMarkers(amap, input, threshold, colors) {
       if (index != oi && !om._aggregated) {
         const position1 = m.getPosition();
         const position2 = om.getPosition();
-        const dist = position1.distance(position2);
+        const dist = haversine(position1.lat, position1.lng, position2.lat, position2.lng);
         if (dist < threshold && amap.getZoom() < 10) {
           cluster.push(om);
           om._aggregated = true;
