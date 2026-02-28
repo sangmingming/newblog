@@ -17,6 +17,8 @@ comments: true
 ### 折腾
 最近获悉LeanCloud将于2027年年初停止服务，而我的博客的评论数据是用这个平台的结构化数据存储的，不过好在Waline支持多种数据存储平台，调研了一下发现Tidb Cloud提供的免费服务就够我用了，于是就迁移到这里了。迁移倒是也挺简单，通过Waline把数据导出，在tidb cloud中创建好数据库和对应的表，在Vercel后台把Waline的环境变量中的LeanCloud相关的都删掉，并且新加上tidb的，进入Waline后台再导入一下数据就好了，对于用户来说基本没啥影响。
 
+![](https://img.isming.me/photo/26-feb/IMG_20260220_170509.webp)
+
 前不久发现网上有网友基于高德地图的API做了个足迹地图，手一痒也想吧自己的搞一搞，于是就对AI发号施令，完成了足迹功能的重构，勉强能用给上线了。地点聚合和图片加载还有点小问题，就等后续有空再优化了。效果的话可以参考我首页的足迹页面，代码修改可以参考这个[PR](https://github.com/sangmingming/newblog/pull/12)。
 
 我的博客中的图片是存储在github上，通过vercel进行cdn加速的，发布的时候会使用piclist进行上传。但是有时候我会在chromebook上写文章，上面没法安装piclist，而github也不能直接预览某一个文件文件夹下的图片，于是就想到去写个网页应用来展示。这种事情自己做不来，就指挥AI来干，这里是地址，有需要的也可以看看。[图片管理器](https://image-manager-git.vercel.app/)
