@@ -11,7 +11,7 @@ export let points = [
     ["<b>武汉</b><i>Wuhan</i>", 30.547081,114.2970471],
     ["<b>南京</b><i>Nanjing</i>", 32.0743982,118.7955266],
     ["<b>杭州</b><i>Hangzhou</i>", 30.2450166,120.0915979],
-    ["<b>曼谷</b><i>Bangkok</i>", 13.7524938,100.4935089],
+    ["<b>曼谷</b><i>Bangkok</i><a href='/2026-03-bangkok/'><img src='https://img.isming.me/photo/26bangkok/20260329-35-39.webp' />漫步曼谷游记</a>", 13.7524938,100.4935089],
     ["<b>普吉</b><i>Ko Phuket</i>", 7.9790846,98.3355238],
     ["<b>南昌</b><i>Nanchang</i><a href='https://isming.me/2024-02-nanchang/'><img src='https://img.isming.me/photo/IMG_20240217_160538.jpg' />历史之城英雄之城-南昌游记</a>", 28.685125, 115.8760944],
     ["<b>青岛</b><i>Qingdao</i><a href='https://isming.me/2024-07-shandong/'><img src='https://img.isming.me/image/20240706-19-2.jpg' />想去海边-山东半岛自驾游</a>", 36.0906493, 120.4633972],
