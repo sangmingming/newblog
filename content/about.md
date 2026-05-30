@@ -29,7 +29,7 @@ showCopyright: false
 
 + 邮箱： [i@isming.me](mailto:i@isming.me)   [linming1007@gmail.com](mailto:linming1007@gmail.com)
 
-![](/images/wechat-qrcode.png)
+![](https://img.isming.me/image/wechat_qrcode.webp)
 
 ### 版权声明
 本站所有内容（包括文章和照片）遵循「[CC BY-NC-SA 4.0(署名—非商业性使用—相同方式共享)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)」协议，转载请保留署名并注明来源。
