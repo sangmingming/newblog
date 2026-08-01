@@ -8,7 +8,9 @@ comments: true
 ---
 
 七月暑假正式小朋友正式放假，遂带着小孩回老家待了几周，地处皖南附近玩的地方比较多周末正好去了不少地方，后面听我慢慢道来。
+
 ![](https://img.isming.me/photo/2607/IMG_20260720_191521.webp)
+
 <!--more-->
 
 ### 行
@@ -22,60 +24,60 @@ comments: true
 
 在老家各处玩的都比较方便，之前的一些没去过的地方也都趁机去了一下。庐山一直没去过，说过想去很多此了，这次就去了一趟，但是因为当天来回，就没去到庐山里面。在秀峰景区脚下，看了疑是银河落九天的秀峰瀑布，又开车去了有天下四大书院之一称号的白鹿洞书院，这个书院号称是朱熹所建，自己看不懂就请了个讲解。下午去爬了三叠泉瀑布，导航到庐山东门，坐观光车到山底，这样可以少走很多路。三叠泉真的是三层的瀑布，下面有个湖还可以划船，但是这个瀑布肯定不是李白口中的瀑布。因为时间太赶，就没有去庐山景区了，遗憾留给下一次了。晚上又去九江城区跟朋友吃了个饭，看了看浔阳楼，在江边散个步就回了。
 
-![IMG_20260711_101416.webp](https://img.isming.me/photo/2607/IMG_20260711_101416.webp)
+![](https://img.isming.me/photo/2607/IMG_20260711_101416.webp)
 
 
-![IMG_20260711_144116.webp](https://img.isming.me/photo/2607/IMG_20260711_144116.webp)
+![](https://img.isming.me/photo/2607/IMG_20260711_144116.webp)
 
-![IMG_20260711_145348.webp](https://img.isming.me/photo/2607/IMG_20260711_145348.webp)
+![](https://img.isming.me/photo/2607/IMG_20260711_145348.webp)
 
-![IMG_20260711_121013.webp](https://img.isming.me/photo/2607/IMG_20260711_121013.webp)
+![](https://img.isming.me/photo/2607/IMG_20260711_121013.webp)
 
 
-![IMG_20260711_170306.webp](https://img.isming.me/photo/2607/IMG_20260711_170306.webp)
+![](https://img.isming.me/photo/2607/IMG_20260711_170306.webp)
 
 另一周末朋友约着去合肥科技馆，遂驱车前往。之前只去过上海天文馆，还没去过其他的科技馆。合肥科技馆坐落于蜀西湖，里面有好几个展馆，我们差不多一点钟进去，许多展馆中都有互动项目，很多像是儿童玩具，带着几个小孩玩的不亦乐乎，到了差不多下午关门了才出去。
 
-![IMG_20260719_155937.webp](https://img.isming.me/photo/2607/IMG_20260719_155937.webp)
+![](https://img.isming.me/photo/2607/IMG_20260719_155937.webp)
 
 另有一天想着去六安玩水，想着去霍山玩玩，然而当天早上大雨是没法去霍山大峡谷漂流的，于是找了个九龙潭玩水，先去了佛子岭水库，这个水库建于一九五几年，看着还是挺震撼的，看完水库就前往九龙潭。路上一直下雨不断，山路还挺危险，开了一两个小时才到。九龙潭这里车子可以开到水边，除了我们还有三四车人也在这里玩水，玩了两个小时又开车下起了雨就赶回去了。
 
-![IMG_20260719_134516.webp](https://img.isming.me/photo/2607/IMG_20260719_134516.webp)
+![](https://img.isming.me/photo/2607/IMG_20260719_134516.webp)
 
-![IMG_20260719_132818.webp](https://img.isming.me/photo/2607/IMG_20260719_132818.webp)
+![](https://img.isming.me/photo/2607/IMG_20260719_132818.webp)
 
 因为离黄山也不是很远，去了休宁县转了转，这里是古代出过状元最多的县，因此修了个状元博物馆，里面有不少关于古代科举的展览，以及当地的人文的介绍。除了状元博物馆，休宁还有个齐云山，是道教名山，山上也有不少出名的摩崖石刻，但是天气太热就不想去爬山就没去了。
 
-![IMG_20260724_114733.webp](https://img.isming.me/photo/2607/IMG_20260724_114733.webp)
+![](https://img.isming.me/photo/2607/IMG_20260724_114733.webp)
 
-![IMG_20260724_113825.webp](https://img.isming.me/photo/2607/IMG_20260724_113825.webp)
+![](https://img.isming.me/photo/2607/IMG_20260724_113825.webp)
 
 黄山附近的古村落很多，之前去过宏村，这次就去了西溪南，这个村子边有溪流很适合小孩玩水，很多小孩玩水，水流倒不是很清澈，溪流两边很多古树，这场景像绿野仙踪一般，村子里面有一些古建筑其他就是一些卖鱼灯特产之类的店铺，相比之下就没其他的了，但是免费的商业化又不严重，还不错了。
 
-![IMG_20260724_142847.webp](https://img.isming.me/photo/2607/IMG_20260724_142847.webp)
+![](https://img.isming.me/photo/2607/IMG_20260724_142847.webp)
 
-![IMG_20260724_145552.webp](https://img.isming.me/photo/2607/IMG_20260724_145552.webp)
+![](https://img.isming.me/photo/2607/IMG_20260724_145552.webp)
 
 
 
 回来的路途中，又去歙县待了一天，逛了一下徽州古城，晚上在府衙中看了个情景演出，听李白背将进酒。另外还去徽州历史博物馆感受了一下徽州文化，去渔梁坝看了一下古村古坝。
 
-![IMG_20260724_195422.webp](https://img.isming.me/photo/2607/IMG_20260724_195422.webp)
+![](https://img.isming.me/photo/2607/IMG_20260724_195422.webp)
 
-![IMG_20260724_201523.webp](https://img.isming.me/photo/2607/IMG_20260724_201523.webp)
+![](https://img.isming.me/photo/2607/IMG_20260724_201523.webp)
 
-![IMG_20260724_204915.webp](https://img.isming.me/photo/2607/IMG_20260724_204915.webp)
+![](https://img.isming.me/photo/2607/IMG_20260724_204915.webp)
 
-![IMG_20260724_205252.webp](https://img.isming.me/photo/2607/IMG_20260724_205252.webp)
+![](https://img.isming.me/photo/2607/IMG_20260724_205252.webp)
 
-![IMG_20260725_115522.webp](https://img.isming.me/photo/2607/IMG_20260725_115522.webp)
+![](https://img.isming.me/photo/2607/IMG_20260725_115522.webp)
 
 在老家几周大部分时间还是挺热的，农村的环境不大行，蚊子超级多，苍蝇也很多，天天各种防蚊措施也没啥用。夏天在老家待着是难受也真没办法，不然还能在家多待几周，去附近更多地方耍耍。
 
 不过七月恰逢台风天比较多，经常晚上都有比较好看的晚霞，在老家每天黄昏散步倒是拍到不少好看的晚霞。
-![IMG_20260705_193308.webp](https://img.isming.me/photo/2607/IMG_20260705_193308.webp)
+![](https://img.isming.me/photo/2607/IMG_20260705_193308.webp)
 
-![IMG_20260723_184833.webp](https://img.isming.me/photo/2607/IMG_20260723_184833.webp)
+![](https://img.isming.me/photo/2607/IMG_20260723_184833.webp)
 
 ### 看
 
