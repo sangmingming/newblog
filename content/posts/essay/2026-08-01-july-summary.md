@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "#20 回村喂蚊的七月月报"
-date: 2026-08-1T20:20:27+0800
+date: 2026-08-01T20:20:27+0800
 tags: ["月报", "总结", "旅行"]
 feature: 
 comments: true
