@@ -1,257 +1,357 @@
-function haversine(lat1, lon1, lat2, lon2) {
-  const R = 6371;
-  const toRad = (angle) => angle * (Math.PI / 180);
+// 足迹地图主逻辑
+// 入口：location_map.html
+// 数据：points.js (城市列表) + areas.js (中国省份边界 GeoJSON)
+//
+// 主要能力：
+//  1. 去过的省份高亮遮罩（terracotta 色，参考 koobai.com/zouguo/）
+//  2. 缩略图圆点 marker（无图时退化为小圆点）
+//  3. 屏幕像素距离聚合（不是米距离）+ 双 disc 缩略图 cluster
+//  4. InfoWindow 卡片：缩略图 + 中英文名 + 关联文章链接
 
-  const dLat = toRad(lat2 - lat1);
-  const dLon = toRad(lon2 - lon1);
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+import { points } from "./points.js";
+import { areas } from "./areas.js";
 
-  return R * c;
-}
+// ---------- 工具：point-in-polygon ----------
 
-export function getClusterRadius(zoom) {
-  var radius = 100;
-  switch (zoom) {
-    case 14:
-      radius = 0.5;
-      break;
-    case 13:
-      radius = 1;
-      break;
-    case 12:
-      radius = 2;
-      break;
-    case 11:
-      radius = 3;
-      break;
-    case 10:
-      radius = 5;
-      break;
-    case 9:
-      radius = 6;
-      break;
-    case 8:
-      radius = 10;
-      break;
-    case 7:
-      radius = 20;
-      break;
-    case 6:
-      radius = 50;
-      break;
-    case 5:
-      radius = 100;
-      break;
-    case 4:
-      radius = 200;
-      break;
-    case 3:
-      radius = 500;
-      break;
-    case 2:
-      radius = 1000;
-      break;
-    case 1:
-      radius = 1000;
-      break;
+function pointInRing(lng, lat, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const xi = ring[i][0],
+      yi = ring[i][1];
+    const xj = ring[j][0],
+      yj = ring[j][1];
+    if (yi > lat !== yj > lat && lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) {
+      inside = !inside;
+    }
   }
-  return radius;
+  return inside;
 }
 
-function getThemeColors() {
-  const isDark = localStorage.getItem("pref-theme") === "dark";
+function pointInFeature(lng, lat, feature) {
+  if (!feature || !feature.geometry) return false;
+  const g = feature.geometry;
+  if (g.type === "Polygon") {
+    return pointInRing(lng, lat, g.coordinates[0]);
+  }
+  if (g.type === "MultiPolygon") {
+    return g.coordinates.some((poly) => pointInRing(lng, lat, poly[0]));
+  }
+  return false;
+}
+
+// ---------- 工具：解析 points 条目 ----------
+// points 的元素：[htmlString, lat, lng]
+// htmlString 形如：<b>北京</b><i>Beijing</i><a href='url'><img src='...' />标题</a>
+
+const POINT_RE =
+  /<b>([^<]+)<\/b>\s*<i>([^<]+)<\/i>(?:\s*<a\s+href=['"]([^'"]+)['"]\s*>\s*<img\s+[^>]*src=['"]([^'"]+)['"][^>]*\/?>([^<]*)<\/a>)?/i;
+
+function parsePoint(entry) {
+  const [, lat, lng] = entry;
+  const html = entry[0] || "";
+  const m = html.match(POINT_RE);
+  if (!m) {
+    return { name: "", en: "", lat, lng, img: "", url: "", title: "" };
+  }
   return {
-    markerFill: isDark ? "#ff6b6b" : "#ff471a",
-    markerStroke: isDark ? "#333333" : "#ffffff",
-    clusterText: isDark ? "#333333" : "#ffffff",
-    clusterBorder: isDark ? "#ff000000" : "#ffffff",
-    areaFill: isDark ? "#ffd93d" : "#ffcc80",
-    areaStroke: isDark ? "#ffd93d" : "#ffcc80"
+    name: m[1] || "",
+    en: m[2] || "",
+    url: m[3] || "",
+    img: m[4] || "",
+    title: (m[5] || "").trim(),
+    lat,
+    lng,
   };
 }
 
-export function aggregateMarkers(amap, input, threshold, colors) {
-  const clusters = [];
-  const ms = input.map((it) => {
-    it._aggregated = false;
-    return it;
-  });
-  ms.forEach((m, index) => {
-    let addedToCluster = false;
-    if (m._aggregated) return;
+// ---------- 工具：主题色 ----------
 
-    let cluster = [m];
-    m._aggregated = true;
-    ms.forEach((om, oi) => {
-      if (index != oi && !om._aggregated) {
-        const position1 = m.getPosition();
-        const position2 = om.getPosition();
-        const dist = haversine(position1.lat, position1.lng, position2.lat, position2.lng);
-        if (dist < threshold && amap.getZoom() < 10) {
-          cluster.push(om);
-          om._aggregated = true;
-        }
-      }
-    });
-
-    if (cluster.length > 1) {
-      const position = cluster[0].getPosition();
-      const markerCount = cluster.length;
-
-      const clusterMarker = new AMap.Marker({
-        position: position,
-        content: `<div class="my-cluster-icon" style="width: 32px; height: 32px; background: linear-gradient(135deg, #ffb347, #ff6f61); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: ${colors.clusterText}; font-weight: bold; border: 2px solid ${colors.clusterBorder}; font-size: 14px;">${markerCount}</div>`,
-        offset: new AMap.Pixel(-16, -16),
-        zIndex: 100
-      });
-      
-      clusterMarker.on("click", function () {
-        amap.setZoomAndCenter(amap.getZoom() + 1, clusterMarker.getPosition());
-      });
-      clusters.push(clusterMarker);
-    } else {
-      clusters.push(m);
-    }
-  });
-  return clusters;
+function isDark() {
+  return document.body.classList.contains("dark");
 }
 
-export function init() {
-  var defaultTheme = localStorage.getItem("pref-theme") === "dark" ? "amap://styles/dark" : "amap://styles/whitesmoke";
-  var map = new AMap.Map("map", {
-    zoom: 4,
-    center: [117.2345622, 33.3007613],
-    zooms: [2, 14],
-    viewMode: "3D",
-    mapStyle: defaultTheme,
-    pitch: 0,
-    rotateEnable: false,
-    pitchEnable: false
-  });
+function getTheme() {
+  return isDark() ? "amap://styles/dark" : "amap://styles/whitesmoke";
+}
 
-  AMap.plugin(['AMap.Scale', 'AMap.MoveAnimation', 'AMap.ToolBar'], () => {
-    var toolbar = new AMap.ToolBar({position: "RT"});
-    map.addControl(toolbar);
-    var scale = new AMap.Scale({positaion: "LB"});
-    map.addControl(scale);
-  });
+function getMarkerColor() {
+  return isDark() ? "#c97a63" : "#bd6b55";
+}
 
-  const aggregationThreshold = 1;
+function getAreaColors() {
+  return isDark()
+    ? { fill: "#c97a63", fillOpacity: 0.22, stroke: "#d6917b", strokeOpacity: 0.6, strokeWeight: 1 }
+    : { fill: "#bd6b55", fillOpacity: 0.18, stroke: "#aa6251", strokeOpacity: 0.65, strokeWeight: 1 };
+}
 
-  function createMarkerIcon(colors) {
-    const svgTemplate = `
-    <div style="position: relative; width: 28px; height: 28px;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="width: 100%; height: 100%;">
-        <path fill-opacity=".25" d="M16 32s1.427-9.585 3.761-12.025c4.595-4.805 8.685-.99 8.685-.99s4.044 3.964-.526 8.743C25.514 30.245 16 32 16 32z"/>
-        <path stroke="${colors.markerStroke}" fill="${colors.markerFill}" d="M15.938 32S6 17.938 6 11.938C6 .125 15.938 0 15.938 0S26 .125 26 11.875C26 18.062 15.938 32 15.938 32zM16 6a4 4 0 100 8 4 4 0 000-8z"/>
-      </svg>
-    </div>`;
+// ---------- 工具：去过的省份 ----------
 
-    return svgTemplate;
-  }
-
-  function processGeoJSON(geojson, colors) {
-    if (!geojson || !geojson.features) return;
-    
-    geojson.features.forEach(function(feature) {
-      if (!feature.geometry) return;
-      
-      const geometry = feature.geometry;
-      const type = geometry.type;
-      const coordinates = geometry.coordinates;
-      
-      if (type === 'Polygon') {
-        const path = coordinates[0].map(function(coord) {
-          return new AMap.LngLat(coord[0], coord[1]);
-        });
-        const polygon = new AMap.Polygon({
-          path: path,
-          fillColor: colors.areaFill,
-          fillOpacity: 0.4,
-          strokeColor: colors.areaStroke,
-          strokeWeight: 1,
-        });
-        map.add(polygon);
-      } else if (type === 'MultiPolygon') {
-        coordinates.forEach(function(polygonCoords) {
-          const path = polygonCoords[0].map(function(coord) {
-            return new AMap.LngLat(coord[0], coord[1]);
-          });
-          const polygon = new AMap.Polygon({
-            path: path,
-            fillColor: colors.areaFill,
-            fillOpacity: 0.4,
-            strokeColor: colors.areaStroke,
-            strokeWeight: 1,
-          });
-          map.add(polygon);
-        });
+function getVisitedProvinceAdcodes() {
+  const parsed = points.map(parsePoint);
+  const visited = new Set();
+  for (const p of parsed) {
+    if (typeof p.lat !== "number" || typeof p.lng !== "number") continue;
+    for (const f of areas.features) {
+      if (f.properties?.level !== "province") continue;
+      if (pointInFeature(p.lng, p.lat, f)) {
+        if (f.properties.adcode) visited.add(f.properties.adcode);
       }
-    });
+    }
   }
+  return visited;
+}
 
-  var colors = getThemeColors();
-  processGeoJSON(areas, colors);
+// ---------- 渲染：marker 元素 ----------
 
-  var markers = points.map((item) => {
-    const [popupText, lat, lng] = item;
-    const marker = new AMap.Marker({
-      position: [lng, lat],
-      content: createMarkerIcon(colors),
-      offset: new AMap.Pixel(-12, -24),
-      zIndex: 50
-    });
-    marker.setExtData({ popupText: popupText });
-    return marker;
+function escapeAttr(s) {
+  return String(s || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function buildMarkerContent(point, color) {
+  const hasImg = !!point.img;
+  const cls = "zouguo-marker" + (hasImg ? "" : " is-text-only");
+  // 内联 background-image，避免 AMap 二次解析 <style>
+  const style = hasImg
+    ? `style="--marker-fill:${escapeAttr(color)};--marker-img:url('${escapeAttr(point.img)}')"`
+    : `style="--marker-fill:${escapeAttr(color)}"`;
+  return `<div class="${cls}" ${style} role="button" tabindex="0" aria-label="${escapeAttr(point.name)}">` +
+    `<div class="zouguo-marker-thumb"></div>` +
+    `<div class="zouguo-marker-tail"></div>` +
+    `</div>`;
+}
+
+// ---------- 渲染：聚合 ----------
+
+function buildClusterContent(members, color) {
+  const hasImgMembers = members.filter((m) => m.img);
+  const front = hasImgMembers[0] || members[0];
+  const back = hasImgMembers[1];
+  const count = members.length;
+
+  const discFrontStyle = front.img
+    ? `style="--marker-fill:${escapeAttr(color)};background-image:url('${escapeAttr(front.img)}')"`
+    : `style="--marker-fill:${escapeAttr(color)}"`;
+
+  let html = `<div class="zouguo-cluster" role="button" tabindex="0" aria-label="聚合 ${count} 个点，放大查看">`;
+  if (back) {
+    const backStyle = `style="--marker-fill:${escapeAttr(color)};background-image:url('${escapeAttr(back.img)}')"`;
+    html += `<div class="zouguo-cluster-disc is-back" ${backStyle}></div>`;
+    html += `<div class="zouguo-cluster-disc is-front" ${discFrontStyle}></div>`;
+  } else {
+    const singleStyle = front.img
+      ? `style="--marker-fill:${escapeAttr(color)};background-image:url('${escapeAttr(front.img)}')"`
+      : `style="--marker-fill:${escapeAttr(color)}"`;
+    html += `<div class="zouguo-cluster-disc is-single" ${singleStyle}></div>`;
+  }
+  if (count > 2) {
+    html += `<span class="zouguo-cluster-count">+${count - 2}</span>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+// ---------- 渲染：InfoWindow 卡片 ----------
+
+function buildInfoHtml(point) {
+  const imgStyle = point.img
+    ? `style="background-image:url('${escapeAttr(point.img)}')"`
+    : "";
+  const link = point.url
+    ? `<a class="zouguo-iw-link" href="${escapeAttr(point.url)}" target="_self">${point.title || "查看游记 →"}</a>`
+    : "";
+  return (
+    `<div class="zouguo-iw">` +
+    (point.img ? `<span class="zouguo-iw-img" ${imgStyle}></span>` : "") +
+    `<div class="zouguo-iw-body">` +
+    `<p class="zouguo-iw-name">${escapeAttr(point.name)}<i class="zouguo-iw-en">${escapeAttr(point.en)}</i></p>` +
+    link +
+    `</div>` +
+    `</div>`
+  );
+}
+
+// ---------- 聚合：屏幕像素距离 ----------
+
+const CLUSTER_PX = 50;
+
+function projectToContainer(amap, marker) {
+  // AMap v2: lngLatToContainer 返回相对于地图容器的像素坐标
+  try {
+    return amap.lngLatToContainer(marker.getPosition());
+  } catch {
+    const p = marker.getPosition();
+    return amap.lngLatToPixel(p, amap.getZoom());
+  }
+}
+
+function clusterMarkers(amap, markers) {
+  // 简单贪心：未分配的点开一个新组，把所有 50px 内的点吸进来
+  const groups = [];
+  const items = markers.map((m) => ({ marker: m, point: m.getExtData().point }));
+  const assigned = new Array(items.length).fill(false);
+
+  for (let i = 0; i < items.length; i++) {
+    if (assigned[i]) continue;
+    const center = projectToContainer(amap, items[i].marker);
+    if (!center) {
+      // 容器还没就绪：作为单点处理
+      groups.push([items[i]]);
+      assigned[i] = true;
+      continue;
+    }
+    const group = [items[i]];
+    assigned[i] = true;
+    for (let j = i + 1; j < items.length; j++) {
+      if (assigned[j]) continue;
+      const c2 = projectToContainer(amap, items[j].marker);
+      if (!c2) continue;
+      const dx = c2.x - center.x;
+      const dy = c2.y - center.y;
+      if (Math.hypot(dx, dy) < CLUSTER_PX) {
+        group.push(items[j]);
+        assigned[j] = true;
+      }
+    }
+    groups.push(group);
+  }
+  return groups;
+}
+
+// ---------- 主流程 ----------
+
+export function init() {
+  const map = new AMap.Map("map", {
+    zoom: 4,
+    center: [108, 34],
+    zooms: [2, 18],
+    viewMode: "2D",
+    mapStyle: getTheme(),
+    pitch: 0,
+    rotateEnable: true,
+    pitchEnable: false,
   });
 
-  var markerGroup = new AMap.OverlayGroup(aggregateMarkers(map, markers, getClusterRadius(4), colors));
-  map.add(markerGroup);
-
-  markers.forEach((marker) => {
-    marker.on("click", function() {
-      const infoWindow = new AMap.InfoWindow({
-        content: marker.getExtData().popupText,
-        closeWhenClickMap: true,
-        offset: new AMap.Pixel(0, -30)
-      });
-      infoWindow.open(map, marker.getPosition());
-    });
+  AMap.plugin(["AMap.Scale", "AMap.MoveAnimation", "AMap.ToolBar"], () => {
+    map.addControl(new AMap.ToolBar({ position: "RT" }));
+    map.addControl(new AMap.Scale());
   });
 
-  map.on("zoomend", function () {
-    map.remove(markerGroup);
-    const clusters = aggregateMarkers(
-      map,
-      markers,
-      getClusterRadius(map.getZoom()),
-      colors
+  // ---------- 遮罩：只画去过的省份 ----------
+  const areaColors = getAreaColors();
+  const visitedAdcodes = getVisitedProvinceAdcodes();
+  const visitedPolygons = [];
+  for (const f of areas.features) {
+    if (f.properties?.level !== "province") continue;
+    if (!visitedAdcodes.has(f.properties.adcode)) continue;
+    const g = f.geometry;
+    if (g.type === "Polygon") {
+      visitedPolygons.push(g.coordinates[0].map(([lng, lat]) => [lng, lat]));
+    } else if (g.type === "MultiPolygon") {
+      for (const poly of g.coordinates) {
+        visitedPolygons.push(poly[0].map(([lng, lat]) => [lng, lat]));
+      }
+    }
+  }
+  for (const path of visitedPolygons) {
+    const ring = path.map(([lng, lat]) => new AMap.LngLat(lng, lat));
+    map.add(
+      new AMap.Polygon({
+        path: ring,
+        fillColor: areaColors.fill,
+        fillOpacity: areaColors.fillOpacity,
+        strokeColor: areaColors.stroke,
+        strokeWeight: areaColors.strokeWeight,
+        strokeOpacity: areaColors.strokeOpacity,
+      })
     );
-    markerGroup = new AMap.OverlayGroup(clusters);
-    map.add(markerGroup);
+  }
+
+  // ---------- marker：每个点一个 ----------
+  const color = getMarkerColor();
+  const markers = points.map((entry) => {
+    const p = parsePoint(entry);
+    const m = new AMap.Marker({
+      position: [p.lng, p.lat],
+      content: buildMarkerContent(p, color),
+      offset: new AMap.Pixel(-19, -46),
+      zIndex: 50,
+      extData: { point: p, raw: entry },
+    });
+    return m;
   });
 
-  function updateTheme() {
-    const theme = localStorage.getItem("pref-theme") === "dark" ? "amap://styles/dark" : "amap://styles/whitesmoke";
-    map.setMapStyle(theme);
-    
-    colors = getThemeColors();
-    
-    markers.forEach((marker) => {
-      marker.setContent(createMarkerIcon(colors));
-    });
-    
-    map.remove(markerGroup);
-    const clusters = aggregateMarkers(map, markers, getClusterRadius(map.getZoom()), colors);
-    markerGroup = new AMap.OverlayGroup(clusters);
+  let markerGroup = null;
+
+  function rebuildGroup() {
+    if (markerGroup) {
+      map.remove(markerGroup);
+      markerGroup = null;
+    }
+    const groups = clusterMarkers(map, markers);
+    const overlays = [];
+    for (const g of groups) {
+      if (g.length === 1) {
+        overlays.push(g[0].marker);
+        continue;
+      }
+      const pointsInCluster = g.map((x) => x.point);
+      const lngSum = pointsInCluster.reduce((s, p) => s + p.lng, 0);
+      const latSum = pointsInCluster.reduce((s, p) => s + p.lat, 0);
+      const center = new AMap.LngLat(lngSum / g.length, latSum / g.length);
+      const clusterMarker = new AMap.Marker({
+        position: center,
+        content: buildClusterContent(pointsInCluster, color),
+        offset: new AMap.Pixel(-28, -28),
+        zIndex: 100,
+        extData: { cluster: true, members: g.map((x) => x.marker) },
+      });
+      clusterMarker.on("click", () => {
+        fitToCluster(g.map((x) => x.marker));
+      });
+      overlays.push(clusterMarker);
+    }
+    markerGroup = new AMap.OverlayGroup(overlays);
     map.add(markerGroup);
   }
 
-  new MutationObserver(() => {
-    updateTheme();
-  }).observe(document.body, {attributes: true, attributeFilter: ["class"]});
+  function fitToCluster(ms) {
+    if (!ms.length) return;
+    const bounds = new AMap.Bounds(ms[0].getPosition(), ms[0].getPosition());
+    for (let i = 1; i < ms.length; i++) bounds.extend(ms[i].getPosition());
+    map.setBounds(bounds, false, [60, 60, 60, 60]);
+  }
 
+  rebuildGroup();
+
+  // ---------- 单点点击 → InfoWindow ----------
+  const infoWindow = new AMap.InfoWindow({
+    offset: new AMap.Pixel(0, -42),
+    closeWhenClickMap: true,
+    autoMove: true,
+    isCustom: false,
+  });
+  for (const m of markers) {
+    m.on("click", () => {
+      const p = m.getExtData().point;
+      infoWindow.setContent(buildInfoHtml(p));
+      infoWindow.open(map, m.getPosition());
+    });
+  }
+
+  // ---------- 视野变化时重新聚合 ----------
+  map.on("moveend", rebuildGroup);
+  map.on("zoomend", rebuildGroup);
+
+  // ---------- 主题切换 ----------
+  const observer = new MutationObserver(() => {
+    const t = getTheme();
+    map.setMapStyle(t);
+    const c = getMarkerColor();
+    // 重建 marker 内容以更新颜色
+    for (const m of markers) {
+      m.setContent(buildMarkerContent(m.getExtData().point, c));
+    }
+    rebuildGroup();
+  });
+  observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
 }
