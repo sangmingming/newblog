@@ -291,6 +291,42 @@
     background: rgba(0, 0, 0, 0.7);
 }
 
+/* ===== Mapbox attribution 缩小变淡（保留以满足 Mapbox TOS） ===== */
+
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib {
+    background: transparent !important;
+    font-size: 10px;
+    color: var(--secondary);
+    opacity: 0.45;
+    transition: opacity 0.2s ease;
+    padding: 0 6px;
+}
+
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib:hover,
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib:focus-within {
+    opacity: 1;
+}
+
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib a {
+    color: var(--secondary);
+}
+
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib a:hover {
+    color: var(--primary);
+}
+
+.mapboxgl-ctrl-logo {
+    opacity: 0.4 !important;
+    transform: scale(0.7) !important;
+    transform-origin: bottom left !important;
+    margin: 0 0 2px 4px !important;
+    transition: opacity 0.2s ease;
+}
+
+.mapboxgl-ctrl-logo:hover {
+    opacity: 0.8 !important;
+}
+
 /* ===== 默认 light 主题变量 ===== */
 
 :root {
