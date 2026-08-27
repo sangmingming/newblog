@@ -1,25 +1,24 @@
-// 足迹地图主逻辑
+// 足迹地图主逻辑（Mapbox GL JS v3 版本）
 // 入口：location_map.html
 // 数据：points.js (城市列表) + areas.js (中国省份边界 GeoJSON)
 //
-// 主要能力：
-//  1. 去过的省份高亮遮罩（terracotta 色，参考 koobai.com/zouguo/）
-//  2. 缩略图圆点 marker（无图时退化为小圆点）
-//  3. 屏幕像素距离聚合（不是米距离）+ 双 disc 缩略图 cluster
-//  4. InfoWindow 卡片：缩略图 + 中英文名 + 关联文章链接
-
-import { points } from "./points.js";
-import { areas } from "./areas.js";
+// 视觉参考：https://koobai.com/zouguo/
+//   - Mapbox Standard 风格派生 + 暖色 config
+//   - 缩略图圆点 marker
+//   - 屏幕像素距离聚合（不是米距离）
+//   - 去过的省份 terracotta 色遮罩
+//
+// 注意：points.js 和 areas.js 是与本文件 concat 成同一模块的，
+//       它们在源文件里就是普通顶层变量（不写 export，也不 import）。
+//       见 themes/zen/layouts/partials/location_map.html 的 Concat 流水线。
 
 // ---------- 工具：point-in-polygon ----------
 
 function pointInRing(lng, lat, ring) {
   let inside = false;
   for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const xi = ring[i][0],
-      yi = ring[i][1];
-    const xj = ring[j][0],
-      yj = ring[j][1];
+    const xi = ring[i][0], yi = ring[i][1];
+    const xj = ring[j][0], yj = ring[j][1];
     if (yi > lat !== yj > lat && lng < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) {
       inside = !inside;
     }
@@ -30,18 +29,13 @@ function pointInRing(lng, lat, ring) {
 function pointInFeature(lng, lat, feature) {
   if (!feature || !feature.geometry) return false;
   const g = feature.geometry;
-  if (g.type === "Polygon") {
-    return pointInRing(lng, lat, g.coordinates[0]);
-  }
-  if (g.type === "MultiPolygon") {
-    return g.coordinates.some((poly) => pointInRing(lng, lat, poly[0]));
-  }
+  if (g.type === "Polygon") return pointInRing(lng, lat, g.coordinates[0]);
+  if (g.type === "MultiPolygon") return g.coordinates.some((poly) => pointInRing(lng, lat, poly[0]));
   return false;
 }
 
 // ---------- 工具：解析 points 条目 ----------
 // points 的元素：[htmlString, lat, lng]
-// htmlString 形如：<b>北京</b><i>Beijing</i><a href='url'><img src='...' />标题</a>
 
 const POINT_RE =
   /<b>([^<]+)<\/b>\s*<i>([^<]+)<\/i>(?:\s*<a\s+href=['"]([^'"]+)['"]\s*>\s*<img\s+[^>]*src=['"]([^'"]+)['"][^>]*\/?>([^<]*)<\/a>)?/i;
@@ -50,28 +44,67 @@ function parsePoint(entry) {
   const [, lat, lng] = entry;
   const html = entry[0] || "";
   const m = html.match(POINT_RE);
-  if (!m) {
-    return { name: "", en: "", lat, lng, img: "", url: "", title: "" };
-  }
+  if (!m) return { name: "", en: "", lat, lng, img: "", url: "", title: "" };
   return {
     name: m[1] || "",
     en: m[2] || "",
     url: m[3] || "",
     img: m[4] || "",
     title: (m[5] || "").trim(),
-    lat,
-    lng,
+    lat, lng,
   };
 }
 
-// ---------- 工具：主题色 ----------
+function escapeAttr(s) {
+  return String(s || "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+// ---------- 主题 ----------
 
 function isDark() {
   return document.body.classList.contains("dark");
 }
 
-function getTheme() {
-  return isDark() ? "amap://styles/dark" : "amap://styles/whitesmoke";
+// 暖色 Mapbox Standard config（light + dark 两套）
+// 参考 koobai 的"足迹 · Footprints Light"：theme=faded, 暖米色调
+const WARM_LIGHT = {
+  theme: "faded",
+  lightPreset: "day",
+  colorLand: "hsl(40, 33%, 93%)",
+  colorWater: "hsl(192, 31%, 81%)",
+  colorRoads: "hsl(37, 19%, 81%)",
+  colorTrunks: "hsl(34, 23%, 76%)",
+  colorMotorways: "hsl(35, 23%, 72%)",
+  colorAdminBoundaries: "hsl(11, 40%, 53%)",
+  colorBuildings: "hsl(38, 22%, 83%)",
+  colorPlaceLabels: "hsl(34, 6%, 46%)",
+  colorRoadLabels: "hsl(32, 6%, 44%)",
+  showPointOfInterestLabels: false,
+  showRoadLabels: false,
+};
+
+const WARM_DARK = {
+  theme: "faded",
+  lightPreset: "night",
+  colorLand: "hsl(35, 15%, 16%)",
+  colorWater: "hsl(200, 25%, 20%)",
+  colorRoads: "hsl(30, 8%, 28%)",
+  colorTrunks: "hsl(28, 12%, 36%)",
+  colorMotorways: "hsl(28, 12%, 42%)",
+  colorAdminBoundaries: "hsl(15, 30%, 48%)",
+  colorBuildings: "hsl(30, 12%, 24%)",
+  colorPlaceLabels: "hsl(34, 10%, 72%)",
+  colorRoadLabels: "hsl(34, 10%, 60%)",
+  showPointOfInterestLabels: false,
+  showRoadLabels: false,
+};
+
+function getWarmConfig() {
+  return isDark() ? WARM_DARK : WARM_LIGHT;
 }
 
 function getMarkerColor() {
@@ -80,55 +113,51 @@ function getMarkerColor() {
 
 function getAreaColors() {
   return isDark()
-    ? { fill: "#c97a63", fillOpacity: 0.22, stroke: "#d6917b", strokeOpacity: 0.6, strokeWeight: 1 }
-    : { fill: "#bd6b55", fillOpacity: 0.18, stroke: "#aa6251", strokeOpacity: 0.65, strokeWeight: 1 };
+    ? { fill: "#c97a63", fillOpacity: 0.22, stroke: "#d6917b", strokeOpacity: 0.6 }
+    : { fill: "#bd6b55", fillOpacity: 0.18, stroke: "#aa6251", strokeOpacity: 0.65 };
 }
 
-// ---------- 工具：去过的省份 ----------
+// ---------- 去过省份 GeoJSON ----------
 
-function getVisitedProvinceAdcodes() {
+function getVisitedProvincesFC() {
   const parsed = points.map(parsePoint);
-  const visited = new Set();
-  for (const p of parsed) {
-    if (typeof p.lat !== "number" || typeof p.lng !== "number") continue;
-    for (const f of areas.features) {
-      if (f.properties?.level !== "province") continue;
-      if (pointInFeature(p.lng, p.lat, f)) {
-        if (f.properties.adcode) visited.add(f.properties.adcode);
-      }
-    }
+  const features = [];
+  for (const f of areas.features) {
+    if (f.properties?.level !== "province") continue;
+    const hit = parsed.some(
+      (p) =>
+        typeof p.lat === "number" &&
+        typeof p.lng === "number" &&
+        pointInFeature(p.lng, p.lat, f)
+    );
+    if (hit) features.push(f);
   }
-  return visited;
+  return { type: "FeatureCollection", features };
 }
 
-// ---------- 渲染：marker 元素 ----------
+// ---------- 渲染：marker / cluster / popup HTML ----------
 
-function escapeAttr(s) {
-  return String(s || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function buildMarkerContent(point, color) {
+function buildMarkerHtml(point, color) {
   const hasImg = !!point.img;
   const cls = "zouguo-marker" + (hasImg ? "" : " is-text-only");
-  // 内联 background-image，避免 AMap 二次解析 <style>
   const style = hasImg
     ? `style="--marker-fill:${escapeAttr(color)};--marker-img:url('${escapeAttr(point.img)}')"`
     : `style="--marker-fill:${escapeAttr(color)}"`;
-  return `<div class="${cls}" ${style} role="button" tabindex="0" aria-label="${escapeAttr(point.name)}">` +
+  return (
+    `<div class="${cls}" ${style} role="button" tabindex="0" aria-label="${escapeAttr(point.name)}">` +
     `<div class="zouguo-marker-thumb"></div>` +
     `<div class="zouguo-marker-tail"></div>` +
-    `</div>`;
+    `</div>`
+  );
 }
 
-// ---------- 渲染：聚合 ----------
-
-function buildClusterContent(members, color) {
-  const hasImgMembers = members.filter((m) => m.img);
-  const front = hasImgMembers[0] || members[0];
-  const back = hasImgMembers[1];
+function buildClusterHtml(members, color) {
+  const hasImg = members.filter((m) => m.img);
+  const front = hasImg[0] || members[0];
+  const back = hasImg[1];
   const count = members.length;
 
-  const discFrontStyle = front.img
+  const frontStyle = front.img
     ? `style="--marker-fill:${escapeAttr(color)};background-image:url('${escapeAttr(front.img)}')"`
     : `style="--marker-fill:${escapeAttr(color)}"`;
 
@@ -136,7 +165,7 @@ function buildClusterContent(members, color) {
   if (back) {
     const backStyle = `style="--marker-fill:${escapeAttr(color)};background-image:url('${escapeAttr(back.img)}')"`;
     html += `<div class="zouguo-cluster-disc is-back" ${backStyle}></div>`;
-    html += `<div class="zouguo-cluster-disc is-front" ${discFrontStyle}></div>`;
+    html += `<div class="zouguo-cluster-disc is-front" ${frontStyle}></div>`;
   } else {
     const singleStyle = front.img
       ? `style="--marker-fill:${escapeAttr(color)};background-image:url('${escapeAttr(front.img)}')"`
@@ -150,18 +179,13 @@ function buildClusterContent(members, color) {
   return html;
 }
 
-// ---------- 渲染：InfoWindow 卡片 ----------
-
-function buildInfoHtml(point) {
-  const imgStyle = point.img
-    ? `style="background-image:url('${escapeAttr(point.img)}')"`
-    : "";
+function buildPopupHtml(point) {
   const link = point.url
     ? `<a class="zouguo-iw-link" href="${escapeAttr(point.url)}" target="_self">${point.title || "查看游记 →"}</a>`
     : "";
   return (
     `<div class="zouguo-iw">` +
-    (point.img ? `<span class="zouguo-iw-img" ${imgStyle}></span>` : "") +
+    (point.img ? `<div class="zouguo-iw-img" style="background-image:url('${escapeAttr(point.img)}')"></div>` : "") +
     `<div class="zouguo-iw-body">` +
     `<p class="zouguo-iw-name">${escapeAttr(point.name)}<i class="zouguo-iw-en">${escapeAttr(point.en)}</i></p>` +
     link +
@@ -172,43 +196,29 @@ function buildInfoHtml(point) {
 
 // ---------- 聚合：屏幕像素距离 ----------
 
-const CLUSTER_PX = 50;
+const CLUSTER_PX = 58;
+const ZOOM_NO_CLUSTER = 13.15; // koobai: zoom 超过这个值不再聚合
 
-function projectToContainer(amap, marker) {
-  // AMap v2: lngLatToContainer 返回相对于地图容器的像素坐标
-  try {
-    return amap.lngLatToContainer(marker.getPosition());
-  } catch {
-    const p = marker.getPosition();
-    return amap.lngLatToPixel(p, amap.getZoom());
-  }
-}
-
-function clusterMarkers(amap, markers) {
-  // 简单贪心：未分配的点开一个新组，把所有 50px 内的点吸进来
+function clusterLocations(map, locations) {
   const groups = [];
-  const items = markers.map((m) => ({ marker: m, point: m.getExtData().point }));
-  const assigned = new Array(items.length).fill(false);
+  const assigned = new Array(locations.length).fill(false);
 
-  for (let i = 0; i < items.length; i++) {
+  for (let i = 0; i < locations.length; i++) {
     if (assigned[i]) continue;
-    const center = projectToContainer(amap, items[i].marker);
-    if (!center) {
-      // 容器还没就绪：作为单点处理
-      groups.push([items[i]]);
+    const p1 = map.project([locations[i].lng, locations[i].lat]);
+    if (!p1) {
+      groups.push([locations[i]]);
       assigned[i] = true;
       continue;
     }
-    const group = [items[i]];
+    const group = [locations[i]];
     assigned[i] = true;
-    for (let j = i + 1; j < items.length; j++) {
+    for (let j = i + 1; j < locations.length; j++) {
       if (assigned[j]) continue;
-      const c2 = projectToContainer(amap, items[j].marker);
-      if (!c2) continue;
-      const dx = c2.x - center.x;
-      const dy = c2.y - center.y;
-      if (Math.hypot(dx, dy) < CLUSTER_PX) {
-        group.push(items[j]);
+      const p2 = map.project([locations[j].lng, locations[j].lat]);
+      if (!p2) continue;
+      if (Math.hypot(p2.x - p1.x, p2.y - p1.y) < CLUSTER_PX) {
+        group.push(locations[j]);
         assigned[j] = true;
       }
     }
@@ -220,138 +230,216 @@ function clusterMarkers(amap, markers) {
 // ---------- 主流程 ----------
 
 export function init() {
-  const map = new AMap.Map("map", {
-    zoom: 4,
-    center: [108, 34],
-    zooms: [2, 18],
-    viewMode: "2D",
-    mapStyle: getTheme(),
-    pitch: 0,
-    rotateEnable: true,
-    pitchEnable: false,
-  });
-
-  AMap.plugin(["AMap.Scale", "AMap.MoveAnimation", "AMap.ToolBar"], () => {
-    map.addControl(new AMap.ToolBar({ position: "RT" }));
-    map.addControl(new AMap.Scale());
-  });
-
-  // ---------- 遮罩：只画去过的省份 ----------
-  const areaColors = getAreaColors();
-  const visitedAdcodes = getVisitedProvinceAdcodes();
-  const visitedPolygons = [];
-  for (const f of areas.features) {
-    if (f.properties?.level !== "province") continue;
-    if (!visitedAdcodes.has(f.properties.adcode)) continue;
-    const g = f.geometry;
-    if (g.type === "Polygon") {
-      visitedPolygons.push(g.coordinates[0].map(([lng, lat]) => [lng, lat]));
-    } else if (g.type === "MultiPolygon") {
-      for (const poly of g.coordinates) {
-        visitedPolygons.push(poly[0].map(([lng, lat]) => [lng, lat]));
-      }
-    }
-  }
-  for (const path of visitedPolygons) {
-    const ring = path.map(([lng, lat]) => new AMap.LngLat(lng, lat));
-    map.add(
-      new AMap.Polygon({
-        path: ring,
-        fillColor: areaColors.fill,
-        fillOpacity: areaColors.fillOpacity,
-        strokeColor: areaColors.stroke,
-        strokeWeight: areaColors.strokeWeight,
-        strokeOpacity: areaColors.strokeOpacity,
-      })
+  const token = window.MAPBOX_TOKEN;
+  if (!token || token === "pk.YOUR_MAPBOX_PUBLIC_TOKEN_HERE") {
+    console.warn(
+      "[location-map] Mapbox token 未配置。请在 config.toml 设置 params.mapboxToken。"
     );
+    return;
+  }
+  if (typeof mapboxgl === "undefined") {
+    console.error("[location-map] mapbox-gl 未加载。");
+    return;
+  }
+  mapboxgl.accessToken = token;
+
+  // ---- 地图初始化 ----
+  const map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/standard",
+    center: [108, 34],
+    zoom: 3.3,
+    minZoom: 1.5,
+    maxZoom: 18,
+    projection: "mercator",
+    config: { basemap: getWarmConfig() },
+    attributionControl: true,
+  });
+
+  map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
+  map.addControl(new mapboxgl.ScaleControl({ maxWidth: 120, unit: "metric" }), "bottom-left");
+
+  // ---- 解析点 ----
+  const locations = points
+    .map(parsePoint)
+    .filter((p) => typeof p.lat === "number" && typeof p.lng === "number");
+
+  // ---- visited provinces 遮罩 ----
+  let provincesReady = false;
+  function addVisitedProvinces() {
+    if (provincesReady) return;
+    const data = getVisitedProvincesFC();
+    if (!data.features.length) return;
+    const ac = getAreaColors();
+    try {
+      map.addSource("visited-provinces", { type: "geojson", data });
+      map.addLayer({
+        id: "visited-provinces-fill",
+        type: "fill",
+        source: "visited-provinces",
+        slot: "bottom",
+        paint: {
+          "fill-color": ac.fill,
+          "fill-opacity": ac.fillOpacity,
+          "fill-emissive-strength": 0.12,
+        },
+      });
+      map.addLayer({
+        id: "visited-provinces-line",
+        type: "line",
+        source: "visited-provinces",
+        slot: "middle",
+        paint: {
+          "line-color": ac.stroke,
+          "line-width": 1.15,
+          "line-opacity": ac.strokeOpacity,
+        },
+      });
+      provincesReady = true;
+    } catch (e) {
+      // 在 style 还没完全就绪时调 addLayer 会抛错，等 style.load 后再试
+      console.warn("[location-map] visited-provinces add failed:", e);
+    }
   }
 
-  // ---------- marker：每个点一个 ----------
+  // ---- 单点 marker + popup ----
   const color = getMarkerColor();
-  const markers = points.map((entry) => {
-    const p = parsePoint(entry);
-    const m = new AMap.Marker({
-      position: [p.lng, p.lat],
-      content: buildMarkerContent(p, color),
-      offset: new AMap.Pixel(-19, -46),
-      zIndex: 50,
-      extData: { point: p, raw: entry },
+  for (const loc of locations) {
+    const el = document.createElement("div");
+    el.innerHTML = buildMarkerHtml(loc, color);
+    const markerEl = el.firstElementChild;
+
+    const marker = new mapboxgl.Marker({ element: markerEl, anchor: "bottom" })
+      .setLngLat([loc.lng, loc.lat])
+      .addTo(map);
+
+    const popup = new mapboxgl.Popup({
+      offset: 28,
+      closeButton: false,
+      closeOnClick: true,
+      maxWidth: "240px",
+      className: "zouguo-popup",
+    }).setHTML(buildPopupHtml(loc));
+
+    markerEl.addEventListener("click", (e) => {
+      e.stopPropagation();
+      // 关闭其他 popup
+      document.querySelectorAll(".mapboxgl-popup").forEach((p) => p.remove());
+      popup.addTo(map);
     });
-    return m;
-  });
 
-  let markerGroup = null;
+    loc.marker = marker;
+    loc.markerEl = markerEl;
+  }
 
-  function rebuildGroup() {
-    if (markerGroup) {
-      map.remove(markerGroup);
-      markerGroup = null;
+  // ---- 聚合 ----
+  const clusterMarkers = [];
+
+  function clearClusters() {
+    for (const cm of clusterMarkers) cm.remove();
+    clusterMarkers.length = 0;
+  }
+
+  function showAllSingles() {
+    for (const loc of locations) {
+      if (loc.markerEl) loc.markerEl.style.visibility = "";
     }
-    const groups = clusterMarkers(map, markers);
-    const overlays = [];
-    for (const g of groups) {
-      if (g.length === 1) {
-        overlays.push(g[0].marker);
-        continue;
-      }
-      const pointsInCluster = g.map((x) => x.point);
-      const lngSum = pointsInCluster.reduce((s, p) => s + p.lng, 0);
-      const latSum = pointsInCluster.reduce((s, p) => s + p.lat, 0);
-      const center = new AMap.LngLat(lngSum / g.length, latSum / g.length);
-      const clusterMarker = new AMap.Marker({
-        position: center,
-        content: buildClusterContent(pointsInCluster, color),
-        offset: new AMap.Pixel(-28, -28),
-        zIndex: 100,
-        extData: { cluster: true, members: g.map((x) => x.marker) },
-      });
-      clusterMarker.on("click", () => {
-        fitToCluster(g.map((x) => x.marker));
-      });
-      overlays.push(clusterMarker);
+  }
+
+  function rebuildClusters() {
+    clearClusters();
+    if (map.getZoom() >= ZOOM_NO_CLUSTER) {
+      showAllSingles();
+      return;
     }
-    markerGroup = new AMap.OverlayGroup(overlays);
-    map.add(markerGroup);
-  }
-
-  function fitToCluster(ms) {
-    if (!ms.length) return;
-    const bounds = new AMap.Bounds(ms[0].getPosition(), ms[0].getPosition());
-    for (let i = 1; i < ms.length; i++) bounds.extend(ms[i].getPosition());
-    map.setBounds(bounds, false, [60, 60, 60, 60]);
-  }
-
-  rebuildGroup();
-
-  // ---------- 单点点击 → InfoWindow ----------
-  const infoWindow = new AMap.InfoWindow({
-    offset: new AMap.Pixel(0, -42),
-    closeWhenClickMap: true,
-    autoMove: true,
-    isCustom: false,
-  });
-  for (const m of markers) {
-    m.on("click", () => {
-      const p = m.getExtData().point;
-      infoWindow.setContent(buildInfoHtml(p));
-      infoWindow.open(map, m.getPosition());
-    });
-  }
-
-  // ---------- 视野变化时重新聚合 ----------
-  map.on("moveend", rebuildGroup);
-  map.on("zoomend", rebuildGroup);
-
-  // ---------- 主题切换 ----------
-  const observer = new MutationObserver(() => {
-    const t = getTheme();
-    map.setMapStyle(t);
+    const groups = clusterLocations(map, locations);
+    const inCluster = new Set();
     const c = getMarkerColor();
-    // 重建 marker 内容以更新颜色
-    for (const m of markers) {
-      m.setContent(buildMarkerContent(m.getExtData().point, c));
+
+    for (const g of groups) {
+      if (g.length === 1) continue;
+      const lngSum = g.reduce((s, p) => s + p.lng, 0);
+      const latSum = g.reduce((s, p) => s + p.lat, 0);
+      const center = [lngSum / g.length, latSum / g.length];
+
+      const el = document.createElement("div");
+      el.innerHTML = buildClusterHtml(g, c);
+      const clusterEl = el.firstElementChild;
+
+      clusterEl.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const bounds = new mapboxgl.LngLatBounds();
+        for (const m of g) bounds.extend([m.lng, m.lat]);
+        map.fitBounds(bounds, { padding: 70, maxZoom: 13.45, duration: 800 });
+      });
+
+      const cm = new mapboxgl.Marker({ element: clusterEl, anchor: "center" })
+        .setLngLat(center)
+        .addTo(map);
+      clusterMarkers.push(cm);
+
+      for (const m of g) {
+        inCluster.add(m);
+        if (m.markerEl) m.markerEl.style.visibility = "hidden";
+      }
     }
-    rebuildGroup();
+    for (const loc of locations) {
+      if (!inCluster.has(loc) && loc.markerEl) {
+        loc.markerEl.style.visibility = "";
+      }
+    }
+  }
+
+  // ---- style.load：重新挂遮罩（应对 setStyle 触发的情况） ----
+  map.on("style.load", () => {
+    provincesReady = false;
+    addVisitedProvinces();
+  });
+
+  map.on("load", () => {
+    addVisitedProvinces();
+    // 初次 fit-bounds：把所有点框进来
+    if (locations.length) {
+      const bounds = new mapboxgl.LngLatBounds();
+      for (const loc of locations) bounds.extend([loc.lng, loc.lat]);
+      map.fitBounds(bounds, { padding: 60, maxZoom: 6.5, duration: 0 });
+    }
+    rebuildClusters();
+  });
+
+  map.on("moveend", rebuildClusters);
+  map.on("zoomend", rebuildClusters);
+
+  // ---- 主题切换 ----
+  const observer = new MutationObserver(() => {
+    // 1) basemap config
+    const cfg = getWarmConfig();
+    for (const k of Object.keys(cfg)) {
+      try {
+        map.setConfigProperty("basemap", k, cfg[k]);
+      } catch {
+        /* key 不存在时静默忽略 */
+      }
+    }
+    // 2) 遮罩颜色
+    const ac = getAreaColors();
+    try {
+      if (map.getLayer("visited-provinces-fill")) {
+        map.setPaintProperty("visited-provinces-fill", "fill-color", ac.fill);
+        map.setPaintProperty("visited-provinces-fill", "fill-opacity", ac.fillOpacity);
+      }
+      if (map.getLayer("visited-provinces-line")) {
+        map.setPaintProperty("visited-provinces-line", "line-color", ac.stroke);
+        map.setPaintProperty("visited-provinces-line", "line-opacity", ac.strokeOpacity);
+      }
+    } catch {
+      /* layer 还没就绪，style.load 时会重设 */
+    }
+    // 3) marker 颜色（只换 CSS 变量，不重建 DOM）
+    const mc = getMarkerColor();
+    for (const loc of locations) {
+      if (loc.markerEl) loc.markerEl.style.setProperty("--marker-fill", mc);
+    }
   });
   observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
 }

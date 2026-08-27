@@ -22,6 +22,10 @@ Copyright = '[码农明明桑的博客](https://isming.me)所有内容遵循[「
  ShowCodeCopyButtons = true
  ShowPostNavLinks = true
  hasCJKLanguage = true
+ # Mapbox 公开 token。值写为 "MAPBOX_TOKEN" 表示从同名环境变量读取（Hugo 约定）。
+# 本地开发：在终端设置 $env:MAPBOX_TOKEN="pk.eyJ1..."（或写在 PowerShell profile 里）
+# 部署：在 GitHub repo Settings → Secrets → Actions 新增 MAPBOX_TOKEN，工作流里取出来用
+ mapboxToken = "MAPBOX_TOKEN"
  reading_speed=120
  readingSpeedRation=1.46
  RssImage='avatar.png'

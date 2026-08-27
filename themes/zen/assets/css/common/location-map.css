@@ -1,10 +1,11 @@
 /*
- * 足迹地图样式
+ * 足迹地图样式（Mapbox GL JS v3 版本）
  * 参考 https://koobai.com/zouguo/ 的视觉语言
  *
- * - 缩略图圆点 marker：去过的城市以图片为底，hover 时缩放
+ * - 缩略图圆点 marker：去过的城市以图片为底，hover 缩放
  * - 双 disc 聚合：以成员点缩略图为底，多于 2 个时显示 +N
  * - 去过的城市遮罩：terracotta 色（亮 / 暗双主题）
+ * - Mapbox popup 卡片
  */
 
 /* ===== 容器 ===== */
@@ -78,11 +79,10 @@
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 8px solid #fff;
-    /* 圆盘的下方阴影与尾巴衔接 */
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.18));
 }
 
-/* 无图点模式：更小，只有圆点没有尾巴 */
+/* 无图点模式 */
 .zouguo-marker.is-text-only {
     width: 16px;
     height: 16px;
@@ -171,13 +171,20 @@
     letter-spacing: 0.02em;
 }
 
-/* ===== InfoWindow 卡片 ===== */
+/* ===== Mapbox Popup 卡片 ===== */
 
-.amap-info-content {
-    padding: 0 !important;
-    border-radius: 10px !important;
+.mapboxgl-popup.zouguo-popup .mapboxgl-popup-content {
+    padding: 0;
+    border-radius: 10px;
     overflow: hidden;
-    width: 200px !important;
+    background: var(--entry);
+    color: var(--primary);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+
+.mapboxgl-popup.zouguo-popup .mapboxgl-popup-tip {
+    border-top-color: var(--entry);
+    border-bottom-color: var(--entry);
 }
 
 .zouguo-iw {
@@ -187,19 +194,20 @@
     color: var(--primary);
     font-size: 13px;
     line-height: 1.4;
+    min-width: 180px;
 }
 
 .zouguo-iw-img {
     display: block;
     width: 100%;
-    height: 110px;
+    height: 120px;
     background-color: rgba(0, 0, 0, 0.05);
     background-size: cover;
     background-position: center;
 }
 
 .zouguo-iw-body {
-    padding: 8px 12px 10px;
+    padding: 10px 12px 12px;
 }
 
 .zouguo-iw-name {
@@ -235,20 +243,12 @@
     border-bottom-color: var(--color-a-hover);
 }
 
-/* dark 模式：底色和文字反过来 */
-.dark .amap-info-content,
-.dark .zouguo-iw {
-    background: var(--entry);
-    color: var(--primary);
-}
+/* ===== 默认 light 主题变量 ===== */
 
-/* ===== 暗色主题：terracotta 提亮 ===== */
+:root {
+    --marker-fill: #bd6b55;
+}
 
 .dark {
     --marker-fill: #c97a63;
-}
-
-/* 默认 light 主题变量 */
-:root {
-    --marker-fill: #bd6b55;
 }
