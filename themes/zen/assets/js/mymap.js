@@ -179,15 +179,21 @@ function buildClusterHtml(members, color) {
   return html;
 }
 
-function buildPopupHtml(point) {
+function buildPopupHtml(point, province) {
   const link = point.url
-    ? `<a class="zouguo-iw-link" href="${escapeAttr(point.url)}" target="_self">${point.title || "查看游记 →"}</a>`
+    ? `<a class="zouguo-iw-link" href="${escapeAttr(point.url)}" target="_self">${escapeAttr(point.title || "查看游记")} →</a>`
     : "";
+  const eyebrow = province ? `<span class="zouguo-iw-region">${escapeAttr(province)}</span>` : "";
+  const imgBlock = point.img
+    ? `<div class="zouguo-iw-img" style="background-image:url('${escapeAttr(point.img)}')"></div>`
+    : `<div class="zouguo-iw-img is-empty"></div>`;
   return (
     `<div class="zouguo-iw">` +
-    (point.img ? `<div class="zouguo-iw-img" style="background-image:url('${escapeAttr(point.img)}')"></div>` : "") +
+    `<button class="zouguo-iw-close" type="button" aria-label="关闭">×</button>` +
+    imgBlock +
     `<div class="zouguo-iw-body">` +
-    `<p class="zouguo-iw-name">${escapeAttr(point.name)}<i class="zouguo-iw-en">${escapeAttr(point.en)}</i></p>` +
+    eyebrow +
+    `<h3 class="zouguo-iw-name">${escapeAttr(point.name)}<i>${escapeAttr(point.en)}</i></h3>` +
     link +
     `</div>` +
     `</div>`
@@ -244,11 +250,12 @@ export function init() {
   mapboxgl.accessToken = token;
 
   // ---- 地图初始化 ----
+  // 中心对准中国（105°E, 35°N 附近），初始 zoom 比之前大，让中国占据屏幕中央
   const map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/standard",
-    center: [108, 34],
-    zoom: 3.3,
+    center: [105, 35],
+    zoom: 4.5,
     minZoom: 1.5,
     maxZoom: 18,
     projection: "mercator",
@@ -263,6 +270,20 @@ export function init() {
   const locations = points
     .map(parsePoint)
     .filter((p) => typeof p.lat === "number" && typeof p.lng === "number");
+
+  // ---- 省份查找：用于弹窗 eyebrow（用 "lng,lat" 做 key） ----
+  const provinceByPoint = new Map();
+  for (const f of areas.features) {
+    if (f.properties?.level !== "province") continue;
+    const provinceName = f.properties.name;
+    for (const loc of locations) {
+      const key = `${loc.lng.toFixed(4)},${loc.lat.toFixed(4)}`;
+      if (provinceByPoint.has(key)) continue;
+      if (pointInFeature(loc.lng, loc.lat, f)) {
+        provinceByPoint.set(key, provinceName);
+      }
+    }
+  }
 
   // ---- visited provinces 遮罩 ----
   let provincesReady = false;
@@ -313,19 +334,30 @@ export function init() {
       .setLngLat([loc.lng, loc.lat])
       .addTo(map);
 
+    const province = provinceByPoint.get(`${loc.lng.toFixed(4)},${loc.lat.toFixed(4)}`) || "";
     const popup = new mapboxgl.Popup({
-      offset: 28,
+      offset: 32,
       closeButton: false,
       closeOnClick: true,
-      maxWidth: "240px",
+      maxWidth: "300px",
       className: "zouguo-popup",
-    }).setHTML(buildPopupHtml(loc));
+    }).setHTML(buildPopupHtml(loc, province));
 
     markerEl.addEventListener("click", (e) => {
       e.stopPropagation();
-      // 关闭其他 popup
+      // 切换行为：再点同一个 marker 关闭弹窗
+      const isOpen = popup.isOpen();
       document.querySelectorAll(".mapboxgl-popup").forEach((p) => p.remove());
+      if (isOpen) return;
       popup.addTo(map);
+      // 关闭按钮
+      const closeBtn = popup.getElement()?.querySelector(".zouguo-iw-close");
+      if (closeBtn) {
+        closeBtn.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          popup.remove();
+        });
+      }
     });
 
     loc.marker = marker;
@@ -398,12 +430,7 @@ export function init() {
 
   map.on("load", () => {
     addVisitedProvinces();
-    // 初次 fit-bounds：把所有点框进来
-    if (locations.length) {
-      const bounds = new mapboxgl.LngLatBounds();
-      for (const loc of locations) bounds.extend([loc.lng, loc.lat]);
-      map.fitBounds(bounds, { padding: 60, maxZoom: 6.5, duration: 0 });
-    }
+    // 保持 [105, 35] / zoom 4.5 的中国中心视图，不做 fitBounds（避免被海外点拉远）
     rebuildClusters();
   });
 
