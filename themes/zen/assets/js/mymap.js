@@ -231,9 +231,9 @@ function clusterLocations(map, locations) {
 
 export function init() {
   const token = window.MAPBOX_TOKEN;
-  if (!token || token === "pk.YOUR_MAPBOX_PUBLIC_TOKEN_HERE") {
+  if (!token || !token.startsWith("pk.")) {
     console.warn(
-      "[location-map] Mapbox token 未配置。请在 config.toml 设置 params.mapboxToken。"
+      "[location-map] Mapbox token 未配置。请设置环境变量 HUGO_PARAMS_MAPBOXTOKEN 后重启 hugo。"
     );
     return;
   }

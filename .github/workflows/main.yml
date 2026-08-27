@@ -19,7 +19,7 @@ jobs:
 
       - name: Build
         env:
-          MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+          HUGO_PARAMS_MAPBOXTOKEN: ${{ secrets.MAPBOX_TOKEN }}
         run: hugo -D
 
       - name: Deploy
