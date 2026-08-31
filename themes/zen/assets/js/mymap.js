@@ -334,7 +334,9 @@ export function init() {
     const popup = new mapboxgl.Popup({
       offset: 32,
       closeButton: false,
-      closeOnClick: false,
+      // closeOnClick: true 让 Mapbox 自己处理：点 marker 切换、点地图其他位置关闭
+      // 不要 false — 否则点空白处没反应
+      closeOnClick: true,
       maxWidth: "300px",
       className: "zouguo-popup",
     })
@@ -435,11 +437,6 @@ export function init() {
 
   map.on("moveend", rebuildClusters);
   map.on("zoomend", rebuildClusters);
-
-  // 点击地图空白处关闭所有弹窗
-  map.on("click", () => {
-    document.querySelectorAll(".mapboxgl-popup").forEach((p) => p.remove());
-  });
 
   console.log("[location-map] init done. locations:", locations.length, "clusters:", clusterMarkers.length);
 
