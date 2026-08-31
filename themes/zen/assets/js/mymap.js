@@ -264,7 +264,6 @@ export function init() {
   });
 
   map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
-  map.addControl(new mapboxgl.ScaleControl({ maxWidth: 120, unit: "metric" }), "bottom-left");
 
   // ---- 解析点 ----
   const locations = points

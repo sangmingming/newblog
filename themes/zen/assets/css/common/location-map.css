@@ -295,9 +295,9 @@
 
 .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib {
     background: transparent !important;
-    font-size: 10px;
+    font-size: 8px;
     color: var(--secondary);
-    opacity: 0.45;
+    opacity: 0.4;
     transition: opacity 0.2s ease;
     padding: 0 6px;
 }
