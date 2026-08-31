@@ -94,20 +94,22 @@ pre:hover .copy-code {
 
 @media only screen and (max-width: 768px) {
 	.other-map {
-        /* mobile 撑满屏幕边缘（吃掉 .main 的左右 padding） */
-        width: calc(100% + 2 * var(--gap));
-        margin-left: calc(-1 * var(--gap));
-        margin-right: calc(-1 * var(--gap));
+        /* mobile 撑满屏幕边缘：用 vw 单位无视父级 padding */
+        position: relative;
+        width: 100vw;
+        left: 50%;
+        margin-left: -50vw;
         height: 24rem;
         border-radius: 0;
 
     }
 
     .home-map {
-        /* home 同理：mobile 上也撑满屏幕边缘 */
-        width: calc(100% + 2 * var(--gap));
-        margin-left: calc(-1 * var(--gap));
-        margin-right: calc(-1 * var(--gap));
+        /* home 同理 */
+        position: relative;
+        width: 100vw;
+        left: 50%;
+        margin-left: -50vw;
         height: 20rem;
         margin-top: 16px;
         border-radius: 0;
