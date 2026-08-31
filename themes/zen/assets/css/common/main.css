@@ -94,18 +94,23 @@ pre:hover .copy-code {
 
 @media only screen and (max-width: 768px) {
 	.other-map {
-        /* mobile 取消负 margin 出血，避免被裁掉 */
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
+        /* mobile 撑满屏幕边缘（吃掉 .main 的左右 padding） */
+        width: calc(100% + 2 * var(--gap));
+        margin-left: calc(-1 * var(--gap));
+        margin-right: calc(-1 * var(--gap));
         height: 24rem;
+        border-radius: 0;
 
     }
 
     .home-map {
-        width: 100%;
+        /* home 同理：mobile 上也撑满屏幕边缘 */
+        width: calc(100% + 2 * var(--gap));
+        margin-left: calc(-1 * var(--gap));
+        margin-right: calc(-1 * var(--gap));
         height: 20rem;
         margin-top: 16px;
+        border-radius: 0;
     }
 
     .mermaid {
