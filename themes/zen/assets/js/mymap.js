@@ -330,38 +330,34 @@ export function init() {
     el.innerHTML = buildMarkerHtml(loc, color);
     const markerEl = el.firstElementChild;
 
-    const marker = new mapboxgl.Marker({ element: markerEl, anchor: "bottom" })
-      .setLngLat([loc.lng, loc.lat])
-      .addTo(map);
-
     const province = provinceByPoint.get(`${loc.lng.toFixed(4)},${loc.lat.toFixed(4)}`) || "";
     const popup = new mapboxgl.Popup({
       offset: 32,
       closeButton: false,
-      closeOnClick: false, // 关闭自动关闭，避免 map click 监听器把刚开的弹窗秒关
+      closeOnClick: false,
       maxWidth: "300px",
       className: "zouguo-popup",
     })
-      .setLngLat([loc.lng, loc.lat])  // 必须先 setLngLat，addTo 才知道定位
+      .setLngLat([loc.lng, loc.lat])
       .setHTML(buildPopupHtml(loc, province));
 
-    markerEl.addEventListener("click", (e) => {
-      e.stopPropagation();
-      // 切换：再点同一个 marker 关闭弹窗
-      const isOpen = popup.isOpen();
-      document.querySelectorAll(".mapboxgl-popup").forEach((p) => p.remove());
-      if (isOpen) return;
-      popup.addTo(map);
-      console.log("[location-map] popup opened:", loc.name);
-      // 关闭按钮
+    // 弹窗打开时挂上关闭按钮（用 dataset 防止重复绑定）
+    popup.on("open", () => {
       const closeBtn = popup.getElement()?.querySelector(".zouguo-iw-close");
-      if (closeBtn) {
+      if (closeBtn && !closeBtn.dataset.wired) {
+        closeBtn.dataset.wired = "1";
         closeBtn.addEventListener("click", (ev) => {
           ev.stopPropagation();
           popup.remove();
         });
       }
     });
+
+    // 把 popup 绑给 marker：marker 自动处理点击切换弹窗（避免时序 race）
+    const marker = new mapboxgl.Marker({ element: markerEl, anchor: "bottom" })
+      .setLngLat([loc.lng, loc.lat])
+      .setPopup(popup)
+      .addTo(map);
 
     loc.marker = marker;
     loc.markerEl = markerEl;
