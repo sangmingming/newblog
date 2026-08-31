@@ -250,12 +250,12 @@ export function init() {
   mapboxgl.accessToken = token;
 
   // ---- 地图初始化 ----
-  // 中心对准中国（105°E, 35°N 附近），初始 zoom 比之前大，让中国占据屏幕中央
+  // 中心对准中国（105°E, 35°N 附近），初始 zoom 让中国占据屏幕中央
   const map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/standard",
     center: [105, 35],
-    zoom: 4.5,
+    zoom: 4,
     minZoom: 1.5,
     maxZoom: 18,
     projection: "mercator",
