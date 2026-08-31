@@ -255,7 +255,7 @@ export function init() {
     container: "map",
     style: "mapbox://styles/mapbox/standard",
     center: [105, 35],
-    zoom: 4,
+    zoom: 3,
     minZoom: 1.5,
     maxZoom: 18,
     projection: "mercator",
