@@ -364,10 +364,19 @@ export function init() {
       document.querySelectorAll(".mapboxgl-popup").forEach((p) => p.remove());
       // 切换：再点同一个 marker 关闭
       if (popup.isOpen()) return;
-      // 平移地图：把 marker 移到水平正中 + 垂直 70% 位置（让弹窗能在中上方完整展示）
+      // 平移地图：让弹窗在地图中完整显示。
+      // 弹窗在 marker 上方（offset=32），要弹窗中心落在地图中心，需要：
+      //   marker.lngLat.y = map_center + offset + popupHeight/2
+      // 用估算的 popupHeight（图片 168 + body ~110 = ~280）；实际略小也不会出问题
       const rect = map.getContainer().getBoundingClientRect();
+      const containerH = rect.height;
+      const popupH = 280;
+      const offset = 32;
+      const targetY = Math.min(
+        containerH - 30,
+        Math.max(popupH + offset + 20, containerH / 2 + offset + popupH / 2)
+      );
       const targetX = rect.width / 2;
-      const targetY = rect.height * 0.7;
       const currentPx = map.project([loc.lng, loc.lat]);
       map.panBy(
         [currentPx.x - targetX, currentPx.y - targetY],
