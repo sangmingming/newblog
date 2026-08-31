@@ -338,18 +338,19 @@ export function init() {
     const popup = new mapboxgl.Popup({
       offset: 32,
       closeButton: false,
-      closeOnClick: true,
+      closeOnClick: false, // 关闭自动关闭，避免 map click 监听器把刚开的弹窗秒关
       maxWidth: "300px",
       className: "zouguo-popup",
     }).setHTML(buildPopupHtml(loc, province));
 
     markerEl.addEventListener("click", (e) => {
       e.stopPropagation();
-      // 切换行为：再点同一个 marker 关闭弹窗
+      // 切换：再点同一个 marker 关闭弹窗
       const isOpen = popup.isOpen();
       document.querySelectorAll(".mapboxgl-popup").forEach((p) => p.remove());
       if (isOpen) return;
       popup.addTo(map);
+      console.log("[location-map] popup opened:", loc.name);
       // 关闭按钮
       const closeBtn = popup.getElement()?.querySelector(".zouguo-iw-close");
       if (closeBtn) {
@@ -436,6 +437,13 @@ export function init() {
 
   map.on("moveend", rebuildClusters);
   map.on("zoomend", rebuildClusters);
+
+  // 点击地图空白处关闭所有弹窗
+  map.on("click", () => {
+    document.querySelectorAll(".mapboxgl-popup").forEach((p) => p.remove());
+  });
+
+  console.log("[location-map] init done. locations:", locations.length, "clusters:", clusterMarkers.length);
 
   // ---- 主题切换 ----
   const observer = new MutationObserver(() => {
