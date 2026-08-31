@@ -335,7 +335,6 @@ export function init() {
       offset: 32,
       closeButton: false,
       // closeOnClick: true 让 Mapbox 自己处理：点 marker 切换、点地图其他位置关闭
-      // 不要 false — 否则点空白处没反应
       closeOnClick: true,
       maxWidth: "300px",
       className: "zouguo-popup",
@@ -355,11 +354,29 @@ export function init() {
       }
     });
 
-    // 把 popup 绑给 marker：marker 自动处理点击切换弹窗（避免时序 race）
+    // 不绑 setPopup（避免 Mapbox 内部 toggle 跟我们手动 click 打架），手写 click handler
     const marker = new mapboxgl.Marker({ element: markerEl, anchor: "bottom" })
       .setLngLat([loc.lng, loc.lat])
-      .setPopup(popup)
       .addTo(map);
+
+    markerEl.addEventListener("click", (e) => {
+      e.stopPropagation();
+      // 关掉其他已开的弹窗
+      document.querySelectorAll(".mapboxgl-popup").forEach((p) => p.remove());
+      // 切换：再点同一个 marker 关闭
+      if (popup.isOpen()) return;
+      // 平移地图：把 marker 移到水平正中 + 垂直 70% 位置（让弹窗能在中上方完整展示）
+      const rect = map.getContainer().getBoundingClientRect();
+      const targetX = rect.width / 2;
+      const targetY = rect.height * 0.7;
+      const currentPx = map.project([loc.lng, loc.lat]);
+      map.panBy(
+        [currentPx.x - targetX, currentPx.y - targetY],
+        { duration: 380, easing: (t) => 1 - Math.pow(1 - t, 3) }
+      );
+      // 开弹窗
+      popup.addTo(map);
+    });
 
     loc.marker = marker;
     loc.markerEl = markerEl;
