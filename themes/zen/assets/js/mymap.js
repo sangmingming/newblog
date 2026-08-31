@@ -341,7 +341,9 @@ export function init() {
       closeOnClick: false, // 关闭自动关闭，避免 map click 监听器把刚开的弹窗秒关
       maxWidth: "300px",
       className: "zouguo-popup",
-    }).setHTML(buildPopupHtml(loc, province));
+    })
+      .setLngLat([loc.lng, loc.lat])  // 必须先 setLngLat，addTo 才知道定位
+      .setHTML(buildPopupHtml(loc, province));
 
     markerEl.addEventListener("click", (e) => {
       e.stopPropagation();
