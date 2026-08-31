@@ -94,9 +94,10 @@ pre:hover .copy-code {
 
 @media only screen and (max-width: 768px) {
 	.other-map {
-        margin-left: 0-var(--gap);
-        margin-right: 0-var(--gap);
-        width: 120%;
+        /* mobile 取消负 margin 出血，避免被裁掉 */
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
         height: 24rem;
 
     }
