@@ -378,12 +378,15 @@ export function init() {
       );
       const targetX = rect.width / 2;
       const currentPx = map.project([loc.lng, loc.lat]);
+      // 等平移动画完成后再开弹窗（避免弹窗"跟着地图飞"）
       map.panBy(
         [currentPx.x - targetX, currentPx.y - targetY],
-        { duration: 380, easing: (t) => 1 - Math.pow(1 - t, 3) }
+        {
+          duration: 380,
+          easing: (t) => 1 - Math.pow(1 - t, 3),
+        },
+        () => popup.addTo(map)
       );
-      // 开弹窗
-      popup.addTo(map);
     });
 
     loc.marker = marker;
