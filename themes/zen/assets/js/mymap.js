@@ -117,13 +117,14 @@ function getAreaColors() {
     : { fill: "#bd6b55", fillOpacity: 0.18, stroke: "#aa6251", strokeOpacity: 0.65 };
 }
 
-// ---------- 去过省份 GeoJSON ----------
+// ---------- 去过过的区域 GeoJSON ----------
+// 直接遍历 areas.js 全部 feature（省/市/国家任何级别），点-多边形包含就画上
 
-function getVisitedProvincesFC() {
+function getVisitedAreasFC() {
   const parsed = points.map(parsePoint);
   const features = [];
   for (const f of areas.features) {
-    if (f.properties?.level !== "province") continue;
+    if (!f.geometry) continue;
     const hit = parsed.some(
       (p) =>
         typeof p.lat === "number" &&
@@ -284,19 +285,19 @@ export function init() {
     }
   }
 
-  // ---- visited provinces 遮罩 ----
-  let provincesReady = false;
-  function addVisitedProvinces() {
-    if (provincesReady) return;
-    const data = getVisitedProvincesFC();
+  // ---- 去过区域遮罩（直接用 areas.js 里所有含点的 feature，省/市/国家都画） ----
+  let areasReady = false;
+  function addVisitedAreas() {
+    if (areasReady) return;
+    const data = getVisitedAreasFC();
     if (!data.features.length) return;
     const ac = getAreaColors();
     try {
-      map.addSource("visited-provinces", { type: "geojson", data });
+      map.addSource("visited-areas", { type: "geojson", data });
       map.addLayer({
-        id: "visited-provinces-fill",
+        id: "visited-areas-fill",
         type: "fill",
-        source: "visited-provinces",
+        source: "visited-areas",
         slot: "bottom",
         paint: {
           "fill-color": ac.fill,
@@ -305,9 +306,9 @@ export function init() {
         },
       });
       map.addLayer({
-        id: "visited-provinces-line",
+        id: "visited-areas-line",
         type: "line",
-        source: "visited-provinces",
+        source: "visited-areas",
         slot: "middle",
         paint: {
           "line-color": ac.stroke,
@@ -315,10 +316,9 @@ export function init() {
           "line-opacity": ac.strokeOpacity,
         },
       });
-      provincesReady = true;
+      areasReady = true;
     } catch (e) {
-      // 在 style 还没完全就绪时调 addLayer 会抛错，等 style.load 后再试
-      console.warn("[location-map] visited-provinces add failed:", e);
+      console.warn("[location-map] visited-areas add failed:", e);
     }
   }
 
@@ -455,13 +455,13 @@ export function init() {
 
   // ---- style.load：重新挂遮罩（应对 setStyle 触发的情况） ----
   map.on("style.load", () => {
-    provincesReady = false;
-    addVisitedProvinces();
+    areasReady = false;
+    addVisitedAreas();
   });
 
   map.on("load", () => {
-    addVisitedProvinces();
-    // 保持 [105, 35] / zoom 4.5 的中国中心视图，不做 fitBounds（避免被海外点拉远）
+    addVisitedAreas();
+    // 保持 [105, 35] / zoom 4 的中国中心视图，不做 fitBounds（避免被海外点拉远）
     rebuildClusters();
   });
 
@@ -484,13 +484,13 @@ export function init() {
     // 2) 遮罩颜色
     const ac = getAreaColors();
     try {
-      if (map.getLayer("visited-provinces-fill")) {
-        map.setPaintProperty("visited-provinces-fill", "fill-color", ac.fill);
-        map.setPaintProperty("visited-provinces-fill", "fill-opacity", ac.fillOpacity);
+      if (map.getLayer("visited-areas-fill")) {
+        map.setPaintProperty("visited-areas-fill", "fill-color", ac.fill);
+        map.setPaintProperty("visited-areas-fill", "fill-opacity", ac.fillOpacity);
       }
-      if (map.getLayer("visited-provinces-line")) {
-        map.setPaintProperty("visited-provinces-line", "line-color", ac.stroke);
-        map.setPaintProperty("visited-provinces-line", "line-opacity", ac.strokeOpacity);
+      if (map.getLayer("visited-areas-line")) {
+        map.setPaintProperty("visited-areas-line", "line-color", ac.stroke);
+        map.setPaintProperty("visited-areas-line", "line-opacity", ac.strokeOpacity);
       }
     } catch {
       /* layer 还没就绪，style.load 时会重设 */
