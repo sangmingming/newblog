@@ -2,20 +2,49 @@
 <h1>我的足迹</h1>
 {{- $class = "home-map" }} {{- else }} {{- $class = "other-map" }} {{- end }}
 <div id="map" class="{{ $class }}"></div>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css">
 <script>
   window.MAPBOX_TOKEN = "{{ .Site.Params.mapboxToken | default "" }}";
 </script>
-<script type="text/javascript" src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+<link rel="preconnect" href="https://api.mapbox.com">
+<link rel="preconnect" href="https://api.mapbox.com" crossorigin>
 {{- $pointjs := resources.Get "js/points.js" }}
 {{- $areajs := resources.Get "js/areas.js" }}
 {{- $mapjs := resources.Get "js/mymap.js" }}
 {{- $res := slice $pointjs $areajs $mapjs | resources.Concat "js/mapbundle.js" }}
 {{- $compress := $res | resources.Minify}}
 
-<script type = "module" async>
-
-import { init } from "{{$compress.RelPermalink }}";
-init();
-
+<!-- 地图懒加载：map div 进入视口（或距视口 200px 内）才去拉 Mapbox 资源 + bundle，避免 660KB 拖累首屏 -->
+<script>
+(function() {
+  var mapEl = document.getElementById("map");
+  if (!mapEl) return;
+  var loaded = false;
+  function loadMap() {
+    if (loaded) return;
+    loaded = true;
+    observer.disconnect();
+    if (typeof clearTimeout === "function") clearTimeout(fallbackTimer);
+    // 1) mapbox-gl CSS
+    var css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css";
+    document.head.appendChild(css);
+    // 2) mapbox-gl JS
+    var js = document.createElement("script");
+    js.src = "https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js";
+    js.onload = function() {
+      // 3) 动态 import bundle（dynamic import 是 ES2020，普通 script 里也能用）
+      import("{{ $compress.RelPermalink }}").then(function(m) {
+        m.init();
+      });
+    };
+    document.head.appendChild(js);
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries.some(function(e) { return e.isIntersecting; })) loadMap();
+  }, { rootMargin: "200px" });
+  observer.observe(mapEl);
+  // 兜底：3s 后强制加载（防 IO 在某些环境不触发，也防用户卡在 lazy 边缘）
+  var fallbackTimer = setTimeout(loadMap, 3000);
+})();
 </script>
