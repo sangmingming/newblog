@@ -5,6 +5,10 @@
     justify-content: center;
     min-height: 320px;
     margin: var(--gap) 0 calc(var(--gap) * 2) 0;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--entry);
+    box-shadow: var(--shadow-card);
 }
 
 .first-entry .entry-header {
@@ -39,7 +43,10 @@
     margin-top: var(--gap);
     transition: transform 0.1s;
     padding-top: var(--content-gap);
-    
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--entry);
+    box-shadow: var(--shadow-card);
 }
 
 
@@ -98,10 +105,11 @@
 }
 
 .entry-cover img {
-    border-radius: var(--radius);
+    border-radius: 0;
     pointer-events: none;
     width: 100%;
     height: auto;
+    display: block;
 }
 
 .entry-cover a {
