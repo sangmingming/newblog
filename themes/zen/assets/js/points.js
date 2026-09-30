@@ -14,7 +14,7 @@ let points = [
     ["<b>洛阳</b><i>Luoyang</i>", 34.67957,112.4451451],
     ["<b>太原</b><i>Taiyuan</i>", 37.7067399,112.4427521],
     ["<b>大同</b><i>Datong</i>", 40.0937644,113.2985485],
-    ["<b>香港</b><i>Hongkong</i>", 22.2811328,114.1893356],
+    ["<b>香港</b><i>Hongkong</i><a href='/2026-09-11-hongkong/'><img src='https://img.isming.me/photo/26hk/20260524-36-14.webp' />记香港高温徒步与办卡之旅</a>", 22.2811328,114.1893356],
     ["<b>曼谷</b><i>Bangkok</i><a href='/2026-03-bangkok/'><img src='https://img.isming.me/photo/26bangkok/20260329-35-39.webp' />漫步曼谷游记</a>", 13.7524938,100.4935089],
     ["<b>普吉</b><i>Ko Phuket</i>", 7.9790846,98.3355238],
     ["<b>南昌</b><i>Nanchang</i><a href='https://isming.me/2024-02-nanchang/'><img src='https://img.isming.me/photo/IMG_20240217_160538.jpg' />历史之城英雄之城-南昌游记</a>", 28.685125, 115.8760944],
