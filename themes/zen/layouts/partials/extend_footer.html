@@ -4,3 +4,41 @@
 {{- if hugo.IsProduction | or (eq site.Params.env "production") }}
 {{- partial "analytics.html" . }}
 {{- end -}}
+
+{{- /* Group consecutive .links-item into a CSS Grid wrapper so each row auto-stretches to the tallest card. */ -}}
+<script>
+(function () {
+    function wrapLinks() {
+        var cards = document.querySelectorAll('.post-content .links-item');
+        if (!cards.length) return;
+
+        var groups = [];
+        var current = null;
+        var prev = null;
+
+        cards.forEach(function (card) {
+            if (prev && card.previousElementSibling === prev) {
+                current.push(card);
+            } else {
+                if (current) groups.push(current);
+                current = [card];
+            }
+            prev = card;
+        });
+        if (current) groups.push(current);
+
+        groups.forEach(function (items) {
+            var wrap = document.createElement('div');
+            wrap.className = 'links-grid';
+            items[0].parentNode.insertBefore(wrap, items[0]);
+            items.forEach(function (item) { wrap.appendChild(item); });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', wrapLinks);
+    } else {
+        wrapLinks();
+    }
+})();
+</script>
