@@ -460,15 +460,7 @@ img.in-text {
     color: var(--secondary)
 }
 
-.links-item {
-    width:32%;
-    margin:1em 0;
-}
-@media only screen and (max-width:683px) {
-	.links-item {
-        width:49%
-    }
-}
+/* .links-item layout now lives in friends.css and is sized by .links-grid */
 
 .related li {
     margin-top: 8px;

@@ -54,6 +54,12 @@
         background-color 0.2s ease;
 }
 
+/* Override `.post-content a` underline shadow (0 1px 0) for friend links,
+   otherwise each card gets a thin dark line at the bottom. */
+.post-content a.links-item {
+    box-shadow: none;
+}
+
 .links-item:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-card);
