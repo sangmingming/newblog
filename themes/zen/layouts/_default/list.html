@@ -98,7 +98,7 @@
   {{- end }}
   {{ if not .Params.hideReadMore }}
       <div>
-          <a class="read-more" href="{{ .Permalink }}">{{ $.Site.Params.ReadMore | default "Read more" }} </a>
+          <a class="read-more" href="{{ .Permalink }}">{{ site.Params.ReadMore | default "Read more" }} </a>
       </div>
   {{ end }}
   
