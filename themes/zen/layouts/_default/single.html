@@ -85,8 +85,7 @@
     
     mermaid.initialize({ startOnLoad: false });
     function setMermaidTheme() {
-      const body = document.querySelector('body');
-      const theme = body.classList.contains('dark') ? 'dark' : 'default';
+      const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
       mermaid.initialize({theme: theme});
     }
     document.addEventListener('DOMContentLoaded', () => {

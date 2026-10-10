@@ -94,12 +94,13 @@
     })
 
     function switchTheme() {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
+        const html = document.documentElement;
+        if (html.dataset.theme === "dark") {
+            delete html.dataset.theme;
+            localStorage.setItem("pref-theme", "light");
         } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
+            html.dataset.theme = "dark";
+            localStorage.setItem("pref-theme", "dark");
         }
     }
 

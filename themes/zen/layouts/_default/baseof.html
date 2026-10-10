@@ -3,17 +3,14 @@
 {{- end -}}
 
 <!DOCTYPE html>
-<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}">
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}"
+{{- if eq site.Params.defaultTheme `dark` }} data-theme="dark"{{ end -}}>
 
 <head>
     {{- partial "head.html" . }}
 </head>
 
-<body class="
-{{- if eq site.Params.defaultTheme `dark` -}}
-{{- print " dark" }}
-{{- end -}}
-" id="top">
+<body id="top">
     {{- partialCached "header.html" . .Page -}}
     <main class="main">
         {{- block "main" . }}{{ end }}
