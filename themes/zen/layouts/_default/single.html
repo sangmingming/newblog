@@ -78,6 +78,7 @@
   {{- partial "comments.html" . }}
   {{- end }}
 </article>
+{{- partial "extend_post_content.html" . }}
 {{ if .Store.Get "hasMermaid" }}
   <script type="module">
     import mermaid from 'https://fastly.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
