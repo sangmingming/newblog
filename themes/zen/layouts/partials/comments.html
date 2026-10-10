@@ -19,7 +19,7 @@
       margin: .5em 0;
     }
 
-    .dark {
+    [data-theme="dark"] {
       --sds-theme-color: #AEAEAE;
         --sds-active-color: #A0A0A0;
         --sds-info-bg-color: rgba(0, 0, 0, 0.06);
@@ -35,7 +35,7 @@
     // init({
     //   el: '#waline',
     //   serverURL: 'https://waline-comments.isming.me',
-    //   dark: "body.dark",
+    //   dark: "html[data-theme=\"dark\"]",
     //   login: "disable",
     //   reaction: false,
     //   imageUploader: false
@@ -45,6 +45,6 @@
     init({
       el: '#waline',
       serverURL: 'https://waline-comments.isming.me',
-      dark: "body.dark"
+      dark: 'html[data-theme="dark"]'
         });
   </script>

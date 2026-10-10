@@ -66,7 +66,7 @@ function escapeAttr(s) {
 // ---------- 主题 ----------
 
 function isDark() {
-  return document.body.classList.contains("dark");
+  return document.documentElement.dataset.theme === "dark";
 }
 
 // 暖色 Mapbox Standard config（light + dark 两套）
