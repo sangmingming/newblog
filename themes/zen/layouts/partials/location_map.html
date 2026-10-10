@@ -3,7 +3,7 @@
 {{- $class = "home-map" }} {{- else }} {{- $class = "other-map" }} {{- end }}
 <div id="map" class="{{ $class }}"></div>
 <script>
-  window.MAPBOX_TOKEN = "{{ .Site.Params.mapboxToken | default "" }}";
+  window.MAPBOX_TOKEN = "{{ site.Params.mapboxToken | default "" }}";
 </script>
 <link rel="preconnect" href="https://api.mapbox.com">
 <link rel="preconnect" href="https://api.mapbox.com" crossorigin>

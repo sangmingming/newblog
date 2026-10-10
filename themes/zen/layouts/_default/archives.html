@@ -33,10 +33,10 @@
 {{- $pages = site.RegularPages }}
 {{- end }}
 
-共计 {{ len (where .Site.RegularPages "Section" "posts") }} 篇文章
+共计 {{ len (where site.RegularPages "Section" "posts") }} 篇文章
 
     <div id="all-tags">
-      {{- range .Site.Taxonomies.tags -}}
+      {{- range site.Taxonomies.tags -}}
       <a href="{{ .Page.Permalink }}">#{{ .Page.Title }}<sup class="archive-count">{{ .Count }}</sup></a>
       {{- end -}}
     </div>

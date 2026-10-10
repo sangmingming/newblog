@@ -1,7 +1,7 @@
 {{- $scratch := newScratch }}
 
 {{- if (.Param "showReadingTime") | default true -}}
-{{$readingTimeNew := mul (float .ReadingTime) .Site.Params.readingSpeedRation }}
+{{$readingTimeNew := mul (float .ReadingTime) site.Params.readingSpeedRation }}
 {{$readingTimeNew = math.Ceil $readingTimeNew }}
 {{- $scratch.Add "meta" (slice (i18n "read_time" (int $readingTimeNew) | default (printf "%d min" (int $readingTimeNew)))) }}
 {{- end }}
