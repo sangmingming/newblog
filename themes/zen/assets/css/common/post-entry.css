@@ -64,7 +64,8 @@
     object-fit: cover;
     width: 100%;
     aspect-ratio: 3.4/2;
-    
+    /* match the radius of in-article images (.post-content img) */
+    border-radius: var(--radius-card);
 }
 
 .entry-meta {
