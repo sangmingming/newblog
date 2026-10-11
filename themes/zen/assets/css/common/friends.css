@@ -173,6 +173,29 @@
     display: block;
 }
 
+/* `.post-content img` (post-single.css) puts `margin: 1rem 0` + border-radius +
+   box-shadow on every content image. It has the same specificity as
+   `.recent-commenter img` but loads later (common/*.css concat is alphabetical),
+   so it wins and pushes the absolutely-positioned avatar 1rem down inside the
+   circle — the avatar then looks off-center and gets cropped at the bottom.
+   These higher-specificity overrides win regardless of file order. */
+.post-content .recent-commenter img {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* `.post-content a` adds a 1px underline box-shadow to every content link,
+   which also replaces the avatar circle's own soft shadow. Restore it. */
+.post-content a.recent-commenter {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px -4px rgba(0, 0, 0, 0.18);
+}
+
+.post-content a.recent-commenter:hover,
+.post-content a.recent-commenter:focus-visible {
+    box-shadow: var(--shadow-card);
+}
+
 /* Floating tooltip (created + positioned by the shortcode script, appended to
    document.body so the parent's overflow:hidden doesn't clip it). */
 /* Light theme: dark chip with light text. Dark theme inverts the pair so the
