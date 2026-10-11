@@ -69,10 +69,13 @@
 
 .links-item .archive-list-image {
     flex-shrink: 0;
-    border-radius: 8px;
+    border-radius: 50%;
     margin: 0 14px 0 0;
     width: 48px;
     height: 48px;
+    /* force-crop non-square avatars into the circle instead of squishing them */
+    object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
 }
 
@@ -238,6 +241,14 @@
     font-size: 0.85em;
     color: var(--secondary);
     padding: 4px 0;
+}
+
+/* Small caption under the grid explaining the data source. Sits inside the
+   section, so it hides together with the grid when there are no commenters. */
+.recent-commenters-note {
+    font-size: 0.78em;
+    color: var(--secondary);
+    margin: -0.8em 0 1.6em;
 }
 
 @media (prefers-reduced-motion: reduce) {
