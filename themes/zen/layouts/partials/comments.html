@@ -1,51 +1,17 @@
-{{- /* Comments area start */ -}}
-{{- /* to add comments read => https://gohugo.io/content-management/comments/ */ -}}
-{{- /* Comments area end */ -}}
-<!-- <link href='//unpkg.com/@waline/client@3.5.1/dist/waline.css' rel='stylesheet' /> -->
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/sodesu-comment@0.5.2/dist/sodesu-comment.css"
-  />
-<style>
-     :root {
-        --sds-theme-color: #121212;
-        --sds-active-color: #202020;
-        --sds-info-bg-color: rgba(0, 0, 0, 0.06);
-        
-    }
-
-    .wl-panel {
-      border-radius: var(--radius);
-      margin: .5em 0;
-    }
-
-    [data-theme="dark"] {
-      --sds-theme-color: #AEAEAE;
-        --sds-active-color: #A0A0A0;
-        --sds-info-bg-color: rgba(0, 0, 0, 0.06);
-    }
-    
-</style>
+{{- /* 自建评论前端（SiteComments）
+     数据仍存于 Waline 服务端（https://waline-comments.isming.me），
+     前端只调 /api/comment，支持展示 / 发布 / 回复，
+     无登录、无注册、无点赞。
+     JS：assets/js/comments.js
+     CSS：assets/css/common/comments.css（随 common/*.css 自动合并进全站样式） */ -}}
 <p id="commentsanchor"></p>
-<div id="waline"></div>
-<script type="module">
-  import { init } from "//cdn.jsdelivr.net/npm/sodesu-comment@0.5.2/dist/sodesu.aio.mjs";
-    // import { init } from '//unpkg.com/@waline/client@3.5.1/dist/waline.js';
-
-    // init({
-    //   el: '#waline',
-    //   serverURL: 'https://waline-comments.isming.me',
-    //   dark: "html[data-theme=\"dark\"]",
-    //   login: "disable",
-    //   reaction: false,
-    //   imageUploader: false
-      
-    // });
-
-    init({
-      el: '#waline',
-      serverURL: 'https://waline-comments.isming.me',
-      dark: 'html[data-theme="dark"]',
-      login: 'disable'
-        });
-  </script>
+<div id="comments" class="comments"></div>
+{{- $commentsjs := resources.Get "js/comments.js" | resources.Minify }}
+<script src="{{ $commentsjs.RelPermalink }}"></script>
+<script>
+  window.SiteComments.init({
+    el: '#comments',
+    serverURL: 'https://waline-comments.isming.me',
+    path: window.location.pathname
+  });
+</script>

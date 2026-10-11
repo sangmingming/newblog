@@ -1,0 +1,270 @@
+/* ---------- 评论区（自建 Waline 前端，见 assets/js/comments.js） ---------- */
+
+.comments {
+    margin-top: var(--gap);
+}
+
+/* 输入区 */
+.cm-box {
+    padding: 0;
+}
+
+/* 回复时输入框被移动到目标评论下方，留出间距 */
+.cm-item .cm-box {
+    margin: 12px 0 4px;
+}
+
+.cm-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.cm-input,
+.cm-editor {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--tertiary);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--content);
+    font-size: 0.95em;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.cm-input:focus,
+.cm-editor:focus {
+    border-color: var(--secondary);
+}
+
+/* 必填项为空时标红 */
+.cm-input.cm-invalid,
+.cm-editor.cm-invalid {
+    border-color: #d32f2f;
+}
+
+.cm-editor {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.6;
+}
+
+.cm-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+    gap: 8px;
+}
+
+.cm-reply-hint {
+    font-size: 0.85em;
+    color: var(--secondary);
+}
+
+.cm-reply-cancel {
+    margin-left: 8px;
+    border: none;
+    background: none;
+    color: var(--secondary);
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.cm-submit,
+.cm-more {
+    padding: 6px 20px;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: var(--theme);
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.cm-submit:hover,
+.cm-more:hover {
+    opacity: 0.85;
+}
+
+.cm-submit:disabled,
+.cm-more:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cm-msg {
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: var(--secondary);
+}
+
+.cm-msg-error {
+    color: #d32f2f;
+}
+
+/* 列表区 */
+.cm-count {
+    margin: var(--content-gap) 0 4px;
+    font-size: 0.9em;
+    color: var(--secondary);
+}
+
+.cm-item {
+    display: flex;
+    gap: 12px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+}
+
+.cm-list > .cm-item:first-child {
+    border-top: none;
+}
+
+.cm-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--code-bg);
+    object-fit: cover;
+}
+
+.cm-avatar-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    font-size: 0.9em;
+    user-select: none;
+}
+
+.cm-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.cm-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    margin-bottom: 2px;
+}
+
+.cm-nick {
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a.cm-nick:hover {
+    color: var(--color-a-hover);
+}
+
+.cm-badge {
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--code-bg);
+    color: var(--secondary);
+    font-size: 0.72em;
+}
+
+.cm-reply-to {
+    font-size: 0.85em;
+    color: var(--secondary);
+}
+
+.cm-time {
+    font-size: 0.8em;
+    color: var(--secondary);
+}
+
+/* 昵称下方的浏览器 / 系统信息 */
+.cm-ua {
+    font-size: 0.75em;
+    color: var(--secondary);
+    margin: 2px 0 4px;
+}
+
+.cm-reply {
+    margin-left: auto;
+    border: none;
+    background: none;
+    padding: 2px 0;
+    color: var(--secondary);
+    font-size: 0.82em;
+    cursor: pointer;
+}
+
+.cm-reply:hover {
+    color: var(--primary);
+}
+
+.cm-content {
+    color: var(--content);
+    line-height: 1.7;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.cm-content p {
+    margin: 6px 0;
+}
+
+.cm-content p:first-child {
+    margin-top: 0;
+}
+
+.cm-content p:last-child {
+    margin-bottom: 0;
+}
+
+.cm-content a {
+    color: var(--primary);
+}
+
+.cm-children {
+    margin-top: 4px;
+    padding-left: 14px;
+}
+
+.cm-children .cm-item {
+    border-top: none;
+    padding: 12px 0 0;
+}
+
+.cm-children .cm-item:last-child {
+    padding-bottom: 0;
+}
+
+.cm-children .cm-avatar {
+    width: 28px;
+    height: 28px;
+}
+
+.cm-empty {
+    color: var(--secondary);
+    font-size: 0.9em;
+    text-align: center;
+    padding: 16px 0;
+}
+
+.cm-more-wrap {
+    text-align: center;
+    margin-top: 8px;
+}
+
+@media screen and (max-width: 768px) {
+    .cm-avatar {
+        width: 32px;
+        height: 32px;
+    }
+}
