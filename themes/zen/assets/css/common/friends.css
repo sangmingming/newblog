@@ -116,3 +116,111 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* ---------- Recent commenters ("来过") ---------- */
+
+.recent-commenters {
+    display: grid;
+    /* auto-fill so we pack as many as the row can hold at the chosen size */
+    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+    gap: 16px;
+    margin: 1.2em 0 1.6em;
+    padding: 24px;
+    border-radius: var(--radius-card);
+    background: var(--entry);
+}
+
+.recent-commenters:empty {
+    display: none;
+}
+
+/* The circular crop is on the parent (border-radius + overflow:hidden so the
+   image is forced into a perfect circle). Because overflow:hidden would clip
+   any tooltip positioned inside, the shortcode's script creates the tooltip
+   dynamically and appends it to document.body — see .recent-commenter-tooltip
+   below. padding-bottom:100% gives a reliable 1:1 cell inside the grid even
+   when aspect-ratio is finicky with grid items. */
+.recent-commenter {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--code-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px -4px rgba(0, 0, 0, 0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+
+.recent-commenter:hover,
+.recent-commenter:focus-visible {
+    transform: scale(1.15);
+    box-shadow: var(--shadow-card);
+    z-index: 2;
+    outline: none;
+}
+
+.recent-commenter img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Floating tooltip (created + positioned by the shortcode script, appended to
+   document.body so the parent's overflow:hidden doesn't clip it). */
+/* Light theme: dark chip with light text. Dark theme inverts the pair so the
+   contrast stays high in both modes. */
+.recent-commenter-tooltip {
+    position: fixed;
+    background: var(--code-block-bg);
+    color: var(--theme);
+    font-size: 0.78em;
+    line-height: 1.2;
+    padding: 5px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: rcTooltipIn 0.18s ease both;
+}
+
+[data-theme="dark"] .recent-commenter-tooltip {
+    background: var(--primary);
+    color: var(--code-block-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes rcTooltipIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading / empty state */
+.recent-commenters-loading,
+.recent-commenters-empty {
+    font-size: 0.85em;
+    color: var(--secondary);
+    padding: 4px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .recent-commenter,
+    .recent-commenter-tooltip {
+        transition: none;
+        animation: none;
+    }
+}

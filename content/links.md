@@ -13,7 +13,6 @@ showCopyright: false
 
 ### 朋友们
 
-
 {{< friend des="" url="https://zhengzexin.com/" src="https://zhengzexin.com/assets/static/author.e6b6009.efb8001502fac3cdd18d6a5681b57971.jpg" name="郑泽鑫的博客" >}}
 {{< friend url="https://blog.cuger.cn" src="https://blog.cuger.cn/images/avatar.png" name="遐说-Dorad" des="❤编程❤摄影，期待走遍万水千山" >}}
 {{< friend url="https://www.yunyitang.me/zh/" src="https://www.yunyitang.me/img/Avatar.png" name="Yunyi's Blog" des="Little squirrel Hopping around" >}}
@@ -23,6 +22,8 @@ showCopyright: false
 {{< friend url="https://feng.pub" src="https://cravatar.cn/avatar/868740183b995d2707e307ce0a89633a?s=200" name="阿锋的小宇宙" des="沧海一粟，微亮渺小一只虫。">}}
 {{< friend url="https://blog.hanta2011.top" src="https://pic.imgdb.cn/item/65fe67989f345e8d03923ea6.jpg" name="可执行程序の天境小屋🥝" des="The boy who lived">}}
 {{< friend url="https://siena.zone" src="https://siena.zone/favicon_compressed.png" name="小鹿的个人网站" des="跳吧，在无比宏大的星系！">}}
+
+{{< recentcommenters >}}
 
 ### 博客导航
 {{< friend url="https://www.foreverblog.cn/" src="https://img.isming.me/image/foreverblog.png" name="十年之约" des="一个人的寂寞，一群人的狂欢" >}}

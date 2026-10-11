@@ -1,0 +1,165 @@
+{{- /*
+  recentcommenters shortcode
+
+  Renders a grid of recent commenters fetched from Waline's API. Only
+  commenters who filled in a blog URL (the `link` field) are shown, so
+  the avatars can deep-link back to their sites. Hovering an avatar
+  shows a tooltip with the nickname and how many times that person
+  has commented.
+
+  The whole "来过" section (heading + grid) is hidden via JS when the
+  Waline API returns no qualifying commenters, so the heading never
+  shows up orphaned.
+
+  Server URL is hard-coded to the Waline instance used elsewhere in the
+  theme (see layouts/partials/comments.html). No parameters.
+*/ -}}
+
+{{- $server := "https://waline-comments.isming.me" -}}
+
+<section class="recent-commenters-section" id="recent-commenters-section">
+  <h3>来过</h3>
+  <div class="recent-commenters-loading" id="recent-commenters" data-server="{{ $server }}">正在加载最近评论者…</div>
+</section>
+
+<script>
+(function () {
+  var section   = document.getElementById('recent-commenters-section');
+  var container = document.getElementById('recent-commenters');
+  if (!section || !container) return;
+
+  var server = container.getAttribute('data-server') || '';
+  var count  = 50;                                       // Waline caps `count` at 50; larger values return an empty array.
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+
+  function escapeUrl(s) {
+    try {
+      var u = new URL(s);
+      if (u.protocol !== 'http:' && u.protocol !== 'https:') return '';
+      return u.toString();
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function hide() { section.style.display = 'none'; }
+
+  fetch(server + '/api/comment?type=recent&count=' + count, { credentials: 'omit' })
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function (json) {
+      var list = (json && Array.isArray(json.data)) ? json.data : [];
+      var seen = Object.create(null);
+
+      list.forEach(function (c) {
+        if (!c || !c.nick || !c.link) return;            // skip commenters with no blog URL
+        if (c.type === 'administrator') return;           // skip the blog owner's own comments
+        var url = escapeUrl(c.link);
+        if (!url) return;                                 // skip malformed URLs
+        // Also skip links pointing at this site itself: the owner occasionally
+        // comments while logged out, which comes back with no `type` flag.
+        try {
+          if (new URL(url).hostname === window.location.hostname) return;
+        } catch (e) { /* already validated by escapeUrl */ }
+        if (seen[url]) {
+          seen[url].count += 1;                          // collapse duplicates by canonical blog URL
+        } else {
+          seen[url] = {
+            nick:   c.nick,
+            link:   url,
+            avatar: c.avatar || '',
+            count:  1
+          };
+        }
+      });
+
+      var users = Object.keys(seen).map(function (k) { return seen[k]; });
+      if (!users.length) { hide(); return; }              // no qualifying commenters → hide the whole section
+
+      container.removeAttribute('data-server');
+      container.className = 'recent-commenters';
+      container.innerHTML = users.map(function (u) {
+        var tip = u.count > 1
+          ? escapeHtml(u.nick) + ' · ' + u.count + ' 次评论'
+          : escapeHtml(u.nick) + ' · 1 次评论';
+        return '<a class="recent-commenter" href="' + escapeHtml(u.link) +
+               '" target="_blank" rel="noopener noreferrer" data-tip="' + tip + '">' +
+               '<img loading="lazy" src="' + escapeHtml(u.avatar) +
+               '" alt="' + escapeHtml(u.nick) + '" />' +
+               '</a>';
+      }).join('');
+
+      // Wire up hover-driven tooltips. We append to document.body (not as a
+      // ::after on the avatar) so the parent link's overflow:hidden — needed
+      // for the perfect-circle crop — doesn't clip the tooltip.
+      function placeTooltip(link, tip) {
+        var rect = link.getBoundingClientRect();
+        var tipH = tip.offsetHeight;
+        var tipW = tip.offsetWidth;
+        // Prefer above the avatar; flip below if there's no room at the top.
+        var spaceAbove = rect.top;
+        var top = spaceAbove >= tipH + 12
+          ? rect.top - tipH - 8
+          : rect.bottom + 8;
+        var left = rect.left + rect.width / 2 - tipW / 2;
+        // Keep the tooltip inside the viewport horizontally.
+        var pad = 4;
+        if (left < pad) left = pad;
+        if (left + tipW > window.innerWidth - pad) left = window.innerWidth - tipW - pad;
+        tip.style.left = left + 'px';
+        tip.style.top  = top  + 'px';
+      }
+
+      // Only one tooltip exists at a time: showing a new one always removes
+      // the previous first, so fast mouse moves across avatars can't stack them.
+      var currentTip = null;
+      var currentReposition = null;
+
+      function hideTooltip() {
+        if (!currentTip) return;
+        currentTip.remove();
+        currentTip = null;
+        if (currentReposition) {
+          window.removeEventListener('scroll', currentReposition);
+          window.removeEventListener('resize', currentReposition);
+          currentReposition = null;
+        }
+      }
+
+      function showTooltip(link) {
+        hideTooltip();
+        var tip = document.createElement('div');
+        tip.className = 'recent-commenter-tooltip';
+        tip.textContent = link.getAttribute('data-tip');
+        document.body.appendChild(tip);
+        currentTip = tip;
+        placeTooltip(link, tip);
+        // Reposition on scroll / resize while visible.
+        currentReposition = function () {
+          if (currentTip === tip) placeTooltip(link, tip);
+        };
+        window.addEventListener('scroll', currentReposition, { passive: true });
+        window.addEventListener('resize', currentReposition);
+      }
+
+      Array.prototype.forEach.call(container.querySelectorAll('.recent-commenter'), function (link) {
+        link.addEventListener('mouseenter', function () { showTooltip(link); });
+        link.addEventListener('mouseleave', function () { hideTooltip(); });
+        // Touch / focus also reveals the tooltip.
+        link.addEventListener('focus', function () { showTooltip(link); });
+        link.addEventListener('blur', function () { hideTooltip(); });
+      });
+    })
+    .catch(function (err) {
+      console.error('[recent-commenters] fetch failed:', err);
+      hide();
+    });
+})();
+</script>
