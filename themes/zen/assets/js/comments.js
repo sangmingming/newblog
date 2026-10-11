@@ -65,6 +65,12 @@
     return div;
   }
 
+  // 头像一律强制 https（部分头像源如 qlogo.cn 返回的是 http 链接，
+  // 在 https 页面上会被浏览器按 mixed content 拦截）
+  function httpsAvatar(url) {
+    return String(url || '').replace(/^http:\/\//i, 'https://');
+  }
+
   // Waline 客户端约定的排序参数（latest → insertedAt_desc）
   var SORT_LATEST = 'insertedAt_desc';
 
@@ -227,12 +233,13 @@
       item.setAttribute('data-id', c.objectId);
 
       var avatar;
-      if (c.avatar) {
+      var avatarUrl = httpsAvatar(c.avatar);
+      if (avatarUrl) {
         avatar = document.createElement('img');
         avatar.className = 'cm-avatar';
         avatar.loading = 'lazy';
         avatar.alt = '';
-        avatar.src = c.avatar;
+        avatar.src = avatarUrl;
         // 头像加载失败时降级为昵称首字符
         avatar.addEventListener('error', function () {
           avatar.replaceWith(makeAvatarFallback(c.nick));
@@ -317,6 +324,52 @@
       item.appendChild(avatar);
       item.appendChild(body);
       return item;
+    }
+
+    /* ---------- 新评论本地插入 ---------- */
+
+    function updateCount(delta) {
+      state.count = Math.max(0, state.count + delta);
+      countBox.hidden = state.count === 0;
+      countBox.textContent = state.count > 0 ? '共 ' + state.count + ' 条评论' : '';
+    }
+
+    // 发布成功后直接把服务端返回的新评论插入页面，不再重新请求列表。
+    // 若服务端开启了评论审核（COMMENT_AUDIT），新评论是 waiting 状态，
+    // 此时不插入，只提示等待审核。
+    function insertComment(c, replyInfo) {
+      if (!c) return;
+      if (c.status && c.status !== 'approved') {
+        showMsg('评论已提交，审核通过后会展示');
+        return;
+      }
+      // 清掉「还没有评论」占位
+      var empty = listBox.querySelector('.cm-empty');
+      if (empty) empty.remove();
+
+      if (replyInfo) {
+        // 回复：挂到根评论的嵌套容器里（没有则创建）
+        if (!c.reply_user) c.reply_user = { nick: replyInfo.at, link: '', avatar: '' };
+        var rootItem = listBox.querySelector('[data-id="' + replyInfo.rid + '"]');
+        if (!rootItem) {
+          // 被回复的评论不在当前已加载的页里（在后面的分页中），兜底整页刷新
+          state.page = 0;
+          loadComments();
+          return;
+        }
+        var bodyEl = ownBody(rootItem);
+        var childWrap = bodyEl.querySelector('.cm-children');
+        if (!childWrap) {
+          childWrap = document.createElement('div');
+          childWrap.className = 'cm-children';
+          bodyEl.appendChild(childWrap);
+        }
+        childWrap.appendChild(renderItem(c, true, replyInfo.rid));
+      } else {
+        // 顶层评论：插到列表最上方
+        listBox.insertBefore(renderItem(c, false), listBox.firstChild);
+      }
+      updateCount(1);
     }
 
     /* ---------- 回复状态 ---------- */
@@ -412,11 +465,11 @@
           } catch (e) { /* ignore */ }
 
           editor.value = '';
+          var replyInfo = state.replyTo;
           setReplyTo(null);
           showMsg('发布成功');
-          // 重新拉第一页，新评论会出现在最上面
-          state.page = 0;
-          loadComments();
+          // 不再整页刷新列表，直接把服务端返回的新评论插入对应位置
+          insertComment(json.data, replyInfo);
         })
         .catch(function (err) {
           showMsg(err.message || '发布失败，请稍后重试', true);

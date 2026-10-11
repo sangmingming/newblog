@@ -75,7 +75,8 @@
           seen[url] = {
             nick:   c.nick,
             link:   url,
-            avatar: c.avatar || '',
+            // 头像强制 https（qlogo.cn 等返回 http 链接会被浏览器拦截）
+            avatar: (c.avatar || '').replace(/^http:\/\//i, 'https://'),
             count:  1
           };
         }
