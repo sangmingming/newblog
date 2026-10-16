@@ -1,0 +1,126 @@
+/* 简单灯箱：仅文章详情页正文图片使用（js/lightbox.js，single.html 加载） */
+
+.post-content img {
+  cursor: zoom-in;
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(20, 20, 26, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-stage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.lightbox-img {
+  margin: auto;
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+  cursor: zoom-in;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+  will-change: transform;
+}
+
+/* 手势结束后的回弹 / 缩放动画（拖动过程中不加，避免跟手延迟） */
+.lightbox-img.anim {
+  transition: transform 0.22s ease;
+}
+
+.lightbox-img.zoomed {
+  cursor: grab;
+}
+
+.lightbox-img.zoomed.dragging {
+  cursor: grabbing;
+}
+
+.lightbox-btn {
+  position: fixed;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.lightbox-btn:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.lightbox-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.lightbox-close {
+  top: 20px;
+  right: 20px;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-prev {
+  left: 6px;
+}
+
+.lightbox-next {
+  right: 6px;
+}
+
+body.lightbox-lock {
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .lightbox-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .lightbox-prev {
+    left: 4px;
+  }
+
+  .lightbox-next {
+    right: 4px;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+  }
+}
