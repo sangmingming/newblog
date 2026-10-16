@@ -79,13 +79,15 @@
   {{- end }}
 </article>
 {{- partial "extend_post_content.html" . }}
-{{- /* 灯箱：仅文章详情页加载，正文图片点击预览 */ -}}
+{{- /* 灯箱：仅 posts 栏目文章加载，正文图片点击预览（友链、关于等页面不加载） */ -}}
+{{- if eq .Section "posts" }}
 {{- $lightbox := resources.Get "js/lightbox.js" | resources.Minify }}
 {{- if not site.Params.assets.disableFingerprinting }}
 {{- $lightbox = $lightbox | fingerprint }}
 <script defer crossorigin="anonymous" src="{{ $lightbox.RelPermalink }}" integrity="{{ $lightbox.Data.Integrity }}"></script>
 {{- else }}
 <script defer src="{{ $lightbox.RelPermalink }}"></script>
+{{- end }}
 {{- end }}
 {{ if .Store.Get "hasMermaid" }}
   <script type="module">
