@@ -12,6 +12,10 @@
  *     pageSize: 10                    // 可选
  *   });
  *
+ * path 会自动归一化：去掉 query（?xxx）和锚点（#xxx），并补上结尾的 '/'，
+ * 保证「/2026-10-02-guangde」和「/2026-10-02-guangde/?a=1#day1」
+ * 都对应到服务端同一个评论线程。
+ *
  * 样式在 assets/css/common/comments.css，随主题的 common/*.css 自动合并。
  */
 (function () {
@@ -79,6 +83,34 @@
     return s.endsWith('/api') ? s : s + '/api';
   }
 
+  /* ---------- 路径归一化 ---------- */
+
+  // 评论区唯一标识（path）的归一化规则：
+  //   1. 传进来的是完整 URL 时，只取 pathname；
+  //   2. 去掉 query（?a=b）和锚点（#day1 等），只保留路径部分；
+  //   3. 结尾补 '/'，与站点 permalink（/2026-10-02-guangde/）保持一致。
+  // 目的：访客用「/2026-10-02-guangde」「/2026-10-02-guangde/?a=1#day1」
+  // 等各种形式打开同一篇文章时，评论读写都落在服务端同一个线程上。
+  function normalizePath(input) {
+    var p = String(input == null ? '' : input).trim();
+    if (!p) {
+      p = window.location.pathname || '/';
+    } else if (/^[a-z][a-z0-9+.-]*:\/\//i.test(p)) {
+      // 完整 URL：http(s)://host/path?query#hash
+      try {
+        p = new URL(p).pathname;
+      } catch (e) {
+        p = p.replace(/^[a-z][a-z0-9+.-]*:\/\/[^/?#]*/i, '');
+      }
+    }
+    // 从第一个 ? 或 # 开始的内容全部丢掉（query + hash / target）
+    p = p.replace(/[?#].*$/, '');
+    if (!p) p = '/';
+    // 结尾补 '/'，根路径 '/' 不动
+    if (!/\/$/.test(p)) p += '/';
+    return p;
+  }
+
   /* ---------- 主初始化 ---------- */
 
   function init(opts) {
@@ -86,8 +118,13 @@
     if (!root) return;
 
     var api = apiBase(opts.serverURL);
-    var pagePath = opts.path || window.location.pathname;
     var pageSize = opts.pageSize || 10;
+
+    // 每次请求前都重新取一次当前路径，兼容带 query / 锚点的访问方式
+    function currentPath() {
+      var p = (opts.path == null || opts.path === '') ? window.location.pathname : opts.path;
+      return normalizePath(p);
+    }
 
     var state = {
       page: 0,
@@ -166,6 +203,7 @@
       state.loading = true;
       moreBtn.disabled = true;
 
+      var pagePath = currentPath();
       var url = api + '/comment?path=' + encodeURIComponent(pagePath) +
                 '&page=' + (state.page + 1) + '&pageSize=' + pageSize +
                 '&sortBy=' + SORT_LATEST + '&lang=zh-CN';
@@ -429,6 +467,7 @@
         return;
       }
 
+      var pagePath = currentPath();
       var body = {
         nick: nick,
         mail: mail,
@@ -436,6 +475,8 @@
         // 纯文本输入框：把单个换行转成 Markdown 硬换行，保证多行文本按原样显示
         comment: text.replace(/\r\n|\r/g, '\n').replace(/\n/g, '  \n'),
         ua: navigator.userAgent,
+        // path：评论归属的文章（已归一化，无 query / 锚点，结尾带 '/'）
+        path: pagePath,
         url: pagePath,
         lang: 'zh-CN'
       };
