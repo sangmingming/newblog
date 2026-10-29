@@ -2,14 +2,13 @@
 {{- $endpoint := printf "https://webmention.io/%s/webmention" $wm.username -}}
 <section id="webmentions" class="webmentions" data-target="{{ .Permalink }}">
   <h2 class="wm-title">Webmentions <span class="wm-count" hidden></span></h2>
-  <p class="wm-intro">其他网站对本文的回复、转发、点赞和提及会显示在这里。</p>
   <div class="wm-status" role="status">正在加载 Webmentions…</div>
   <div class="wm-reactions"></div>
   <div class="wm-list"></div>
 
   <details class="wm-send">
     <summary>通过你的网站回应本文</summary>
-    <p>在你的网站发布一篇包含本文链接的文章，然后在这里提交文章地址。</p>
+    <p>在你的网站发布包含本文链接的文章，再提交文章地址。<a href="https://indieweb.org/Webmention" target="_blank" rel="noopener noreferrer">什么是 Webmention？</a></p>
     <form action="{{ $endpoint }}" method="post" accept-charset="UTF-8">
       <label for="wm-source">你的文章地址</label>
       <div class="wm-form-row">

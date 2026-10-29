@@ -1,7 +1,12 @@
 /* ---------- 评论区（自建 Waline 前端，见 assets/js/comments.js） ---------- */
 
+.comments-title {
+    margin: var(--gap) 0 var(--content-gap);
+    font-size: 1.25em;
+}
+
 .comments {
-    margin-top: var(--gap);
+    margin-top: 0;
 }
 
 /* 输入区 */

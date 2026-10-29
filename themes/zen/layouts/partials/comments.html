@@ -5,6 +5,7 @@
      JS：assets/js/comments.js
      CSS：assets/css/common/comments.css（随 common/*.css 自动合并进全站样式） */ -}}
 <p id="commentsanchor"></p>
+<h2 class="comments-title">评论</h2>
 <div id="comments" class="comments"></div>
 {{- $commentsjs := resources.Get "js/comments.js" | resources.Minify }}
 <script src="{{ $commentsjs.RelPermalink }}"></script>
