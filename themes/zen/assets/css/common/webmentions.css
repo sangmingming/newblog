@@ -1,0 +1,177 @@
+/* ---------- Webmentions（数据来自 webmention.io） ---------- */
+
+.webmentions {
+    margin-top: var(--gap);
+    padding-top: var(--content-gap);
+    border-top: 1px solid var(--border);
+}
+
+.wm-title {
+    margin-bottom: 8px;
+    font-size: 1.25em;
+}
+
+.wm-count {
+    color: var(--secondary);
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.wm-intro,
+.wm-status,
+.wm-send {
+    color: var(--secondary);
+    font-size: 0.9em;
+}
+
+.wm-status {
+    padding: 12px 0;
+}
+
+.wm-face-group {
+    margin-top: 16px;
+}
+
+.wm-group-title {
+    margin-bottom: 8px;
+    color: var(--secondary);
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+.wm-faces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.wm-face {
+    display: inline-flex;
+    border-radius: 50%;
+}
+
+.wm-avatar {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--code-bg);
+    object-fit: cover;
+}
+
+.wm-avatar-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    font-size: 0.9em;
+    user-select: none;
+}
+
+.wm-item {
+    display: flex;
+    gap: 12px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+}
+
+.wm-list > .wm-item:first-child {
+    border-top: none;
+}
+
+.wm-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.wm-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+}
+
+.wm-author {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.wm-action,
+.wm-time {
+    color: var(--secondary);
+    font-size: 0.85em;
+}
+
+.wm-content {
+    margin: 6px 0;
+    color: var(--content);
+    line-height: 1.7;
+    overflow-wrap: break-word;
+    white-space: pre-line;
+}
+
+.wm-source {
+    color: var(--secondary);
+    font-size: 0.82em;
+}
+
+.wm-send {
+    margin-top: 12px;
+}
+
+.wm-send summary {
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.wm-send p {
+    margin: 10px 0 8px;
+}
+
+.wm-send label {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.wm-form-row {
+    display: flex;
+    gap: 8px;
+}
+
+.wm-form-row input[type="url"] {
+    width: 100%;
+    min-width: 0;
+    padding: 8px 12px;
+    border: 1px solid var(--tertiary);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--content);
+    font: inherit;
+    outline: none;
+}
+
+.wm-form-row input[type="url"]:focus {
+    border-color: var(--secondary);
+}
+
+.wm-form-row button {
+    flex-shrink: 0;
+    padding: 6px 16px;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: var(--theme);
+    font: inherit;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .wm-form-row {
+        flex-direction: column;
+    }
+
+    .wm-form-row button {
+        align-self: flex-start;
+    }
+}

@@ -37,6 +37,12 @@
 {{- end }}
 <meta name="fediverse:creator" content="@isming@mastodon.social">
 <link rel="me" href="https://mastodon.social/@isming"/>
+{{- with site.Params.webmention }}
+{{- if .enabled }}
+<link rel="webmention" href="{{ printf "https://webmention.io/%s/webmention" .username }}">
+<link rel="pingback" href="{{ printf "https://webmention.io/%s/xmlrpc" .username }}">
+{{- end }}
+{{- end }}
 
 {{- /* Styles */}}
 
