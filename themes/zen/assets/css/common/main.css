@@ -101,6 +101,11 @@ pre:hover .copy-code {
     justify-content: center;
 }
 
+.mermaid svg.pele {
+    max-width: 100%;
+    margin-inline: auto;
+}
+
 @media only screen and (max-width: 768px) {
 	.other-map {
         /* mobile 撑满屏幕边缘：用 vw 单位无视父级 padding */
@@ -125,9 +130,12 @@ pre:hover .copy-code {
     }
 
     .mermaid {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-}
+        position: relative;
+        left: 50%;
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: -50vw;
+        margin-right: 0;
+    }
 
 }
