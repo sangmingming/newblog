@@ -85,11 +85,20 @@ pre:hover .copy-code {
 
 
 .mermaid {
-        margin-left: -20%;
-        margin-right: -20%;
-        width: 140%;
-        display: flex;
-        justify-content: center;
+    --pele-bg: var(--theme);
+    --pele-fg: var(--content);
+    --pele-muted: var(--secondary);
+    --pele-line: var(--primary);
+    --pele-surface: var(--entry);
+    --pele-surface-alt: var(--code-bg);
+    --pele-border: var(--tertiary);
+    --pele-accent: var(--primary);
+    --pele-font: var(--font-yahei);
+    margin-left: -20%;
+    margin-right: -20%;
+    width: 140%;
+    display: flex;
+    justify-content: center;
 }
 
 @media only screen and (max-width: 768px) {

@@ -74,6 +74,10 @@
     {{- end }}
   </footer>
 
+  {{- if and (eq .Section "posts") site.Params.webmention.enabled }}
+  {{- partial "webmentions.html" . }}
+  {{- end }}
+
   {{- if (.Param "comments") }}
   {{- partial "comments.html" . }}
   {{- end }}
@@ -91,27 +95,19 @@
 {{- end }}
 {{ if .Store.Get "hasMermaid" }}
   <script type="module">
-    import mermaid from 'https://fastly.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
-    
-    mermaid.initialize({ startOnLoad: false });
-    function setMermaidTheme() {
-      const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default';
-      mermaid.initialize({theme: theme});
+    import { mount } from 'https://fastly.jsdelivr.net/npm/pele@1.6.0/dist/pele.js';
+
+    function renderDiagrams() {
+      for (const element of document.querySelectorAll('pre.mermaid')) {
+        mount(element, element.textContent);
+      }
     }
-    document.addEventListener('DOMContentLoaded', () => {
-      setMermaidTheme();
-      mermaid.contentLoaded(); // Trigger rendering
-    });
-    // const observer = new MutationObserver((mutationsList) => {
-    //   for (const mutation of mutationsList) {
-    //     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-    //       console.log('change ' + mutation);
-    //       location.reload();
-    //     }
-    //   }
-    // });
-    // observer.observe(document.body, {attributes: true, attributeFilter: ['class']});
-    
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderDiagrams, { once: true });
+    } else {
+      renderDiagrams();
+    }
   </script>
 {{ end }}
 {{- end }}{{/* end main */}}
