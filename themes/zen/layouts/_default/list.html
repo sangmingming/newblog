@@ -49,7 +49,6 @@
 
 {{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
 {{- partial "home_info.html" . }}
-{{- partial "location_map.html" . }}
 {{- end }}
 
 {{- $term := .Data.Term }}

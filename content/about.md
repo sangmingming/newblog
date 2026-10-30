@@ -7,6 +7,7 @@ footer: true
 layout: 'single'
 showReadingTime: false
 showCopyright: false
+showLocationMap: true
 ---
 
 
