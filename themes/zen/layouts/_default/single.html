@@ -44,6 +44,13 @@
   </div>
   {{- end }}
 
+  {{- if .Param "showLocationMap" }}
+  <section class="about-footprint" aria-labelledby="about-footprint-title">
+    <h2 id="about-footprint-title">我的足迹</h2>
+    {{- partial "location_map.html" . }}
+  </section>
+  {{- end }}
+
   <footer class="post-footer">
 
     {{ if eq .Section "posts" }}
