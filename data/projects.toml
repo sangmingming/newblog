@@ -1,5 +1,13 @@
 [[projects]]
-name = "FyMemos"
+name = "预期养老金计算器"
+description = "一个纯前端的中国城镇职工基本养老金估算工具，可测算基础养老金、个人账户养老金及当前购买力。"
+tech = ["React", "TypeScript", "Vite"]
+repo = "https://github.com/sangmingming/pension-calculator"
+url = "https://pension-cal.ok.kimi.link"
+url_name = "立即使用"
+
+[[projects]]
+name = "云笺"
 description = "一款使用 Flutter 编写的 Memos 客户端，在手机上方便地记录和查看碎片想法。"
 tech = ["Flutter", "Memos"]
 repo = "https://github.com/sangmingming/fymemos"
@@ -13,27 +21,9 @@ tech = ["Chrome 扩展", "Anki"]
 repo = "https://github.com/sangmingming/youdao-to-anki"
 
 [[projects]]
-name = "码农明明桑"
+name = "个人博客"
 description = "你现在正在浏览的个人博客，使用 Hugo 构建，记录技术、行摄和生活随笔。"
 tech = ["Hugo", "GitHub Pages"]
 repo = "https://github.com/sangmingming/newblog"
 url = "https://isming.me"
 url_name = "访问博客"
-
-[[projects]]
-name = "StickerView"
-description = "Android 贴纸视图组件，支持在图片上添加、移动、旋转和缩放贴纸。"
-tech = ["Android", "Java"]
-repo = "https://github.com/sangmingming/StickerView"
-
-[[projects]]
-name = "Gradle Fir 插件"
-description = "用于将 APK 上传到 fir.im 的 Gradle 插件，简化 Android 应用的测试包分发流程。"
-tech = ["Gradle", "Android"]
-repo = "https://github.com/sangmingming/gradle-fir-plugin"
-
-[[projects]]
-name = "Android Instagram Filter"
-description = "一个 Android 图片滤镜项目，实现类似 Instagram 的图片处理效果。"
-tech = ["Android", "图片处理"]
-repo = "https://github.com/sangmingming/android-instagram-filter"
