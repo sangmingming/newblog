@@ -186,7 +186,8 @@ html:not([data-theme="dark"]) #sun {
     align-items: center;
     justify-content: center;
     min-width: 28px;
-    min-height: 40px;
+    height: var(--header-height);
+    line-height: 1;
 }
 
 .nav-search[hidden] {
