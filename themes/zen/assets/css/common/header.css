@@ -53,7 +53,7 @@ html:not([data-theme="dark"]) #sun {
 #menu {
     list-style: none;
     word-break: keep-all;
-    overflow-x: auto;
+    overflow: visible;
     white-space: nowrap;
 }
 
@@ -90,4 +90,206 @@ html:not([data-theme="dark"]) #sun {
 
 .logo-switches {
     flex-wrap: inherit;
+}
+
+.header {
+    position: relative;
+    z-index: 50;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.menu-dropdown {
+    position: relative;
+}
+
+.menu-dropdown details {
+    position: relative;
+}
+
+.menu-dropdown summary {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    list-style: none;
+    user-select: none;
+}
+
+.menu-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.menu-dropdown summary:focus-visible,
+.nav-search-toggle:focus-visible,
+.nav-search-close:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.menu-caret {
+    transition: transform 0.18s ease;
+}
+
+.menu-dropdown details[open] .menu-caret {
+    transform: rotate(180deg);
+}
+
+.menu-dropdown .menu-dropdown-list {
+    position: absolute;
+    top: calc(100% - 5px);
+    right: -12px;
+    z-index: 60;
+    min-width: 128px;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    background: var(--entry);
+    box-shadow: var(--shadow-card);
+    list-style: none;
+}
+
+#menu .menu-dropdown-list li + li {
+    margin-inline-start: 0;
+}
+
+#menu .menu-dropdown-list a {
+    padding: 7px 12px;
+    border-radius: var(--radius);
+    line-height: 1.6;
+}
+
+#menu .menu-dropdown-list a:hover,
+#menu .menu-dropdown-list a:focus-visible {
+    background: var(--code-bg);
+}
+
+#menu .menu-dropdown-list .active {
+    display: inline-block;
+}
+
+#menu .nav-search-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    min-height: 40px;
+}
+
+.nav-search[hidden] {
+    display: none;
+}
+
+.nav-search {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10vh 20px 24px;
+}
+
+.nav-search-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.48);
+    cursor: default;
+    backdrop-filter: blur(3px);
+}
+
+.nav-search-panel {
+    position: relative;
+    width: min(680px, 100%);
+    max-height: 78vh;
+    padding: 22px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    background: var(--theme);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+.nav-search-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.nav-search-header h2 {
+    font-size: 20px;
+}
+
+.nav-search-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--secondary);
+}
+
+.nav-search-close:hover {
+    background: var(--code-bg);
+    color: var(--primary);
+}
+
+.nav-searchbox input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid var(--tertiary);
+    border-radius: var(--radius);
+    color: var(--primary);
+    background: var(--entry);
+    font-size: 16px;
+}
+
+.nav-searchbox input:focus {
+    border-color: var(--secondary);
+}
+
+.nav-searchbox [data-search-results] {
+    max-height: 52vh;
+    margin: 12px 0 0;
+    overflow-y: auto;
+}
+
+.search-empty {
+    margin-top: 16px;
+    color: var(--secondary);
+    font-size: 14px;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-search {
+        padding: 7vh 14px 18px;
+    }
+
+    .nav-search-panel {
+        padding: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-caret {
+        transition: none;
+    }
 }

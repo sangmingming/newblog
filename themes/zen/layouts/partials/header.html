@@ -81,30 +81,77 @@
             </div>
         </div>
         {{- $currentPage := . }}
+        {{- $pageURL := $currentPage.RelPermalink }}
         <ul id="menu">
             {{- range site.Menus.main }}
-            {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
-            {{- $page_url:= $currentPage.Permalink | absLangURL }}
-            {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
+            {{- $menuItem := . }}
+            {{- if .HasChildren }}
+            {{- $parentActive := false }}
+            {{- range .Children }}
+                {{- if eq .URL $pageURL }}{{ $parentActive = true }}{{ end }}
+            {{- end }}
+            <li class="menu-dropdown">
+                <details>
+                    <summary title="浏览文章分类">
+                        <span {{- if $parentActive }} class="active" {{- end }}>{{ .Name }}</span>
+                        <svg class="menu-caret" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </summary>
+                    <ul class="menu-dropdown-list">
+                        {{- range .Children }}
+                        <li><a href="{{ .URL | absLangURL }}"><span {{- if eq .URL $pageURL }} class="active" {{- end }}>{{ .Name }}</span></a></li>
+                        {{- end }}
+                    </ul>
+                </details>
+            </li>
+            {{- else if eq .Identifier "search" }}
+            <li class="nav-search-item">
+                <a class="nav-search-toggle" href="{{ .URL | absLangURL }}" title="搜索 (Alt + /)" aria-label="搜索" aria-haspopup="dialog" aria-controls="nav-search" accesskey="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </a>
+            </li>
+            {{- else }}
+            {{- $menuItemURL := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL)) }}
             <li>
-                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
-                {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
-                    <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
-                        {{- .Pre }}
-                        {{- .Name -}}
-                        {{ .Post -}}
+                <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
+                    <span {{- if eq $menuItemURL $pageURL }} class="active" {{- end }}>
+                        {{- .Pre }}{{ .Name }}{{ .Post -}}
                     </span>
                     {{- if (findRE "://" .URL) }}&nbsp;
-                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12" aria-hidden="true">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                         <path d="M15 3h6v6"></path>
-                        <path d="M10 14L21 3"></path>
+                        <path d="M10 14 21 3"></path>
                     </svg>
                     {{- end }}
                 </a>
             </li>
             {{- end }}
+            {{- end }}
         </ul>
     </nav>
 </header>
+
+<div class="nav-search" id="nav-search" role="dialog" aria-modal="true" aria-labelledby="nav-search-title" hidden>
+    <button class="nav-search-backdrop" type="button" data-search-close tabindex="-1" aria-label="关闭搜索"></button>
+    <section class="nav-search-panel">
+        <header class="nav-search-header">
+            <h2 id="nav-search-title">搜索博客</h2>
+            <button class="nav-search-close" type="button" data-search-close aria-label="关闭搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+        </header>
+        <div class="nav-searchbox" data-search-root>
+            <label class="sr-only" for="navSearchInput">输入文章标题或内容关键词</label>
+            <input id="navSearchInput" data-search-input placeholder="输入关键词，开始搜索…" type="search" autocomplete="off" maxlength="64">
+            <ul id="navSearchResults" data-search-results aria-label="搜索结果"></ul>
+            <p class="search-empty" data-search-empty hidden>没有找到相关内容，换个关键词试试。</p>
+        </div>
+    </section>
+</div>

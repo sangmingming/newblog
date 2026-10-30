@@ -49,31 +49,47 @@ Copyright = '[码农明明桑的博客](https://isming.me)所有内容遵循[「
  [[menu.main]]
   name="首页"
   url="/"
-  weight="1"
+  weight=1
  [[menu.main]]
+  name="分类"
+  identifier="articles"
+  weight=2
+ [[menu.main]]
+  parent="articles"
   name="技术"
   url="/posts/tech/"
-  weight="2"
+  weight=1
  [[menu.main]]
+  parent="articles"
   name="行摄"
   url="/posts/photography/"
-  weight="2"
+  weight=2
+ [[menu.main]]
+  parent="articles"
+  name="随笔"
+  url="/posts/essay/"
+  weight=3
+ [[menu.main]]
+  name="项目"
+  url="/projects/"
+  weight=3
  [[menu.main]]
   name="归档"
   url="/archives/"
-  weight="3"
-[[menu.main]]
-  name="搜索"
-  url="/search/"
-  weight="4"
+  weight=4
  [[menu.main]]
   name="友链"
   url="/links/"
-  weight="5"
+  weight=5
  [[menu.main]]
   name="关于"
   url="/about/"
-  weight="6"
+  weight=6
+ [[menu.main]]
+  name="搜索"
+  identifier="search"
+  url="/search/"
+  weight=7
 
 [markup]
   [markup.goldmark]
