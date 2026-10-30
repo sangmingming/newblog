@@ -20,10 +20,11 @@
     {{- end }}
 </header>
 
-<div id="searchbox">
-    <input id="searchInput" autofocus placeholder="{{ .Params.placeholder | default (printf "%s ↵" .Title) }}"
+<div id="searchbox" data-search-root>
+    <input id="searchInput" data-search-input autofocus placeholder="{{ .Params.placeholder | default (printf "%s ↵" .Title) }}"
         aria-label="search" type="search" autocomplete="off" maxlength="64">
-    <ul id="searchResults" aria-label="search results"></ul>
+    <ul id="searchResults" data-search-results aria-label="search results"></ul>
+    <p class="search-empty" data-search-empty hidden>没有找到相关内容，换个关键词试试。</p>
 </div>
 
 {{- end }}{{/* end main */}}
