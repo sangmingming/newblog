@@ -82,3 +82,17 @@
     padding-left: 8px;
     padding-right: 8px;
 }
+
+.wormhole-logo {
+    width: auto;
+    height: 32px;
+}
+
+.wormhole-logo-dark,
+[data-theme="dark"] .wormhole-logo-light {
+    display: none;
+}
+
+[data-theme="dark"] .wormhole-logo-dark {
+    display: inline;
+}

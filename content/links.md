@@ -30,7 +30,7 @@ showCopyright: false
 
 <div class="links-grid">
 {{< friend url="https://www.foreverblog.cn/" src="https://img.isming.me/image/foreverblog.png" name="十年之约" des="一个人的寂寞，一群人的狂欢" >}}
-{{< friend url="https://storeweb.cn/" src="https://upload.storeweb.cn/image/logo.png" name="个站商店" des="一个精致带社交元素的个人网站发布平台" >}}
+{{< friend url="https://storeweb.cn/" src="/images/storeweb/logo.png" name="个站商店" des="一个精致带社交元素的个人网站发布平台" >}}
 {{< friend url="https://www.boyouquan.com/home" src="https://www.boyouquan.com/assets/images/sites/logo/logo-small.png" name="博友圈" des="博客人的朋友圈" >}}
 {{< friend url="https://bf.zzxworld.com/" src="https://bf.zzxworld.com/images/favicon.png" name="BlogFinder" des="每个博客都是一座宝藏" >}}
 {{< friend url="https://blogscn.fun/" src="https://photo.xiangming.site/img/blogscn_icon.png" name="笔墨迹" des="发现和分享真实、可持续访问的个人独立博客" >}}
