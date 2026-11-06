@@ -88,11 +88,6 @@
     height: 32px;
 }
 
-.wormhole-logo-dark,
-[data-theme="dark"] .wormhole-logo-light {
-    display: none;
-}
-
-[data-theme="dark"] .wormhole-logo-dark {
-    display: inline;
+[data-theme="dark"] .wormhole-logo {
+    content: url("/images/foreverblog/wormhole_v2_dark.webp");
 }
